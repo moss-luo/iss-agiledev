@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>用户管理</title>
+<link rel="stylesheet" type="text/css" href="../resources/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../resources/easyui/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="../resources/agiledev/agiledev.css">
+<link rel="stylesheet" type="text/css" href="../resources/agiledev/agiledev-crud.css">
+<link rel="stylesheet" type="text/css" href="../resources/agiledev/agiledev-form.css">
+<link rel="stylesheet" type="text/css" href="../resources/agiledev/plupload/css/plupload.queue.css">
+
+
+<script type="text/javascript" src="../resources/easyui/jquery-1.6.min.js"></script>
+<script type="text/javascript" src="../resources/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../resources/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../resources/easyui/jquery.easyui.validation.custom.js"></script>
+<script type="text/javascript" src="../resources/agiledev/jquery.ui.core.js"></script>
+<script type="text/javascript" src="../resources/agiledev/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="../resources/agiledev/upload.js"></script>
+<script type="text/javascript" src="../resources/agiledev/form.js"></script>
+<script type="text/javascript" src="../resources/agiledev/crud.js"></script>
+<script type="text/javascript">
+//$(function(){
+//	$("body").agiledevForm({
+//		field:[
+//				{title:'Name',field:'user.name'},
+//				{title:'Password',field:'user.pwd',type:'password'},
+//				{title:'Mobile',field:'user.mobile'},
+//				{title:'Email',field:'user.email'}
+//			],
+//		initUrl:'user-init',
+//		submitUrl:'user-create',
+//		success:function(result){alert(result);},
+//		text:'submit'
+//	});
+//});
+var handle = {
+config:{
+	formInitUrl:'user/init',
+	saveUrl:'user/create',
+	updateUrl:'user/update',
+	removeUrl:'user/remove',
+	fields:[
+		{
+			title:'',
+			checkbox:true,
+			field:'uid',
+			//show:true,
+			frozen:true
+		},
+		{
+			title: '用户名',
+			//validType:'remotely["user/unique","name"]',
+			//required:true,
+			width:130,
+			field: 'userId',
+			//show: true,
+			frozen: false,
+			sortable: true
+		},
+		{
+			title:'密码',
+			field:'password',
+			type:'password',
+			gridShow:false,
+			frozen:false,
+			sortable:false
+		},
+		{
+			title:'角色',
+			field:'roleId',
+			width:130,
+			type:'combobox',
+			url:'role/list2',
+			valueField:'uid',
+			textField:'roleName',
+			formShow:true,
+			gridShow:false,
+			frozen:false,
+			sortable:false
+		},
+		{
+			title:'角色',
+			field:'roleName',
+			formShow:false,
+			gridShow:true,
+			frozen:false,
+			sortable:false
+		},
+		{
+			title:'头像',
+			url:'user/list',
+			field:'photo',
+			type:'upload',
+			filters:[
+				{title:'图像文件',extensions:'jpg,gif,png'}
+			],
+			gridShow:false,
+			review:function(row,field){
+				$("<div id='review'/>").append("<img class='review' src='" + field + "' width='100' height='100'/>").appendTo(".agiledev-form");
+			},
+			path:'user',
+			callback:function(response){
+					var isHas = false;
+					$(".review").each(function(){
+						if($(this).attr("src") == response.response)isHas = true;
+					});
+					if (!isHas) {
+						$("#review").remove();
+						$("<div id='review'/>").append("<img class='review' src='" + response.response + "' width='100' height='100'/>").appendTo(".agiledev-form");
+						var s = response.response;
+						s = s.substring(28);
+						s = s.substring(0,s.indexOf("&"));
+						$("input[name='photo']").val(s);
+					}
+			}
+		}
+	],
+	grid:{
+		dataUrl:'user/list',
+		singleSelect:false,
+		idField:'uid',
+		title:'用户管理'
+	},
+	search:{
+		field:[
+			{title:'用户名',field:'queryCondition.userId'},
+			{title:'角色',field:'queryCondition.roleId',type:'combobox',url:'role/list2',valueField:'uid',textField:'roleName'}
+		]
+	}
+}
+};
+$(function(){
+	$("#list").crud(handle.config);
+});
+</script>
+
+</head>
+<body>
+<div class="list">
+	<table id="list"></table>
+</div>
+</body>
+
+</html>

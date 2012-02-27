@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isoftstone.agiledev.hr.mapper.PermisionMapper">
+	<select id="list" parameterType="map" resultType="com.isoftstone.agiledev.actions.system.permision.Permision">
+		SELECT * FROM T_PERMISION
+		<if test="sort != null">
+			ORDER BY #{orderBy}
+		</if>
+	</select>
+	<insert id="save" parameterType="com.isoftstone.agiledev.actions.system.permision.Permision">
+		INSERT INTO T_PERMISION(permisionName,url)
+		VALUES(#{permisionName},#{url})
+	</insert>
+	<update id="update" parameterType="com.isoftstone.agiledev.actions.system.permision.Permision">
+		UPDATE T_PERMISION SET permisionName=#{permisionName},url=#{url} WHERE uid=#{uid}
+	</update>
+	
+	<delete id="remove" parameterType="java.lang.Integer">
+		DELETE FROM T_PERMISION WHERE uid=#{id}
+	</delete>
+	<delete id="removeMiddle" parameterType="java.lang.Integer">
+		DELETE FROM T_ROLE_PERMISION WHERE permisionId=#{id}
+	</delete>
+	<select id="total" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM T_PERMISION
+	</select>
+	<select id="findByPid" parameterType="java.util.HashMap" resultType="com.isoftstone.agiledev.actions.system.permision.Permision">
+		SELECT * FROM T_PERMISION WHERE PID=#{id} 
+	</select>
+</mapper>

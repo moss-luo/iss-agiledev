@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isoftstone.agiledev.hr.mapper.RoleMapper">
+	<select id="selectList" parameterType="map" resultType="com.isoftstone.agiledev.actions.system.role.Role">
+		SELECT * FROM T_ROLE
+		<if test="sort != null">
+			ORDER BY #{orderBy}
+		</if>
+		LIMIT #{limit} , #{offset}
+	</select>
+	<select id="selectMiddleList" parameterType="java.util.HashMap" resultType="java.lang.String">
+		SELECT permisionId FROM T_ROLE_PERMISION WHERE roleId=#{roleId}
+	</select>
+	<insert id="saveRole" parameterType="com.isoftstone.agiledev.actions.system.role.Role">
+		INSERT INTO T_ROLE(roleName)
+		VALUES(#{roleName})
+	</insert>
+	<update id="updateRole" parameterType="com.isoftstone.agiledev.actions.system.role.Role">
+		UPDATE T_ROLE SET roleName=#{roleName} WHERE uid=#{uid}
+	</update>
+	<update id="updateUserRole" parameterType="com.isoftstone.agiledev.actions.system.role.Role">
+		UPDATE T_USER SET roleId='' WHERE roleId=#{uid}
+	</update>
+	<select id="selectNextId" resultType="java.lang.Integer">
+		SELECT last_insert_id() from T_ROLE limit 1
+	</select>
+	<insert id="insertMiddle" parameterType="java.util.Map">
+		INSERT INTO T_ROLE_PERMISION(roleid,permisionid) VALUES(#{roleId},#{pId})
+	</insert>
+	<delete id="removeMiddle" parameterType="java.lang.Integer">
+		DELETE FROM T_ROLE_PERMISION WHERE roleid=#{id}
+	</delete>
+	
+	<delete id="remove" parameterType="java.lang.Integer">
+		DELETE FROM T_ROLE WHERE uid=#{id}
+	</delete>
+	<select id="total" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM T_ROLE
+	</select>
+	
+	<select id="unique" parameterType="java.util.HashMap" resultType="com.isoftstone.agiledev.actions.system.role.Role">
+		SELECT * FROM T_ROLE WHERE rolename=#{roleName}
+	</select>
+</mapper>

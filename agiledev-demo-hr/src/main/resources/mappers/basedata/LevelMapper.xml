@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isoftstone.agiledev.hr.mapper.LevelMapper">
+	<select id="list" parameterType="map" resultType="com.isoftstone.agiledev.actions.basedata.level.Level">
+		SELECT * FROM T_LEVEL
+		<if test="sort != null">
+			ORDER BY #{orderBy}
+		</if>
+		LIMIT #{limit} , #{offset}
+	</select>
+	<insert id="save" parameterType="com.isoftstone.agiledev.actions.basedata.level.Level">
+		INSERT INTO T_LEVEL(name) VALUES(#{name})
+	</insert>
+	<update id="update" parameterType="com.isoftstone.agiledev.actions.basedata.level.Level">
+		UPDATE T_LEVEL SET name=#{name} WHERE UID=#{uid}
+	</update>
+	<delete id="remove" parameterType="java.lang.Integer">
+		DELETE FROM T_LEVEL WHERE uid=#{id}
+	</delete>
+	<select id="total" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM T_LEVEL
+	</select>
+</mapper>
