@@ -14,7 +14,7 @@ var options = {
 				addable:true,//是否可新增
 				updateable:true,//是否可修改
 				deleteable:true,//是否可删除
-				title:'My Datagrid',//grid标题
+				title:lang.grid.title,//grid标题
 				sortName:null,//排序列
 				sortOrder:'asc',//初始排序规则
 				remoteSort: false,//服务器端排序(点击时)
@@ -105,7 +105,7 @@ Render.prototype.createSearch = function(){
 				className:'agiledev-search',
 				submitUrl:options.grid.dataUrl,
 				icon:'icon-search',
-				text:'查询',
+				text:lang.search.text,
 				beforeSubmit:function(){
 					!!!options.search.beforeSubmit?options.search.beforeSubmit.call(this.uiForm):'';
 					var queryParameters = this.getSearchParameters();
@@ -127,10 +127,10 @@ Render.prototype.createDatagrid = function(){
 	if(options.grid.addable){
 		buttons = buttons.add({
 			id:'btnAdd',
-			text:'添加',
+			text:lang.btn.create,
 			iconCls:'icon-add',
 			handler:function(){
-				$this.createDialog("新建").dialog("open");
+				$this.createDialog(lang.btn.create).dialog("open");
 				$this.plugin.setUrl(options.saveUrl);
 			}
 		});
@@ -138,13 +138,13 @@ Render.prototype.createDatagrid = function(){
 	if(options.grid.updateable){
 		buttons = buttons.add({
 			id:'btnEdit',
-			text:'编辑',
+			text:lang.btn.edit,
 			iconCls:'icon-edit',
 			handler:function(){
 				if($($this.plugin.selector).datagrid('getSelections').length>1){
 					$.messager.show({
-						title:'提示',
-						msg:'请明确选择您要编辑的数据项！',
+						title:lang.prompt.title,
+						msg:lang.prompt.selectedMuch,
 						showType:'show',
 						timeout:1500
 					});
@@ -153,7 +153,7 @@ Render.prototype.createDatagrid = function(){
 				var row = $($this.plugin.selector).datagrid('getSelected');
 				if (row){
 					$this.plugin.setUrl(options.updateUrl+'?'+options.grid.idField+'='+row[options.grid.idField]);
-					$this.createDialog("编辑",row).dialog("open");
+					$this.createDialog(lang.btn.edit,row).dialog("open");
 					$(options.fields).each(function(i,o){
 						if(o.type=="upload"){
 							if(typeof o.review == "function")
@@ -162,8 +162,8 @@ Render.prototype.createDatagrid = function(){
 					});
 				}else{
 					$.messager.show({
-						title:'提示',
-						msg:'请选择至少一项！',
+						title:lang.prompt.title,
+						msg:lang.prompt.noSelected,
 						showType:'show',
 						timeout:1500
 					});
@@ -176,7 +176,7 @@ Render.prototype.createDatagrid = function(){
 	if(options.grid.deleteable){
 		buttons = buttons.add({
 			id:'btnRemove',
-			text:'删除',
+			text:lang.btn.remove,
 			iconCls:'icon-remove',
 			handler:function(){
 				$this.plugin.getHandle().remove();
@@ -244,7 +244,7 @@ Render.prototype.createDialog = function(title,data){
 	}
 	
 	dialogButtons = dialogButtons.add({
-		text:'保存',
+		text:lang.btn.save,
 		iconCls:'icon-ok',
 		handler:function(){
 			$this.plugin.getHandle().save();
@@ -256,7 +256,7 @@ Render.prototype.createDialog = function(title,data){
 	$.each(options.dialog.buttons,function(i,b){
 		dialogButtons = dialogButtons.add({text:b.text,iconCls:b.icon,handler:b.handler});
 	});
-	dialogButtons = dialogButtons.add({text:'关闭',handler:function(){$('#_crudDialog').dialog('close');}});
+	dialogButtons = dialogButtons.add({text:lang.btn.close,handler:function(){$('#_crudDialog').dialog('close');}});
 	
 	return dialog
 			.dialog({
@@ -317,7 +317,7 @@ Handle.prototype.save = function(){
 				$($this.plugin.selector).datagrid('clearSelections');
 			} else {
 				$.messager.show({
-					title: 'Error',
+					title: lang.prompt.title,
 					msg: result.msg
 				});
 			}
@@ -330,7 +330,7 @@ Handle.prototype.save = function(){
 Handle.prototype.remove = function(){
 	var rows = $(this.plugin.selector).datagrid('getSelections'),$this = this;
 	if (rows.length>0){
-		$.messager.confirm('系统提示','确认要删除选中的数据项吗?',function(r){
+		$.messager.confirm(lang.prompt.title,lang.prompt.remove,function(r){
 			if (r){
 				$.ajax({
 					url:options.removeUrl,
@@ -340,7 +340,7 @@ Handle.prototype.remove = function(){
 						if(data.success){
 							$this.plugin.getRender().reloadDatagrid("reload");
 							$.messager.show({
-								title:'提示',
+								title:lang.prompt.title,
 								msg:data.msg,
 								showType:'show',
 								timeout:1500
@@ -348,8 +348,8 @@ Handle.prototype.remove = function(){
 							$($this.plugin.selector).datagrid('clearSelections');
 						}else{
 							$.messager.show({
-								title:'提示!',
-								msg:'系统出错了,请稍后再试!',
+								title:lang.prompt.title,
+								msg:lang.prompt.error,
 								showType:'show',
 								timeout:2500
 							});
@@ -360,8 +360,8 @@ Handle.prototype.remove = function(){
 		});
 	}else{
 		$.messager.show({
-			title:'提示!',
-			msg:'请选择至少一项!',
+			title:lang.prompt.title,
+			msg:lang.prompt.noSelected,
 			showType:'show',
 			timeout:1500
 		});
