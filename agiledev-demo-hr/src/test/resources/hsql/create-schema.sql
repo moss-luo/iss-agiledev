@@ -1,4 +1,4 @@
-CREATE TABLE  `dbsns`.`T_DEPARTMENT` (
+CREATE TABLE  `dbsns`.`T_DEPARTMENT` ( 
   `uid` int(11) NOT NULL AUTO_INCREMENT,
   `name` char(200) NOT NULL,
   PRIMARY KEY (`uid`)
