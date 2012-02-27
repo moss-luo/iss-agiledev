@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+	
+<struts>
+	<constant name="struts.objectFacotry" value="spring"/>
+	<constant name="struts.devMode" value="true"/>
+	<constant name="struts.convention.action.mapAllMatches" value="true"/>
+	<constant name="struts.convention.default.parent.package" value="agiledev-hr"/>
+	<constant name="struts.convention.classes.reload" value="true"/>
+	<constant name="struts.action.excludePattern" value="/index.html"/>
+	<constant name="struts.i18n.encoding" value="utf-8"/>
+	<constant name="struts.multipart.maxSize" value="31457280"/>
+	
+	<package name="agiledev-hr" extends="json-default">
+		<result-types>
+			<!-- datagrid所需的json格式result -->
+            <result-type name="datagrid-json" class="com.isoftstone.agiledev.pager.PaginationSupportJSONResult"/>
+            <!-- 初始化表单result -->
+            <result-type name="initjson" class="com.isoftstone.agiledev.initform.InitSupportJSONResult"/>
+        </result-types>
+		<interceptors>
+			<interceptor name="validate" class="com.isoftstone.agiledev.validater.ValidateInterceptor"/>
+			<interceptor name="uploader" class="com.isoftstone.agiledev.uploader.UploadInterceptor"/>
+			<interceptor name="queryParams" class="com.isoftstone.agiledev.query.QueryParametersInterceptor"/>
+			<interceptor-stack name="appDefaultStack">
+				<interceptor-ref name="defaultStack"/>
+				<interceptor-ref name="uploader">
+					<!-- 上传类型监检查 
+					<param name="type">jpg,png</param>
+					 上传之前和之后调用的类，UploadBeforeHandle和UploadAfterHandle接口
+					<param name="afterUploadHandle">xx.xx;xx.xx</param>
+					<param name="afterUploadHandle">xx.xx;xx.xx</param> -->
+					<!-- 上传路径 -->
+					<param name="userDir">user:upload;contact:/home/sinner/upload/contact</param>
+					<!-- 是否回传服务器路径 如果是true，则需要在web.xml中配置一个filter：review-->
+					<param name="review">true</param>
+					<!-- 如果是上传到ftp服务器，需要配置ftp服务器相关信息-->
+					<param name="remoteIP">localhost</param>
+						<!-- ftp端口 -->
+					<param name="remotePort">21</param>
+						<!-- ftp用户名 -->
+					<param name="remoteUser">sinner</param>
+						<!-- ftp密码 -->
+					<param name="remotePassword">puxl1982</param>
+				</interceptor-ref>
+				<interceptor-ref name="validate"/>
+				<interceptor-ref name="queryParams">
+					<param name="orderByKey">order</param>
+				</interceptor-ref>
+					
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="appDefaultStack"/>
+	</package>
+</struts>

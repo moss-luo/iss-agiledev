@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isoftstone.agiledev.hr.mapper.UserMapper">
+	<select id="list" parameterType="map" resultType="com.isoftstone.agiledev.actions.system.user.User">
+		SELECT u.*,r.uid,r.roleName FROM T_USER u LEFT JOIN
+ 		T_ROLE r ON u.roleId=r.uid WHERE 1=1
+ 		<if test="userId != null">
+ 			AND u.USERID like concat('%',#{userId[0]},'%')
+ 		</if>
+ 		<if test="roleId != null">
+ 			AND r.uid=#{roleId[0]}
+ 		</if>
+		<if test="sort != null">
+			ORDER BY #{orderBy}
+		</if>
+		LIMIT #{limit} , #{offset}
+	</select>
+	<insert id="save" parameterType="com.isoftstone.agiledev.actions.system.user.User">
+		INSERT INTO T_USER(userid,password,roleid,photo)
+		VALUES(#{userId},#{password},#{roleId},#{photo})
+	</insert>
+	<update id="update" parameterType="com.isoftstone.agiledev.actions.system.user.User">
+		UPDATE T_USER SET userid=#{userId},password=#{password},roleid=#{roleId},photo=#{photo} WHERE UID=#{uid}
+	</update>
+	<delete id="remove" parameterType="java.lang.Integer">
+		DELETE FROM T_USER WHERE uid=#{id}
+	</delete>
+	<select id="total" resultType="java.lang.Integer" parameterType="map">
+		SELECT COUNT(*) FROM T_USER u LEFT JOIN
+ 		T_ROLE r ON u.roleId=r.uid WHERE 1=1
+ 		<if test="userId != null">
+ 			AND u.USERID=#{userId[0]}
+ 		</if>
+ 		<if test="roleId != null">
+ 			AND r.uid=#{roleId[0]}
+ 		</if>
+	</select>
+	<select id="unique" parameterType="java.util.HashMap" resultType="com.isoftstone.agiledev.actions.system.user.User">
+		SELECT * FROM T_USER WHERE userid=#{userId}
+	</select>
+</mapper>

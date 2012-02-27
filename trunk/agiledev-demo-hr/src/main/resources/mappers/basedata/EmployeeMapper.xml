@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isoftstone.agiledev.hr.mapper.EmployeeMapper">
+	<select id="list" parameterType="map" resultType="com.isoftstone.agiledev.actions.basedata.employee.Employee">
+		SELECT * FROM T_DEPARTMENT
+		<if test="sort != null">
+			ORDER BY #{orderBy}
+		</if>
+		LIMIT #{limit} , #{offset}
+	</select>
+	<insert id="save" parameterType="com.isoftstone.agiledev.actions.basedata.employee.Employee">
+		INSERT INTO T_DEPARTMENT(name) VALUES(#{name})
+	</insert>
+	<update id="update" parameterType="com.isoftstone.agiledev.actions.basedata.employee.Employee">
+		UPDATE T_DEPARTMENT SET name=#{name} WHERE UID=#{uid}
+	</update>
+	<delete id="remove" parameterType="java.lang.Integer">
+		DELETE FROM T_DEPARTMENT WHERE uid=#{id}
+	</delete>
+	<select id="total" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM T_DEPARTMENT
+	</select>
+</mapper>

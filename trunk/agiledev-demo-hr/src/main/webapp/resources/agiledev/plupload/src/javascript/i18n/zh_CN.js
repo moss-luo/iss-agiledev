@@ -1,0 +1,28 @@
+// Spanish
+plupload.addI18n( {
+			'Select files' : '选择文件',
+			'Select files name over max' : '选择文件名称超50个字符将自动截取',
+			'Add files to the upload queue and click the start button.' : '新增文件上传',
+			'Filename' : '文件名',
+			'Status' : '状态',
+			'Size' : '大小',
+			'Add files' : '新增文件',
+			'Start upload' : '开始上传',
+			'Stop current upload' : '停止上传',
+			'Start uploading queue' : '开始上传',
+			'Uploaded %d/%d files' : '已经上传 %d/%d 文件',
+			'N/A' : 'N/A',
+			'Drag files here.' : '拖文件到这',
+			'File extension error.' : '错误的上传文件格式。',
+			"Error: Invalid file extension: " : '错误的上传文件格式。',
+			'File size error.' : '上传文件大小不能为空。',
+			'Init error.' : '初始化异常',
+			'HTTP Error.' : 'HTTP错误。',
+			'Security error.' : '安全错误',
+			'Generic error.' : '错误',
+			'IO error.' : '文件读写出错',
+			'Stop Upload' : '停止上传',
+			'Add Files' : '新增上传文件',
+			'%d files queued' : '%d 共要上传文件.',
+			'delete' : '删除'
+});

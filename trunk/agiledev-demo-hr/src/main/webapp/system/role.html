@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>角色管理</title>
+<link rel="stylesheet" type="text/css" href="../resources/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../resources/easyui/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="../resources/agiledev/agiledev.css">
+<link rel="stylesheet" type="text/css" href="../resources/agiledev/agiledev-crud.css">
+<link rel="stylesheet" type="text/css" href="../resources/agiledev/agiledev-form.css">
+
+
+<script type="text/javascript" src="../resources/easyui/jquery-1.6.min.js"></script>
+<script type="text/javascript" src="../resources/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../resources/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../resources/easyui/jquery.easyui.validation.custom.js"></script>
+<script type="text/javascript" src="../resources/agiledev/jquery.ui.core.js"></script>
+<script type="text/javascript" src="../resources/agiledev/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="../resources/agiledev/upload.js"></script>
+<script type="text/javascript" src="../resources/agiledev/form.js"></script>
+<script type="text/javascript" src="../resources/agiledev/crud.js"></script>
+<script type="text/javascript">
+//$(function(){
+//	$("body").agiledevForm({
+//		field:[
+//				{title:'Name',field:'user.name'},
+//				{title:'Password',field:'user.pwd',type:'password'},
+//				{title:'Mobile',field:'user.mobile'},
+//				{title:'Email',field:'user.email'}
+//			],
+//		initUrl:'user-init',
+//		submitUrl:'user-create',
+//		success:function(result){alert(result);},
+//		text:'submit'
+//	});
+//});
+var handle = {
+config:{
+	formInitUrl:'role/init',
+	saveUrl:'role/create',
+	updateUrl:'role/update',
+	removeUrl:'role/remove',
+	fields:[
+		{
+			title:'',
+			checkbox:true,
+			field:'uid',
+			frozen:true
+		},
+		{
+			title: '角色名称',
+			width:130,
+			field: 'roleName',
+			frozen: false,
+			sortable: true
+		},
+		{
+			title:'可操作模块',
+			field:'permisionId',
+			width:130,
+			type:'checkbox',
+			url:'permision/list',
+			valueField:'uid',
+			textField:'permisionName',
+			//gridShow:false,
+			frozen:false,
+			sortable:false,
+			formatter:function(value,rowData,rowIndex){
+				///alert(value);
+				$("#btnEdit").click(function(){
+					$.each(value,function(i,o){
+						//$(".agiledev-edit").find(":checkbox[name='permisionId'][value='"+o+"']").attr("checked","1");
+						$("[name = 'permisionId'][value='"+o+"']:checkbox").attr("checked", "checked");
+					});
+				});
+			}
+		}
+	],
+	grid:{
+		dataUrl:'role/list',
+		singleSelect:false,
+		idField:'uid',
+		title:'角色管理'
+	}
+}
+};
+$(function(){
+	$("#list").crud(handle.config);
+});
+</script>
+
+</head>
+<body>
+<div class="list">
+	<table id="list"></table>
+</div>
+</body>
+
+</html>
