@@ -143,8 +143,8 @@ Render.prototype.createDatagrid = function(){
 			handler:function(){
 				if($($this.plugin.selector).datagrid('getSelections').length>1){
 					$.messager.show({
-						title:'Oops!',
-						msg:'Please definitely with item you wanna edit!',
+						title:'提示',
+						msg:'请明确选择您要编辑的数据项！',
 						showType:'show',
 						timeout:1500
 					});
@@ -162,8 +162,8 @@ Render.prototype.createDatagrid = function(){
 					});
 				}else{
 					$.messager.show({
-						title:'Oops!',
-						msg:'Please select 1 item!.',
+						title:'提示',
+						msg:'请选择至少一项！',
 						showType:'show',
 						timeout:1500
 					});
@@ -330,7 +330,7 @@ Handle.prototype.save = function(){
 Handle.prototype.remove = function(){
 	var rows = $(this.plugin.selector).datagrid('getSelections'),$this = this;
 	if (rows.length>0){
-		$.messager.confirm('Confirm','Are you sure you want to remove selected items?',function(r){
+		$.messager.confirm('系统提示','确认要删除选中的数据项吗?',function(r){
 			if (r){
 				$.ajax({
 					url:options.removeUrl,
@@ -348,7 +348,7 @@ Handle.prototype.remove = function(){
 							$($this.plugin.selector).datagrid('clearSelections');
 						}else{
 							$.messager.show({
-								title:'Oops!',
+								title:'提示!',
 								msg:'系统出错了,请稍后再试!',
 								showType:'show',
 								timeout:2500
@@ -360,8 +360,8 @@ Handle.prototype.remove = function(){
 		});
 	}else{
 		$.messager.show({
-			title:'Oops!',
-			msg:'Please select 1 item!.',
+			title:'提示!',
+			msg:'请选择至少一项!',
 			showType:'show',
 			timeout:1500
 		});
