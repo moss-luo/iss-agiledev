@@ -1,11 +1,9 @@
 lang = {
-	search:{
-		text:'查询'
-	},
 	grid:{
 		title:'数据列表'
 	},
 	btn:{
+		search:'查询',
 		edit:'编辑',
 		create:'新建',
 		remove:'删除',

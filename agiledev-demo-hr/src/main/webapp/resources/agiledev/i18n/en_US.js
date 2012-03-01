@@ -1,11 +1,9 @@
 lang = {
-	search:{
-		text:'search'
-	},
 	grid:{
 		title:'datagrid'
 	},
 	btn:{
+		search:'search',
 		edit:'edit',
 		create:'new',
 		remove:'remove',
