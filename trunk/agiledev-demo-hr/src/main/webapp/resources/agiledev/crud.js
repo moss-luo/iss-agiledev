@@ -105,7 +105,7 @@ Render.prototype.createSearch = function(){
 				className:'agiledev-search',
 				submitUrl:options.grid.dataUrl,
 				icon:'icon-search',
-				text:lang.search.text,
+				text:lang.btn.search,
 				beforeSubmit:function(){
 					!!!options.search.beforeSubmit?options.search.beforeSubmit.call(this.uiForm):'';
 					var queryParameters = this.getSearchParameters();
