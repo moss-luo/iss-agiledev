@@ -142,6 +142,7 @@ Render.prototype.createDatagrid = function(){
 			iconCls:'icon-edit',
 			handler:function(){
 				if($($this.plugin.selector).datagrid('getSelections').length>1){
+					$("#btnEdit").linkbutton("disable");
 					$.messager.show({
 						title:lang.prompt.title,
 						msg:lang.prompt.selectedMuch,
@@ -211,8 +212,30 @@ Render.prototype.createDatagrid = function(){
 		columns:[columns],
 		toolbar:buttons,
 		pageSize:options.grid.pageSize,
-		pageList:options.grid.pageList
+		pageList:options.grid.pageList,
+		onLoadSuccess:function(){
+			$(".datagrid-cell-check > :checkbox").live("change",function(){
+				if(this.checked=="checked" || this.checked == true){
+					if(options.globalDatagrid.datagrid("getSelections").length>1){
+						$("#btnEdit").linkbutton("disable");
+					}else{
+						$("#btnEdit").linkbutton("enable");
+					}
+					$("#btnRemove").linkbutton("enable");		
+				}else if(options.globalDatagrid.datagrid("getSelections").length == 0){
+					$("#btnEdit,#btnRemove").linkbutton("disable");
+				}
+			});
+		},
+		onSelectAll:function(){
+			$("#btnRemove").linkbutton("enable");	
+			$("#btnEdit").linkbutton("disable");
+		},
+		onUnselectAll:function(){
+			$("#btnEdit,#btnRemove").linkbutton("disable");
+		}
 	});
+	$("#btnEdit,#btnRemove").linkbutton("disable");
 }
 Render.prototype.getRandom = function(){
 	var guid = new Date().getTime(), i;
