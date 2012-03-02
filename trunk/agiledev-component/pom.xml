@@ -8,9 +8,9 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
   <groupId>com.isoftstone.agiledev</groupId>
-  <artifactId>agiledev-component</artifactId>
+  <artifactId>agiledev-web</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>agiledev-component</name>
+  <name>agiledev-web</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
