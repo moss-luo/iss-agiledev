@@ -13,7 +13,7 @@
   <modules>
 	<module>agiledev-core</module>
     <module>agiledev-common</module>
-    <module>agiledev-component</module>
+    <module>agiledev-web</module>
     <module>agiledev-demo-hr</module>
   </modules>
 
