@@ -233,6 +233,21 @@ Render.prototype.createDatagrid = function(){
 		},
 		onUnselectAll:function(){
 			$("#btnEdit,#btnRemove").linkbutton("disable");
+		},
+		onClickRow:function(){
+			$(".datagrid-cell-check > :checkbox").each(function(){
+				if(this.checked=="checked" || this.checked == true){
+					if(options.globalDatagrid.datagrid("getSelections").length>1){
+						$("#btnEdit").linkbutton("disable");
+					}else{
+						$("#btnEdit").linkbutton("enable");
+					}
+					$("#btnRemove").linkbutton("enable");		
+				}else if(options.globalDatagrid.datagrid("getSelections").length == 0){
+					$("#btnEdit,#btnRemove").linkbutton("disable");
+				}
+			});
+			
 		}
 	});
 	$("#btnEdit,#btnRemove").linkbutton("disable");
