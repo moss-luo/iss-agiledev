@@ -33,9 +33,6 @@ var options = {
 				//deleteable:true,
 				buttons:[]
 			},
-			form:{
-				initUrl:''
-			},
 			search:{
 				field:[],//field:[{title:'First Name' field:'firstName',type:'input'}]
 				beforeSubmit:function(){return true;}
