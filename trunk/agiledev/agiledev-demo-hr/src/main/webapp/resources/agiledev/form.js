@@ -69,7 +69,7 @@ $.widget("ui.agiledevForm", {
 				datetimeboxes : $([]),dateboxes : $([]),textareas : $([]),selects : $([])},random = 0,self = this,
 				fields = self.options.field;
 		//global.html+='<table>';
-		global.html+='<div class="'+className+'">';
+		global.html+='<div class="agiledev '+className+'">';
 		$.each(fields,function(i,f){
 			if(f.field==null)return;
 			if(f.formShow == false)return;
