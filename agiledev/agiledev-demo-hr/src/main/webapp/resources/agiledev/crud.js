@@ -213,41 +213,69 @@ Render.prototype.createDatagrid = function(){
 		onLoadSuccess:function(){
 			$(".datagrid-cell-check > :checkbox").live("change",function(){
 				if(this.checked=="checked" || this.checked == true){
-					if(options.globalDatagrid.datagrid("getSelections").length>1){
-						$("#btnEdit").linkbutton("disable");
+					if(options.globalDatagrid.datagrid("getSelections").length!=1){
+						$("#btnEdit").linkbutton("disable").linkbutton({iconCls:'icon-unedit'});
 					}else{
-						$("#btnEdit").linkbutton("enable");
+						$("#btnEdit").linkbutton("enable").linkbutton({iconCls:'icon-edit'});
 					}
-					$("#btnRemove").linkbutton("enable");		
+					$("#btnRemove").linkbutton("enable").linkbutton({iconCls:'icon-remove'});		
 				}else if(options.globalDatagrid.datagrid("getSelections").length == 0){
 					$("#btnEdit,#btnRemove").linkbutton("disable");
+					$("#btnEdit").linkbutton({iconCls:'icon-unedit'});
+					$("#btnRemove").linkbutton({iconCls:'icon-unremove'});
 				}
 			});
 		},
 		onSelectAll:function(){
-			$("#btnRemove").linkbutton("enable");	
-			$("#btnEdit").linkbutton("disable");
+			if ($(".datagrid-row-selected").length == 0) {
+				$("#btnRemove").linkbutton("disable").linkbutton({
+					iconCls: 'icon-unremove'
+				});
+				$("#btnEdit").linkbutton("disable").linkbutton({
+					iconCls: 'icon-unedit'
+				});
+			}
+			else 
+				if ($(".datagrid-row-selected").length == 1) {
+					$("#btnRemove").linkbutton("enable").linkbutton({
+						iconCls: 'icon-remove'
+					});
+					$("#btnEdit").linkbutton("enable").linkbutton({
+						iconCls: 'icon-edit'
+					});
+				}
+				else 
+					if ($(".datagrid-row-selected").length > 1) {
+						$("#btnRemove").linkbutton("enable").linkbutton({iconCls:'icon-remove'});	
+						$("#btnEdit").linkbutton("disable").linkbutton({iconCls:'icon-unedit'});
+					}
 		},
 		onUnselectAll:function(){
 			$("#btnEdit,#btnRemove").linkbutton("disable");
+			$("#btnEdit").linkbutton({iconCls:'icon-unedit'});
+			$("#btnRemove").linkbutton({iconCls:'icon-unremove'});
 		},
 		onClickRow:function(){
 			$(".datagrid-cell-check > :checkbox").each(function(){
 				if(this.checked=="checked" || this.checked == true){
-					if(options.globalDatagrid.datagrid("getSelections").length>1){
-						$("#btnEdit").linkbutton("disable");
+					if(options.globalDatagrid.datagrid("getSelections").length!=1){
+						$("#btnEdit").linkbutton("disable").linkbutton({iconCls:'icon-unedit'});
 					}else{
-						$("#btnEdit").linkbutton("enable");
+						$("#btnEdit").linkbutton("enable").linkbutton({iconCls:'icon-edit'});
 					}
-					$("#btnRemove").linkbutton("enable");		
+					$("#btnRemove").linkbutton("enable").linkbutton({iconCls:'icon-remove'});		
 				}else if(options.globalDatagrid.datagrid("getSelections").length == 0){
 					$("#btnEdit,#btnRemove").linkbutton("disable");
+					$("#btnEdit").linkbutton({iconCls:'icon-unedit'});
+					$("#btnRemove").linkbutton({iconCls:'icon-unremove'});
 				}
 			});
 			
 		}
 	});
 	$("#btnEdit,#btnRemove").linkbutton("disable");
+	$("#btnEdit").linkbutton({iconCls:'icon-unedit'});
+	$("#btnRemove").linkbutton({iconCls:'icon-unremove'});
 }
 Render.prototype.getRandom = function(){
 	var guid = new Date().getTime(), i;
