@@ -52,3 +52,59 @@
 .icon-tip{
 	background:url('icons/tip.png') no-repeat;
 }
+
+
+.icon-unblank{
+	background:url('icons/unblank.gif') no-repeat;
+}
+.icon-unadd{
+	background:url('icons/unedit_add.png') no-repeat;
+}
+.icon-unedit{
+	background:url('icons/unpencil.png') no-repeat;
+}
+.icon-unremove{
+	background:url('icons/unedit_remove.png') no-repeat;
+}
+.icon-unsave{
+	background:url('icons/unfilesave.png') no-repeat;
+}
+.icon-uncut{
+	background:url('icons/uncut.png') no-repeat;
+}
+.icon-unok{
+	background:url('icons/unok.png') no-repeat;
+}
+.icon-unno{
+	background:url('icons/unno.png') no-repeat;
+}
+.icon-uncancel{
+	background:url('icons/uncancel.png') no-repeat;
+}
+.icon-unreload{
+	background:url('icons/unreload.png') no-repeat;
+}
+.icon-unsearch{
+	background:url('icons/unsearch.png') no-repeat;
+}
+.icon-unprint{
+	background:url('icons/unprint.png') no-repeat;
+}
+.icon-unhelp{
+	background:url('icons/unhelp.png') no-repeat;
+}
+.icon-unundo{
+	background:url('icons/unundo.png') no-repeat;
+}
+.icon-unredo{
+	background:url('icons/unredo.png') no-repeat;
+}
+.icon-unback{
+	background:url('icons/unback.png') no-repeat;
+}
+.icon-unsum{
+	background:url('icons/unsum.png') no-repeat;
+}
+.icon-untip{
+	background:url('icons/untip.png') no-repeat;
+}
