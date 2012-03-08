@@ -4,6 +4,7 @@ lang = {
 	},
 	btn:{
 		search:'查询',
+		close:'取消',
 		edit:'编辑',
 		create:'新建',
 		remove:'删除',
