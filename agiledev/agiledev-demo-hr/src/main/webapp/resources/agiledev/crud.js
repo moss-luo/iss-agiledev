@@ -319,7 +319,7 @@ Render.prototype.createDialog = function(title,data){
 	$.each(options.dialog.buttons,function(i,b){
 		dialogButtons = dialogButtons.add({text:b.text,iconCls:b.icon,handler:b.handler});
 	});
-	dialogButtons = dialogButtons.add({text:lang.btn.close,handler:function(){$('#_crudDialog').dialog('close');}});
+	dialogButtons = dialogButtons.add({text:lang.btn.close,iconCls:'icon-cancel',handler:function(){$('#_crudDialog').dialog('close');}});
 	
 	return dialog
 			.dialog({
