@@ -219,10 +219,13 @@ Render.prototype.createDatagrid = function(){
 						$("#btnEdit").linkbutton("enable").linkbutton({iconCls:'icon-edit'});
 					}
 					$("#btnRemove").linkbutton("enable").linkbutton({iconCls:'icon-remove'});		
-				}else if(options.globalDatagrid.datagrid("getSelections").length == 0){
-					$("#btnEdit,#btnRemove").linkbutton("disable");
-					$("#btnEdit").linkbutton({iconCls:'icon-unedit'});
-					$("#btnRemove").linkbutton({iconCls:'icon-unremove'});
+				}else{
+					if(options.globalDatagrid.datagrid("getSelections").length!=1){
+						$("#btnEdit").linkbutton("disable").linkbutton({iconCls:'icon-unedit'});
+					}else{
+						$("#btnEdit").linkbutton("enable").linkbutton({iconCls:'icon-edit'});
+					}
+					$("#btnRemove").linkbutton("enable").linkbutton({iconCls:'icon-remove'});
 				}
 			});
 		},
@@ -256,8 +259,10 @@ Render.prototype.createDatagrid = function(){
 			$("#btnRemove").linkbutton({iconCls:'icon-unremove'});
 		},
 		onClickRow:function(){
-			$(".datagrid-cell-check > :checkbox").each(function(){
-				if(this.checked=="checked" || this.checked == true){
+			///$(".datagrid-cell-check > :checkbox").each(function(){
+			$(".datagrid-body tr").each(function(){
+				//if(this.checked=="checked" || this.checked == true){
+				if($(this).hasClass("datagrid-row-selected")){
 					if(options.globalDatagrid.datagrid("getSelections").length!=1){
 						$("#btnEdit").linkbutton("disable").linkbutton({iconCls:'icon-unedit'});
 					}else{
