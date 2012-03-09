@@ -107,15 +107,30 @@ $.widget("ui.agiledevForm", {
 					global.html +='<input '+(f.id?('id="'+f.id+'"'):'')+' readonly="true" class="agiledev-date" name="'+f.field+'" element-id="'+random+'"/>';
 					global.dateboxes = global.dateboxes.add(f);
 				}else if(f.type == "radio"){
-					if(f.data==null){
-						throw new Error("radio:\""+f.field+"\" need configuration parameter:data!ex:[{valueField:'1',textField:'男'},{valueField:'0',textField:'女'}]");
-					}else{
-						$.each(f.data,function(i,o){
-							random = self.guid();
-							f._id = random;
-							global.html +='<div><input '+(f.id?('id="'+f.id+'"'):'')+' serId='+i+' class="agiledev-radio" type="radio" element-id="'+random+'" name="'+f.field+'" value="'+o.valueField+'"/>'+o.textField+"</div>";
+					var radioData = $([]);
+					if(f.data != null){
+						radioData = f.data;
+					}else if(f.url!=null){
+						$.ajax({
+							url:f.url,
+							dataType:'json',
+							async:false,
+							success:function(d){
+								$(d).each(function(i,o){
+									radioData = radioData.add({valueField:o[f.valueField],textField:o[f.textField]});  
+								});
+							}
 						});
+					}else{
+						throw new Error("radio:\""+f.field+"\" need configuration url or a parameter:data!ex:[{valueField:'1',textField:'男'},{valueField:'0',textField:'女'}]");
 					}
+					global.html+='<ol>';
+					$(radioData).each(function(i,o){
+						random = self.guid();
+						f._id = random;
+						global.html +='<ul><input '+(f.id?('id="'+f.id+'"'):'')+' serId='+i+' class="agiledev-radio" type="radio" element-id="'+random+'" name="'+f.field+'" value="'+o.valueField+'"/>'+o.textField+"</ul>";
+					});					
+					global.html+='</ol>';
 				}else if(f.type === "checkbox" || f.type === "checkBox"){
 					var checkboxData = $([]);
 					if(f.data != null){
