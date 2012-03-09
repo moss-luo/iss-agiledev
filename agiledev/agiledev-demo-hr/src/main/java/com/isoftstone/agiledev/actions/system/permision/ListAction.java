@@ -7,17 +7,19 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
 import com.isoftstone.agiledev.manages.BaseService;
 import com.isoftstone.agiledev.query.QueryParametersMap;
+import com.isoftstone.agiledev.query.SummaryProvider;
 
 @Results({
 	@Result(name="list",type="json",params={"root","results"}),
 	@Result(name="json2",type="datagrid-json",params={"root","results"})
 })
-public class ListAction {
+public class ListAction implements SummaryProvider{
 
 	private List<Permision> results = new ArrayList<Permision>();
 	@QueryParametersMap
@@ -28,6 +30,11 @@ public class ListAction {
 	public String execute(){
 		results= permisionManager.list(queryCondition,new Permision());
 		return "list";
+	}
+	@Action("list2")
+	public String list(){
+		results= permisionManager.list(queryCondition,new Permision());
+		return "json2";
 	}
 	public List<Permision> getResults() {
 		return results;
@@ -40,6 +47,10 @@ public class ListAction {
 	}
 	public void setQueryCondition(Map<String, Object> queryCondition) {
 		this.queryCondition = queryCondition;
+	}
+	@Override
+	public int getTotal() {
+		return permisionManager.getTotal();
 	}
 	
 	
