@@ -124,13 +124,17 @@ $.widget("ui.agiledevForm", {
 					}else{
 						throw new Error("radio:\""+f.field+"\" need configuration url or a parameter:data!ex:[{valueField:'1',textField:'男'},{valueField:'0',textField:'女'}]");
 					}
-					global.html+='<ol>';
-					$(radioData).each(function(i,o){
-						random = self.guid();
-						f._id = random;
-						global.html +='<ul><input '+(f.id?('id="'+f.id+'"'):'')+' serId='+i+' class="agiledev-radio" type="radio" element-id="'+random+'" name="'+f.field+'" value="'+o.valueField+'"/>'+o.textField+"</ul>";
-					});					
-					global.html+='</ol>';
+					global = 
+					f.formatter ? f.formatter.call(self,global,radioData) : function(global,radioData){
+						global.html += '<ol>';
+						$(radioData).each(function(i, o){
+							random = self.guid();
+							f._id = random;
+							global.html += '<ul><input ' + (f.id ? ('id="' + f.id + '"') : '') + ' serId=' + i + ' class="agiledev-radio" type="radio" element-id="' + random + '" name="' + f.field + '" value="' + o.valueField + '"/>' + o.textField + "</ul>";
+						});
+						global.html += '</ol>';
+						return global;
+					}(global,radioData);
 				}else if(f.type === "checkbox" || f.type === "checkBox"){
 					var checkboxData = $([]);
 					if(f.data != null){
