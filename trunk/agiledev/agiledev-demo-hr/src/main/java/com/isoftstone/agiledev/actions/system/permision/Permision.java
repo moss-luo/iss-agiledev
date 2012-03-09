@@ -6,6 +6,7 @@ public class Permision {
 	private String permisionName;
 	private String url;
 	private String pid;
+	private String pname;
 	private Integer hasChild;
 	
 	public Permision() {
@@ -46,5 +47,11 @@ public class Permision {
 	}
 	public void setHasChild(Integer hasChild) {
 		this.hasChild = hasChild;
+	}
+	public String getPname() {
+		return pname;
+	}
+	public void setPname(String pname) {
+		this.pname = pname;
 	}
 }
