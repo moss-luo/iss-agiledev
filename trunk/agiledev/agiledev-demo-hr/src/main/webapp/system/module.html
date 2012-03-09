@@ -47,10 +47,29 @@ config:{
 			width:130,
 			frozen:false,
 			sortable:false,
+		},
+		{
+			title:'父模块',
+			field:'pid',
+			width:130,
+			type:'radio',
+			url:'permision/list?queryCondition.pid=0',
+			valueField:'uid',
+			textField:'permisionName',
+			gridShow:false,
+			frozen:false,
+			sortable:false
+		},
+		{
+			title:'父模块',
+			field:'pname',
+			width:130,
+			frozen:false,
+			sortable:false
 		}
 	],
 	grid:{
-		dataUrl:'permision/list',
+		dataUrl:'permision/list2',
 		singleSelect:false,
 		idField:'uid',
 		title:'模块管理'
@@ -59,6 +78,13 @@ config:{
 };
 $(function(){
 	$("#list").crud(handle.config);
+	
+	$("#btnEdit").click(function(){
+		$.each(value,function(i,o){
+			//$(".agiledev-edit").find(":checkbox[name='permisionId'][value='"+o+"']").attr("checked","1");
+			$("[name = 'pid'][value='"+o+"']:radio").attr("checked", "checked");
+		});
+	});
 });
 </script>
 
