@@ -104,9 +104,12 @@ Render.prototype.createSearch = function(){
 				icon:'icon-search',
 				text:lang.btn.search,
 				beforeSubmit:function(){
-					!!!options.search.beforeSubmit?options.search.beforeSubmit.call(this.uiForm):'';
-					var queryParameters = this.getSearchParameters();
-					$this.reloadDatagrid(queryParameters);
+					if(options.search.beforeSubmit){
+						if(options.search.beforeSubmit.call(this.uiForm)){
+							var queryParameters = this.getSearchParameters();
+							$this.reloadDatagrid(queryParameters);
+						}
+					}
 					return false;
 				}
 		});
