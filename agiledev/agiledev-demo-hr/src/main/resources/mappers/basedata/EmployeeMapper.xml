@@ -24,7 +24,7 @@
      UPDATE T_EMPLOYEE SET name=#{name},depId=#{depId},levelId=#{levelId} WHERE UID=#{uid}
   </update>
   <delete id="remove" parameterType="com.isoftstone.agiledev.actions.basedata.employee.Employee">
-    DELETE FORM T_EMPLOYEE WHERE uid=#{id}
+    DELETE FROM T_EMPLOYEE WHERE uid=#{uid}
   </delete>
   <select id="total" resultType="java.lang.Integer" parameterType="map">
     SELECT COUNT(*) FROM T_EMPLOYEE e LEFT JOIN T_DEPARTMENT d ON e.depId=d.uid  LEFT JOIN T_LEVEL l ON e.levelId=l.uid WHERE 1=1
