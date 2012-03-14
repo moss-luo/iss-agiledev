@@ -3,17 +3,27 @@ package com.isoftstone.agiledev.actions.basedata.level;
 import javax.annotation.Resource;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 
 import com.isoftstone.agiledev.OperationResult;
 import com.isoftstone.agiledev.manages.BaseService;
+import com.opensymphony.xwork2.ModelDriven;
+@Results({
+	@Result(name="result",type="json",params={"root","result","contentType","text/html"}),
+	@Result(name="init",type="initjson")
+})
+public class DefaultAction implements ModelDriven<Level>{
 
-public class DefaultAction {
-
-	private Level level;
-	private OperationResult result;
-	private String id;
+	private Level level=null;
+	private OperationResult result=null;
+	private String id=null;
 	@Resource(name="baseService")
-	private BaseService<Level> levelManager;
+	private BaseService<Level> levelManager=null;
+	@Action("init")
+	public String init(){
+		return "init";
+	}
 	@Action("create")
 	public String create(){
 		levelManager.save(level);
@@ -46,5 +56,13 @@ public class DefaultAction {
 	}
 	public void setLevel(Level level) {
 		this.level = level;
+	}
+	@Override
+	public Level getModel() {
+		if(level==null)
+		{
+			level=new Level();
+		}
+		return level;
 	}
 }
