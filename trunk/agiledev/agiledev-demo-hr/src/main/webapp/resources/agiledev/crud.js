@@ -337,11 +337,11 @@ Render.prototype.createDialog = function(title,data){
 						title:title,
 						onOpen:function(){
 							if (data != null) {
-								$(".agiledev-form").find("img").remove().end().form("load", data);
+								$("#_crudDialog").find(".agiledev-form").find("img").remove().end().form("load", data);
 							}
 							else {
-								$(".agiledev-form").find("img").remove().end().form("clear");
-								$(".agiledev-form").find(":input").each(function(){
+								$("#_crudDialog").find(".agiledev-form").find("img").remove().end().form("clear");
+								$("#_crudDialog").find(".agiledev-form").find(":input").each(function(){
 									if($(this).data("initValue")!=null){
 										if(typeof $(this).data("initValue") == "string"){
 											$(this).val($(this).data("initValue"));
