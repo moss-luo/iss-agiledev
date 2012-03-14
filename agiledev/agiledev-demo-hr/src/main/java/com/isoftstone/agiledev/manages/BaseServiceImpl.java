@@ -57,6 +57,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 	public String getOperationCommand(T t){
 		String name = t.getClass().getName();
 		name = name.substring(name.lastIndexOf(".")+1);
+		System.err.println(this.packageName+"."+name+"Mapper");
 		return this.packageName+"."+name+"Mapper";
 	}
 	@Override
