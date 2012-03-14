@@ -2,9 +2,107 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="../resources/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../resources/easyui/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="../resources/agiledev/style/agiledev.css">
+<link rel="stylesheet" type="text/css" href="../resources/agiledev/style/agiledev-crud.css">
+<link rel="stylesheet" type="text/css" href="../resources/agiledev/style/agiledev-form.css">
+
+<script type="text/javascript" src="../resources/easyui/jquery-1.6.min.js"></script>
+<script type="text/javascript" src="../resources/agiledev/i18n/zh_CN.js"></script>
+<script type="text/javascript" src="../resources/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../resources/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../resources/easyui/jquery.easyui.validation.custom.js"></script>
+<script type="text/javascript" src="../resources/agiledev/jquery.ui.core.js"></script>
+<script type="text/javascript" src="../resources/agiledev/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="../resources/agiledev/upload.js"></script>
+<script type="text/javascript" src="../resources/agiledev/form.js"></script>
+<script type="text/javascript" src="../resources/agiledev/crud.js"></script>
+<script type="text/javascript">
+var handle={
+  config:{
+      formInitUrl:'employee/init',
+      saveUrl:'employee/save',
+      updateUrl:'employee/update',
+      removeUrl:'employee/remove',
+      fields:[
+              {
+				title:'',
+				checkbox:true,
+				field:'uid',
+				frozen:true,
+              },
+              {
+                title:'姓名',
+                field:'name',
+                frozen: false,
+    			sortable: true
+              },
+              {
+                title:'部门',
+                field:'depId',
+                type:'combobox',
+                url:'department/list2',
+                valueField:'uid',
+                textField:'depName',
+                formShow:true,
+                gridShow:false,
+    			frozen:false,
+    			sortable:false
+              },
+              {
+			    title:'职级',
+			    field:'levelId',
+			    type:'combobox',
+			    url:'level/list3',
+			    valueField:'uid',
+			    textField:'levelName',
+			    formShow:true,
+			    gridShow:false,
+				frozen:false,
+				sortable:false
+              },
+              {
+                title:'部门',
+                field:'depName',
+                formShow:false,
+                gridShow:true,
+                frozen:false,
+                sortable:false
+              },
+              {
+                 title:'职级',
+                 field:'levelName',
+                 formShow:false,
+                 gridShow:true,
+                 frozen:false,
+                 sortable:false
+              }
+             ],
+      grid:{
+             dataUrl:'employee/list',
+             singleSelect:false,
+             idField:'uid',
+             title:'职员管理'	
+           },
+      search:{
+              field:[
+                     {title:'姓名',field:'queryCondition.name'},
+                     {title:'部门',field:'queryCondition.depId',type:'combobox',url:'department/list2',valueField:'uid',textField:'depName'},
+                     {title:'职级',field:'queryCondition.levelId',type:'combobox',url:'level/list3',valueField:'uid',textField:'levelName'}
+                     ]
+          	 }
+     }
+};
+$(function(){
+	$("#list").crud(handle.config);
+});
+</script>
+<title>员工管理</title>
 </head>
 <body>
-员工管理
+   <div class="list">
+     <table id="list"></table>
+   </div>
 </body>
 </html>
