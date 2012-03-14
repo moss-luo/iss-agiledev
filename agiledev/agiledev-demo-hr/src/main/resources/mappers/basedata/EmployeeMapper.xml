@@ -1,23 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.isoftstone.agiledev.hr.mapper.EmployeeMapper">
-	<select id="list" parameterType="map" resultType="com.isoftstone.agiledev.actions.basedata.employee.Employee">
-		SELECT * FROM T_DEPARTMENT
-		<if test="sort != null">
-			ORDER BY #{orderBy}
-		</if>
-		LIMIT #{limit} , #{offset}
-	</select>
-	<insert id="save" parameterType="com.isoftstone.agiledev.actions.basedata.employee.Employee">
-		INSERT INTO T_DEPARTMENT(name) VALUES(#{name})
-	</insert>
-	<update id="update" parameterType="com.isoftstone.agiledev.actions.basedata.employee.Employee">
-		UPDATE T_DEPARTMENT SET name=#{name} WHERE UID=#{uid}
-	</update>
-	<delete id="remove" parameterType="java.lang.Integer">
-		DELETE FROM T_DEPARTMENT WHERE uid=#{id}
-	</delete>
-	<select id="total" resultType="java.lang.Integer">
-		SELECT COUNT(*) FROM T_DEPARTMENT
-	</select>
+  <select id="list" parameterType="map" resultType="com.isoftstone.agiledev.actions.basedata.employee.Employee">
+     SELECT e.*,d.uid,d.depName,l.uid,l.levelName FROM T_EMPLOYEE e LEFT JOIN T_DEPARTMENT d ON e.depId=d.uid LEFT JOIN T_LEVEL l ON e.levelId=l.uid WHERE 1=1
+     <if test="name!=null">
+       AND e.NAME like concat('%',#{name[0]},'%')
+     </if>
+     <if test="depId!=null">
+       AND d.uid=#{depId[0]}
+     </if>
+     <if test="levelId!=null">
+       AND l.uid=#{levelId[0]}
+     </if>
+     <if test="sort!=null">
+       ORDER BY #{orderBy}
+     </if>
+     LIMIT #{limit} , #{offset}
+  </select>
+  <insert id="save" parameterType="com.isoftstone.agiledev.actions.basedata.employee.Employee">
+     INSERT INTO T_EMPLOYEE(name,depId,levelId) VALUES(#{name},#{depId},#{levelId})
+  </insert>
+  <update id="update" parameterType="com.isoftstone.agiledev.actions.basedata.employee.Employee">
+     UPDATE T_EMPLOYEE SET name=#{name},depId=#{depId},levelId=#{levelId} WHERE UID=#{uid}
+  </update>
+  <delete id="remove" parameterType="com.isoftstone.agiledev.actions.basedata.employee.Employee">
+    DELETE FORM T_EMPLOYEE WHERE uid=#{id}
+  </delete>
+  <select id="total" resultType="java.lang.Integer" parameterType="map">
+    SELECT COUNT(*) FROM T_EMPLOYEE e LEFT JOIN T_DEPARTMENT d ON e.depId=d.uid  LEFT JOIN T_LEVEL l ON e.levelId=l.uid WHERE 1=1
+    <if test="name!=null">
+      AND e.NAME=#{name[0]}
+    </if>
+    <if test="depId">
+      AND d.uid=#{depId[0]}
+    </if>
+    <if test="levelId">
+      AND l.uid=#{levelId[0]}
+    </if>
+  </select>
 </mapper>

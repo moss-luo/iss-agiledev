@@ -9,10 +9,10 @@
 		LIMIT #{limit} , #{offset}
 	</select>
 	<insert id="save" parameterType="com.isoftstone.agiledev.actions.basedata.level.Level">
-		INSERT INTO T_LEVEL(name) VALUES(#{name})
+		INSERT INTO T_LEVEL(levelName) VALUES(#{levelName})
 	</insert>
 	<update id="update" parameterType="com.isoftstone.agiledev.actions.basedata.level.Level">
-		UPDATE T_LEVEL SET name=#{name} WHERE UID=#{uid}
+		UPDATE T_LEVEL SET levelName=#{levelName} WHERE UID=#{uid}
 	</update>
 	<delete id="remove" parameterType="java.lang.Integer">
 		DELETE FROM T_LEVEL WHERE uid=#{id}

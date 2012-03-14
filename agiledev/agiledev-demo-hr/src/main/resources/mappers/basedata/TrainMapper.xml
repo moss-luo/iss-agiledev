@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isoftstone.agiledev.hr.mapper.TrainMapper">
+  <select id="list" parameterType="map" resultType="com.isoftstone.agiledev.actions.basedata.train.Train">
+    SELECT * FROM T_TRAIN
+    <if test="sort!=null">
+      ORDER BY #{orderBy}
+    </if>
+    LIMIT #{limit},#{offset}
+  </select>
+  <insert id="save" parameterType="com.isoftstone.agiledev.actions.basedata.train.Train">
+     INSERT INTO T_TRAIN(name) VALUES(#{name})
+  </insert>
+  <update id="update" parameterType="com.isoftstone.agiledev.actions.basedata.train.Train">
+     UPDATE T_TRAIN SET name=#{name} WHERE UID=#{uid}
+  </update>
+  <delete id="remove" parameterType="com.isoftstone.agiledev.actions.basedata.train.Train">
+     DELETE FROM T_TRAIN WHERE UID=#{uid}
+  </delete>
+  <select id="total" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM T_TRAIN
+  </select>
+</mapper>

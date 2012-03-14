@@ -9,10 +9,10 @@
 		LIMIT #{limit} , #{offset}
 	</select>
 	<insert id="save" parameterType="com.isoftstone.agiledev.actions.basedata.department.Department">
-		INSERT INTO T_DEPARTMENT(name) VALUES(#{name})
+		INSERT INTO T_DEPARTMENT(depName) VALUES(#{depName})
 	</insert>
 	<update id="update" parameterType="com.isoftstone.agiledev.actions.basedata.department.Department">
-		UPDATE T_DEPARTMENT SET name=#{name} WHERE UID=#{uid}
+		UPDATE T_DEPARTMENT SET depName=#{depName} WHERE UID=#{uid}
 	</update>
 	<delete id="remove" parameterType="java.lang.Integer">
 		DELETE FROM T_DEPARTMENT WHERE uid=#{id}
