@@ -213,25 +213,6 @@ Render.prototype.createDatagrid = function(){
 		toolbar:buttons,
 		pageSize:options.grid.pageSize,
 		pageList:options.grid.pageList,
-		onLoadSuccess:function(){
-			$(".datagrid-cell-check > :checkbox").live("change",function(){
-				if(this.checked=="checked" || this.checked == true){
-					if(options.globalDatagrid.datagrid("getSelections").length!=1){
-						$("#btnEdit").linkbutton("disable").linkbutton({iconCls:'icon-unedit'});
-					}else{
-						$("#btnEdit").linkbutton("enable").linkbutton({iconCls:'icon-edit'});
-					}
-					$("#btnRemove").linkbutton("enable").linkbutton({iconCls:'icon-remove'});		
-				}else{
-					if(options.globalDatagrid.datagrid("getSelections").length!=1){
-						$("#btnEdit").linkbutton("disable").linkbutton({iconCls:'icon-unedit'});
-					}else{
-						$("#btnEdit").linkbutton("enable").linkbutton({iconCls:'icon-edit'});
-					}
-					$("#btnRemove").linkbutton("enable").linkbutton({iconCls:'icon-remove'});
-				}
-			});
-		},
 		onSelectAll:function(){
 			if ($(".datagrid-row-selected").length == 0) {
 				$("#btnRemove").linkbutton("disable").linkbutton({
@@ -279,6 +260,26 @@ Render.prototype.createDatagrid = function(){
 				}
 			});
 			
+		},
+		onSelect:function(){
+			if(options.globalDatagrid.datagrid("getSelections").length!=1){
+				$("#btnEdit").linkbutton("disable").linkbutton({iconCls:'icon-unedit'});
+			}else{
+				$("#btnEdit").linkbutton("enable").linkbutton({iconCls:'icon-edit'});
+			}
+			$("#btnRemove").linkbutton("enable").linkbutton({iconCls:'icon-remove'});
+		},
+		onUnselect:function(){
+			if(options.globalDatagrid.datagrid("getSelections").length!=1){
+				$("#btnEdit").linkbutton("disable").linkbutton({iconCls:'icon-unedit'});
+			}else{
+				$("#btnEdit").linkbutton("enable").linkbutton({iconCls:'icon-edit'});
+			}
+			if(options.globalDatagrid.datagrid("getSelections").length>=1){
+				$("#btnRemove").linkbutton("enable").linkbutton({iconCls:'icon-remove'});
+			}else{
+				$("#btnRemove").linkbutton("disable").linkbutton({iconCls:'icon-unremove'});
+			}
 		}
 	});
 	$("#btnEdit,#btnRemove").linkbutton("disable");
