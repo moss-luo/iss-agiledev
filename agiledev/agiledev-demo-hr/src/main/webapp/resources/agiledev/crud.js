@@ -336,10 +336,19 @@ Render.prototype.createDialog = function(title,data){
 						buttons:dialogButtons,
 						title:title,
 						onOpen:function(){
-							if(data!=null)
-								$(".agiledev-form").find("img").remove().end().form("load",data);
-							else
+							if (data != null) {
+								$(".agiledev-form").find("img").remove().end().form("load", data);
+							}
+							else {
 								$(".agiledev-form").find("img").remove().end().form("clear");
+								$(".agiledev-form").find(":input").each(function(){
+									if($(this).data("initValue")!=null){
+										if(typeof $(this).data("initValue") == "string"){
+											$(this).val($(this).data("initValue"));
+										}
+									}
+								});
+							}
 						}
 					}).dialog("close");
 	
