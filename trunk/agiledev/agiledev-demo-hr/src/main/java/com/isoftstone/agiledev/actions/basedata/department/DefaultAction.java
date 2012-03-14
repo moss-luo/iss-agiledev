@@ -1,19 +1,32 @@
 package com.isoftstone.agiledev.actions.basedata.department;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 
 import com.isoftstone.agiledev.OperationResult;
 import com.isoftstone.agiledev.manages.BaseService;
+import com.opensymphony.xwork2.ModelDriven;
+@Results({
+	@Result(name="result",type="json",params={"root","result","contentType","text/html"}),
+	@Result(name="init",type="initjson")
+})
+public class DefaultAction implements ModelDriven<Department>{
 
-public class DefaultAction {
-
-	private Department department;
-	private OperationResult result;
-	private String id;
+	private Department department=null;
+	private OperationResult result=null;
+	private String id=null;
 	@Resource(name="baseService")
-	private BaseService<Department> departmentManager;
+	private BaseService<Department> departmentManager=null;
+	@Action("init")
+	public String init(){
+		return "init";
+	}
 	@Action("create")
 	public String create(){
 		departmentManager.save(department);
@@ -48,4 +61,12 @@ public class DefaultAction {
 	public void setId(String id) {
 		this.id = id;
 	}
+	@Override
+	public Department getModel() {
+		if(department==null){
+			department=new Department();
+		}
+		return department;
+	}
+	
 }
