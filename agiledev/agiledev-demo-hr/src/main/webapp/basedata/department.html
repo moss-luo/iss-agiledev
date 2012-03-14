@@ -2,16 +2,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>部门管理</title>
 <link rel="stylesheet" type="text/css" href="../resources/easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="../resources/easyui/themes/icon.css">
-<link rel="stylesheet" type="text/css" href="../resources/agiledev/agiledev.css">
-<link rel="stylesheet" type="text/css" href="../resources/agiledev/agiledev-crud.css">
-<link rel="stylesheet" type="text/css" href="../resources/agiledev/agiledev-form.css">
-
+<link rel="stylesheet" type="text/css" href="../resources/agiledev/style/agiledev.css">
+<link rel="stylesheet" type="text/css" href="../resources/agiledev/style/agiledev-crud.css">
+<link rel="stylesheet" type="text/css" href="../resources/agiledev/style/agiledev-form.css">
 
 <script type="text/javascript" src="../resources/easyui/jquery-1.6.min.js"></script>
-<script type="text/javascript" src="../resources/agiledev/lang_zh_CN.js"></script>
+<script type="text/javascript" src="../resources/agiledev/i18n/zh_CN.js"></script>
 <script type="text/javascript" src="../resources/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../resources/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="../resources/easyui/jquery.easyui.validation.custom.js"></script>
@@ -23,6 +22,7 @@
 <script type="text/javascript">
 var handle = {
 config:{
+	formInitUrl:'department/init',
 	saveUrl:'department/create',
 	updateUrl:'department/update',
 	removeUrl:'department/remove',
@@ -36,7 +36,7 @@ config:{
 		{
 			title: '部门名称',
 			width:130,
-			field: 'name',
+			field: 'depName',
 			frozen: false,
 			sortable: true
 		}

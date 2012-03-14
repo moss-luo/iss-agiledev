@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>培训类别</title>
+<link rel="stylesheet" type="text/css" href="../resources/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../resources/easyui/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="../resources/agiledev/style/agiledev.css">
+<link rel="stylesheet" type="text/css" href="../resources/agiledev/style/agiledev-crud.css">
+<link rel="stylesheet" type="text/css" href="../resources/agiledev/style/agiledev-form.css">
+
+
+<script type="text/javascript" src="../resources/easyui/jquery-1.6.min.js"></script>
+<script type="text/javascript" src="../resources/agiledev/i18n/zh_CN.js"></script>
+<script type="text/javascript" src="../resources/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../resources/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../resources/easyui/jquery.easyui.validation.custom.js"></script>
+<script type="text/javascript" src="../resources/agiledev/jquery.ui.core.js"></script>
+<script type="text/javascript" src="../resources/agiledev/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="../resources/agiledev/upload.js"></script>
+<script type="text/javascript" src="../resources/agiledev/form.js"></script>
+<script type="text/javascript" src="../resources/agiledev/crud.js"></script>
+<script type="text/javascript">
+var handle={
+config:{
+	formInitUrl:'train/init',
+	saveUrl:'train/save',
+	updateUrl:'train/update',
+	removeUrl:'train/remove',
+	fields:[
+            {
+                title:'',
+                checkbox:true,
+                field:'uid',
+                frozen:true
+            },
+            {
+                title:'培训类别名称',
+                width:130,
+                field:'name',
+                frozen:false,
+                sortable:true
+            }
+	       ],
+    grid:{
+          dataUrl:'train/list',
+          singleSelect:false,
+          idField:'uid',
+          title:'培训类别'
+        }
+}
+};
+$(function(){
+	$("#list").crud(handle.config)
+});
+</script>
+</head>
+<body>
+  <div class="list">
+    <table id="list"></table>
+  </div>
+</body>
+</html>
