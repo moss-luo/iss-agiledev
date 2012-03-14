@@ -336,11 +336,12 @@ Render.prototype.createDialog = function(title,data){
 						buttons:dialogButtons,
 						title:title,
 						onOpen:function(){
+							$("#_crudDialog").find(".agiledev-form").find("img").remove();
 							if (data != null) {
-								$("#_crudDialog").find(".agiledev-form").find("img").remove().end().form("load", data);
+								$("#_crudDialog").find(".agiledev-form").form("load", data);
 							}
 							else {
-								$("#_crudDialog").find(".agiledev-form").find("img").remove().end().form("clear");
+								$("#_crudDialog").find(".agiledev-form").form("clear");
 								$("#_crudDialog").find(".agiledev-form").find(":input").each(function(){
 									if($(this).data("initValue")!=null){
 										if(typeof $(this).data("initValue") == "string"){
