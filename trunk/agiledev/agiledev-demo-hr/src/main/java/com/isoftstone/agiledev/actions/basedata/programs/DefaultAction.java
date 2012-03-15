@@ -18,16 +18,16 @@ import com.opensymphony.xwork2.ModelDriven;
 	@Result(name="result",type="json",params={"root","result","contentType","text/html"}),
 	@Result(name="init",type="initjson")
 })
-public class DefaultAction implements ModelDriven<Programs>{
+public class DefaultAction implements ModelDriven<Program>{
 
-	private Programs programs=null;
+	private Program programs=null;
 	
 	private OperationResult result=null;
 	
 	private String id=null;
 	
 	@Resource(name="baseService")
-	private BaseService<Programs> programsManager=null;
+	private BaseService<Program> programsManager=null;
 	
 	@Action("init")
 	public String init()
@@ -38,7 +38,7 @@ public class DefaultAction implements ModelDriven<Programs>{
 	public String create(){
 		Map<String, Object> p = new HashMap<String, Object>();
 		p.put("uid",programs.getUid());
-		if(!programsManager.unique(p, new Programs())){
+		if(!programsManager.unique(p, new Program())){
 			result=new OperationResult(true,"该项目已存在");
 			return "result";
 		}
@@ -54,16 +54,16 @@ public class DefaultAction implements ModelDriven<Programs>{
 	}
 	@Action("remove")
 	public String remove(){
-		programsManager.remove(id,new Programs());
+		programsManager.remove(id,new Program());
 		result=new OperationResult(true,"删除项目成功");
 		return "result";
 	}
 
-	public Programs getPrograms() {
+	public Program getPrograms() {
 		return programs;
 	}
 
-	public void setPrograms(Programs programs) {
+	public void setPrograms(Program programs) {
 		this.programs = programs;
 	}
 
@@ -84,19 +84,19 @@ public class DefaultAction implements ModelDriven<Programs>{
 		this.id = id;
 	}
 
-	public BaseService<Programs> getProgramsManager() {
+	public BaseService<Program> getProgramsManager() {
 		return programsManager;
 	}
 
-	public void setProgramsManager(BaseService<Programs> programsManager) {
+	public void setProgramsManager(BaseService<Program> programsManager) {
 		this.programsManager = programsManager;
 	}
 	
-	public Programs getModel() 
+	public Program getModel() 
 	{
 		if(programs==null)
 		{
-			return new Programs();
+			return new Program();
 		}
 		return programs;
 	}

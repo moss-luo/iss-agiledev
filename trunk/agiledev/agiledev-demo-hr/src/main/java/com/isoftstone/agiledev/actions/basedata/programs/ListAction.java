@@ -17,17 +17,17 @@ import com.isoftstone.agiledev.query.SummaryProvider;
 
 public class ListAction implements SummaryProvider{
 	
-	private List<Programs> results=null;
+	private List<Program> results=null;
 	
 	@Resource(name="baseService")
-	private BaseService<Programs> programsManager=null;
+	private BaseService<Program> programsManager=null;
 	
 	@QueryParametersMap
 	private Map<String,Object> queryCondition = new HashMap<String,Object>();
 	
 	public String execute()
 	{
-		results=programsManager.list(queryCondition, new Programs());
+		results=programsManager.list(queryCondition, new Program());
 		
 		return "result";
 	}
@@ -38,19 +38,19 @@ public class ListAction implements SummaryProvider{
 		return programsManager.getTotal();
 	}
 
-	public List<Programs> getResults() {
+	public List<Program> getResults() {
 		return results;
 	}
 
-	public void setResults(List<Programs> results) {
+	public void setResults(List<Program> results) {
 		this.results = results;
 	}
 
-	public BaseService<Programs> getProgramsManager() {
+	public BaseService<Program> getProgramsManager() {
 		return programsManager;
 	}
 
-	public void setProgramsManager(BaseService<Programs> programsManager) {
+	public void setProgramsManager(BaseService<Program> programsManager) {
 		this.programsManager = programsManager;
 	}
 }
