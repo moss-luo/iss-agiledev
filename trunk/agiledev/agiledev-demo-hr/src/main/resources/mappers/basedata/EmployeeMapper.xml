@@ -4,7 +4,7 @@
   <select id="list" parameterType="map" resultType="com.isoftstone.agiledev.actions.basedata.employee.Employee">
      SELECT e.*,d.uid,d.depName,l.uid,l.levelName FROM T_EMPLOYEE e LEFT JOIN T_DEPARTMENT d ON e.depId=d.uid LEFT JOIN T_LEVEL l ON e.levelId=l.uid WHERE 1=1
      <if test="name!=null">
-       AND e.NAME like concat('%',#{name[0]},'%')
+       AND e.name like concat('%',#{name[0]},'%')
      </if>
      <if test="depId!=null">
        AND d.uid=#{depId[0]}
@@ -29,7 +29,7 @@
   <select id="total" resultType="java.lang.Integer" parameterType="map">
     SELECT COUNT(*) FROM T_EMPLOYEE e LEFT JOIN T_DEPARTMENT d ON e.depId=d.uid  LEFT JOIN T_LEVEL l ON e.levelId=l.uid WHERE 1=1
     <if test="name!=null">
-      AND e.NAME=#{name[0]}
+      AND e.name=#{name[0]}
     </if>
     <if test="depId">
       AND d.uid=#{depId[0]}

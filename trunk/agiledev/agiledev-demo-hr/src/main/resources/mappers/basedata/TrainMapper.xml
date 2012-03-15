@@ -20,4 +20,7 @@
   <select id="total" resultType="java.lang.Integer">
     SELECT COUNT(*) FROM T_TRAIN
   </select>
+  <select id="unique" parameterType="java.util.HashMap" resultType="com.isoftstone.agiledev.actions.basedata.train.Train">
+    SELECT * FROM T_TRAIN WHERE uid=#{uid}
+  </select>
 </mapper>
