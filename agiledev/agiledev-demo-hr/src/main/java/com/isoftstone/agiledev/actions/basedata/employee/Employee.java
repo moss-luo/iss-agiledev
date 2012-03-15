@@ -1,5 +1,7 @@
 package com.isoftstone.agiledev.actions.basedata.employee;
 
+import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
+
 public class Employee {
 
 	private String uid;
@@ -17,6 +19,7 @@ public class Employee {
 	public String getName() {
 		return name;
 	}
+	@StringLengthFieldValidator(message="用户名必须在1-10之间",minLength="1",maxLength="10")
 	public void setName(String name) {
 		this.name = name;
 	}
