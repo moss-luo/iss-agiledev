@@ -2,10 +2,84 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link>
+<link rel="stylesheet" type="text/css" href="../resources/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../resources/easyui/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="../resources/agiledev/style/agiledev.css">
+<link rel="stylesheet" type="text/css" href="../resources/agiledev/style/agiledev-crud.css">
+<link rel="stylesheet" type="text/css" href="../resources/agiledev/style/agiledev-form.css">
+
+<script type="text/javascript" src="../resources/easyui/jquery-1.6.min.js"></script>
+<script type="text/javascript" src="../resources/agiledev/i18n/zh_CN.js"></script>
+<script type="text/javascript" src="../resources/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../resources/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../resources/easyui/jquery.easyui.validation.custom.js"></script>
+<script type="text/javascript" src="../resources/agiledev/jquery.ui.core.js"></script>
+<script type="text/javascript" src="../resources/agiledev/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="../resources/agiledev/upload.js"></script>
+<script type="text/javascript" src="../resources/agiledev/form.js"></script>
+<script type="text/javascript" src="../resources/agiledev/crud.js"></script>
+<script type="text/javascript">
+
+	var handle=
+			{
+			config:
+				{
+				formInitUrl:'programs/init',
+				saveUrl:'programs/save',
+				updateUrl:'programs/update',
+				removeUrl:'programs/remove',
+				fields:[
+							{
+								title:'',
+								checkbox:true,
+								field:'uid',
+								frozen:true,		
+							},
+							{
+								title:'培训项目名',
+								field:'trainId',
+								frozen:true,
+								sortable: true		
+							},
+			              	{
+				                title:'培训类别',
+				                field:'trainId',
+				                type:'combobox',
+				                url:'train/list2',
+				                valueField:'uid',
+				                textField:'trainName',
+				                formShow:true,
+				                gridShow:false,
+				    			frozen:false,
+				    			sortable:false
+			              	},
+			                {
+			                    title:'培训类别',
+			                    field:'trainName',
+			                    formShow:false,
+			                    gridShow:true,
+			                    frozen:false,
+			                    sortable:false
+			                  },
+					   ],
+		      	grid:{
+		             dataUrl:'programs/list',
+		             singleSelect:false,
+		             idField:'uid',
+		             title:'培训项目'	
+		           }		
+				}
+			}
+
+	$(function (){
+		$("#list").crud(handle.config);
+	})
+</script>
 <title>培训项目</title>
 </head>
 <body>
-
+	<div class="list">
+		<table id="list"></table>
+	</div>
 </body>
 </html>
