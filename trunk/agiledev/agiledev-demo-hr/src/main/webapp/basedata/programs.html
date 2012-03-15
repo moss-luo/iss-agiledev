@@ -24,10 +24,10 @@
 			{
 			config:
 				{
-				formInitUrl:'programs/init',
-				saveUrl:'programs/save',
-				updateUrl:'programs/update',
-				removeUrl:'programs/remove',
+				formInitUrl:'program/init',
+				saveUrl:'program/save',
+				updateUrl:'program/update',
+				removeUrl:'program/remove',
 				fields:[
 							{
 								title:'',
@@ -37,7 +37,7 @@
 							},
 							{
 								title:'培训项目名',
-								field:'trainId',
+								field:'name',
 								frozen:true,
 								sortable: true		
 							},
@@ -63,7 +63,7 @@
 			                  },
 					   ],
 		      	grid:{
-		             dataUrl:'programs/list',
+		             dataUrl:'program/list',
 		             singleSelect:false,
 		             idField:'uid',
 		             title:'培训项目'	

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.isoftstone.agiledev.hr.mapper.Programs">
-	<select id="list" parameterType="map" resultType="com.isoftstone.agiledev.actions.basedata.programs.Programs">
+	<select id="list" parameterType="map" resultType="com.isoftstone.agiledev.actions.basedata.programs.Program">
 		select p.*,t.uid,t.name from T_PROGRAMS p left join T_TRAIN t on p.trainId=t.uid where 1=1
 		<if test="name!=null">
 			and p.name like concat('%',#{name[0]},'%')
@@ -15,15 +15,15 @@
     	LIMIT #{limit},#{offset} 
 	</select>
 	
-	<insert id="save" parameterType="com.isoftstone.agiledev.actions.basedata.programs.Programs">
+	<insert id="save" parameterType="com.isoftstone.agiledev.actions.basedata.programs.Program">
      	INSERT INTO T_PROGRAMS(name,trainId) VALUES(#{name},#{trainId})
   	</insert>
 	
-	<update id="update" parameterType="com.isoftstone.agiledev.actions.basedata.programs.Programs">
+	<update id="update" parameterType="com.isoftstone.agiledev.actions.basedata.programs.Program">
 	     UPDATE T_PROGRAMS SET name=#{name},tratinId=#{trainId} WHERE UID=#{uid}
 	</update>
 	
-	<delete id="remove" parameterType="com.isoftstone.agiledev.actions.basedata.programs.Programs">
+	<delete id="remove" parameterType="com.isoftstone.agiledev.actions.basedata.programs.Program">
 	     DELETE FROM T_PROGRAMS WHERE UID=#{uid}
 	</delete>
 	
