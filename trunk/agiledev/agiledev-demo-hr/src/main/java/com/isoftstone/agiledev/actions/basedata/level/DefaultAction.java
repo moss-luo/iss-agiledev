@@ -1,5 +1,8 @@
 package com.isoftstone.agiledev.actions.basedata.level;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -26,6 +29,12 @@ public class DefaultAction implements ModelDriven<Level>{
 	}
 	@Action("create")
 	public String create(){
+		Map<String, Object> p=new HashMap<String, Object>();
+		p.put("uid", level.getUid());
+		if(!levelManager.unique(p, new Level())){
+			result=new OperationResult(true,"该职级已存在");
+			return "result";
+		}
 		levelManager.save(level);
 		result = new OperationResult(true,"创建职级成功");
 		return "result";
