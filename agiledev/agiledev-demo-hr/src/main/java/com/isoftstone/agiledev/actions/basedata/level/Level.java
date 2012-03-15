@@ -1,5 +1,7 @@
 package com.isoftstone.agiledev.actions.basedata.level;
 
+import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
+
 public class Level {
 
 	private String uid;
@@ -13,6 +15,7 @@ public class Level {
 	public String getLevelName() {
 		return levelName;
 	}
+	@StringLengthFieldValidator(message="职级名称必须在1-10之间",minLength="1",maxLength="10")
 	public void setLevelName(String levelName) {
 		this.levelName = levelName;
 	}
