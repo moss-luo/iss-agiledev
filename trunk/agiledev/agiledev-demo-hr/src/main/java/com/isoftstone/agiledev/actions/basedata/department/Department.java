@@ -15,6 +15,7 @@ public class Department {
 	public String getDepName() {
 		return depName;
 	}
+	@StringLengthFieldValidator(message="部门名必须在1-10位之间",minLength="1",maxLength="10")
 	public void setDepName(String depName) {
 		this.depName = depName;
 	}
