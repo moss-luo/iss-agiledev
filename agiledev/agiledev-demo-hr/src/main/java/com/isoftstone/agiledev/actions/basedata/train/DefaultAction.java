@@ -29,6 +29,12 @@ public class DefaultAction implements ModelDriven<Train>{
 	}
 	@Action("save")
 	public String create(){
+		Map<String, Object> p = new HashMap<String, Object>();
+		p.put("uid",train.getUid());
+		if(!trainManager.unique(p, new Train())){
+			result=new OperationResult(true,"该培训类别已存在");
+			return "result";
+		}
 		trainManager.save(train);
 		result=new OperationResult(true,"创建培训类别成功");
 		return "result";
