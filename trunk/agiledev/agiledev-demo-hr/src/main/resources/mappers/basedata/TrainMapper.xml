@@ -9,10 +9,10 @@
     LIMIT #{limit},#{offset}
   </select>
   <insert id="save" parameterType="com.isoftstone.agiledev.actions.basedata.train.Train">
-     INSERT INTO T_TRAIN(name) VALUES(#{name})
+     INSERT INTO T_TRAIN(trainName) VALUES(#{trainName})
   </insert>
   <update id="update" parameterType="com.isoftstone.agiledev.actions.basedata.train.Train">
-     UPDATE T_TRAIN SET name=#{name} WHERE UID=#{uid}
+     UPDATE T_TRAIN SET trainName=#{trainName} WHERE UID=#{uid}
   </update>
   <delete id="remove" parameterType="com.isoftstone.agiledev.actions.basedata.train.Train">
      DELETE FROM T_TRAIN WHERE UID=#{uid}
