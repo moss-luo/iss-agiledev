@@ -30,9 +30,9 @@ public class DefaultAction implements ModelDriven<Department>{
 	@Action("create")
 	public String create(){
 		Map<String, Object> p=new HashMap<String, Object>();
-		p.put("uid", department.getUid());
+		p.put("depName", department.getDepName());
 		if(!departmentManager.unique(p, new Department())){
-			result=new OperationResult(true,"该部门已存在");
+			result=new OperationResult(false,"该部门已存在");
 			return "result";
 		}
 		departmentManager.save(department);
