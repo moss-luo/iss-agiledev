@@ -20,7 +20,7 @@
   	</insert>
 	
 	<update id="update" parameterType="com.isoftstone.agiledev.actions.basedata.program.Program">
-	     UPDATE T_PROGRAMS SET name=#{name},tratinId=#{trainId} WHERE UID=#{uid}
+	     UPDATE T_PROGRAMS SET name=#{name},trainId=#{trainId} WHERE UID=#{uid}
 	</update>
 	
 	<delete id="remove" parameterType="com.isoftstone.agiledev.actions.basedata.program.Program">
@@ -35,5 +35,9 @@
 	    <if test="trainId!=null">
 			and t.uid=#{trainId[0]}	    	
 	    </if>
+	</select>
+	
+	<select id="unique" parameterType="java.util.HashMap" resultType="com.isoftstone.agiledev.actions.basedata.program.Program">
+		select * from T_PROGRAMS where name=#{name}
 	</select>
 </mapper>
