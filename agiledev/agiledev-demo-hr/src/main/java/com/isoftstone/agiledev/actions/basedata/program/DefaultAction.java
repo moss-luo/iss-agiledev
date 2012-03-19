@@ -20,7 +20,7 @@ import com.opensymphony.xwork2.ModelDriven;
 })
 public class DefaultAction implements ModelDriven<Program>{
 
-	private Program program=null;
+	private Program program;
 	
 	private OperationResult result=null;
 	
@@ -36,10 +36,11 @@ public class DefaultAction implements ModelDriven<Program>{
 	}
 	@Action("save")
 	public String create(){
-		Map<String, Object> p = new HashMap<String, Object>();
-		p.put("uid",program.getUid());
-		if(!programsManager.unique(p, new Program())){
-			result=new OperationResult(true,"该项目已存在");
+		Map<String, Object> p=new HashMap<String, Object>();
+		p.put("name", program.getName());
+		if(!programsManager.unique(p, new Program()))
+		{
+			result=new OperationResult(true, "该项目已存在");
 			return "result";
 		}
 		programsManager.save(program);
@@ -58,46 +59,29 @@ public class DefaultAction implements ModelDriven<Program>{
 		result=new OperationResult(true,"删除项目成功");
 		return "result";
 	}
-
 	public Program getProgram() {
 		return program;
 	}
-
-	public void setProgram(Program programs) {
-		this.program = programs;
+	public void setProgram(Program program) {
+		this.program = program;
 	}
-
-	public OperationResult getResult() {
-		return result;
-	}
-
-
-	public void setResult(OperationResult result) {
-		this.result = result;
-	}
-
 	public String getId() {
 		return id;
 	}
-
 	public void setId(String id) {
 		this.id = id;
 	}
-
-	public BaseService<Program> getProgramsManager() {
-		return programsManager;
+	public OperationResult getResult() {
+		return result;
 	}
-
-	public void setProgramsManager(BaseService<Program> programsManager) {
-		this.programsManager = programsManager;
-	}
-	
-	public Program getModel() 
-	{
+	@Override
+	public Program getModel() {
+		
 		if(program==null)
 		{
-			return new Program();
+			return program=new Program();
 		}
+		
 		return program;
 	}
 }

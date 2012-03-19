@@ -9,7 +9,7 @@ public class Program {
 	private int trainId;//项目培训类别的id
 	
 	private String trainName;//项目培训类别的名称
-	
+
 	public int getUid() {
 		return uid;
 	}
@@ -41,5 +41,6 @@ public class Program {
 	public void setTrainName(String trainName) {
 		this.trainName = trainName;
 	}
+	
 	
 }
