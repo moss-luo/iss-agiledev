@@ -30,9 +30,9 @@ public class DefaultAction implements ModelDriven<Level>{
 	@Action("create")
 	public String create(){
 		Map<String, Object> p=new HashMap<String, Object>();
-		p.put("uid", level.getUid());
+		p.put("levelName", level.getLevelName());
 		if(!levelManager.unique(p, new Level())){
-			result=new OperationResult(true,"该职级已存在");
+			result=new OperationResult(false,"该职级已存在");
 			return "result";
 		}
 		levelManager.save(level);
