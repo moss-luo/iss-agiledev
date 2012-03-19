@@ -21,6 +21,6 @@
 		SELECT COUNT(*) FROM T_DEPARTMENT
 	</select>
 	<select id="unique" parameterType="java.util.HashMap" resultType="com.isoftstone.agiledev.actions.basedata.department.Department">
-	    SELECT * FROM T_DEPARTMENT WHERE uid=#{uid} 
+	    SELECT * FROM T_DEPARTMENT WHERE depName=#{depName} 
 	</select>
 </mapper>
