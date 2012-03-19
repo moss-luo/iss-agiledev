@@ -17,5 +17,4 @@ public class Train {
 		this.trainName = trainName;
 	}
 	
-	
 }
