@@ -22,7 +22,7 @@ public class ListAction implements SummaryProvider{
 	@QueryParametersMap
 	private Map<String,Object> queryCondition = new HashMap<String,Object>();
 	public String execute(){
-		results = employeeManager.list(queryCondition,new Employee());
+		results = employeeManager.list(this.getQueryCondition(),new Employee());
 		return "result";
 	}
 	@Override
@@ -33,5 +33,14 @@ public class ListAction implements SummaryProvider{
 	public List<Employee> getResults() {
 		return results;
 	}
+	public Map<String, Object> getQueryCondition() {
+		return queryCondition;
+	}
+	public void setQueryCondition(Map<String, Object> queryCondition) {
+		this.queryCondition = queryCondition;
+	}
+	
+	
+	
 
 }
