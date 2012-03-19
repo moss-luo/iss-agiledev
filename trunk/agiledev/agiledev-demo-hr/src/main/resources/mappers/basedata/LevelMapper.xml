@@ -12,7 +12,7 @@
 		INSERT INTO T_LEVEL(levelName) VALUES(#{levelName})
 	</insert>
 	<update id="update" parameterType="com.isoftstone.agiledev.actions.basedata.level.Level">
-		UPDATE T_LEVEL SET levelName=#{levelName} WHERE UID=#{uid}
+		UPDATE T_LEVEL SET levelName=#{levelName} WHERE uid=#{uid}
 	</update>
 	<delete id="remove" parameterType="java.lang.Integer">
 		DELETE FROM T_LEVEL WHERE uid=#{id}
@@ -21,6 +21,6 @@
 		SELECT COUNT(*) FROM T_LEVEL
 	</select>
 	<select id="unique" parameterType="java.util.HashMap" resultType="com.isoftstone.agiledev.actions.basedata.level.Level">
-	    SELECT * FROM T_LEVEL WHERE uid=#{uid}
+	    SELECT * FROM T_LEVEL WHERE levelName=#{levelName}
 	</select>
 </mapper>
