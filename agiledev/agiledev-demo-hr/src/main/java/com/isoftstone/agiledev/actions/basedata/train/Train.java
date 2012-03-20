@@ -1,5 +1,7 @@
 package com.isoftstone.agiledev.actions.basedata.train;
 
+import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
+
 public class Train {
 
 	private String uid;
@@ -13,6 +15,7 @@ public class Train {
 	public String getTrainName() {
 		return trainName;
 	}
+	@StringLengthFieldValidator(message="培训类别必须在1-10之间",minLength="1",maxLength="10")
 	public void setTrainName(String trainName) {
 		this.trainName = trainName;
 	}
