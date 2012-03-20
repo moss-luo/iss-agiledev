@@ -10,7 +10,9 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
 import com.isoftstone.agiledev.OperationResult;
+import com.isoftstone.agiledev.initform.Initialization;
 import com.isoftstone.agiledev.manages.BaseService;
+import com.isoftstone.agiledev.validater.Validation;
 import com.opensymphony.xwork2.ModelDriven;
 @Results({
 	@Result(name="result",type="json",params={"root","result","contentType","text/html"}),
@@ -18,6 +20,8 @@ import com.opensymphony.xwork2.ModelDriven;
 })
 public class DefaultAction implements ModelDriven<Department>{
 
+	@Validation
+	@Initialization
 	private Department department=null;
 	private OperationResult result=null;
 	private String id=null;
