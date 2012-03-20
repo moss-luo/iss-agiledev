@@ -1,5 +1,7 @@
 package com.isoftstone.agiledev.actions.basedata.program;
 
+import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
+
 public class Program {
 
 	private int uid;
@@ -21,7 +23,8 @@ public class Program {
 	public String getName() {
 		return name;
 	}
-
+	
+	@StringLengthFieldValidator(message="项目名应在5-10之间",minLength="5",maxLength="10")
 	public void setName(String name) {
 		this.name = name;
 	}

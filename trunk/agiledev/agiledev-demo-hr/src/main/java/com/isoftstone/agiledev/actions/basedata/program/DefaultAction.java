@@ -10,7 +10,9 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
 import com.isoftstone.agiledev.OperationResult;
+import com.isoftstone.agiledev.initform.Initialization;
 import com.isoftstone.agiledev.manages.BaseService;
+import com.isoftstone.agiledev.validater.Validation;
 import com.opensymphony.xwork2.ModelDriven;
 
 
@@ -20,6 +22,8 @@ import com.opensymphony.xwork2.ModelDriven;
 })
 public class DefaultAction implements ModelDriven<Program>{
 
+	@Validation
+	@Initialization
 	private Program program;
 	
 	private OperationResult result=null;
