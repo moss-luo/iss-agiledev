@@ -5,6 +5,7 @@ import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
 public class Department {
 
 	private String uid;
+	
 	private String depName;
 	public String getUid() {
 		return uid;
