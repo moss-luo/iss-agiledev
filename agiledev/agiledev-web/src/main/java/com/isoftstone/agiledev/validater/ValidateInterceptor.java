@@ -23,6 +23,7 @@ import com.opensymphony.xwork2.validator.FieldValidator;
 import com.opensymphony.xwork2.validator.Validator;
 import com.opensymphony.xwork2.validator.annotations.EmailValidator;
 import com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator;
+import com.opensymphony.xwork2.validator.validators.RequiredFieldValidator;
 import com.opensymphony.xwork2.validator.validators.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.validators.StringLengthFieldValidator;
 
@@ -103,11 +104,9 @@ public class ValidateInterceptor extends MethodFilterInterceptor {
 	}
 
 	private void doValidate( Object action,Object targetValidationBean) throws IllegalAccessException {
-		//Object targetValidationBean = field.get(action);
 		Class<?> targetValidateObjectClazz = targetValidationBean.getClass();
 		Field[] targetValidateObjectFields = targetValidateObjectClazz.getDeclaredFields();
 		for (Field validateField: targetValidateObjectFields) {
-			//Object value = BeanUtils.getProperty(targetValidationBean, validateField.getName());
 			Annotation[] annotations = validateField.getAnnotations();
 			for (Annotation annotation : annotations) {
 				Map<String,List<String>> temp = validate(targetValidationBean,annotation,validateField.getName());
@@ -117,8 +116,7 @@ public class ValidateInterceptor extends MethodFilterInterceptor {
 		Method[] targetValidateObjectMethods = targetValidateObjectClazz.getDeclaredMethods();
 		for (Method validateMethod : targetValidateObjectMethods) {
 			//获取setter或者getter对应的字段名称
-			String fieldName = AnnotationUtils.resolvePropertyName(validateMethod);//validateMethod.getName().substring(3).replace(validateMethod.getName().substring(3).substring(0, 1), validateMethod.getName().substring(3).substring(0, 1).toLowerCase());
-			//Object value = BeanUtils.getProperty(targetValidationBean, fieldName);
+			String fieldName = AnnotationUtils.resolvePropertyName(validateMethod);
 			Annotation[] annotations = validateMethod.getAnnotations();
 			for (Annotation annotation : annotations) {
 				Map<String,List<String>> temp = validate(targetValidationBean,annotation,fieldName);
@@ -160,14 +158,15 @@ public class ValidateInterceptor extends MethodFilterInterceptor {
 
 	private static String validators;
 	private static Map<Class<? extends Annotation>,Validator> VALIDATOR = new HashMap<Class<? extends Annotation>,Validator>();
-	public static Validator getValidator(Class clazz){
+	public static Validator getValidator(Class AnnotationClazz){
 		for (Class c : VALIDATOR.keySet()) {
-			if(c.getName().equals(clazz.getName())){
-				return VALIDATOR.get(clazz);
+			if(c.getName().equals(AnnotationClazz.getName())){
+				return VALIDATOR.get(AnnotationClazz);
 			}
 		}
 		return null;
 	}
+	
 	/**
 	 * 初始化agiledev-validator组件自带的及struts2提供的部分校验器，并且支持struts.xml文件中扩展其他校验器
 	 */
@@ -180,7 +179,7 @@ public class ValidateInterceptor extends MethodFilterInterceptor {
 		requiredStringValidator.setValidatorType("required");
 		VALIDATOR.put(com.opensymphony.xwork2.validator.annotations.RequiredStringValidator.class, requiredStringValidator);
 		              
-		RequiredStringValidator requiredFieldValidator = new RequiredStringValidator();
+		RequiredFieldValidator requiredFieldValidator = new RequiredFieldValidator();
 		requiredFieldValidator.setValidatorType("required");
 		VALIDATOR.put(com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator.class, requiredFieldValidator);
 		
