@@ -169,7 +169,7 @@ $.widget("ui.agiledevForm", {
 				//global.html += "</div></div></td></tr>";
 				global.html += "</div></div>";
 			}else{
-				global.html += '<input '+(f.id?('id="'+f.id+'"'):'')+' class="agiledev-hidden" type="hidden" name="'+f.field+'" id="'+random+'"/>';
+				global.html += '<input '+(f.id?('id="'+f.id+'"'):'')+' class="agiledev-hidden" type="hidden" name="'+f.field+'" id="'+random+'" value="'+f.value+'"/>';
 				global.hiddens = global.hiddens.add(f);
 			}
 		});

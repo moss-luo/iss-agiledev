@@ -77,6 +77,12 @@ $.fn.crud = function(){
 	function getDialog(render,handle,args){
 		return render.createDialog(args);
 	}
+	function getSearchform(){
+		return options.globalSearchform;
+	}
+	function reloadDatagrid(render,handle,params){
+		return render.reloadDatagrid(params[1]);
+	}
 	this.init();
 	return this;
 }
@@ -113,6 +119,7 @@ Render.prototype.createSearch = function(){
 				}
 		});
 	}
+	options.globalSearchform = searchPanel;
 	//searchPanel.append('<div class="search-button"><a onclick="return false" class="easyui-linkbutton l-btn search_button"><span class="l-btn-left"><span class="l-btn-text icon-search" style="padding-left: 20px;">查询</span></span></a></div>');
 	//$(".search_button").click(function(){
 	//	$this.plugin.getHandle().search();
@@ -363,14 +370,19 @@ Render.prototype.closeDialog = function(){
  * 重新渲染datagrid
  */
 Render.prototype.reloadDatagrid = function(params){
-	if(params == "reload")
+	if (params == "reload") {
 		$(this.plugin.selector).datagrid("reload");
-	else if(params!=null && !$.isEmptyObject(params)){
-		$(this.plugin.selector).datagrid("load",params);
-	}else{
-		$(this.plugin.selector).datagrid({url:options.grid.dataUrl,queryParams:null});
+	}else if(params=="remake"){
+		$(this.plugin.selector).datagrid();
+	}else if (params != null && !$.isEmptyObject(params)) {
+		$(this.plugin.selector).datagrid("load", params);
+	}else {
+		$(this.plugin.selector).datagrid({
+			url: options.grid.dataUrl,
+			queryParams: null
+		});
 	}
-		
+	
 	
 }
  /**
