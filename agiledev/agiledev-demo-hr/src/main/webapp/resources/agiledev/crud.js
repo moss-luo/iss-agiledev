@@ -101,8 +101,7 @@ Render.prototype.createSearch = function(){
 				field:options.search.field,
 				className:'agiledev-search',
 				submitUrl:options.grid.dataUrl,
-				icon:'icon-search',
-				text:lang.btn.search,
+				buttons:options.search.buttons,
 				beforeSubmit:function(){
 					if(options.search.beforeSubmit){
 						if(options.search.beforeSubmit.call(this.uiForm)){
