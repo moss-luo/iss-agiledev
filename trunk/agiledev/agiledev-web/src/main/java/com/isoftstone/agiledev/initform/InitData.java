@@ -13,4 +13,7 @@ public class InitData {
 	public static List<InitField> getInitData(){
 		return initFields;
 	}
+	public static void clear(){
+		initFields.clear();
+	}
 }
