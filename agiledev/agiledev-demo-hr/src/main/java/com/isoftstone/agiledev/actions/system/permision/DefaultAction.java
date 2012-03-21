@@ -38,6 +38,12 @@ public class DefaultAction implements ModelDriven<Permision>{
 			return "result";
 		}
 		
+		if(permision.getPid()!=null){
+			permision.setHasChild(1);
+			permision.setPname(permision.getPid().split(";")[1]);
+			permision.setPid(permision.getPid().split(";")[0]);
+		}
+		
 		manage.save(permision);
 		result = new OperationResult(true, "添加模块成功");
 		return "result";
@@ -49,6 +55,12 @@ public class DefaultAction implements ModelDriven<Permision>{
 		if(!manage.unique(p, new Permision())){
 			result = new OperationResult(false,"该模块已存在");
 			return "result";
+		}
+
+		if(permision.getPid()!=null){
+			permision.setHasChild(1);
+			permision.setPname(permision.getPid().split(";")[1]);
+			permision.setPid(permision.getPid().split(";")[0]);
 		}
 		manage.update(permision);
 		result = new OperationResult(true, "修改模块成功");
