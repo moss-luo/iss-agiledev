@@ -59,7 +59,14 @@ config:{
 			//show: true,
 			frozen: false,
 			sortable: true
-		},
+		},{
+				title:'角色',
+				field:'roleName',
+				formShow:false,
+				gridShow:true,
+				frozen:false,
+				sortable:false
+			},
 		{
 			title:'密码',
 			field:'password',
@@ -123,7 +130,35 @@ config:{
 		],
 		buttons:{
 			'test':{handler:function(){alert(123);}}
+		},
+		beforeSubmit:function(form){
+			//demo 演示如何隐藏列，显示列
+			$("#list").crud("getDatagrid").datagrid("hideColumn","roleName");
+			var params = $("#list").crud("getSearchform").agiledevForm("getSearchParameters");
+			$("#list").crud("reloadDatagrid",params);
+			window.setTimeout(function(){
+				$("#list").crud("getDatagrid").datagrid("showColumn","roleName");
+			},1000);
+			return false;
 		}
+		/*,
+		beforeSubmit:function(form){
+			var a=	{
+				title:'角色',
+				field:'roleName',
+				formShow:false,
+				gridShow:true,
+				frozen:false,
+				sortable:false
+			};
+			
+			var params = this.getSearchform().getSearchParameters();
+			//$(handle.config.fieilds).append(a);
+			var columns = handle.config.fields;
+			columns = $(columns).add(a);
+			$("#list").crud("reloadDatagrid",columns,params);
+			return false;
+		}*/
 	}
 }
 };
