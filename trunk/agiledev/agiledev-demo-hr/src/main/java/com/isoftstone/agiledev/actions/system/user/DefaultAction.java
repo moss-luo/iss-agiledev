@@ -11,6 +11,7 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
 import com.isoftstone.agiledev.OperationResult;
+import com.isoftstone.agiledev.initform.Initializa;
 import com.isoftstone.agiledev.initform.Initialization;
 import com.isoftstone.agiledev.manages.BaseService;
 import com.isoftstone.agiledev.validater.Validation;
@@ -29,9 +30,13 @@ public class DefaultAction implements ModelDriven<User>{
 	
 	private OperationResult result = null;
 //	@Validation
-	@Initialization
+//	@Initialization
+	@Initialization({
+		@Initializa(fieldName="userId",value="lisi")
+	})
 	@Validations({
-		@Validation(fieldName="userId",validType=StringLengthFieldValidator.class,params={"message","用户名必须在1-10位之间","minLength","1","maxLength","10"})
+		@Validation(fieldName="userId",validType=StringLengthFieldValidator.class,params={"message","用户名必须在1-12位之间","minLength","1","maxLength","12"}),
+		@Validation(fieldName="password",validType=StringLengthFieldValidator.class,params={"message","密码必须在1-10位之间","minLength","1","maxLength","10"})
 	})
 	private User user = null;
 	private String id;
