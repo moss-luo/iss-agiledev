@@ -2,7 +2,11 @@ package com.isoftstone.agiledev.initform;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 辅助类，用于在各result的实现中持有全局的初始化信息对象
+ * @author sinner
+ *
+ */
 public class InitData {
 
 

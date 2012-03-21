@@ -2,6 +2,7 @@ package com.isoftstone.agiledev.initform;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,7 +18,7 @@ import com.opensymphony.xwork2.ActionInvocation;
  *
  */
 @SuppressWarnings("serial")
-public class InitSupportJSONResult extends JSONResult {
+public class InitSupportJSONResult extends JSONResult{
 	private ActionInvocation actionInvocation = null;
 	@Override
 	public void execute(ActionInvocation invocation) throws Exception {
@@ -42,6 +43,10 @@ public class InitSupportJSONResult extends JSONResult {
 		InitData.clear();
 		//super.writeToResponse(response, json, gzip);
 		
+		
+	}
+	public void init(Properties properties) {
+		// TODO Auto-generated method stub
 		
 	}
 	
