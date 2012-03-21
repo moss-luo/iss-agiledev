@@ -1,10 +1,12 @@
 package com.isoftstone.agiledev.actions.system.user;
 
+import com.isoftstone.agiledev.initform.Initializa;
 import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
 
 public class User {
 
 	private String uid;
+	@Initializa("zhangsan")
 	private String userId;
 	private String password;
 	private String photo;

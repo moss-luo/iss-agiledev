@@ -14,7 +14,9 @@ import com.isoftstone.agiledev.OperationResult;
 import com.isoftstone.agiledev.initform.Initialization;
 import com.isoftstone.agiledev.manages.BaseService;
 import com.isoftstone.agiledev.validater.Validation;
+import com.isoftstone.agiledev.validater.Validations;
 import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
 
 @Results({
 	@Result(name = "result", type = "json", params = {"root", "result", "contentType", "text/html"}),
@@ -26,8 +28,11 @@ public class DefaultAction implements ModelDriven<User>{
 	private BaseService<User> manage;
 	
 	private OperationResult result = null;
-	@Validation
+//	@Validation
 	@Initialization
+	@Validations({
+		@Validation(fieldName="userId",validType=StringLengthFieldValidator.class,params={"message","用户名必须在1-10位之间","minLength","1","maxLength","10"})
+	})
 	private User user = null;
 	private String id;
 	private String name=null;
@@ -75,7 +80,7 @@ public class DefaultAction implements ModelDriven<User>{
 //		return "result";
 //	}
 //	
-	
+
 	public User getUser() {
 		return user;
 	}
