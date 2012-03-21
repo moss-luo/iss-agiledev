@@ -7,8 +7,7 @@ $.widget("ui.agiledevForm", {
 		initUrl:null,
 		className:'agiledev-dialog',
 		submitUrl:null,
-		icon:'icon-ok',
-		text:'',
+		buttons:{'查询':{iconCls:'icon-ok',handler:function(){this.submit();}}},
 		beforeSubmit:function(){return true;},
 		success:function(response){;}
 	},
@@ -16,18 +15,23 @@ $.widget("ui.agiledevForm", {
 		var self = this,
 			options = self.options,
 			uiForm = $(self.uiForm = $("<form method='post' class='agiledev-form "+(options.autoShow?'':'agiledev-hide')+"' onkeydown='if(event.keyCode==13){return false;}'/>"))
-					.appendTo(self.element);
-		if(options.text){
-			var uiSubmit = $(self.uiSubmit = $('<a class="easyui-linkbutton l-btn search_button" onclick="return false"><span class="l-btn-left"><span style="padding-left: 20px;" class="l-btn-text '+options.icon+'">'+options.text+'</span></span></a>'));
-			uiSubmit.click(function(){
-				self.submit();
+					.appendTo(self.element),
+			buttons = $(this.buttons = $([]));
+		
+		for(var o in options.buttons){
+			var btn = $('<a class="easyui-linkbutton l-btn search_button" onclick="return false">'
+							+'<span class="l-btn-left"><span style="padding-left: 20px;" class="l-btn-text '
+							+options.buttons[o].iconCls+'">'+o+'</span></span></a>')
+			btn.click(function(){
+				options.buttons[o].handler.call(self);
 			});
+			this.buttons = this.buttons.add(btn); 
 		}
 	},
 	_init:function(){
 		this.globalHtml = this.createField(this.options.className);
 		this.uiForm.prepend(this.globalHtml.html);
-		this.uiForm.append(this.uiSubmit);
+		this.uiForm.append(this.buttons);
 		this.renderField();
 		this.initForm();
 		this.createValidate();
