@@ -101,7 +101,7 @@ Render.prototype.createSearch = function(){
 				field:options.search.field,
 				className:'agiledev-search',
 				submitUrl:options.grid.dataUrl,
-				buttons:$.extend({},{'查询':{iconCls:'icon-ok',handler:function(){this.submit();}}},options.search.buttons),
+				buttons:$.extend({},{'查询':{iconCls:'icon-search',handler:function(){this.submit();}}},options.search.buttons),
 				beforeSubmit:function(){
 					if(options.search.beforeSubmit){
 						if(options.search.beforeSubmit.call(this.uiForm)){
