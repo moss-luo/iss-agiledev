@@ -20,6 +20,27 @@ public class InitField {
 	 */
 	private boolean required;
 	
+
+	public InitField() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public InitField(String name){
+		this(name,null,null,false);
+	}
+	public InitField(String name,Object initValue){
+		this(name,initValue,null,false);
+	}
+	
+	public InitField(String name, Object initValue, String validate,boolean required) {
+		super();
+		this.name = name;
+		this.initValue = initValue;
+		this.validate = validate;
+		this.required = required;
+	}
+
 	public String getName() {
 		return name;
 	}
