@@ -39,7 +39,7 @@ public class InitSupportJSONResult extends JSONResult {
 		out.print(String.format("{\"field\":%s}",fields.toString()));
 		out.flush();
 		out.close();
-		
+		InitData.clear();
 		//super.writeToResponse(response, json, gzip);
 		
 		
