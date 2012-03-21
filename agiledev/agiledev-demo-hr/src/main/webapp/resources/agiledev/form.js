@@ -7,7 +7,7 @@ $.widget("ui.agiledevForm", {
 		initUrl:null,
 		className:'agiledev-dialog',
 		submitUrl:null,
-		buttons:{'查询':{iconCls:'icon-ok',handler:function(){this.submit();}}},
+		buttons:{},
 		beforeSubmit:function(){return true;},
 		success:function(response){;}
 	},
@@ -20,7 +20,7 @@ $.widget("ui.agiledevForm", {
 		
 		for(var o in options.buttons){
 			var btn = $('<a class="easyui-linkbutton l-btn search_button" onclick="return false">'
-							+'<span class="l-btn-left"><span style="padding-left: 20px;" class="l-btn-text '
+							+'<span class="l-btn-left"><span style="'+(options.buttons[o].iconCls?'padding-left: 20px;':'')+'" class="l-btn-text '
 							+options.buttons[o].iconCls+'">'+o+'</span></span></a>')
 			btn.click(function(){
 				options.buttons[o].handler.call(self);
