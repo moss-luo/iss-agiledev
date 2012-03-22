@@ -399,6 +399,11 @@ Handle.prototype.save = function(){
 	$('.agiledev-dialog').closest(".agiledev-form").form('submit',{
 		url: $this.plugin.getUrl(),
 		onSubmit: function(){
+			if($(this).find(":hidden[name='agiledev-ajax-request-type']").length!=0){
+				$(this).find(":hidden[name='agiledev-ajax-request-type']").val('validate');
+			}else{
+				$(this).append("<input name='agiledev-ajax-request-type' type='hidden' value='validate'/>");
+			}
 			return $(this).form('validate');
 		},
 		success: function(result){
