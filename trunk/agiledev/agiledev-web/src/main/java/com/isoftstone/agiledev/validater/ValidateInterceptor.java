@@ -14,15 +14,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
 import com.opensymphony.xwork2.util.AnnotationUtils;
+import com.opensymphony.xwork2.util.ValueStack;
 import com.opensymphony.xwork2.validator.FieldValidator;
 import com.opensymphony.xwork2.validator.Validator;
 import com.opensymphony.xwork2.validator.annotations.EmailValidator;
-import com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator;
+import com.opensymphony.xwork2.validator.validators.FieldValidatorSupport;
 import com.opensymphony.xwork2.validator.validators.RequiredFieldValidator;
 import com.opensymphony.xwork2.validator.validators.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.validators.StringLengthFieldValidator;
@@ -35,17 +37,19 @@ import com.opensymphony.xwork2.validator.validators.StringLengthFieldValidator;
 @SuppressWarnings({ "serial", "rawtypes", "unchecked" })
 public class ValidateInterceptor extends MethodFilterInterceptor {
 	private Map<String,List<String>> errors = new Hashtable<String,List<String>>();
+	private ValueStack stack = null;
 	@Override
 	protected String doIntercept(ActionInvocation invocation) throws Exception {
 		
 		HttpServletRequest request = ServletActionContext.getRequest();
-
-		
+		stack = invocation.getStack();
 		
 		Object action = invocation.getAction();
-		String requestType = request.getHeader("agiledev-ajax-request-type");
-		if(requestType==null || requestType.equalsIgnoreCase("init-form"))
-			return invocation.invoke();
+//		String requestType = request.getHeader("agiledev-ajax-request-type");
+//		if(requestType==null || requestType.equalsIgnoreCase("init-form"))
+//			return invocation.invoke();
+		String requestType = request.getParameter("agiledev-ajax-request-type");
+		if(requestType==null || !"validate".equals(requestType))return invocation.invoke();
 		
 		
 		
@@ -55,6 +59,7 @@ public class ValidateInterceptor extends MethodFilterInterceptor {
 			for (Field field : fields) {
 				//判断action中的哪个属性是pojo,是需要校验的对象
 				boolean oldAccessible = field.isAccessible();
+				field.setAccessible(true);
 				try {
 				
 					//校验action字段
@@ -65,19 +70,37 @@ public class ValidateInterceptor extends MethodFilterInterceptor {
 						}
 					}
 
-					//struts校验
-					Method[] methods = clazz.getDeclaredMethods();
-					for (Method method : methods) {
-						if(method.isAnnotationPresent(VisitorFieldValidator.class)){
-							Object bean = method.invoke(action,new Object[]{});
-							this.doValidate(action,bean);
-						}
-					}
+//					//struts校验
+//					Method[] methods = clazz.getDeclaredMethods();
+//					for (Method method : methods) {
+//						if(method.isAnnotationPresent(VisitorFieldValidator.class)){
+//							Object bean = method.invoke(action,new Object[]{});
+//							this.doValidate(action,bean);
+//						}
+//					}
 					
 					//校验页面提交过来的bean
 					if(field.isAnnotationPresent(Validation.class)){
-						field.setAccessible(true);
 						doValidate(action, field.get(action));
+					}else if(field.isAnnotationPresent(Validations.class)){
+						Validations vs = field.getAnnotation(Validations.class);
+						for(Validation v : vs.value()){
+							String fieldName = v.fieldName();
+							String[] params = v.params();
+							Map<String,String> annotationParameter = new HashMap<String,String>();
+							for(int i=0;i<params.length;i++){
+								annotationParameter.put(params[i], params[i+1]);
+								++i;
+							}
+							Class<? extends Annotation> annotationClazz = v.validType();
+							FieldValidatorSupport validator = (FieldValidatorSupport) VALIDATOR.get(annotationClazz);
+							validator.setFieldName(fieldName);
+							for (String s : annotationParameter.keySet()) {
+								BeanUtils.setProperty(validator, s, annotationParameter.get(s));
+							}
+							validator.setValueStack(stack);
+							validator.validate(field.get(action));
+						}
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -110,7 +133,8 @@ public class ValidateInterceptor extends MethodFilterInterceptor {
 			Annotation[] annotations = validateField.getAnnotations();
 			for (Annotation annotation : annotations) {
 				Map<String,List<String>> temp = validate(targetValidationBean,annotation,validateField.getName());
-				errors.putAll(temp);
+				if(temp!=null)
+					errors.putAll(temp);
 			}
 		}
 		Method[] targetValidateObjectMethods = targetValidateObjectClazz.getDeclaredMethods();
@@ -120,7 +144,8 @@ public class ValidateInterceptor extends MethodFilterInterceptor {
 			Annotation[] annotations = validateMethod.getAnnotations();
 			for (Annotation annotation : annotations) {
 				Map<String,List<String>> temp = validate(targetValidationBean,annotation,fieldName);
-				errors.putAll(temp);
+				if(temp!=null)
+					errors.putAll(temp);
 			}
 		}
 	}
@@ -135,7 +160,6 @@ public class ValidateInterceptor extends MethodFilterInterceptor {
 	private Map<String,List<String>> validate(Object bean,Annotation annotation,String fieldName){
 		if(VALIDATOR.containsKey(annotation.getClass())){
 			try {
-				 
 				FieldValidator validator = (FieldValidator) VALIDATOR.get(annotation.getClass());
 				validator.setFieldName(fieldName);
 				validator.validate(bean);
@@ -149,12 +173,7 @@ public class ValidateInterceptor extends MethodFilterInterceptor {
 
 	private boolean isRegisterAnnotation(Annotation annotation){
 		return VALIDATOR.containsKey(annotation.getClass());
-		
 	}
-	public static void main(String[] args) {
-		System.out.println(com.opensymphony.xwork2.validator.annotations.RequiredStringValidator.class.getName());
-	}
-	
 
 	private static String validators;
 	private static Map<Class<? extends Annotation>,Validator> VALIDATOR = new HashMap<Class<? extends Annotation>,Validator>();
@@ -192,7 +211,6 @@ public class ValidateInterceptor extends MethodFilterInterceptor {
 		VALIDATOR.put(IPAddress.class, new IPAddrValidator());
 		VALIDATOR.put(NickName.class, new NickNameValidator());
 		VALIDATOR.put(ErrorChar.class, new ErrorCharValidator());
-		
 		//扩展配置文件配置的其他校验器
 		if(validators!=null && validators.contains(":")){
 			for (String s : validators.split(";")) {
