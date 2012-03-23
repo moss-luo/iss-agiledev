@@ -16,6 +16,7 @@ import com.isoftstone.agiledev.manages.BaseService;
 import com.isoftstone.agiledev.validater.Validation;
 import com.isoftstone.agiledev.validater.Validations;
 import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
 import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
 
 
@@ -30,7 +31,8 @@ public class DefaultAction implements ModelDriven<Program>{
 		@Initializa(fieldName="name",value="testPro")
 	})
 	@Validations({
-		@Validation(fieldName="name",validType=StringLengthFieldValidator.class,params={"message","项目名需在5-10之间","minLength","5","maxLength","10"})
+		@Validation(fieldName="name",validType=StringLengthFieldValidator.class,params={"message","项目名需在5-10之间","minLength","5","maxLength","10"}),
+		@Validation(fieldName="trainId", validType=RequiredFieldValidator.class,params={"message","项目培训类别是必须的"})
 	})
 	private Program program;
 	
@@ -52,7 +54,7 @@ public class DefaultAction implements ModelDriven<Program>{
 		p.put("name", program.getName());
 		if(!programsManager.unique(p, new Program()))
 		{
-			result=new OperationResult(true, "该项目已存在");
+			result=new OperationResult(false, "该项目已存在");
 			return "result";
 		}
 		programsManager.save(program);
