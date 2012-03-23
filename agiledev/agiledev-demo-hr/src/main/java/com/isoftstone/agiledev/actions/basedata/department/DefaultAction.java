@@ -10,18 +10,33 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
 import com.isoftstone.agiledev.OperationResult;
+import com.isoftstone.agiledev.initform.Initializa;
 import com.isoftstone.agiledev.initform.Initialization;
 import com.isoftstone.agiledev.manages.BaseService;
 import com.isoftstone.agiledev.validater.Validation;
+import com.isoftstone.agiledev.validater.Validations;
 import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
 @Results({
 	@Result(name="result",type="json",params={"root","result","contentType","text/html"}),
 	@Result(name="init",type="initjson")
 })
 public class DefaultAction implements ModelDriven<Department>{
 
-	@Validation
-	@Initialization
+	/**
+	 * @Validation
+	   @Initialization
+	       此注解为使用组件可见源码时的注解
+	 */
+	
+	//此种注解使用组件时，看不见源码时使用，它的格式为key,value形式，此处可以进行批量
+    //的初始化和校验
+	@Initialization({
+		@Initializa(fieldName="depName",value="研发部门")
+	})
+	@Validations({
+		@Validation(fieldName="depName",validType=StringLengthFieldValidator.class,params={"message","部门名称必须在1-10之间","minLength","1","maxLength","10"})
+	})
 	private Department department=null;
 	private OperationResult result=null;
 	private String id=null;
