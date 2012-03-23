@@ -10,18 +10,27 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
 import com.isoftstone.agiledev.OperationResult;
+import com.isoftstone.agiledev.initform.Initializa;
 import com.isoftstone.agiledev.initform.Initialization;
 import com.isoftstone.agiledev.manages.BaseService;
 import com.isoftstone.agiledev.validater.Validation;
+import com.isoftstone.agiledev.validater.Validations;
 import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
 @Results({
 	@Result(name="result",type="json",params={"root","result","contentType","text/html"}),
 	@Result(name="init",type="initjson")
 })
 public class DefaultAction implements ModelDriven<Level>{
 
-	@Validation
-	@Initialization
+	//@Validation
+	//@Initialization
+	@Initialization({
+		@Initializa(fieldName="levelName",value="初级工程师")
+	})
+	@Validations({
+		@Validation(fieldName="levelName",validType=StringLengthFieldValidator.class,params={"message","职级名称必须在1-10之间","minLength","1","maxLength","10"})
+	})
 	private Level level=null;
 	private OperationResult result=null;
 	private String id=null;
