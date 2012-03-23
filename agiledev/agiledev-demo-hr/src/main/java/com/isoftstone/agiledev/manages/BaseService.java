@@ -19,5 +19,7 @@ public interface BaseService<T> extends SummaryProvider {
 	public abstract String getOperationCommand(T t);
 	
 	public abstract boolean unique(Map<String,Object> p,T t);
+	
+	public abstract boolean login(Map<String, Object> p,T t);
 
 }
