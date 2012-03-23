@@ -10,10 +10,13 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
 import com.isoftstone.agiledev.OperationResult;
+import com.isoftstone.agiledev.initform.Initializa;
 import com.isoftstone.agiledev.initform.Initialization;
 import com.isoftstone.agiledev.manages.BaseService;
 import com.isoftstone.agiledev.validater.Validation;
+import com.isoftstone.agiledev.validater.Validations;
 import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
 
 
 @Results({
@@ -22,8 +25,13 @@ import com.opensymphony.xwork2.ModelDriven;
 })
 public class DefaultAction implements ModelDriven<Program>{
 
-	@Validation
-	@Initialization
+
+	@Initialization({
+		@Initializa(fieldName="name",value="testPro")
+	})
+	@Validations({
+		@Validation(fieldName="name",validType=StringLengthFieldValidator.class,params={"message","项目名需在5-10之间","minLength","5","maxLength","10"})
+	})
 	private Program program;
 	
 	private OperationResult result=null;

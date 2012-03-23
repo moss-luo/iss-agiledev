@@ -1,6 +1,5 @@
 package com.isoftstone.agiledev.actions.basedata.program;
 
-import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
 
 public class Program {
 
@@ -24,7 +23,7 @@ public class Program {
 		return name;
 	}
 	
-	@StringLengthFieldValidator(message="项目名应在5-10之间",minLength="5",maxLength="10")
+	//@StringLengthFieldValidator(message="项目名应在5-10之间",minLength="5",maxLength="10")
 	public void setName(String name) {
 		this.name = name;
 	}
