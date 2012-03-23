@@ -5,6 +5,30 @@
         <title>agiledev HR</title>
 		<link href="resources/css/login.css" type="text/css" rel="stylesheet">
     </head>
+    <script type="text/javascript">
+      function change(){
+             if(document.loginForm.userId.value==""){
+                 alert("用户名不能为空!");
+                 document.loginForm.userId.focus;
+                 return false;
+             }
+             if(document.loginForm.password.value==""){
+                 alert("密码不能为空!");
+                 document.loginForm.password.focus;
+                 return false;
+             }
+             if(document.loginForm.validateCode.value==""){
+                alert("请输入验证码!");
+                document.loginForm.validateCode.focus;
+                return false;
+             }
+          }
+      function changeValidateCode() {  
+          var src=document.getElementById("valid");
+          var timenow = new Date().getTime(); 
+    	  src.setAttribute('src','authcode/rand.action?d='+timenow);
+   }  
+    </script>
     <body>
         <div style="left: 0px; top: 0px; width: 1280px;" id="ext-comp-1002" class="x-panel x-border-panel x-panel-noborder">
             <div id="ext-gen9" class="x-panel-bwrap">
@@ -67,7 +91,7 @@
                                             </table>
                                         </td>
                                         <td id="ext-gen46" class="rightForm" colspan="1" rowspan="1">
-                                            <form id="loginForm" name="loginForm" method="post" action="login/login" enctype="application/x-www-form-urlencoded" class="loginForm">
+                                            <form id="loginForm" name="loginForm" method="post" action="login/login" enctype="application/x-www-form-urlencoded" class="loginForm" onSubmit="return change()">
                                                 <div id="ext-gen48" class="formBorder" align="left">
                                                     <img src="resources/images/userlogin.gif" style="margin: 0px 0px 10px 10px;">
                                                     <br>
@@ -86,7 +110,7 @@
                                                                                 <td>
                                                                                     <div class="x-form-item">
                                                                                         <div id="ext-gen15" class="x-form-element">
-                                                                                            <input id="loginForm:username" name="loginForm:username" style="" class="inputfield x-form-text x-form-field" type="text">
+                                                                                            <input id="userId" name="user.userId" style="" class="inputfield x-form-text x-form-field" type="text">
                                                                                         </div>
                                                                                     </div>
                                                                                 </td>
@@ -115,7 +139,7 @@
                                                                                 <td>
                                                                                     <div class="x-form-item">
                                                                                         <div id="ext-gen22" class="x-form-element">
-                                                                                            <input id="loginForm:password" name="loginForm:password" style="" class="inputfield x-form-text x-form-field" type="password">
+                                                                                            <input id="password" name="user.password" style="" class="inputfield x-form-text x-form-field" type="password">
                                                                                         </div>
                                                                                     </div>
                                                                                 </td>
@@ -148,7 +172,7 @@
                                                                                                 <td>
                                                                                                     <div class="x-form-item">
                                                                                                         <div id="ext-gen29" class="x-form-element">
-                                                                                                            <input id="loginForm:validateCode" name="loginForm:validateCode" style="" class="validateInput x-form-text x-form-field" type="text">
+                                                                                                            <input id="validateCode" name="validateCode" style="" class="validateInput x-form-text x-form-field" type="text">
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </td>
@@ -157,7 +181,7 @@
                                                                                     </table>
                                                                                 </td>
                                                                                 <td class="validateImg" colspan="1" rowspan="1">
-                                                                                    <img id="loginForm:validateCodeImg" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAUADwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD02Q2qWpnmWGJY181ncbVCjkknsMdc9K5HTNc8TanLBfW1nawaJcMPLgldluRGcLvy3y9PnxnleAckGtrVLGa/0G/so9vm3Vo8cIcfLkoR7n+LPHv9K8m8vTodOsIdPj1VPGiGJUEgcOpAAIcN8vl7OmP4dueM1lKXyOtao9P8S+IrrSdOgEBtnnnuI4VmnbbHESSSW9QMdfx9qXRNb1aS9v7XUra3aS2dczWu/wAuTcofA3c5UEZ9iOOATQ8a30hgtba+jLaO02b6SFMlQMbAe6ru+8Rz2HXBz/CLwjVby20SSU6LtEnmzZAWc4yqEgHG3HXJ+Uc8jNNu2jOV1H7W1/6/rqbWpax4ntVurwWmkpYQ73NvNI5naNepyPlBYDIGO464NbFrfi806OdMxR3FuJVV/RlBAAzx1xwT06VxN94o0271Wa01S6EVhZTFPsbI7/aHU9WKgjywQMLnkjJ9K6PUvM1LRHm0WYRy3UO6J5CUUBupBHIODwMZ6USkyo1LttO5Hpni+bVPFlzpkCW7WUduXjnUHMzB1UlSSAVyWHHXbnPauna6EbFZEww/2hj8MkV5folpq2neLrS0Mel5h09UkCh9rQeb8xHH+szk56V6G0aXB3YZtvy5Ukjj6Liqc30ZVGpKSd9xLyaQXCMrYK5Ix9SP5AUy3kkuJPIeQ+W5JYDHXr/OiisJN85TfvExVZLCJ2UZ+bB9AAxA+lQJjyvO2jKZwp5HUev+8aKKuSKZIoWVZCRjdEX47EHGB7cdKdDGDLGrEssmdwY9flB/mf0FFFLqv66i6ohlhWOF3UkFZTH16iluCqeUTGrFo1Yk5H8jRRQkgR//2Q==" style="margin-left: 15px;" height="20" width="60"><a id="loginForm:refreshValidateCode" href="#" onclick="return OM.ESI('loginForm','','loginForm:refreshValidateCode','',true);" style="cursor: pointer; text-decoration: underline; color: blue; width: 80px; margin-left: 10px; color: #438DBD;">刷新验证码</a>
+                                                                                    <img  id="valid" src="authcode/rand.action" onclick="changeValidateCode()" style="margin-left: 15px;" height="20" width="60"><a id="loginForm:refreshValidateCode" href="#" onclick="changeValidateCode()" style="cursor: pointer; text-decoration: underline; color: blue; width: 80px; margin-left: 10px; color: #438DBD;">刷新验证码</a>
                                                                                 </td>
                                                                             </tr>
                                                                         </tbody>
