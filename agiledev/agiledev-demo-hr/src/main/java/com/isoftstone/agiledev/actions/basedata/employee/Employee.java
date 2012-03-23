@@ -19,7 +19,7 @@ public class Employee {
 	public String getName() {
 		return name;
 	}
-	@StringLengthFieldValidator(message="用户名必须在1-10之间",minLength="1",maxLength="10")
+	//@StringLengthFieldValidator(message="用户名必须在1-10之间",minLength="1",maxLength="10")
 	public void setName(String name) {
 		this.name = name;
 	}
