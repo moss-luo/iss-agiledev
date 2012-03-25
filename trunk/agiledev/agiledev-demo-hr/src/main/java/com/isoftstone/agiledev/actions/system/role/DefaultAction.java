@@ -14,7 +14,11 @@ import com.isoftstone.agiledev.initform.Initialization;
 import com.isoftstone.agiledev.manages.BaseService;
 import com.isoftstone.agiledev.validater.Validation;
 import com.opensymphony.xwork2.ModelDriven;
-
+/**
+ * 角色的基础操作类,包含新增,修改,删除
+ * @author Administrator
+ *
+ */
 @Results({
 	@Result(name = "result", type = "json", params = {"root", "result", "contentType", "text/html"}),
 	@Result(name = "init", type = "initjson")
