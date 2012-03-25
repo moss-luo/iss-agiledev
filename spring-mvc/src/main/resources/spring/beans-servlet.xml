@@ -18,7 +18,7 @@
             http://www.springframework.org/schema/mvc
 			http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-	<!-- viewer -->
+	<!-- viewer 
 	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver"
 		p:order="0"
 		p:defaultContentType="text/html"
@@ -34,16 +34,27 @@
 		</property>
 		<property name="defaultViews">
 			<list>
-				<bean class="org.sinner.study.view.NormalJsonView" p:renderedAttributes="result"></bean>
 			</list>
 		</property>
-	</bean>
+		<property name="viewResolvers">
+			<list>
+			</list>
+		</property>
+		
+	</bean>-->
 	 
-	 	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:contentType="text/html"
+		p:order="2"
+	 	p:prefix="/WEB-INF/views/"
+	 	p:suffix=".html"/> 
+
+
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="1"/>
-	
+	<bean id="json" class="org.sinner.study.view.NormalJsonView" p:renderedAttributes="result"></bean>
 	<bean id="datagridjson" class="org.sinner.study.view.DatagridView" p:renderedAttributes="datagrid-json"/>
 	<bean id="initform" class="org.sinner.study.view.InitformView" p:renderedAttributes="init"/>
+	 	
 	<!-- <bean id="result" class="org.sinner.study.view.NormalJsonView" p:renderedAttributes="result"/> -->
 	
 	<mvc:interceptors>
@@ -52,9 +63,4 @@
 			<bean class="org.sinner.study.interceptor.ValidateInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
- 
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-		p:order="2"
-	 	p:prefix="/WEB-INF/views/"
-	 	p:suffix=".html"/> 
 </beans>
