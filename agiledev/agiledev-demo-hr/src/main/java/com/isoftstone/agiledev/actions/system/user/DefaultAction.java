@@ -18,7 +18,11 @@ import com.isoftstone.agiledev.validater.Validation;
 import com.isoftstone.agiledev.validater.Validations;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
-
+/**
+ * 用户操作Action类,包含新增,修改,删除
+ * @author sinner
+ *
+ */
 @Results({
 	@Result(name = "result", type = "json", params = {"root", "result", "contentType", "text/html"}),
 	@Result(name = "init", type = "initjson")
@@ -38,9 +42,19 @@ public class DefaultAction implements ModelDriven<User>{
 		@Validation(fieldName="userId",validType=StringLengthFieldValidator.class,params={"defaultMessage","用户名必须在1-12位之间","minLength","1","maxLength","12"}),
 		@Validation(fieldName="password",validType=StringLengthFieldValidator.class,params={"defaultMessage","密码必须在1-10位之间","minLength","1","maxLength","10"})
 	})
+	/**
+	 * @Initialization 用来初始化该对象的表单,也可以在User类中注解
+	 * @Validations 用来统一校验该对象的表单数据,也可以在User类中注解.
+	 * 注意:如果校验注解有参数,params的数组数据必须为偶数,且奇数位置是key,偶数位置是值.
+	 * @see User
+	 */
 	private User user = null;
 	private String id;
 	private String name=null;
+	/**
+	 * initAction为演示初始化表单数据
+	 * @return
+	 */
 	@Action("init")
 	public String init(){
 		return "init";
