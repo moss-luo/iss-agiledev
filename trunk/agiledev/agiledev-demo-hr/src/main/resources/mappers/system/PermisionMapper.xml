@@ -32,7 +32,7 @@
 		SELECT * FROM T_PERMISION WHERE PID=#{id} 
 	</select>
 	
-	<select id="unique" parameterType="java.util.HashMap" resultType="com.isoftstone.agiledev.actions.system.user.User">
+	<select id="unique" parameterType="java.util.HashMap" resultType="com.isoftstone.agiledev.actions.system.permision.Permision">
 		SELECT * FROM T_PERMISION WHERE uid=#{uid}
 	</select>
 </mapper>
