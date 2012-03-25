@@ -32,9 +32,9 @@ public class IndexMenuAction implements TreeDataProvider {
 		List<Permision> ps = permisionManager.findByPid(parentId==null?"0":parentId);
 		TreeData treeData = new TreeData();
 		for (Permision permision : ps) {
-			treeData.nextNode(permision.getHasChild()==1
-								?new Node(permision.getUid(),"<a hh='"+permision.getUrl()+"'>"+permision.getPermisionName()+"</a>",null,State.closed)
-								:new Node(permision.getUid(),"<a hh='"+permision.getUrl()+"'>"+permision.getPermisionName()+"</a>"));
+			treeData.nextNode((permision.getHasChild()==null ||permision.getHasChild()==0)
+								?new Node(permision.getUid(),"<a hh='"+permision.getUrl()+"'>"+permision.getPermisionName()+"</a>")
+								:new Node(permision.getUid(),"<a hh='"+permision.getUrl()+"'>"+permision.getPermisionName()+"</a>",null,State.closed));
 		}
 		return treeData.getData();
 //		if (parentId == null) {
