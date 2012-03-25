@@ -8,6 +8,21 @@
   <name>spring-mvc Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
+  	<dependency>
+  		<groupId>com.isoftstone.agiledev</groupId>
+  		<artifactId>agiledev-core</artifactId>
+  		<version>1.0-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.isoftstone.agiledev</groupId>
+  		<artifactId>agiledev-web</artifactId>
+  		<version>1.0-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.isoftstone.agiledev</groupId>
+  		<artifactId>agiledev-common</artifactId>
+  		<version>1.0-SNAPSHOT</version>
+  	</dependency>
     <dependency>
     	<groupId>junit</groupId>
     	<artifactId>junit</artifactId>
@@ -170,8 +185,7 @@
 				<artifactId>maven-jetty-plugin</artifactId>
 				<version>6.1.26</version>
 				<configuration>
-					<stopKey>stop</stopKey>
-					<stopPort>9999</stopPort>
+  					<scanIntervalSeconds>15</scanIntervalSeconds>
 				</configuration>
 			</plugin>
 		</plugins>
