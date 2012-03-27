@@ -18,8 +18,7 @@ public class RandomNumUtil {
     private static final char[] randomSequence = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G',
         'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
         'U', 'V', 'W', 'X', 'Y', 'Z', '0','1', '2', '3', '4', '5', '6',
-        '7','8', '9' ,'a','b','c','d','e','f','g','h','i','j','k','l','m','n'
-        ,'o','p','q','r','s','t','u','v','w','x','y','z'};
+        '7','8', '9'};
  
    private RandomNumUtil(){  
         init();//初始化属性  
@@ -49,7 +48,7 @@ public class RandomNumUtil {
         g.setColor(getRandColor(200,250));  
         g.fillRect(0, 0, width, height);
       //创建字体，字体的大小应该根据图片的高度来定。
-        Font font = new Font("Times New Roman", Font.PLAIN, height-2);
+        Font font = new Font("Times New Roman", Font.PLAIN, height-1);
         //设置字体。
         g.setFont(font);
 
@@ -66,12 +65,12 @@ public class RandomNumUtil {
         //取随机产生的认证码(6位数字)  
         String sRand="";  
         for (int i=0;i<4;i++ ){  
-          int index = random.nextInt(61);
+          int index = random.nextInt(36);
              String rand = String.valueOf(randomSequence[index]);
-            sRand =rand;  
+            sRand+=rand;  
             // 将认证码显示到图象中  
             g.setColor(new Color(20+random.nextInt(110),20+random.nextInt(110),20+random.nextInt(110)));  
-            //      调用函数出来的颜色相同，可能是因为种子太接近，所以只能直接生成  
+           
             g.drawString(rand,13*i+6,16);  
         }  
         this.str=sRand; 
