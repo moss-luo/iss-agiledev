@@ -31,9 +31,9 @@ public class DefaultAction implements ModelDriven<Department>{
 	
 	//此种注解使用组件时，看不见源码时使用，它的格式为key,value形式，此处可以进行批量
     //的初始化和校验
-	@Initialization({
-		@Initializa(fieldName="depName",value="研发部门")
-	})
+//	@Initialization({
+//		@Initializa(fieldName="depName",value="研发部门")
+//	})
 	@Validations({
 		@Validation(fieldName="depName",validType=StringLengthFieldValidator.class,params={"message","部门名称必须在1-10之间","minLength","1","maxLength","10"})
 	})
