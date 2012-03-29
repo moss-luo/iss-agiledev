@@ -14,7 +14,7 @@ import com.isoftstone.agiledev.manages.BaseService;
 import com.isoftstone.agiledev.query.QueryParametersMap;
 import com.isoftstone.agiledev.query.SummaryProvider;
 @Results({
-	@Result(name="result",type="datagrid-json",params={"root","results"}),
+	@Result(name="list",type="datagrid-json",params={"root","results"}),
 	@Result(name="result",type="json",params={"root","results"})
 })
 public class ListAction implements SummaryProvider{
@@ -26,7 +26,7 @@ public class ListAction implements SummaryProvider{
 	private Map<String,Object> queryCondition = new HashMap<String,Object>();
 	public String execute(){
 		results = departmentManager.list(queryCondition,new Department());
-		return "result";
+		return "list";
 	}
 	@Action("list2")
 	public String execute2(){
@@ -36,6 +36,7 @@ public class ListAction implements SummaryProvider{
 		results=departmentManager.list(queryCondition,new Department());
 		return "result";
 	}
+	@Override
 	public int getTotal() {
 		return departmentManager.getTotal();
 	}
