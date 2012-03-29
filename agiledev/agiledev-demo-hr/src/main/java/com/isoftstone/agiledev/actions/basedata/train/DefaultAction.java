@@ -26,9 +26,9 @@ public class DefaultAction implements ModelDriven<Train>{
 
 	//@Validation
 	//@Initialization
-	@Initialization({
-		@Initializa(fieldName="trainName",value="内部培训")
-	})
+//	@Initialization({
+//		@Initializa(fieldName="trainName",value="内部培训")
+//	})
 	@Validations({
 		@Validation(fieldName="trainName",validType=StringLengthFieldValidator.class,params={"message","培训类别名必须在1-10之间","minLength","1","maxLength","10"})
 	})
