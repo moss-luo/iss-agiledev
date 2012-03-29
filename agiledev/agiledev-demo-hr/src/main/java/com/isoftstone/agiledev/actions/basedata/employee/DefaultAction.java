@@ -22,9 +22,9 @@ public class DefaultAction implements ModelDriven<Employee>{
 
 	//@Validation
 	//@Initialization
-	@Initialization({
-		@Initializa(fieldName="name",value="张三")
-	})
+//	@Initialization({
+//		@Initializa(fieldName="name",value="张三")
+//	})
 	@Validations({
 		@Validation(fieldName="name",validType=StringLengthFieldValidator.class,params={"message","员工名必须在1-10之间","minLength","1","maxLength","10"})
 	})
