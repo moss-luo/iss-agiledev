@@ -25,9 +25,9 @@ public class DefaultAction implements ModelDriven<Level>{
 
 	//@Validation
 	//@Initialization
-	@Initialization({
-		@Initializa(fieldName="levelName",value="初级工程师")
-	})
+//	@Initialization({
+//		@Initializa(fieldName="levelName",value="初级工程师")
+//	})
 	@Validations({
 		@Validation(fieldName="levelName",validType=StringLengthFieldValidator.class,params={"message","职级名称必须在1-10之间","minLength","1","maxLength","10"})
 	})
