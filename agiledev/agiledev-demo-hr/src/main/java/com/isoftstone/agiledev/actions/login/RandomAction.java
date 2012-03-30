@@ -26,7 +26,7 @@ public class RandomAction{
         ActionContext actionContext=ActionContext.getContext();
         Map session=actionContext.getSession();
         session.put("random", rdnu.getString());
-        //System.out.println("保存在session中的--"+rdnu.getString());
+        System.out.println("保存在session中的--"+rdnu.getString());
         return "rand";  
     }  
     public void setInputStream(ByteArrayInputStream inputStream) {  
