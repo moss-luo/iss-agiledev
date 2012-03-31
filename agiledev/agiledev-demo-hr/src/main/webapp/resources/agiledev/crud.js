@@ -26,7 +26,8 @@ var options = {
 				rownumbers:true,//显示行号,
 				toolbars:null,
 				pageSize:5,
-				pageList:[10,20,30,40,50,60,70,80,90,100]
+				pageList:[10,20,30,40,50,60,70,80,90,100],
+				onLoadSuccess:function(){}
 			},
 			dialog:{
 				//saveable:true,
@@ -286,7 +287,8 @@ Render.prototype.createDatagrid = function(){
 			}else{
 				$("#btnRemove").linkbutton("disable").linkbutton({iconCls:'icon-unremove'});
 			}
-		}
+		},
+		onLoadSuccess:options.grid.onLoadSuccess
 	});
 	$("#btnEdit,#btnRemove").linkbutton("disable");
 	$("#btnEdit").linkbutton({iconCls:'icon-unedit'});
