@@ -14,7 +14,7 @@ public class User {
 	private String roleName;
 	
 	//@RequiredStringValidator(trim=true,message="请输入用户名",fieldName="name")
-	@StringLengthFieldValidator(message="用户名必须在1-10位之间",minLength="1",maxLength="10")
+	@StringLengthFieldValidator(message="用户名必须在1-12位之间",minLength="1",maxLength="12")
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
