@@ -15,6 +15,7 @@ import com.opensymphony.xwork2.ActionContext;
 public class RandomAction{
 	private ByteArrayInputStream inputStream;
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Action("rand")
     public String execute() throws Exception{  
     	
