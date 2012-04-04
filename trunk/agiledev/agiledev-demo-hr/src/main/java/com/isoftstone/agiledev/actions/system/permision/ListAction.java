@@ -16,7 +16,7 @@ import com.isoftstone.agiledev.query.QueryParametersMap;
 import com.isoftstone.agiledev.query.SummaryProvider;
 
 @Results({
-	@Result(name="list",type="json",params={"root","results"}),
+	@Result(name="result",type="json",params={"root","results"}),
 	@Result(name="json2",type="datagrid-json",params={"root","results"})
 })
 public class ListAction implements SummaryProvider{
@@ -28,8 +28,8 @@ public class ListAction implements SummaryProvider{
 	private BaseService<Permision> permisionManager=null;
 	
 	public String execute(){
-		results= permisionManager.list(queryCondition,new Permision());
-		return "list";
+		results= permisionManager.list(null,new Permision());
+		return "result";
 	}
 	@Action("list2")
 	public String list(){

@@ -9,7 +9,9 @@
 		<if test="sort != null">
 			ORDER BY #{orderBy}
 		</if>
-		LIMIT #{limit} , #{offset}
+		<if test="limit != null">
+			LIMIT #{limit} , #{offset}
+		</if>
 	</select>
 	<insert id="save" parameterType="com.isoftstone.agiledev.actions.system.permision.Permision">
 		INSERT INTO T_PERMISION(permisionName,url)

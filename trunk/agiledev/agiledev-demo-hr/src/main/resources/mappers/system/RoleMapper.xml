@@ -6,7 +6,9 @@
 		<if test="sort != null">
 			ORDER BY #{orderBy}
 		</if>
+		<if test="limit != null">
 		LIMIT #{limit} , #{offset}
+		</if>
 	</select>
 	<select id="selectMiddleList" parameterType="java.util.HashMap" resultType="java.lang.String">
 		SELECT permisionId FROM T_ROLE_PERMISION WHERE roleId=#{roleId}
