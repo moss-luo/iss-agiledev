@@ -33,10 +33,10 @@ public class ListAction implements SummaryProvider{
 	}
 	@Action("list2")
 	public String execute2(){
-		queryCondition.clear();
-		queryCondition.put("limit", 1);
-		queryCondition.put("offset", 1000);
-		results = roleManager.list(queryCondition,new Role());
+//		queryCondition.clear();
+//		queryCondition.put("limit", 1);
+//		queryCondition.put("offset", 1000);
+		results = roleManager.list(null,new Role());
 		return "result";
 	}
 	
