@@ -8,10 +8,8 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
 import com.isoftstone.agiledev.actions.system.permision.Permision;
-import com.isoftstone.agiledev.ajax.easyui.tree.Node;
-import com.isoftstone.agiledev.ajax.easyui.tree.Node.State;
-import com.isoftstone.agiledev.ajax.easyui.tree.TreeData;
-import com.isoftstone.agiledev.ajax.easyui.tree.TreeDataProvider;
+import com.isoftstone.agiledev.easyui.tree.*;
+import com.isoftstone.agiledev.easyui.tree.Node.State;
 import com.isoftstone.agiledev.manages.system.permision.PermisionManager;
 
 @Results(
