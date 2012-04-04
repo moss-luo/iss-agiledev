@@ -16,7 +16,7 @@
 	<package name="agiledev-hr" extends="json-default">
 		<result-types>
 			<!-- datagrid所需的json格式result -->
-            <result-type name="datagrid-json" class="com.isoftstone.agiledev.pager.PaginationSupportJSONResult"/>
+            <result-type name="datagrid-json" class="com.isoftstone.agiledev.easyui.datagrid.PaginationSupportJSONResult"/>
             <!-- 初始化表单result -->
             <result-type name="initjson" class="com.isoftstone.agiledev.initform.InitSupportJSONResult"/>
         </result-types>
