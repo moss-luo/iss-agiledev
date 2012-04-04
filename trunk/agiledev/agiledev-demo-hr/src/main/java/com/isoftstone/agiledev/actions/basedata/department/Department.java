@@ -1,6 +1,5 @@
 package com.isoftstone.agiledev.actions.basedata.department;
 
-import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
 
 public class Department {
 

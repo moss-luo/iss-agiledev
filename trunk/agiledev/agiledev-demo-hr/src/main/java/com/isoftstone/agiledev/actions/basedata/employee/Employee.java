@@ -1,6 +1,5 @@
 package com.isoftstone.agiledev.actions.basedata.employee;
 
-import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
 
 public class Employee {
 

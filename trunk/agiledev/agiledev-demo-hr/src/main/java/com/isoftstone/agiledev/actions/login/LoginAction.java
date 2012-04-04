@@ -2,25 +2,17 @@ package com.isoftstone.agiledev.actions.login;
 
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
-
-import sun.tools.tree.ThisExpression;
 
 import com.isoftstone.agiledev.actions.system.user.User;
 import com.isoftstone.agiledev.manages.BaseService;
 import com.isoftstone.agiledev.query.QueryParametersMap;
 import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 
 @Results({
 	@Result(name="login", location="/main.html",type="redirect"),

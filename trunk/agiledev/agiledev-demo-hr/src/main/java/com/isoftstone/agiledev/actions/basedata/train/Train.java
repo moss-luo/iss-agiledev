@@ -1,6 +1,5 @@
 package com.isoftstone.agiledev.actions.basedata.train;
 
-import com.opensymphony.xwork2.validator.annotations.StringLengthFieldValidator;
 
 public class Train {
 
