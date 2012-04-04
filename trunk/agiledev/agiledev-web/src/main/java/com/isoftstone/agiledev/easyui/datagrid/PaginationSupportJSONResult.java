@@ -1,4 +1,4 @@
-package com.isoftstone.agiledev.pager;
+package com.isoftstone.agiledev.easyui.datagrid;
 
 import java.io.IOException;
 
