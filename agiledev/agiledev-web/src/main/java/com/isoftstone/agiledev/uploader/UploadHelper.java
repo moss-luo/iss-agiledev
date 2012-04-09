@@ -96,7 +96,7 @@ public class UploadHelper {
 					
 					remotePath = userDir + "/" + uniqueId;
 					String reviewPath = PARA1 + new String(Base64.encodeBase64(remotePath.getBytes()));
-					fileFinalPath = System.currentTimeMillis()+reviewPath+PARA2+"remote";
+					fileFinalPath = System.currentTimeMillis()+reviewPath+PARA2+"remote&_c=true";
 				}
 			}
 			

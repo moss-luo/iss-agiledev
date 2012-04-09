@@ -30,10 +30,13 @@ public class ReviewFilter implements Filter {
 		InputStream in = null;
 		OutputStream out = null;
 		try {
-			byte[] token = null;
-			if (req.getParameter("_token")!=null)
-				token = Base64.decodeBase64(req.getParameter("_token")
-						.getBytes());
+			String token = null;
+			String isCode = req.getParameter("_c");
+			if(Boolean.parseBoolean(isCode)==true){
+				token = new String(Base64.decodeBase64(req.getParameter("_token").getBytes()));
+			}else{
+				token = req.getParameter("_token");
+			}
 			if (token != null) {
 				
 				if(req.getParameter("_type")!=null){
