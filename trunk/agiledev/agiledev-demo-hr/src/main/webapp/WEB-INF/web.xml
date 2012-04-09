@@ -37,7 +37,7 @@
   	<!-- 上传路径 -->
   	<init-param>
   		<param-name>userDir</param-name>
-  		<param-value>user:/home/sinner/upload</param-value>
+  		<param-value>user:/home/david/upload</param-value>
   	</init-param>
   	<!-- 是否回传服务器路径，如果true，则需要配置fileter：review -->
   	<init-param>
@@ -57,7 +57,7 @@
 	<!-- 	ftp用户名-->
   	<init-param>
 		<param-name>remoteUser</param-name>
-		<param-value>sinner</param-value>
+		<param-value>david</param-value>
 	</init-param>
 	<!-- ftp密码-->
   	<init-param>
