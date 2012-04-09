@@ -37,3 +37,6 @@
 .agiledev-form-element{
 	display: inline;
 }
+.search-form #review{
+	display: none;
+}

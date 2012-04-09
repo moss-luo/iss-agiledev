@@ -98,7 +98,8 @@ config:{
 			],
 			gridShow:false,
 			review:function(row,field){
-				$("<div id='review'/>").append("<img class='review' src='" + field + "' width='100' height='100'/>").appendTo(".agiledev-form");
+				
+				$("<div id='review'/>").append("<img class='review' src='/agiledev-demo-hr/32.review?_token="+field+"&_type=remote&_c=false' width='100' height='100'/>").appendTo(".agiledev-form");
 			},
 			path:'user',
 			callback:function(response){
@@ -164,6 +165,7 @@ config:{
 };
 $(function(){
 	$("#list").crud(handle.config);
+	
 });
 </script>
 
