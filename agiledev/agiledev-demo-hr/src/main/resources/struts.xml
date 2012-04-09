@@ -41,7 +41,7 @@
 						<!-- ftp端口 -->
 					<param name="remotePort">21</param>
 						<!-- ftp用户名 -->
-					<param name="remoteUser">sinner</param>
+					<param name="remoteUser">david</param>
 						<!-- ftp密码 -->
 					<param name="remotePassword">puxl1982</param>
 				</interceptor-ref>
