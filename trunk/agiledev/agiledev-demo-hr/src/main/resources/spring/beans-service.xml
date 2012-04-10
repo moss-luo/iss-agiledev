@@ -19,7 +19,7 @@
 			http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 			
 	<bean id="baseService" class="com.isoftstone.agiledev.manages.BaseServiceImpl">
-		<property name="packageName" value="com.isoftstone.agiledev.hr.mapper"></property>
+		<property name="packageName" value="com.isoftstone.agiledev.hr.mapper"/>
 	</bean>
 	<bean id="roleService" class="com.isoftstone.agiledev.manages.system.role.RoleManagerImpl" parent="baseService"/>
 	
