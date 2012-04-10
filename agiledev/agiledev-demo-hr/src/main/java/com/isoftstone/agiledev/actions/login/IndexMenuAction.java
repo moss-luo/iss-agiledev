@@ -4,30 +4,57 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
+import com.isoftstone.agiledev.OperationResult;
 import com.isoftstone.agiledev.actions.system.permision.Permision;
 import com.isoftstone.agiledev.easyui.tree.*;
 import com.isoftstone.agiledev.easyui.tree.Node.State;
+import com.isoftstone.agiledev.manages.BaseService;
 import com.isoftstone.agiledev.manages.system.permision.PermisionManager;
+import com.opensymphony.xwork2.ModelDriven;
 
-@Results(
-	@Result(name = "result", type = "json", params = {"root", "nodes", "contentType", "text/html"})
-)
-public class IndexMenuAction implements TreeDataProvider {
+@Results({
+	@Result(name = "result", type = "json", params = {"root", "nodes", "contentType", "text/html"}),
+	@Result(name = "r", type = "json", params = {"root", "o", "contentType", "text/html"})
+})
+public class IndexMenuAction implements TreeDataProvider,ModelDriven<Permision> {
 	private String id;
 	private List<Node> nodes;
 	@Resource
 	private PermisionManager permisionManager=null;
+	@Resource(name="baseService")
+	private BaseService<Permision> baseService=null;
+	private Permision permision = null;
+	private OperationResult o = null;
+	@Action("create")
+	public String create(){
+		baseService.save(permision);
+		o = new OperationResult(true, "create success!");
+		return "r";
+	}
+	@Action("remove")
+	public String remove(){
+		baseService.remove(id,new Permision());
+		o = new OperationResult(true, "remove success!");
+		return "r";
+	}
 	public String execute() {
 		nodes = getNodes(id);
 		return "result";
 	}
 
+	public OperationResult getO() {
+		return o;
+	}
+	public void setO(OperationResult o) {
+		this.o = o;
+	}
 	@Override
 	public List<Node> getNodes(String parentId) {
-		List<Permision> ps = permisionManager.findByPid(parentId==null?"0":parentId);
+		List<Permision> ps = permisionManager.findByPid(parentId==null?"1":parentId);
 		TreeData treeData = new TreeData();
 		for (Permision permision : ps) {
 			treeData.nextNode((permision.getHasChild()==null ||permision.getHasChild()==0)
@@ -77,5 +104,10 @@ public class IndexMenuAction implements TreeDataProvider {
 	
 	public List<Node> getNodes() {
 		return nodes;
+	}
+	@Override
+	public Permision getModel() {
+		if(permision == null) permision = new Permision();
+		return permision;
 	}
 }

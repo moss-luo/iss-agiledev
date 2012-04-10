@@ -14,8 +14,8 @@
 		</if>
 	</select>
 	<insert id="save" parameterType="com.isoftstone.agiledev.actions.system.permision.Permision">
-		INSERT INTO T_PERMISION(permisionName,url)
-		VALUES(#{permisionName},#{url})
+		INSERT INTO T_PERMISION(uid,permisionName,url,pid)
+		VALUES(#{uid},#{permisionName},#{url},#{pid})
 	</insert>
 	<update id="update" parameterType="com.isoftstone.agiledev.actions.system.permision.Permision">
 		UPDATE T_PERMISION SET permisionName=#{permisionName},url=#{url} WHERE uid=#{uid}

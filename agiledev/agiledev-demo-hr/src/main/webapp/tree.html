@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>tree demo</title>
+
+<link rel="stylesheet" type="text/css" href="resources/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="resources/easyui/themes/icon.css">
+<script type="text/javascript" src="resources/easyui/jquery-1.6.min.js"></script>
+<script type="text/javascript" src="resources/easyui/jquery.easyui.min.js"></script>
+<script>
+$(function(){
+	$('#tt2').tree({
+		checkbox: false,
+		url: 'login/index-menu',
+		onClick:function(node){
+			$(this).tree('toggle', node.target);
+		},
+		onSelect:function(node){
+			$("#add,#remove").linkbutton("enable");
+		}
+	});
+	$("#add").linkbutton({
+		iconCls:'icon-add',
+		text:'append'
+	}).linkbutton("disable")
+		.click(function(){
+			$('<div id="dd" title="My Dialog" style="width:200px;height:100px;text-aling:center;"><input id="text" type="text"/></div>').appendTo("body")
+				.dialog({
+					buttons:[{
+						text:'ok',
+						handler:function(){
+							var node = $('#tt2').tree('getSelected'),
+								name=$("#text").val();
+							
+							$.ajax({
+								url:'login/create',
+								type:'post',
+								dataType:'json',
+								data:{'permisionName':name,'pid':node.id},
+								success:function(d){
+									alert(d.msg);
+									if(d.success||d.success=="true"){
+										$('#tt2').tree('append',{
+											parent: node.target,
+											data:[{text:name}]
+										});
+										$("#dd").dialog("close");
+									}
+								}
+							});
+						}
+					}]
+				});
+		});
+
+	$("#remove").linkbutton({
+		iconCls:'icon-remove',
+		text:'remove'
+	}).linkbutton("disable")
+		.click(function(){
+			var node = $('#tt2').tree('getSelected');
+			$.ajax({
+				url:'login/remove',
+				type:'post',
+				dataType:'json',
+				data:{id:node.id},
+				success:function(d){
+					alert(d.msg);
+					if(d.success||d.success=='true'){
+						$('#tt2').tree('remove', node.target);
+					}
+				}
+			});
+		});
+});
+</script>
+</head>
+<body>
+	<a id="add" href="#"></a>
+	<a id="remove" href="#"></a>
+	<span id="remove"></span>
+	<ul id="tt2"></ul>
+</body>
+</html>
