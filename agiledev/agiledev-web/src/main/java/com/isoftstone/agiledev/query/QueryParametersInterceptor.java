@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
-import com.isoftstone.agiledev.query.QueryParameters;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
 
@@ -21,7 +20,6 @@ public class QueryParametersInterceptor extends MethodFilterInterceptor {
 	private QueryParametersReader queryParametersReader;
 	private List<QueryParametersInjector> queryParametersInjectors;
 	public void setOrderByKey(String value){
-		System.out.println(value);
 	}
 	@Override
 	public void init() {
