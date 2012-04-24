@@ -49,12 +49,9 @@ public class ReviewFilter implements Filter {
 					
 					String type = req.getParameter("_type");
 					if(type.equals("remote")){
-//						HttpURLConnection con = (HttpURLConnection) new URL(new String(token)).openConnection();
-//						in = con.getInputStream();
-
+						
 						HttpSession session = ((HttpServletRequest)req).getSession();
 						UploadConfig config = (UploadConfig) session.getServletContext().getAttribute("uploadConfig");
-						
 						ResStoreUtil remoteDownloadder = new ResStoreUtil(config);
 						byte[] bytes = remoteDownloadder.download(new String(token));
 						out.write(bytes);

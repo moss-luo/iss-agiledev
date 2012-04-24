@@ -89,10 +89,6 @@ public class UploadHelper {
 					fileOnServer.delete();
 				}
 				if (config.isReview()) {
-					//共享配置
-					HttpSession session = ((HttpServletRequest)request).getSession();
-					if(session.getServletContext().getAttribute("uploadConfig")==null)
-						session.getServletContext().setAttribute("uploadConfig", config);
 					
 					remotePath = userDir + "/" + uniqueId;
 					String reviewPath = PARA1 + new String(Base64.encodeBase64(remotePath.getBytes()));
