@@ -36,9 +36,6 @@ public class UploadInterceptor extends FileUploadInterceptor {
 				return invocation.invoke();
 			}
 			
-			if(request.getSession().getServletContext().getAttribute("uploadConfig")==null)
-				request.getSession().getServletContext().setAttribute("uploadConfig", uploadConfig);
-			
 			MultiPartRequestWrapper multiWrapper = (MultiPartRequestWrapper) request;
 
 			Enumeration<String> fileParameterNames = multiWrapper
@@ -80,85 +77,105 @@ public class UploadInterceptor extends FileUploadInterceptor {
 		}
 		return result;
 	}
-	/**
-	 * 下列setter提供给struts2参数注入，用于配置上传至远程ftp服务器和用户路径
-	 */
+//	/**
+//	 * 下列setter提供给struts2参数注入，用于配置上传至远程ftp服务器和用户路径
+//	 */
 
-	public void setRemoteIP(String ip) {
-		uploadConfig.setIp(ip);
-	}
+//	public void setRemoteIP(String ip) {
+//		uploadConfig.setIp(ip);
+//	}
+//
+//	public void setRemotePort(int port) {
+//		uploadConfig.setPort(port);
+//	}
+//
+//	public void setRemoteUser(String user) {
+//		uploadConfig.setUser(user);
+//	}
+//
+//	public void setRemotePassword(String pwd) {
+//		uploadConfig.setPwd(pwd);
+//	}
+//
+//	public void setMaxSleeping(int maxSleeping) {
+//		uploadConfig.setMaxSleeping(maxSleeping);
+//	}
+//
+//	public void setInitCapacity(int initCapacity) {
+//		uploadConfig.setInitCapacity(initCapacity);
+//	}
+//	/**
+//	 * 用户路径配置方式如下 header:/var/html/www/header;photo:/var/html/www/photo
+//	 * 如上，配置了两个路径
+//	 * ，各业务在上传时需传递"_r"参数指定上传的具体路径，如：_r=header表明要上传到/var/html/www/header/下
+//	 * 
+//	 * @param userDir
+//	 */
+//	public void setUserDir(String userDir) {
+//		uploadConfig.setUserDir(userDir);
+//	}
+//
+//	public void setReview(boolean isReview) {
+//		uploadConfig.setReview(isReview);
+//	}
+//	public void setType(String type){
+//		uploadConfig.setType(type);
+//	}
 
-	public void setRemotePort(int port) {
-		uploadConfig.setPort(port);
-	}
-
-	public void setRemoteUser(String user) {
-		uploadConfig.setUser(user);
-	}
-
-	public void setRemotePassword(String pwd) {
-		uploadConfig.setPwd(pwd);
-	}
-
-	public void setMaxSleeping(int maxSleeping) {
-		uploadConfig.setMaxSleeping(maxSleeping);
-	}
-
-	public void setInitCapacity(int initCapacity) {
-		uploadConfig.setInitCapacity(initCapacity);
-	}
-
-	/**
-	 * 用户路径配置方式如下 header:/var/html/www/header;photo:/var/html/www/photo
-	 * 如上，配置了两个路径
-	 * ，各业务在上传时需传递"_r"参数指定上传的具体路径，如：_r=header表明要上传到/var/html/www/header/下
-	 * 
-	 * @param userDir
-	 */
-	public void setUserDir(String userDir) {
-		uploadConfig.setUserDir(userDir);
-	}
-
-	public void setReview(boolean isReview) {
-		uploadConfig.setReview(isReview);
-	}
-	public void setType(String type){
-		uploadConfig.setType(type);
-	}
-
-	/**
-	 * 上传之前调用
-	 * @param beforeHandle
-	 */
-	public void setBeforeUploadHandle(String beforeHandleClasses) {
-		try {
-			if(beforeHandleClasses!=null){
-				String[] classes = beforeHandleClasses.split(";");
-				for (String string : classes) {
-					this.uploadConfig.addUploadBeforeHandle((UploadBeforeHandle)Class.forName(string).newInstance());
-				}
-				
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	/**
-	 * 上传之后调用
-	 * @param afterHandle
-	 */
-	public void setAfterUploadHandle(String afterHandleClasses) {
-		try {
-			if(afterHandleClasses!=null){
-				String[] classes = afterHandleClasses.split(";");
-				for (String string : classes) {
-					this.uploadConfig.addUploadAfterHandle((UploadAfterHandle)Class.forName(string).newInstance());
-				}
-				
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
+//	private void putContextParam(UploadConfig uc){
+//		try {
+//			
+//			UploadConfig c = (UploadConfig) ServletActionContext.getServletContext().getAttribute("uploadConfig");
+//			if(c==null){
+//				ServletActionContext.getServletContext().setAttribute("uploadConfig", uc);
+//			}else{
+//				c.setInitCapacity(uc.getInitCapacity());
+//				c.setIp(uc.getIp());
+//				c.setMaxSleeping(uc.getMaxSleeping());
+//				c.setPort(uc.getPort());
+//				c.setPwd(uc.getPwd());
+//				c.setReview(uc.isReview());
+//				c.setType(uc.getType());
+//				c.setUser(uc.getUser());
+//				c.setUserDir(uc.getUserDir());
+//				ServletActionContext.getServletContext().setAttribute("uploadConfig", c);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+//	/**
+//	 * 上传之前调用
+//	 * @param beforeHandle
+//	 */
+//	public void setBeforeUploadHandle(String beforeHandleClasses) {
+//		try {
+//			if(beforeHandleClasses!=null){
+//				String[] classes = beforeHandleClasses.split(";");
+//				for (String string : classes) {
+//					this.uploadConfig.addUploadBeforeHandle((UploadBeforeHandle)Class.forName(string).newInstance());
+//				}
+//				
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+//	/**
+//	 * 上传之后调用
+//	 * @param afterHandle
+//	 */
+//	public void setAfterUploadHandle(String afterHandleClasses) {
+//		try {
+//			if(afterHandleClasses!=null){
+//				String[] classes = afterHandleClasses.split(";");
+//				for (String string : classes) {
+//					this.uploadConfig.addUploadAfterHandle((UploadAfterHandle)Class.forName(string).newInstance());
+//				}
+//				
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 }

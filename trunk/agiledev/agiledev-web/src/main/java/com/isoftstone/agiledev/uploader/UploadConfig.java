@@ -25,7 +25,7 @@ public class UploadConfig {
 	
 	private static Properties p=new Properties();
 	static{
-		URL url = UploadConfig.class.getResource("component-upload.properties");
+		URL url = UploadConfig.class.getResource("/agiledev/upload.properties");
 		if(url!=null)
 			try {
 				p.load(url.openStream());
@@ -63,25 +63,25 @@ public class UploadConfig {
 	
 	
 	public String getIp() {
-		return ip==null?p.getProperty("ip"):ip;
+		return ip==null?p.getProperty("remoteIP"):ip;
 	}
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
 	public int getPort() {
-		return port==0?Integer.parseInt(p.getProperty("port")==null?"0":p.getProperty("port").toString()):port;
+		return port==0?Integer.parseInt(p.getProperty("remotePort")==null?"0":p.getProperty("remotePort").toString()):port;
 	}
 	public void setPort(int port) {
 		this.port = port;
 	}
 	public String getUser() {
-		return user==null?p.getProperty("user"):user;
+		return user==null?p.getProperty("remoteUser"):user;
 	}
 	public void setUser(String user) {
 		this.user = user;
 	}
 	public String getPwd() {
-		return pwd==null?p.getProperty("pwd"):pwd;
+		return pwd==null?p.getProperty("remotePassword"):pwd;
 	}
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
@@ -105,14 +105,14 @@ public class UploadConfig {
 		this.userDir = userDir;
 	}
 	public boolean isReview() {
-		return isReview || Boolean.parseBoolean(p.getProperty("isReview"));
+		return isReview || Boolean.parseBoolean(p.getProperty("review"));
 	}
 	public void setReview(boolean isReview) {
 		this.isReview = isReview;
 	}
 	public List<UploadBeforeHandle> getBeforeHandles() throws Exception{
 		if(this.beforeHandles.size()==0){
-			String temp = p.getProperty("uploadBeforeHandle");
+			String temp = p.getProperty("beforeUploadHandle");
 			if(temp!=null){
 				String[] beforeHandleClasses = temp.split(";");
 				for (String str : beforeHandleClasses) {
@@ -133,7 +133,7 @@ public class UploadConfig {
 	}
 	public List<UploadAfterHandle> getAfterHandles() throws Exception{
 		if(this.afterHandles.size()==0){
-			String temp = p.getProperty("uploadAfterHandle");
+			String temp = p.getProperty("afterUploadHandle");
 			if(temp!=null){
 				String[] beforeHandleClasses = temp.split(";");
 				for (String str : beforeHandleClasses) {
@@ -159,10 +159,8 @@ public class UploadConfig {
 
 
 	public String getType() {
-		return type;
+		return type==null?p.getProperty("type"):type;
 	}
-
-
 
 	public void setType(String type) {
 		this.type = type;
