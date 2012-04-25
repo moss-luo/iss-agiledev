@@ -12,9 +12,7 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>agiledev-demo-hr</name>
-  <url>http://maven.apache.org</url><properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+  <url>http://maven.apache.org</url>
   <dependencies>
   	<dependency>
   		<groupId>com.isoftstone.agiledev</groupId>
@@ -221,9 +219,11 @@
     	<type>jar</type>
     	<classifier>jdk15</classifier>
     </dependency>
+    <dependency>
+		<groupId>com.sun</groupId>
+		<artifactId>tools</artifactId>
+	</dependency>
     <!-- struts2 end -->
-    
-    
   </dependencies>
   <build>
   	<plugins>

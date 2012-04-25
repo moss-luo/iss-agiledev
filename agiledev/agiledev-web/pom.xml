@@ -102,6 +102,10 @@
     	<type>jar</type>
     	<classifier>jdk15</classifier>
     </dependency>
+    <dependency>
+		<groupId>com.sun</groupId>
+		<artifactId>tools</artifactId>
+	</dependency>
     <!-- struts2 end -->
     
     
