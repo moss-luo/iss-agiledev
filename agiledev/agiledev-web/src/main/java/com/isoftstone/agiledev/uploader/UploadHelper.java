@@ -8,9 +8,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
@@ -26,11 +24,12 @@ public class UploadHelper {
 	private static final Log log = LogFactory.getLog(UploadHelper.class);
 	
 	@SuppressWarnings("deprecation")
-	public static void upload(UploadConfig config,File fileOnServer,HttpServletResponse response,ServletRequest request){
+	public static void upload(File fileOnServer,HttpServletResponse response,ServletRequest request){
 		try {
 			/**
 			 * 前置handle执行
 			 */
+			UploadConfig config = new UploadConfig();
 			List<UploadBeforeHandle> beforeHandles = config.getBeforeHandles();
 			for (UploadBeforeHandle handle : beforeHandles) {
 				OperationResult result = handle.handle(fileOnServer, config, request);
