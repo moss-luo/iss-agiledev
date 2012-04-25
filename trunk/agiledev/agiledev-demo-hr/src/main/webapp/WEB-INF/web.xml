@@ -10,7 +10,6 @@
   	<param-value>classpath*:spring/beans.xml</param-value>
   </context-param>
   
-  
   <filter>
   	<filter-name>encoding</filter-name>
   	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -34,36 +33,36 @@
   <filter>
   	<filter-name>upload</filter-name>
   	<filter-class>com.isoftstone.agiledev.uploader.UploadFilter</filter-class>
-  	<!-- 上传路径 -->
+  	<!-- 上传路径 
   	<init-param>
   		<param-name>userDir</param-name>
   		<param-value>user:/home/david/upload</param-value>
   	</init-param>
-  	<!-- 是否回传服务器路径，如果true，则需要配置fileter：review -->
+  	 是否回传服务器路径，如果true，则需要配置fileter：review 
   	<init-param>
   		<param-name>review</param-name>
   		<param-value>true</param-value>
   	</init-param>
-  	<!-- 如果是上传到ftp服务器 -->
+  	 如果是上传到ftp服务器 
   	<init-param>
 		<param-name>remoteIP</param-name>
 		<param-value>localhost</param-value>
 	</init-param>
-	<!-- 	ftp端口 -->
+	 	ftp端口 
   	<init-param>
 		<param-name>remotePort</param-name>
 		<param-value>21</param-value>
 	</init-param>
-	<!-- 	ftp用户名-->
+	 	ftp用户名
   	<init-param>
 		<param-name>remoteUser</param-name>
 		<param-value>david</param-value>
 	</init-param>
-	<!-- ftp密码-->
+	 ftp密码
   	<init-param>
 		<param-name>remotePassword</param-name>
 		<param-value>puxl1982</param-value>
-	</init-param>
+	</init-param>-->
   </filter>
   
   <filter-mapping>
