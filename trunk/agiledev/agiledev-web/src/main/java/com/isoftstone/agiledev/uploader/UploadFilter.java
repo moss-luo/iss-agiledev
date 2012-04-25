@@ -31,7 +31,6 @@ public class UploadFilter implements Filter {
 
 
 
-	private UploadConfig config = null;
 	public void destroy() {
 	}
 
@@ -76,7 +75,7 @@ public class UploadFilter implements Filter {
 						formField.put(item.getFieldName(), item.getString());
 					}
 					if(tempFile!=null && tempFile.exists()){
-						UploadHelper.upload(config, tempFile, (HttpServletResponse) res,new UploadServletReqeust(formField,request));
+						UploadHelper.upload(tempFile, (HttpServletResponse) res,new UploadServletReqeust(formField,request));
 					}
 				}
 			}
@@ -87,34 +86,27 @@ public class UploadFilter implements Filter {
 
 
 	public void init(FilterConfig fc) throws ServletException {
-
-		config = new UploadConfig();
-		config.setIp(fc.getInitParameter("remoteIP"));
-		config.setInitCapacity(Integer.parseInt(fc.getInitParameter("initCapacity")==null?"0":fc.getInitParameter("initCapacity")));
-		config.setMaxSleeping(Integer.parseInt(fc.getInitParameter("maxSleeping")==null?"0":fc.getInitParameter("maxSleeping")));
-		config.setPort(Integer.parseInt(fc.getInitParameter("remotePort")==null?"0":fc.getInitParameter("remotePort")));
-		config.setPwd(fc.getInitParameter("remotePassword"));
-		config.setUser(fc.getInitParameter("remoteUser"));
-		config.setReview(Boolean.parseBoolean(fc.getInitParameter("review")==null?"true":fc.getInitParameter("review")));
-		config.setUserDir(fc.getInitParameter("userDir"));
-		try {
-			if(fc.getInitParameter("uploadBeforeHandle")!=null){
-				config.addUploadBeforeHandle((UploadBeforeHandle)Class.forName(fc.getInitParameter("uploadBeforeHandle")).newInstance());
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new ServletException("找不到uploadBeforeHandle对应的类");
-		} 
-		try{
-			if(fc.getInitParameter("uploadAfterHandle")!=null){
-				config.addUploadAfterHandle((UploadAfterHandle)Class.forName(fc.getInitParameter("uploadAfterHandle")).newInstance());
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new ServletException("找不到uploadAfterHandle对应的类");
-		} 
+//
+//		config = new UploadConfig();
+//		config.setIp(fc.getInitParameter("remoteIP"));
+//		config.setInitCapacity(Integer.parseInt(fc.getInitParameter("initCapacity")==null?"0":fc.getInitParameter("initCapacity")));
+//		config.setMaxSleeping(Integer.parseInt(fc.getInitParameter("maxSleeping")==null?"0":fc.getInitParameter("maxSleeping")));
+//		config.setPort(Integer.parseInt(fc.getInitParameter("remotePort")==null?"0":fc.getInitParameter("remotePort")));
+//		config.setPwd(fc.getInitParameter("remotePassword"));
+//		config.setUser(fc.getInitParameter("remoteUser"));
+//		config.setReview(Boolean.parseBoolean(fc.getInitParameter("review")==null?"true":fc.getInitParameter("review")));
+//		config.setUserDir(fc.getInitParameter("userDir"));
+//		try {
+//			if(fc.getInitParameter("uploadBeforeHandle")!=null){
+//				config.addUploadBeforeHandle((UploadBeforeHandle)Class.forName(fc.getInitParameter("uploadBeforeHandle")).newInstance());
+//			}
+//			if(fc.getInitParameter("uploadAfterHandle")!=null){
+//				config.addUploadAfterHandle((UploadAfterHandle)Class.forName(fc.getInitParameter("uploadAfterHandle")).newInstance());
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			throw new ServletException("找不到uploadBeforeHandle对应的类");
+//		} 
 	}
 
 }

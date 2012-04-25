@@ -21,7 +21,6 @@ import com.opensymphony.xwork2.ActionInvocation;
 @SuppressWarnings("serial")
 public class UploadInterceptor extends FileUploadInterceptor {
 
-	private UploadConfig uploadConfig = new UploadConfig();
 	
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
@@ -60,7 +59,7 @@ public class UploadInterceptor extends FileUploadInterceptor {
 				}
 			}
 			tempFile = new File(sb.toString());
-			UploadHelper.upload(uploadConfig,tempFile, ServletActionContext.getResponse(), request);
+			UploadHelper.upload(tempFile, ServletActionContext.getResponse(), request);
 
 		} catch (Exception e) {
 			e.printStackTrace();
