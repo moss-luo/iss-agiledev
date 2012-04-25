@@ -27,6 +27,7 @@
 			<interceptor-stack name="appDefaultStack">
 				<interceptor-ref name="defaultStack"/>
 				<interceptor-ref name="validate"/>
+				<interceptor-ref name="uploader"/>
 				<interceptor-ref name="queryParams">
 					<param name="orderByKey">order</param>
 				</interceptor-ref>
