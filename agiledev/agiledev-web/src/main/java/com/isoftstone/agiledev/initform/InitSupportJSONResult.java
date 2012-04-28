@@ -6,9 +6,9 @@ import java.util.Properties;
 
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONArray;
-
+import org.apache.struts2.json.JSONException;
 import org.apache.struts2.json.JSONResult;
+import org.apache.struts2.json.JSONUtil;
 
 import com.opensymphony.xwork2.ActionInvocation;
 
@@ -33,11 +33,17 @@ public class InitSupportJSONResult extends JSONResult{
 			r.doResult(response, actionInvocation);
 		}
 		
-		JSONArray fields = JSONArray.fromObject(InitData.getInitData());
+//		JSONArray fields = JSONArray.fromObject(InitData.getInitData());
+		String jsonData = null;
+		try {
+			jsonData = JSONUtil.serialize(InitData.getInitData());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 		response.setContentType("text/json;charset=utf-8");
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
-		out.print(String.format("{\"field\":%s}",fields.toString()));
+		out.print(String.format("{\"field\":%s}",jsonData));
 		out.flush();
 		out.close();
 		InitData.clear();
