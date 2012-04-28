@@ -12,10 +12,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONArray;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.json.JSONUtil;
 
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
@@ -115,7 +115,8 @@ public class ValidateInterceptor extends MethodFilterInterceptor {
 			response.setContentType("text/json;charset=utf-8");
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
-			JSONArray json = JSONArray.fromObject(errors);
+//			JSONArray json = JSONArray.fromObject(errors);
+			String json = JSONUtil.serialize(errors);
 			out.print(json.toString());
 			out.flush();
 			out.close();
