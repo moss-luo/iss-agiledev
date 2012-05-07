@@ -4,10 +4,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>agiledev</artifactId>
-    <groupId>com.isoftstone.agiledev</groupId>
+    <groupId>com.isoftstone</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent> 
-  <groupId>com.isoftstone.agiledev</groupId>
+  <groupId>com.isoftstone</groupId>
   <artifactId>agiledev-web</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>agiledev-web</name>
