@@ -19,7 +19,7 @@
     	<artifactId>servlet-api</artifactId>
     </dependency>
   	<dependency>
-  		<groupId>com.isoftstone.agiledev</groupId>
+  		<groupId>com.isoftstone</groupId>
   		<artifactId>agiledev-web</artifactId>
   		<version>1.0-SNAPSHOT</version>
   	</dependency>
