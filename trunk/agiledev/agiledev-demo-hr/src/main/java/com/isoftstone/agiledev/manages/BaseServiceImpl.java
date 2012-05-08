@@ -80,13 +80,4 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 		}
 		return true;
 	}
-	@SuppressWarnings("rawtypes")
-	@Override
-	public boolean login(Map<String, Object> p, T t) {
-	    List list=dao.list(p, this.getOperationCommand(t)+".login");
-	    if(list.size()==0){
-	    	return false;
-	    }
-		return true;
-	}
 }
