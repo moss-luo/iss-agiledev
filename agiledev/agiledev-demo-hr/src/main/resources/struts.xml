@@ -31,7 +31,6 @@
 				<interceptor-ref name="queryParams">
 					<param name="orderByKey">order</param>
 				</interceptor-ref>
-					
 			</interceptor-stack>
 		</interceptors>
 		

@@ -1,16 +1,14 @@
 package com.isoftstone.agiledev.actions.login;
 
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.annotation.Resource;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
 import com.isoftstone.agiledev.actions.system.user.User;
-import com.isoftstone.agiledev.manages.BaseService;
+import com.isoftstone.agiledev.manages.system.user.UserService;
 import com.isoftstone.agiledev.query.QueryParametersMap;
 import com.opensymphony.xwork2.ActionContext;
 
@@ -20,8 +18,8 @@ import com.opensymphony.xwork2.ActionContext;
 	@Result(name="input",location="/login.html",type="redirect")
 })
 public class LoginAction {
-    @Resource(name="baseService")
-    private BaseService<User> userBaseService=null;
+    @Resource(name="userService")
+    private UserService userService=null;
     
     @QueryParametersMap
     public User user;
@@ -30,17 +28,14 @@ public class LoginAction {
 	
 	public String execute(){
 		String str=(String)(ActionContext.getContext().getSession().get("random"));//取得session保存中的字符串
-		System.out.println("在session中拿出的--"+str);
-		System.out.println("用户输入的验证码--"+validateCode);
 		if(!str.equalsIgnoreCase(this.getValidateCode())){
 			return "input";
 		}
-		Map<String, Object> p=new HashMap<String, Object>();
-		p.put("userId", user.getUserId());
-		p.put("password", user.getPassword());
-		if(!userBaseService.login(p, new User())){
+		user = userService.login(user);
+		if(user==null){
 			return "error";
 		}else {
+			ServletActionContext.getRequest().getSession().setAttribute("login_user", user);
 			return "login";
 		}
 	}
