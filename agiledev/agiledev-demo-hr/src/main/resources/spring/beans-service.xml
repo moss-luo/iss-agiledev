@@ -24,7 +24,7 @@
 	<bean id="roleService" class="com.isoftstone.agiledev.manages.system.role.RoleManagerImpl" parent="baseService"/>
 	
 	
-	<bean id="userService" class="com.isoftstone.agiledev.manages.system.user.UserService" parent="baseService"/>
+	<bean id="userService" class="com.isoftstone.agiledev.manages.system.user.UserServiceImpl" parent="baseService"/>
 	
 	
 </beans>
