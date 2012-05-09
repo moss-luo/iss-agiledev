@@ -7,20 +7,23 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
+import com.isoftstone.agiledev.OperationResult;
 import com.isoftstone.agiledev.actions.system.user.User;
 import com.isoftstone.agiledev.manages.system.user.UserService;
 import com.isoftstone.agiledev.query.QueryParametersMap;
 import com.opensymphony.xwork2.ActionContext;
 
 @Results({
-	@Result(name="login", location="/main.html",type="redirect"),
-	@Result(name="error",location="/login.html",type="redirect"),
-	@Result(name="input",location="/login.html",type="redirect")
+//	@Result(name="easyui", location="/main.html",type="redirect")
+//	@Result(name="ligerui", location="/main_ligerui.html",type="redirect"),
+//	@Result(name="error",location="/login.html",type="redirect"),
+//	@Result(name="input",location="/login.html",type="redirect")
+	@Result(name="result",type="json",params={"root","result"})
 })
 public class LoginAction {
     @Resource(name="userService")
     private UserService userService=null;
-    
+    private OperationResult result = null;
     @QueryParametersMap
     public User user;
     
@@ -29,15 +32,19 @@ public class LoginAction {
 	public String execute(){
 		String str=(String)(ActionContext.getContext().getSession().get("random"));//取得session保存中的字符串
 		if(!str.equalsIgnoreCase(this.getValidateCode())){
-			return "input";
+			result = new OperationResult(false, "验证码错误");
+//			return "input";
 		}
 		user = userService.login(user);
 		if(user==null){
-			return "error";
+			result = new OperationResult(false, "用户名或密码错误");
+//			return "error";
 		}else {
 			ServletActionContext.getRequest().getSession().setAttribute("login_user", user);
-			return "login";
+			result = new OperationResult(true);
+//			return null!=version?version:"easyui";
 		}
+		return "result";
 	}
 	public User getUser() {
 		return user;
@@ -53,5 +60,11 @@ public class LoginAction {
 	
 	public void setValidateCode(String validateCode) {
 		this.validateCode = validateCode;
+	}
+	public OperationResult getResult() {
+		return result;
+	}
+	public void setResult(OperationResult result) {
+		this.result = result;
 	}
 }

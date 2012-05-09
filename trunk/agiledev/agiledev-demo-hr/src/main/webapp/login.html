@@ -4,31 +4,55 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>agiledev HR</title>
 		<link href="resources/css/login.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="resources/easyui/jquery-1.6.min.js"></script>
+	    <script type="text/javascript">
+			$(function(){
+				$("#submit").click(function(e){
+					e=e||window.event;
+					if ( e && e.preventDefault ) 
+					    e.preventDefault(); 
+					//IE中阻止函数器默认动作的方式 
+					else 
+					    window.event.returnValue = false; 
+		             if(document.loginForm.userId.value==""){
+		                 alert("用户名不能为空!");
+		                 document.loginForm.userId.focus;
+		                 return false;
+		             }
+		             if(document.loginForm.password.value==""){
+		                 alert("密码不能为空!");
+		                 document.loginForm.password.focus;
+		                 return false;
+		             }
+		             if(document.loginForm.validateCode.value==""){
+		                alert("请输入验证码!");
+		                document.loginForm.validateCode.focus;
+		                return false;
+		             }
+		             $.ajax({
+		            	 url:$("#loginForm").attr("submitaction"),
+		            	 type:'post',
+		            	 dataType:'json',
+		            	 data:$("#loginForm").serialize(),
+		            	 success:function(data){
+		            		 if(data.success){
+		            			 location.href=($("#version").val()=="easyui"?"main.html":"main_ligerui.html");
+		            		 }else{
+		            			 alert(data.msg);
+		            			 changeValidateCode();
+		            		 }
+		            	 }
+		             });
+		             
+				});
+			});	  
+	      function changeValidateCode() {  
+	          var src=document.getElementById("valid");
+	          var timenow = new Date().getTime(); 
+	    	  src.setAttribute('src','authcode/rand.action?d='+timenow);
+	   }  
+	    </script>
     </head>
-    <script type="text/javascript">
-      function change(){
-             if(document.loginForm.userId.value==""){
-                 alert("用户名不能为空!");
-                 document.loginForm.userId.focus;
-                 return false;
-             }
-             if(document.loginForm.password.value==""){
-                 alert("密码不能为空!");
-                 document.loginForm.password.focus;
-                 return false;
-             }
-             if(document.loginForm.validateCode.value==""){
-                alert("请输入验证码!");
-                document.loginForm.validateCode.focus;
-                return false;
-             }
-          }
-      function changeValidateCode() {  
-          var src=document.getElementById("valid");
-          var timenow = new Date().getTime(); 
-    	  src.setAttribute('src','authcode/rand.action?d='+timenow);
-   }  
-    </script>
     <body>
         <div style="left: 0px; top: 0px; width: 1280px;" id="ext-comp-1002" class="x-panel x-border-panel x-panel-noborder">
             <div id="ext-gen9" class="x-panel-bwrap">
@@ -91,7 +115,7 @@
                                             </table>
                                         </td>
                                         <td id="ext-gen46" class="rightForm" colspan="1" rowspan="1">
-                                            <form id="loginForm" name="loginForm" method="post" action="login/login" enctype="application/x-www-form-urlencoded" class="loginForm" onSubmit="return change()">
+                                            <form id="loginForm" name="loginForm" method="post" submitaction="login/login" enctype="application/x-www-form-urlencoded" class="loginForm">
                                                 <div id="ext-gen48" class="formBorder" align="left">
                                                     <img src="resources/images/userlogin.gif" style="margin: 0px 0px 10px 10px;">
                                                     <br>
@@ -140,6 +164,38 @@
                                                                                     <div class="x-form-item">
                                                                                         <div id="ext-gen22" class="x-form-element">
                                                                                             <input id="password" name="user.password" style="" class="inputfield x-form-text x-form-field" type="password">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="1" rowspan="1">
+                                                                </td>
+                                                                <td class="vbErrorDiv" colspan="1" rowspan="1" style="height: 18px;">
+                                                                    密码必须在1位以上，且不包括中文等特殊字符。
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="formLabel" colspan="1" rowspan="1">
+                                                                    版本：
+                                                                </td>
+                                                                <td class="inputTD" colspan="1" rowspan="1">
+                                                                    <table cellpadding="0" cellspacing="0">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div class="x-form-item">
+                                                                                        <div class="x-form-element">
+																							<select id="version" name="version" style="width:200px">
+																								<option value="easyui" selected="selected">easyui</option>
+																								<option value="ligerui">ligerui</option>
+																							</select>
                                                                                         </div>
                                                                                     </div>
                                                                                 </td>
@@ -212,8 +268,8 @@
                                                                                                     </td>
                                                                                                     <td class="x-btn-center">
                                                                                                         <em unselectable="on">
-                                                                                                            <button id="submit" class="x-btn-text" type="submit">
-                                                                                                                提交
+                                                                                                            <button id="submit" class="x-btn-text">
+                                                                                                                登录
                                                                                                             </button>
                                                                                                         </em>
                                                                                                     </td>
