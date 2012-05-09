@@ -46,6 +46,7 @@ public class LoginFilter implements Filter {
 		else if(uri.contains(".png"))return true;
 		else if(uri.contains(".gif"))return true;
 		else if(uri.contains(".css"))return true;
+		else if(uri.contains(".js"))return true;
 		else if(uri.contains("login.html"))return true;
 		else if(uri.contains("rand.action"))return true;
 		else if(uri.contains("login"))return true;
