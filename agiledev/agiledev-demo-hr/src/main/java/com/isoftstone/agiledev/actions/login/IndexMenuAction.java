@@ -1,17 +1,21 @@
 package com.isoftstone.agiledev.actions.login;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
 import com.isoftstone.agiledev.OperationResult;
 import com.isoftstone.agiledev.actions.system.permision.Permision;
-import com.isoftstone.agiledev.easyui.tree.*;
-import com.isoftstone.agiledev.easyui.tree.Node.State;
+import com.isoftstone.agiledev.easyui.tree.Node;
+import com.isoftstone.agiledev.easyui.tree.TreeData;
+import com.isoftstone.agiledev.easyui.tree.TreeDataProvider;
+import com.isoftstone.agiledev.ligerui.tree.TreeSupport;
 import com.isoftstone.agiledev.manages.BaseService;
 import com.isoftstone.agiledev.manages.system.permision.PermisionManager;
 import com.opensymphony.xwork2.ModelDriven;
@@ -22,7 +26,7 @@ import com.opensymphony.xwork2.ModelDriven;
 })
 public class IndexMenuAction implements TreeDataProvider,ModelDriven<Permision> {
 	private String id;
-	private List<Node> nodes;
+	private List<TreeSupport> nodes;
 	@Resource
 	private PermisionManager permisionManager=null;
 	@Resource(name="baseService")
@@ -53,15 +57,52 @@ public class IndexMenuAction implements TreeDataProvider,ModelDriven<Permision> 
 		this.o = o;
 	}
 	@Override
-	public List<Node> getNodes(String parentId) {
-		List<Permision> ps = permisionManager.findByPid(parentId==null?"1":parentId);
+	public List<TreeSupport> getNodes(String parentId) {
+		String version = (String) ServletActionContext.getRequest().getSession().getAttribute("version");
 		TreeData treeData = new TreeData();
-		for (Permision permision : ps) {
-			treeData.nextNode((permision.getHasChild()==null ||permision.getHasChild()==0)
-								?new Node(permision.getUid(),"<a hh='"+permision.getUrl()+"'>"+permision.getPermisionName()+"</a>")
-								:new Node(permision.getUid(),"<a hh='"+permision.getUrl()+"'>"+permision.getPermisionName()+"</a>",null,State.closed));
+		List<Permision> ps = null;
+		if("easyui".equals(version)){
+			ps = permisionManager.findByPid(parentId==null?"1":parentId);
+			for (Permision p : ps) {
+				TreeSupport n = new Node();
+				n.setId(p.getUid());
+				n.setText(p.getPermisionName());
+				n.setUrl(p.getUrl());
+				n.hasChild(p.getHasChild()==null ||p.getHasChild()==0);
+				treeData.nextNode(n);
+			}
+		}else{
+			ps = baseService.list(new HashMap(), new Permision());
+			for (Permision p : ps) {
+				if(p.getUid().equals("1"))continue;
+				TreeSupport n = new com.isoftstone.agiledev.ligerui.tree.Node();
+				n.setId(p.getUid());
+				n.setParentId(p.getParentId());
+				n.setText(p.getPermisionName());
+				n.setUrl(p.getUrl());
+				treeData.nextNode(n);
+			}
 		}
 		return treeData.getData();
+//		List<Permision> ps = permisionManager.findByPid(parentId==null?"1":parentId);
+//		TreeData treeData = new TreeData();
+//		TreeSupport node = null;
+//		for (Permision p : ps) {
+//			treeData.nextNode((permision.getHasChild()==null ||permision.getHasChild()==0)
+//								?new Node(permision.getUid(),"<a hh='"+permision.getUrl()+"'>"+permision.getPermisionName()+"</a>")
+//								:new Node(permision.getUid(),"<a hh='"+permision.getUrl()+"'>"+permision.getPermisionName()+"</a>",null,State.closed));
+//			if(version!=null){
+//				node = new Node();
+//				if("ligerui".equals(version))
+//					node = new com.isoftstone.agiledev.ligerui.tree.Node();
+//			}
+//			node.hasChild(p.getHasChild()==null ||p.getHasChild()==0);
+//			node.setText(p.getPermisionName());
+//			node.setUrl(p.getUrl());
+//			node.setId(p.getUid());
+//			treeData.nextNode(node);
+//		}
+//		return treeData.getData();
 //		if (parentId == null) {
 //			return new TreeData().nextNode(new Node("0", "系统管理", State.closed))
 //								.nextNode(new Node("1", "分析图表", State.closed))
@@ -102,7 +143,7 @@ public class IndexMenuAction implements TreeDataProvider,ModelDriven<Permision> 
 		this.id = id;
 	}
 	
-	public List<Node> getNodes() {
+	public List<TreeSupport> getNodes() {
 		return nodes;
 	}
 	@Override
