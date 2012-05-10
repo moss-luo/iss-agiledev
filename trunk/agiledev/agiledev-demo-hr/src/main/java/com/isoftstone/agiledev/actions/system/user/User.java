@@ -11,6 +11,15 @@ public class User {
 	private String password;
 	private String photo;
 	private String roleId;
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public User(String uid, String userId) {
+		super();
+		this.uid = uid;
+		this.userId = userId;
+	}
 	private String roleName;
 	
 	//@RequiredStringValidator(trim=true,message="请输入用户名",fieldName="name")

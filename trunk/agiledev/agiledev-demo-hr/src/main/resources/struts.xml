@@ -17,6 +17,7 @@
 		<result-types>
 			<!-- datagrid所需的json格式result -->
             <result-type name="datagrid-json" class="com.isoftstone.agiledev.easyui.datagrid.PaginationSupportJSONResult"/>
+            <result-type name="ligerui-datagrid-json" class="com.isoftstone.agiledev.ligerui.datagrid.LigeruiGridJSONResult"/>
             <!-- 初始化表单result -->
             <result-type name="initjson" class="com.isoftstone.agiledev.initform.InitSupportJSONResult"/>
         </result-types>
@@ -29,7 +30,7 @@
 				<interceptor-ref name="validate"/>
 				<interceptor-ref name="uploader"/>
 				<interceptor-ref name="queryParams">
-					<param name="orderByKey">order</param>
+					<param name="viewFramework">ligerui</param>
 				</interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
