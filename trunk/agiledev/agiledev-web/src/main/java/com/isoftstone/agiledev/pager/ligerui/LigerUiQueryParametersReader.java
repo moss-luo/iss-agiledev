@@ -1,4 +1,4 @@
-package com.isoftstone.agiledev.query;
+package com.isoftstone.agiledev.pager.ligerui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +6,11 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.isoftstone.agiledev.query.QueryParameters;
+import com.isoftstone.agiledev.query.QueryParametersReader;
 
-public class EasyUiQueryParametersReader implements QueryParametersReader {
+public class LigerUiQueryParametersReader implements QueryParametersReader {
 	private static final String PAGE_KEY = "page";
-	private static final String ROWS_KEY = "rows";
+	private static final String ROWS_KEY = "pagesize";
 	private static final String ORDER_KEY = "order";
 	private static final String SORT_KEY = "sort";
 	
