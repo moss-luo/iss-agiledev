@@ -19,8 +19,6 @@ public class QueryParametersInterceptor extends MethodFilterInterceptor {
 	
 	private QueryParametersReader queryParametersReader;
 	private List<QueryParametersInjector> queryParametersInjectors;
-	public void setOrderByKey(String value){
-	}
 	@Override
 	public void init() {
 		initQueryParametersHandlers();
