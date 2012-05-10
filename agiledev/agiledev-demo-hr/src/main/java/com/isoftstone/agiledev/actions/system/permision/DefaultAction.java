@@ -38,10 +38,10 @@ public class DefaultAction implements ModelDriven<Permision>{
 			return "result";
 		}
 		
-		if(permision.getPid()!=null){
+		if(permision.getParentId()!=null){
 			permision.setHasChild(1);
-			permision.setPname(permision.getPid().split(";")[1]);
-			permision.setPid(permision.getPid().split(";")[0]);
+			permision.setPname(permision.getParentId().split(";")[1]);
+			permision.setParentId(permision.getParentId().split(";")[0]);
 		}
 		
 		manage.save(permision);
@@ -57,10 +57,10 @@ public class DefaultAction implements ModelDriven<Permision>{
 			return "result";
 		}
 
-		if(permision.getPid()!=null){
+		if(permision.getParentId()!=null){
 			permision.setHasChild(1);
-			permision.setPname(permision.getPid().split(";")[1]);
-			permision.setPid(permision.getPid().split(";")[0]);
+			permision.setPname(permision.getParentId().split(";")[1]);
+			permision.setParentId(permision.getParentId().split(";")[0]);
 		}
 		manage.update(permision);
 		result = new OperationResult(true, "修改模块成功");
