@@ -9,8 +9,6 @@ import javax.annotation.Resource;
 import org.apache.struts2.convention.annotation.Result;
 
 import com.isoftstone.agiledev.manages.BaseService;
-import com.isoftstone.agiledev.pager.PageResult;
-import com.isoftstone.agiledev.pager.PaginationInterface;
 import com.isoftstone.agiledev.query.QueryParametersMap;
 import com.isoftstone.agiledev.query.SummaryProvider;
 
