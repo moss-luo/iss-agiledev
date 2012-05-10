@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import com.isoftstone.agiledev.ligerui.tree.TreeSupport;
+
 public class TreeData {
-	private List<Node> topLevelNodes;
-	private Stack<Node> ancestors;
-	private Node current;
+	private List<TreeSupport> topLevelNodes;
+	private Stack<TreeSupport> ancestors;
+	private TreeSupport current;
 	
 	public TreeData() {
-		ancestors = new Stack<Node>();
-		topLevelNodes = new ArrayList<Node>();
+		ancestors = new Stack<TreeSupport>();
+		topLevelNodes = new ArrayList<TreeSupport>();
 	}
 	
 	public TreeData hierarchyUp() {
@@ -32,7 +34,7 @@ public class TreeData {
 		return this;
 	}
 	
-	public TreeData nextNode(Node node) {
+	public TreeData nextNode(TreeSupport node) {
 		if (ancestors.isEmpty()) {
 			topLevelNodes.add(node);
 		} else {
@@ -45,7 +47,7 @@ public class TreeData {
 		return this;
 	}
 	
-	public List<Node> getData() {
+	public List<TreeSupport> getData() {
 		return topLevelNodes;
 	}
 	@Override
@@ -55,7 +57,7 @@ public class TreeData {
 		
 		StringBuilder sb = new StringBuilder();
 		Integer currentLevel = 0;
-		for (Node node : topLevelNodes) {
+		for (TreeSupport node : topLevelNodes) {
 			print(node, sb, currentLevel);
 		}
 		
@@ -66,7 +68,7 @@ public class TreeData {
 		return sb.toString();
 	}
 
-	private void print(Node node, StringBuilder sb, Integer currentLevel) {
+	private void print(TreeSupport node, StringBuilder sb, Integer currentLevel) {
 		if (node.getId() != null) {
 			sb.append(String.format("node(level: %d, id: %s)", currentLevel, node.getId()));
 		} else if (node.getText() != null) {
@@ -77,7 +79,7 @@ public class TreeData {
 		sb.append("-");
 		
 		currentLevel = currentLevel.intValue() + 1;
-		for (Node child : node.getChildren()) {
+		for (TreeSupport child : node.getChildren()) {
 			print(child, sb, currentLevel);
 		}
 	}

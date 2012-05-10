@@ -24,6 +24,7 @@ public class LoginAction {
     @Resource(name="userService")
     private UserService userService=null;
     private OperationResult result = null;
+    private String version;
     @QueryParametersMap
     public User user;
     
@@ -31,6 +32,7 @@ public class LoginAction {
 	
 	public String execute(){
 		String str=(String)(ActionContext.getContext().getSession().get("random"));//取得session保存中的字符串
+		ServletActionContext.getRequest().getSession().setAttribute("version", version);
 		if(!str.equalsIgnoreCase(this.getValidateCode())){
 			result = new OperationResult(false, "验证码错误");
 //			return "input";
@@ -66,5 +68,11 @@ public class LoginAction {
 	}
 	public void setResult(OperationResult result) {
 		this.result = result;
+	}
+	public String getVersion() {
+		return version;
+	}
+	public void setVersion(String version) {
+		this.version = version;
 	}
 }
