@@ -243,13 +243,15 @@ $.widget("ui.agiledevForm", {
 		//设置日期时间组件
 		if(htmls.datetimeboxes.length>0){
 			htmls.datetimeboxes.each(function(i,f){
-				$("[element-id='"+f._id+"']").data("field",f).datetimebox({showSeconds:false});
+				var obj = $.extend({showSeconds:false},f);
+				$("[element-id='"+f._id+"']").data("field",f).datetimebox(obj);
 			});
 		}
 		//设置日期组件
 		if(htmls.dateboxes.length>0){
 			htmls.dateboxes.each(function(i,f){
-				$("[element-id='"+f._id+"']").data("field",f).datebox({showSeconds:false});
+				var obj = $.extend({showSeconds:false},f);
+				$("[element-id='"+f._id+"']").data("field",f).datebox(obj);
 			});
 		}
 		//设置hidden
