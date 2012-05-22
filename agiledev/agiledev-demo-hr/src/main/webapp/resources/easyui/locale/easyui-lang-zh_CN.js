@@ -37,7 +37,8 @@ if ($.fn.calendar){
 	$.fn.calendar.defaults.months = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
 }
 if ($.fn.datebox){
-	$.fn.datebox.defaults.currentText = '今天';
+	//$.fn.datebox.defaults.currentText = '今天';
+	$.fn.datebox.defaults.currentText = '清空';
 	$.fn.datebox.defaults.closeText = '关闭';
 	$.fn.datebox.defaults.okText = '确定';
 	$.fn.datebox.defaults.missingMessage = '该输入项为必输项';
