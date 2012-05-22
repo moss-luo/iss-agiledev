@@ -4,13 +4,13 @@
 
 <web-app>
   <display-name>agiledev-demo-hr</display-name>
-  
+   <servlet> <servlet-name>default</servlet-name> <init-param> <param-name>useFileMappedBuffer</param-name> 
+		<param-value>false</param-value> </init-param> </servlet>
   
   <context-param>
   	<param-name>contextConfigLocation</param-name>
   	<param-value>classpath*:spring/beans.xml</param-value>
   </context-param>
-  
   <filter>
   	<filter-name>login</filter-name>
   	<filter-class>com.isoftstone.agiledev.actions.login.LoginFilter</filter-class>
