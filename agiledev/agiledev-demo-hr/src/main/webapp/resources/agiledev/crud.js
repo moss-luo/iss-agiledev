@@ -26,7 +26,7 @@ var options = {
 				rownumbers:true,//显示行号,
 				toolbars:null,
 				pageSize:5,
-				pageList:[10,20,30,40,50,60,70,80,90,100],
+				pageList:[10,20,30,40,50],
 				onLoadSuccess:function(){}
 			},
 			dialog:{
