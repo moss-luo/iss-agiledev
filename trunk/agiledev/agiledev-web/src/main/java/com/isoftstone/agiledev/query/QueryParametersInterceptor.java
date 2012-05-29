@@ -9,15 +9,17 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
+import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
 
 @SuppressWarnings("serial")
 public class QueryParametersInterceptor extends MethodFilterInterceptor {
 	private static final String DEFAULT_VIEW_FRAMEWORK = "easyui";
-	private String viewFramework = DEFAULT_VIEW_FRAMEWORK;
+//	private String viewFramework = DEFAULT_VIEW_FRAMEWORK;
 	
-	private QueryParametersReader queryParametersReader;
+	private List<QueryParametersReader> queryParametersReaders;
 	private List<QueryParametersInjector> queryParametersInjectors;
 	@Override
 	public void init() {
@@ -31,6 +33,7 @@ public class QueryParametersInterceptor extends MethodFilterInterceptor {
 			return;
 		
 		queryParametersInjectors = new ArrayList<QueryParametersInjector>();		
+		queryParametersReaders = new ArrayList<QueryParametersReader>();
 		for (Entry<Object, Object> entry : properties.entrySet()) {
 			String handlerName = (String)entry.getKey();
 			if (handlerName.endsWith("-injector")) {
@@ -39,11 +42,13 @@ public class QueryParametersInterceptor extends MethodFilterInterceptor {
 					injector.init(readProperties("/agiledev/" + (String)entry.getValue() + ".properties"));
 					queryParametersInjectors.add(injector);
 				}
-			} else if (handlerName.equals(viewFramework + "-reader")) {
-				queryParametersReader = createQueryParametersHandler(entry.getValue(), handlerName);
-				if (queryParametersReader != null) {
-					queryParametersReader.init(readProperties("/agiledev/" + (String)entry.getValue() + "-config.properties"));
+			//} else if (handlerName.equals(viewFramework + "-reader")) {
+			}else if(handlerName.endsWith("-reader")){
+				QueryParametersReader reader = createQueryParametersHandler(entry.getValue(), handlerName);
+				if (reader != null) {
+					reader.init(readProperties("/agiledev/" + (String)entry.getValue() + "-config.properties"));
 				}
+				queryParametersReaders.add(reader);
 			} else {
 				continue;
 			}					
@@ -88,6 +93,20 @@ public class QueryParametersInterceptor extends MethodFilterInterceptor {
 
 	@Override
 	public String doIntercept(ActionInvocation invocation) throws Exception {
+		QueryParametersReader queryParametersReader = null;
+		
+		if(queryParametersReaders.size()>0){
+			String version = (String) ServletActionContext.getRequest().getSession().getAttribute("version");
+			if(version == null || "".equals(version))
+				version = DEFAULT_VIEW_FRAMEWORK;
+			for (QueryParametersReader q : queryParametersReaders) {
+				if(q.getClass().getName().contains(version)){
+					queryParametersReader = q;
+					break;
+				}
+			}
+		}
+		
 		if (queryParametersReader != null) {
 			Map<String, Object> parameters = invocation.getInvocationContext().getParameters();
 			QueryParameters queryParameters = queryParametersReader.readQueryParameters(parameters);
@@ -102,7 +121,7 @@ public class QueryParametersInterceptor extends MethodFilterInterceptor {
 		return invocation.invoke();
 	}
 	
-	public void setViewFramework(String viewFramework) {
-		this.viewFramework = viewFramework;
-	}
+//	public void setViewFramework(String viewFramework) {
+//		this.viewFramework = viewFramework;
+//	}
 }
