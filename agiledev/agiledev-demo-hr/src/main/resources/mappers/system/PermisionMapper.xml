@@ -6,6 +6,9 @@
 		<if test="pid!=null">
 			AND PID = #{pid[0]}
 		</if>
+		<if test="version!=null">
+			AND VERSION = #{version}
+		</if>
 		<if test="sort != null">
 			ORDER BY #{orderBy}
 		</if>

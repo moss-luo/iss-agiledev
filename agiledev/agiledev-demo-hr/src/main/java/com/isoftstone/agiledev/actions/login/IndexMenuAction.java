@@ -2,6 +2,7 @@ package com.isoftstone.agiledev.actions.login;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -62,7 +63,7 @@ public class IndexMenuAction implements TreeDataProvider,ModelDriven<Permision> 
 		TreeData treeData = new TreeData();
 		List<Permision> ps = null;
 		if("easyui".equals(version)){
-			ps = permisionManager.findByPid(parentId==null?"1":parentId);
+			ps = permisionManager.findByPid(parentId==null?"0":parentId);
 			for (Permision p : ps) {
 				TreeSupport n = new Node();
 				n.setId(p.getUid());
@@ -72,7 +73,9 @@ public class IndexMenuAction implements TreeDataProvider,ModelDriven<Permision> 
 				treeData.nextNode(n);
 			}
 		}else{
-			ps = baseService.list(new HashMap(), new Permision());
+			Map<String,Object> param = new HashMap<String,Object>();
+			param.put("version","ligerui");
+			ps = baseService.list(param, new Permision());
 			for (Permision p : ps) {
 				if(p.getUid().equals("1"))continue;
 				TreeSupport n = new com.isoftstone.agiledev.ligerui.tree.Node();

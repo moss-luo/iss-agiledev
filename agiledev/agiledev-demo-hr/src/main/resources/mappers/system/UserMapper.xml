@@ -13,7 +13,9 @@
 		<if test="sort != null">
 			ORDER BY #{orderBy}
 		</if>
-		LIMIT #{limit} , #{offset}
+		<if test="limit!=nukk">
+			LIMIT #{limit} , #{offset}
+		</if>
 	</select>
 	<insert id="save" parameterType="com.isoftstone.agiledev.actions.system.user.User">
 		INSERT INTO T_USER(userid,password,roleid,photo)

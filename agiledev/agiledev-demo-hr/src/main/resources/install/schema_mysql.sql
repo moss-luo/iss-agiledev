@@ -18,15 +18,6 @@ CREATE TABLE  `agiledev`.`T_LEVEL` (
   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE  `agiledev`.`T_PERMISION` (
-  `uid` int(11) NOT NULL AUTO_INCREMENT,
-  `permisionName` char(200) NOT NULL,
-  `url` char(255),
-  `parentId` int(11) NOT NULL,
-  `pname` int(11),
-  `hasChild` int(11),
-  PRIMARY KEY (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 CREATE TABLE  `agiledev`.`T_ROLE` (
   `uid` int(11) NOT NULL AUTO_INCREMENT,
@@ -50,6 +41,54 @@ CREATE TABLE  `agiledev`.`T_USER` (
   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+create table `agiledev`.`T_PERMISION` (
+	`uid` double ,
+	`permisionName` varchar (600),
+	`url` varchar (765),
+	`pid` double ,
+	`hasChild` double ,
+	`pname` varchar (600),
+	`version` varchar (600)
+); 
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('1','系统管理','','0','1',NULL,'easyui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('2','分析数据','','0','1',NULL,'easyui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('3','数据维护','','0','1',NULL,'easyui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('4','基础数据','','0','1',NULL,'easyui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('5','统计报表','','0','1',NULL,'easyui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('6','用户管理','system/user.html','1','0','系统管理','easyui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('7','模块管理','system/module.html','1','0','系统管理','easyui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('8','角色管理','system/role.html','1','0','系统管理','easyui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('9','部门培训分析','','2','0','分析数据','easyui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('10','职级培训分析','','2','0','分析数据','easyui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('11','培训数据','','3','0','数据维护','easyui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('12','部门管理','basedata/department.html','4','0','基础数据','easyui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('13','培训类别','basedata/train.html','4','0','基础数据','easyui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('14','职员管理','basedata/employee.html','4','0','基础数据','easyui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('15','培训项目','basedata/programs.html','4','0','基础数据','easyui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('16','职级管理','basedata/level.html','4','0','基础数据','easyui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('17','部门培训统计','','5','0','统计报表','easyui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('18','职级培训统计','','5','0','统计报表','easyui');
+
+
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('19','系统管理','','-1','1',NULL,'ligerui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('20','分析数据','','-1','1',NULL,'ligerui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('21','数据维护','','-1','1',NULL,'ligerui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('22','基础数据','','-1','1',NULL,'ligerui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('23','统计报表','','-1','1',NULL,'ligerui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('24','用户管理','system/user-ligerui.html','19','0','系统管理','ligerui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('25','模块管理','system/module-ligerui.html','19','0','系统管理','ligerui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('26','角色管理','system/role-ligerui.html','19','0','系统管理','ligerui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('27','部门培训分析','','20','0','分析数据','ligerui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('28','职级培训分析','','20','0','分析数据','ligerui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('29','培训数据','','21','0','数据维护','ligerui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('30','部门管理','basedata/department-ligerui.html','22','0','基础数据','ligerui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('31','培训类别','basedata/train-ligerui.html','22','0','基础数据','ligerui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('32','职员管理','basedata/employee-ligerui.html','22','0','基础数据','ligerui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('33','培训项目','basedata/programs-ligerui.html','22','0','基础数据','ligerui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('34','职级管理','basedata/level-ligerui.html','22','0','基础数据','ligerui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('35','部门培训统计','','23','0','统计报表','ligerui');
+insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('36','职级培训统计','','23','0','统计报表','ligerui');
 
 
 insert into T_PERMISION (uid,permisionname,url,parentId,hasChild) values(1,'root','','-1',1);
