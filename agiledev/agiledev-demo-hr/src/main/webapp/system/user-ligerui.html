@@ -12,14 +12,14 @@
 <script type="text/javascript">
 $(function () {
     $("#maingrid4").ligerGrid({
-        //checkbox: false,
+        checkbox: true,
         height:'100%',
         width: '100%',
         url:'user/ligerui-list',
         rownumbers:true,
         columns: [
-	        { display: '用户名', name: 'userId', align: 'left'},
-    	    { display: '角色', name: 'roleName', align: 'left'}
+	        { display: '用户名', name: 'userId', align: 'left',isSort:false},
+    	    { display: '角色', name: 'roleName', align: 'left',isSort:false}
         ],
         toolbar: { items: [
                            {text:'增加',icon:'add',click:function(){
@@ -28,7 +28,7 @@ $(function () {
                            { line: true },
                            { text: '修改', icon: 'modify' },
                            { line: true },
-                           { text: '删除'}
+                           { text: '删除',icon: 'delete' }
                    ]
        }
     });

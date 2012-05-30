@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	String path=request.getContextPath();
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>提示页面</title>
@@ -30,23 +34,23 @@ a.font_gray:hover{color:#f00;}
 /* content */
 .full{width:560px; margin:0 auto;margin-top:100px}
 /*.full dl.error{width:560px;  background:url(http://csdnimg.cn/www/images/pic_contbg.gif) 0 0 repeat-y; border-bottom:1px solid #ebebeb; margin:100px 0 10px;}*/
-.full dl.error dt{height:44px; line-height:44px;  background:url(resources/images/pic_bg.gif) -20px -18px no-repeat; text-align:left; padding:0 15px; vertical-align:center;}
-.full dl.error dt img{padding-top:13px; width:167px; height:20px;  background:url(resources/images/pic_bg.gif) -20px -309px no-repeat;}
+.full dl.error dt{height:44px; line-height:44px;  background:url(<%=path%>/resources/images/pic_bg.gif) -20px -18px no-repeat; text-align:left; padding:0 15px; vertical-align:center;}
+.full dl.error dt img{padding-top:13px; width:167px; height:20px;  background:url(<%=path%>/resources/resources/images/pic_bg.gif) -20px -309px no-repeat;}
 .full dl.error dd{text-align:center;}
 .full dl.error dd span.error404{padding:50px 30px 40px 0; display:inline-block;}
-.full dl.error dd span.error404 img{width:203px; height:76px;  background:url(resources/images/pic_bg.gif) -176px -130px no-repeat;}
+.full dl.error dd span.error404 img{width:203px; height:76px;  background:url(<%=path%>/resources/images/pic_bg.gif) -176px -130px no-repeat;}
 .full dl.error dd span.errortext{padding:85px 0 40px 0; display:inline-block;}
-.full dl.error dd span.errortext img{width:122px; height:39px;  background:url(resources/images/pic_bg.gif) -426px -130px no-repeat;}
+.full dl.error dd span.errortext img{width:122px; height:39px;  background:url(<%=path%>/resources/images/pic_bg.gif) -426px -130px no-repeat;}
 .full dl.error dd span.btn_back{padding:0 0 50px 0; display:inline-block;}
-.full dl.error dd span.btn_back img{width:122px; height:42px;  background:url(resources/images/pic_bg.gif) -432px -179px no-repeat;}
+.full dl.error dd span.btn_back img{width:122px; height:42px;  background:url(<%=path%>/resources/images/pic_bg.gif) -432px -179px no-repeat;}
 /******/
 
 .error_pop{width:360px; border:1px solid #bebebe; background:#f5f5f5; padding:20px; text-align:center; top:50%; }
 .error_pop .left{width:120px; padding-right:20px; display:inline-block;}
-.error_pop .left img.error{width:120px; height:119px;  background:url(resources/images/pic_bg.gif) -20px -90px no-repeat;}
+.error_pop .left img.error{width:120px; height:119px;  background:url(<%=path%>/resources/images/pic_bg.gif) -20px -90px no-repeat;}
 .error_pop .right{width:166px; padding:0; display:inline-block; vertical-align:top; padding-top:30px;}
-.error_pop .right img.text{margin-bottom:20px; width:166px; height:18px;  background:url(resources/images/pic_bg.gif) -20px -258px no-repeat;}
-.error_pop .right img.close{cursor:pointer;  width:87px; height:32px;  background:url(resources/images/pic_bg.gif) -222px -251px no-repeat;}
+.error_pop .right img.text{margin-bottom:20px; width:166px; height:18px;  background:url(<%=path%>/resources/images/pic_bg.gif) -20px -258px no-repeat;}
+.error_pop .right img.close{cursor:pointer;  width:87px; height:32px;  background:url(<%=path%>/resources/images/pic_bg.gif) -222px -251px no-repeat;}
 
 .mesWindow{width:402px; height:162px;}
 </style><!--20101207 update-->
@@ -145,7 +149,7 @@ setSelectState('');}
 function testMessageBox(ev)
 {
 var objPos = mousePosition(ev);
-messContent="<div class='error_pop'><span class='left'><img src='resources/images/pic_dot.gif' alt='404' title='404' class='error' /></span><span class='right'><img src='resources/images/pic_dot.gif' class='text' alt='您访问的地址不存在' title='您访问的地址不存在' /><img src='resources/images/pic_dot.gif' alt='关闭' title='关闭' onclick='closeWindow();' class='close' /></span></div>";
+messContent="<div class='error_pop'><span class='left'><img src='<%=path%>/resources/images/pic_dot.gif' alt='404' title='404' class='error' /></span><span class='right'><img src='<%=path%>/resources/images/pic_dot.gif' class='text' alt='您访问的地址不存在' title='您访问的地址不存在' /><img src='<%=path%>/resources/images/pic_dot.gif' alt='关闭' title='关闭' onclick='closeWindow();' class='close' /></span></div>";
 showMessageBox('窗口标题',messContent,objPos,350);
 }
 
@@ -158,11 +162,11 @@ showMessageBox('窗口标题',messContent,objPos,350);
 		<dl class="error">
 			<dt></dt>
 			<dd>
-				<span class="error404"><img src="resources/images/pic_dot.gif" alt="404" title="404"></span>
-				<span class="errortext"><a href="#none" onclick="testMessageBox(event);"><img src="resources/images/pic_dot.gif" alt="你懂的" title="你懂的"></a></span>
+				<span class="error404"><img src="<%=path%>/resources/images/pic_dot.gif" alt="404" title="404"></span>
+				<span class="errortext"><a href="#none" onclick="testMessageBox(event);"><img src="<%=path%>/resources/images/pic_dot.gif" alt="你懂的" title="你懂的"></a></span>
 			</dd>
 			<dd>
-				<span class="btn_back"><a href="javascript:history.back();" target="blank"><img src="resources/images/pic_dot.gif" alt="返回" title="返回"></a></span>
+				<span class="btn_back"><a href="javascript:history.back();" target="blank"><img src="<%=path%>/resources/images/pic_dot.gif" alt="返回" title="返回"></a></span>
 			</dd>
 		</dl>
 	</div>
