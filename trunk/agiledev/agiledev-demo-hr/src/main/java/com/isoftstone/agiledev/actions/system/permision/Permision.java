@@ -5,7 +5,7 @@ public class Permision {
 	private String uid;
 	private String permisionName;
 	private String url;
-	private String parentId;
+	private String pid;
 	private String pname;
 	private Integer hasChild;
 	
@@ -48,10 +48,10 @@ public class Permision {
 	public void setPname(String pname) {
 		this.pname = pname;
 	}
-	public String getParentId() {
-		return parentId;
+	public String getPid() {
+		return pid;
 	}
-	public void setParentId(String parentId) {
-		this.parentId = parentId;
+	public void setPid(String pid) {
+		this.pid = pid;
 	}
 }

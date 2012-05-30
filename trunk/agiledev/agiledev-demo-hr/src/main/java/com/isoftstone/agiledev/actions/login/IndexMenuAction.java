@@ -80,7 +80,7 @@ public class IndexMenuAction implements TreeDataProvider,ModelDriven<Permision> 
 				if(p.getUid().equals("1"))continue;
 				TreeSupport n = new com.isoftstone.agiledev.ligerui.tree.Node();
 				n.setId(p.getUid());
-				n.setParentId(p.getParentId());
+				n.setParentId(p.getPid());
 				n.setText(p.getPermisionName());
 				n.setUrl(p.getUrl());
 				treeData.nextNode(n);
