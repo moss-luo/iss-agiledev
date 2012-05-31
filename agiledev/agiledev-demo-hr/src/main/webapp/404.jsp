@@ -166,7 +166,7 @@ showMessageBox('窗口标题',messContent,objPos,350);
 				<span class="errortext"><a href="#none" onclick="testMessageBox(event);"><img src="<%=path%>/resources/images/pic_dot.gif" alt="你懂的" title="你懂的"></a></span>
 			</dd>
 			<dd>
-				<span class="btn_back"><a href="javascript:history.back();" target="blank"><img src="<%=path%>/resources/images/pic_dot.gif" alt="返回" title="返回"></a></span>
+				<span class="btn_back"><a href="<%=path %>/login.html" target="_top"><img src="<%=path%>/resources/images/pic_dot.gif" alt="返回" title="返回"></a></span>
 			</dd>
 		</dl>
 	</div>
