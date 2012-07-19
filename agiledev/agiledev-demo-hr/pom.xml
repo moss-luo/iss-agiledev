@@ -215,11 +215,11 @@
     	<version>2.2.3.1</version>
     	<type>jar</type>
     	<scope>compile</scope>
-    </dependency>
+    </dependency><!-- 
     <dependency>
 		<groupId>com.sun</groupId>
 		<artifactId>tools</artifactId>
-	</dependency>
+	</dependency> -->
     <!-- struts2 end -->
   </dependencies>
   <build>
@@ -231,6 +231,12 @@
   			<configuration>
   				<scanIntervalSeconds>10</scanIntervalSeconds>
   				<jettyEnvXml>src/main/resources/jetty/jetty-env.xml</jettyEnvXml>
+  				<connectors>
+  					<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+  						<port>9090</port>
+  						<maxIdleTime>60000</maxIdleTime>
+  					</connector>
+  				</connectors>
   			</configuration>
   		</plugin>
   	</plugins>
