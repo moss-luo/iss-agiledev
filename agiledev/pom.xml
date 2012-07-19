@@ -18,8 +18,21 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.home>/home/david/soft/jdk1.6.0_16</java.home>
+    <java.home>C:\Program Files\Java\jdk1.6.0_14</java.home>
   </properties>
+  
+    <distributionManagement>
+        <repository>
+            <id>openlbs-release</id>
+            <name>OpenLBS Release Repository</name>
+            <url>http://10.36.16.8:8091/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>openlbs-snapshots</id>
+            <name>OpenLBS Snapshots</name>
+            <url>http://10.36.16.8:8091/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
   <dependencyManagement>
   	
   <dependencies>
