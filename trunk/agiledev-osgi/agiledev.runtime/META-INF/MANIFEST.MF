@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Application-SymbolicName: agiledev
+Application-Version: 1.0.0-SNAPSHOT
+Application-Name: agiledev PAR
+
