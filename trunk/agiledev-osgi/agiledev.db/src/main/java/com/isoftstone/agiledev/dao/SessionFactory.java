@@ -23,6 +23,8 @@ public class SessionFactory implements SessionCreater {
 
 	private Logger logger = LoggerFactory.getLogger(SessionFactory.class);
 	private Properties config = null;
+	private BasicDataSource dataSource = null;
+
 	public SessionFactory() {
 		super();
 		config = this.loadProperties();
@@ -43,16 +45,16 @@ public class SessionFactory implements SessionCreater {
 //			if (sf != null && sf.length > 0) {
 //				ds = (DataSource) context.getService(sf[0]);
 //			}
-			BasicDataSource ds = new BasicDataSource();
-			ds.setUrl(getProperty("jdbc.url"));
-			ds.setUsername(getProperty("jdbc.username"));
-			ds.setPassword(getProperty("jdbc.password"));
-			ds.setDriverClassName(getProperty("jdbc.driverClassName"));
-			ds.setMaxIdle(3600);
+//			BasicDataSource ds = new BasicDataSource();
+//			ds.setUrl(getProperty("jdbc.url"));
+//			ds.setUsername(getProperty("jdbc.username"));
+//			ds.setPassword(getProperty("jdbc.password"));
+//			ds.setDriverClassName(getProperty("jdbc.driverClassName"));
+//			ds.setMaxIdle(3600);
 			
 			TransactionFactory transactionFactory = new JdbcTransactionFactory();
 			Environment environment = new Environment("development",
-					transactionFactory, ds);
+					transactionFactory, dataSource);
 			Configuration configuration = new Configuration(environment);
 			configuration.setCacheEnabled(true);
 			configuration.setDefaultStatementTimeout(25000);
@@ -112,5 +114,11 @@ public class SessionFactory implements SessionCreater {
 	public void registerMapper(Class<?> c) {
 		mappers.add(c);
 		
+	}
+	
+	
+
+	public void setDataSource(BasicDataSource dataSource) {
+		this.dataSource = dataSource;
 	}
 }
