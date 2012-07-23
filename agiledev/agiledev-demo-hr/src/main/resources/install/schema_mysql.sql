@@ -51,6 +51,9 @@ create table `agiledev`.`T_PERMISION` (
 	`pname` varchar (600),
 	`version` varchar (600)
 ); 
+
+insert into `t_user` (uid,userid,password,photo) values('1','admin','admin','');
+
 insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('1','系统管理','','0','1',NULL,'easyui');
 insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('2','分析数据','','0','1',NULL,'easyui');
 insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('3','数据维护','','0','1',NULL,'easyui');
@@ -91,6 +94,7 @@ insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pn
 insert into `T_PERMISION` (`uid`, `permisionName`, `url`, `pid`, `hasChild`, `pname`, `version`) values('36','职级培训统计','','23','0','统计报表','ligerui');
 
 
+/*
 insert into T_PERMISION (uid,permisionname,url,parentId,hasChild) values(1,'root','','-1',1);
 insert into T_PERMISION (uid,permisionname,url,parentId,hasChild) values(2,'system','',1,1);
 insert into T_PERMISION (uid,permisionname,url,parentId,hasChild) values(3,'basic','',1,1);
@@ -109,4 +113,4 @@ insert into T_PERMISION (uid,permisionname,url,parentId,hasChild) values(15,'dep
 insert into T_PERMISION (uid,permisionname,url,parentId,hasChild) values(16,'level train chart','',4,0);
 insert into T_PERMISION (uid,permisionname,url,parentId,hasChild) values(17,'department train report','',5,0);
 insert into T_PERMISION (uid,permisionname,url,parentId,hasChild) values(18,'level train report','',5,0);
-insert into T_PERMISION (uid,permisionname,url,parentId,hasChild) values(19,'train data','',6,0);
+insert into T_PERMISION (uid,permisionname,url,parentId,hasChild) values(19,'train data','',6,0);*/
