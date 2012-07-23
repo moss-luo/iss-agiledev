@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	xmlns:p="http://www.springframework.org/schema/p">
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" 
+	 		p:driverClassName="com.mysql.jdbc.Driver" p:url="jdbc:mysql://10.36.16.52/agile"
+	 		p:username="agile" p:password="agile" p:maxIdle="3600"
+	 		init-method="createDataSource" destroy-method="close"/>
+	 		
+	<bean id="sessionFactory" class="com.isoftstone.agiledev.dao.SessionFactory"
+		p:dataSource-ref="dataSource"/>
+		
+
+	<bean id="baseDao" class="com.isoftstone.agiledev.dao.BaseDao" p:sessionFactory-ref="sessionFactory"/>
+</beans>
