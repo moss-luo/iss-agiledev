@@ -6,8 +6,8 @@
     <artifactId>agiledev</artifactId>
     <groupId>com.isoftstone</groupId>
     <version>1.0-SNAPSHOT</version>
+	<relativePath>../</relativePath>
   </parent>
-  <groupId>com.isoftstone</groupId>
   <artifactId>agiledev.core</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>agiledev.core</name>
