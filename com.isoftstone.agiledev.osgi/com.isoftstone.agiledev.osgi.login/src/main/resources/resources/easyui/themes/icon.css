@@ -1,0 +1,110 @@
+.icon-blank{
+	background:url('icons/blank.gif') no-repeat;
+}
+.icon-add{
+	background:url('icons/edit_add.png') no-repeat;
+}
+.icon-edit{
+	background:url('icons/pencil.png') no-repeat;
+}
+.icon-remove{
+	background:url('icons/edit_remove.png') no-repeat;
+}
+.icon-save{
+	background:url('icons/filesave.png') no-repeat;
+}
+.icon-cut{
+	background:url('icons/cut.png') no-repeat;
+}
+.icon-ok{
+	background:url('icons/ok.png') no-repeat;
+}
+.icon-no{
+	background:url('icons/no.png') no-repeat;
+}
+.icon-cancel{
+	background:url('icons/cancel.png') no-repeat;
+}
+.icon-reload{
+	background:url('icons/reload.png') no-repeat;
+}
+.icon-search{
+	background:url('icons/search.png') no-repeat;
+}
+.icon-print{
+	background:url('icons/print.png') no-repeat;
+}
+.icon-help{
+	background:url('icons/help.png') no-repeat;
+}
+.icon-undo{
+	background:url('icons/undo.png') no-repeat;
+}
+.icon-redo{
+	background:url('icons/redo.png') no-repeat;
+}
+.icon-back{
+	background:url('icons/back.png') no-repeat;
+}
+.icon-sum{
+	background:url('icons/sum.png') no-repeat;
+}
+.icon-tip{
+	background:url('icons/tip.png') no-repeat;
+}
+
+
+.icon-unblank{
+	background:url('icons/unblank.gif') no-repeat;
+}
+.icon-unadd{
+	background:url('icons/unedit_add.png') no-repeat;
+}
+.icon-unedit{
+	background:url('icons/unpencil.png') no-repeat;
+}
+.icon-unremove{
+	background:url('icons/unedit_remove.png') no-repeat;
+}
+.icon-unsave{
+	background:url('icons/unfilesave.png') no-repeat;
+}
+.icon-uncut{
+	background:url('icons/uncut.png') no-repeat;
+}
+.icon-unok{
+	background:url('icons/unok.png') no-repeat;
+}
+.icon-unno{
+	background:url('icons/unno.png') no-repeat;
+}
+.icon-uncancel{
+	background:url('icons/uncancel.png') no-repeat;
+}
+.icon-unreload{
+	background:url('icons/unreload.png') no-repeat;
+}
+.icon-unsearch{
+	background:url('icons/unsearch.png') no-repeat;
+}
+.icon-unprint{
+	background:url('icons/unprint.png') no-repeat;
+}
+.icon-unhelp{
+	background:url('icons/unhelp.png') no-repeat;
+}
+.icon-unundo{
+	background:url('icons/unundo.png') no-repeat;
+}
+.icon-unredo{
+	background:url('icons/unredo.png') no-repeat;
+}
+.icon-unback{
+	background:url('icons/unback.png') no-repeat;
+}
+.icon-unsum{
+	background:url('icons/unsum.png') no-repeat;
+}
+.icon-untip{
+	background:url('icons/untip.png') no-repeat;
+}
