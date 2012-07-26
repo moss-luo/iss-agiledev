@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isoftstone.agiledev.hr.mapper.ReportMapper">
+	<select id="getDepReportData" resultType="com.isoftstone.agiledev.actions.basedata.report.ReportData">
+		<!--  
+		SELECT
+			d.depName as name,	 
+			e.department,
+			COUNT(t.employee) AS totalEmployee,
+			SUM(t.period) AS totalPeriod,
+			count(distinct t.employee) AS distinctEmployee,
+		    (SELECT COUNT(e1.id) FROM t_employee e1 WHERE e1.department=d.id) AS curEmployee
+		FROM train t 
+			INNER JOIN t_employee e on t.employee=e.id
+			INNER JOIN t_department d ON e.department=d.id
+		GROUP BY e.department,d.id,d.name
+		-->
+		SELECT
+			d.depName AS NAME,
+			COUNT(t.employee) AS totalEmployee,
+			SUM(t.period) AS totalPeriod,
+			count(DISTINCT t.employee) AS distinctEmployee,
+			(
+				SELECT
+					COUNT(e1.uid)
+				FROM
+					t_employee e1
+				WHERE
+					e1.depId = d.uid
+			) AS curEmployee
+		FROM
+			train t
+		INNER JOIN t_employee e ON t.employee = e.uid
+		INNER JOIN t_department d ON e.depId = d.uid
+		GROUP BY
+			e.depId,
+			d.uid,
+			d.depName
+	</select>
+	
+	<select id="getLevelReportData" resultType="com.isoftstone.agiledev.actions.basedata.report.ReportData">
+		<!--  
+		select  	 
+			 r.name as name, 
+			 count(t.employee) as totalEmployee, 
+			 SUM(t.period) as totalPeriod, 
+			 count(distinct t.employee) as distinctEmployee, 
+			 (SELECT COUNT(*) FROM t_employee e1 WHERE e1.rank=r.id) as curEmployee
+		from train t 
+			 inner join t_employee e on t.employee=e.id 
+			 inner join t_level r on e.rank=r.id 
+		group by e.rank , r.id , r.name
+		-->
+		SELECT
+			l.levelName AS NAME,
+			COUNT(t.employee) AS totalEmployee,
+			SUM(t.period) AS totalPeriod,
+			count(DISTINCT t.employee) AS distinctEmployee,
+			(
+				SELECT
+					COUNT(e1.uid)
+				FROM
+					t_employee e1
+				WHERE
+					e1.depId = l.uid
+			) AS curEmployee
+		FROM
+			train t
+		INNER JOIN t_employee e ON t.employee = e.uid
+		INNER JOIN t_level l ON e.levelId=l.uid
+		GROUP BY
+			e.depId,
+			l.uid,
+			l.levelName
+	</select>
+	
+	
+	<select id="getDepStatisticesData" resultType="com.isoftstone.agiledev.actions.basedata.report.StatisticsData">
+		SELECT
+			d.depName AS NAME,
+			COUNT(t.employee) AS totalEmployee,
+			SUM(t.period) AS totalPeriod,
+			count(DISTINCT t.employee) AS distinctEmployee,
+			(
+				SELECT
+					COUNT(e1.uid)
+				FROM
+					t_employee e1
+				WHERE
+					e1.depId = d.uid
+			) AS curEmployee
+		FROM
+			train t
+		INNER JOIN t_employee e ON t.employee = e.uid
+		INNER JOIN t_department d ON e.depId = d.uid
+		GROUP BY
+			e.depId,
+			d.uid,
+			d.depName
+	</select>
+	
+	<select id="getLevelStatisticesData" resultType="com.isoftstone.agiledev.actions.basedata.report.StatisticsData">
+		SELECT
+			l.levelName AS NAME,
+			COUNT(t.employee) AS totalEmployee,
+			SUM(t.period) AS totalPeriod,
+			count(DISTINCT t.employee) AS distinctEmployee,
+			(
+				SELECT
+					COUNT(e1.uid)
+				FROM
+					t_employee e1
+				WHERE
+					e1.depId = l.uid
+			) AS curEmployee
+		FROM
+			train t
+		INNER JOIN t_employee e ON t.employee = e.uid
+		INNER JOIN t_level l ON e.levelId=l.uid
+		GROUP BY
+			e.depId,
+			l.uid,
+			l.levelName
+	</select>
+	
+</mapper>
