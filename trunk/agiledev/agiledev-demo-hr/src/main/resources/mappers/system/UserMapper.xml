@@ -41,7 +41,7 @@
 		SELECT * FROM T_USER WHERE userId=#{userId}
 	</select>
 	<select id="login" parameterType="java.util.HashMap" resultType="com.isoftstone.agiledev.actions.system.user.User">
-	   SELECT * FROM T_USER
+	   SELECT * FROM  T_USER 
 	   <where>
 	      <if test="userId!=null">userId=#{userId}</if>
 	      <if test="password!=null"> AND password=#{password}</if>
