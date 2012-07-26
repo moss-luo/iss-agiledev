@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AnalysisLevelPage</title>
+<script type="text/javascript" src="../resources/easyui/jquery-1.6.min.js"></script>
+<script type="text/javascript" src="../resources/amcharts/amcharts.js"></script>
+<script type="text/javascript">
+	var trainPeopleChart,avgPeriodChart;
+	$(document).ready(function (){
+		$.ajax({
+			type:"POST",
+			url:"report/analysis-rank",
+			//data:"",
+			success:function (data)
+			{
+				createTrainPeopleChart();
+				createAvgPeriodChart();
+				var rows=data;
+				parseData(rows);	
+			}
+		});
+	});
+
+	function parseData(data)
+	{
+		var trainPeopleData=[];//各职级培训人次数据提供
+		var avgPeriodData=[];//各职级平均课时数据提供
+		
+		for(var i=0;i<data.length;i++)
+		{
+			var level=data[i].name;
+			
+			var totalEmployee=data[i].totalEmployee;
+			var trainPeople={"level":level,"totalEmployee":totalEmployee};
+			trainPeopleData.push(trainPeople);
+
+			var avgPeriod=data[i].avgPeriod;
+			var avgPeriod={"level":level,"avgPeriod":avgPeriod};
+			avgPeriodData.push(avgPeriod);
+		}
+		
+		//指定各职级培训人次图表的数据源
+		trainPeopleChart.dataProvider=trainPeopleData;
+		//使图表来重建使用新的数据
+		trainPeopleChart.validateData();
+
+		//指定各职级平均课时图表的数据源
+		avgPeriodChart.dataProvider=avgPeriodData;
+		//使图表来重建使用新的数据
+		avgPeriodChart.validateData();
+	}
+
+	function createTrainPeopleChart()
+	{
+		trainPeopleChart=new AmCharts.AmSerialChart();
+		trainPeopleChart.categoryField="level";
+
+		var graph=new AmCharts.AmGraph();
+		graph.labelText="培训人次";
+		graph.valueField="totalEmployee";
+		graph.type="column";
+		trainPeopleChart.addGraph(graph);
+		trainPeopleChart.write('trainPeoplediv');
+
+		//设置column的透明度
+		graph.lineAlpha = 0;
+		//设置column的填充透明度
+		graph.fillAlphas = 0.8;
+
+		//设置3D效果
+		trainPeopleChart.angle = 15; //角度
+		trainPeopleChart.depth3D = 10;//深度
+
+		graph.balloonText ="[[category]]: [[value]]";
+	}
+
+	function createAvgPeriodChart()
+	{
+		avgPeriodChart=new AmCharts.AmSerialChart();
+		avgPeriodChart.categoryField="level";
+
+		var graph=new AmCharts.AmGraph();
+		graph.labelText="人均参与培训课时";
+		graph.valueField="avgPeriod";
+		graph.type="column";
+		avgPeriodChart.addGraph(graph);
+		avgPeriodChart.write("avgPerioddiv");
+
+		//设置column的透明度
+		graph.lineAlpha = 0;
+		//设置column的填充透明度
+		graph.fillAlphas = 0.8;
+
+		//设置3D效果
+		avgPeriodChart.angle = 15; //角度
+		avgPeriodChart.depth3D = 10;//深度
+
+		graph.balloonText ="[[category]]: [[value]]";
+	}
+</script>
+</head>
+   <body style="background-color:#EEEEEE;position:relative;margin-top: 50px;margin-left: 30px;">
+       <div id="trainPeoplediv" style="width:450px; height:300px; background-color:#FFFFFF;float: left;"></div>
+       <div id="avgPerioddiv" style="width:450px; height:300px; background-color:#FFFFFF;position: relative;margin: 0px auto;"></div>
+   </body>
+</html>

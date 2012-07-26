@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>StatisticsDepartmentPage</title>
+<script type="text/javascript" src="../resources/easyui/jquery-1.6.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function (){
+		$.ajax({
+			type:"POST",
+			url:"report/statistics",
+			success:function(results)
+			{
+				var datas=results;
+				var text="总计";
+				var html="";
+				
+				for(var i=0;i<datas.length;i++)
+				{
+					html+="<tr><td>"+datas[i].name+"</td>"+"<td>"+datas[i].totalEmployee+"</td>"+"<td>"+datas[i].totalPeriod+"</td>"+
+					"<td>"+datas[i].distinctEmployee+"</td>"+"<td>"+datas[i].curEmployee+"</td>"+
+					"<td>"+datas[i].avgPeriod+"</td>"+"<td>"+datas[i].coverageRate+"</td></tr>"
+					if(i==datas.length-1)
+					{
+						html+="<tr><td colspan='7' style='height: 100%'></td></tr>"+
+						"<tr><td>"+text+"</td>"+"<td>"+datas[datas.length-1].alltotalEmployee+"</td>"+"<td>"+datas[datas.length-1].alltotalPeriod+"</td>"+"<td>"+datas[datas.length-1].alldistinctEmployee+"</td>"+
+						"<td>"+datas[datas.length-1].allcurEmployee+"</td>"+"<td>"+datas[datas.length-1].allAvgPeriod+"</td>"+"<td>"+datas[datas.length-1].allCoverageRate+"</td></tr>";
+					}
+				}
+	
+				$("#tbody").append(html);
+			}	
+		});
+	});
+</script>
+</head>
+<body>
+	<table border="0" cellpadding="3" cellspacing="1" width="100%" align="center">
+				<tr>
+					<td class="reportTitle" align="center" valign="top">
+						<div>
+							部门培训统计报告
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td align="left" valign="top">
+					<table border="0" class="report" cellpadding="5" cellspacing="0" width="90%"
+						align="center">
+						<thead>
+							<tr>
+								<td>部门</td>
+								<td>培训人次</td>
+								<td>培训总课时</td>
+								<td>参与人数</td>
+								<td>当前人数</td>
+								<td>人均参与课时</td>
+								<td>培训覆盖率</td>
+							</tr>
+						</thead>
+						<tbody id="tbody">
+							<tr>
+								<td colspan="7" style="height: 100%"></td>
+							</tr>
+							<tr id="tfooter" class="footer">
+							</tr>
+						</tbody>
+					</table>
+					</td>
+				</tr>
+			</table>
+
+</body>
+</html>
