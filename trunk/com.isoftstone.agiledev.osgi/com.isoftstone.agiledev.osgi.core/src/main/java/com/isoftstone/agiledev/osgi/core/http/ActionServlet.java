@@ -1,10 +1,14 @@
 package com.isoftstone.agiledev.osgi.core.http;
 
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletConfig;
@@ -23,6 +27,7 @@ import org.slf4j.LoggerFactory;
 import com.isoftstone.agiledev.osgi.core.web.Action;
 import com.isoftstone.agiledev.osgi.core.web.ActionContext;
 import com.isoftstone.agiledev.osgi.core.web.ModelDriven;
+import com.isoftstone.agiledev.osgi.core.web.annotation.RequestParameter;
 import com.isoftstone.agiledev.osgi.core.web.annotation.Results;
 
 
@@ -102,18 +107,32 @@ public class ActionServlet  extends HttpServlet{
 				try {
 					Action action = (Action) context.getService(ref[0]);
 					//填充action参数 
-					fillActionModel(action,request);
+//					fillActionModel(action,request);
+					Method m = null;//action.getClass().getDeclaredMethod(method, new Class<?>[]{});
+					
+					
+					//TODO 需要处理重载
+					Method[] ms = action.getClass().getDeclaredMethods();
+					for (Method mm : ms) {
+						if(mm.getName().equals(method)){
+							m = mm;
+							break;
+						}
+					}
+					
+					Object[] parameterValues = this.getActionParameters(action,request,m);
+					
+					
 //					action = (Action) this.injectService(action);
 					//执行action
 					String result = null;
-					Method m = action.getClass().getDeclaredMethod(method, null);
-					result = (String) m.invoke(action, null);
+					result = (String) m.invoke(action, parameterValues);
 						
 					this.dispatchResult(action,result);
 					
 					context.ungetService(ref[0]);
 				} catch (Exception e) {
-					e.printStackTrace();
+					logger.error("exception in ActionServlet",e);
 				}
 			}else{
 				throw new Exception("no action registed in path:"+path);
@@ -216,4 +235,52 @@ public class ActionServlet  extends HttpServlet{
 		}
 		return action;
 	}
+	
+	private Object[] getActionParameters(Action action,HttpServletRequest request,Method method){
+		
+		Annotation[][] as = method.getParameterAnnotations();
+//		Class<?>[] parameterClasses = method.getParameterTypes();
+		List<Object> values = new ArrayList<Object>();
+		for (Annotation[] annotations : as) {
+			String parameterName = ((RequestParameter)annotations[0]).value();
+			String value = request.getParameter(parameterName);
+			values.add(value);
+		}
+//		try {
+//			method.invoke(action, values.toArray(new Object[]{}));
+//		} catch (Exception e) {
+//			e.printStackTrace(); 
+//		}
+		return values.toArray(new Object[]{});
+	}
+	
+	public static void main(String[] args) {
+//		ActionServlet as = new ActionServlet();
+//		try {
+//			as.fillAction(as, null, as.getClass().getDeclaredMethod("test", new Class<?>[]{String.class}));
+//		} catch (SecurityException e) {
+//			e.printStackTrace();
+//		} catch (NoSuchMethodException e) {
+//			e.printStackTrace();
+//		}
+		
+		ActionServlet as = new ActionServlet();
+		try {
+			Method m = as.getClass().getDeclaredMethod("test",null);
+			System.out.println(m);
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	public void test(String id){
+		
+	}
+	
 }
