@@ -23,7 +23,7 @@ public @interface Service {
 	 */
 	Class<?> type() default Object.class;
 	/**
-	 * 注册service时的props，key=params[i],value=params[i+1]
+	 * 注册service时的serviceName
 	 * @return
 	 */
 	String name() default "";

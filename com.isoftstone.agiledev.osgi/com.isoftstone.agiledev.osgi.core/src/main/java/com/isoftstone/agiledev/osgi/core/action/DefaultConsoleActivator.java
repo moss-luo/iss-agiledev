@@ -28,13 +28,12 @@ import com.isoftstone.agiledev.osgi.core.domain.EntityMapper;
 import com.isoftstone.agiledev.osgi.core.service.Service;
 import com.isoftstone.agiledev.osgi.core.web.ActionContext;
 import com.isoftstone.agiledev.osgi.core.web.annotation.Action;
-import com.isoftstone.agiledev.osgi.core.web.navigate.TreeDataProvider;
 import com.isoftstone.agiledev.osgi.db.dao.SessionCreater;
 
 public abstract class DefaultConsoleActivator implements BundleActivator,
 		ServiceListener {
 
-	private BundleContext context = null;
+	protected BundleContext context = null;
 
 	private Logger logger = LoggerFactory
 			.getLogger(DefaultConsoleActivator.class);
@@ -45,9 +44,9 @@ public abstract class DefaultConsoleActivator implements BundleActivator,
 
 		this.initClasses();
 		this.startBundle(context);
-		this.registerService(context);
-		this.registerAction(context);
-		this.registerDomain(context);
+		this.registerService();
+		this.registerAction();
+		this.registerDomain();
 //		this.registerMenu(context);
 
 		context.addServiceListener(this,
@@ -67,7 +66,7 @@ public abstract class DefaultConsoleActivator implements BundleActivator,
 		switch (event.getType()) {
 		case ServiceEvent.REGISTERED:
 			try {
-				registerDomain(this.context);
+				registerDomain();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -83,7 +82,7 @@ public abstract class DefaultConsoleActivator implements BundleActivator,
 	 * 注册Bundle action
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	protected void registerAction(BundleContext context) {
+	protected void registerAction() {
 		try {
 			for (Class clazz : this.actionClasses) {
 				Action annotation = (Action) clazz.getAnnotation(Action.class);
@@ -115,7 +114,7 @@ public abstract class DefaultConsoleActivator implements BundleActivator,
 	 * @param context
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	protected void registerDomain(BundleContext context) {
+	protected void registerDomain() {
 		try {
 			SessionCreater creater = null;
 			ServiceReference sf = context
@@ -154,7 +153,7 @@ public abstract class DefaultConsoleActivator implements BundleActivator,
 	 * @param context
 	 */
 	@SuppressWarnings("rawtypes")
-	protected void registerMenu(BundleContext context) throws IOException,
+	protected void registerMenu() throws IOException,
 			ClassNotFoundException, InstantiationException,
 			IllegalAccessException {
 
@@ -172,11 +171,11 @@ public abstract class DefaultConsoleActivator implements BundleActivator,
 //				}
 //			}
 //		}
-		
-		for (Class clazz : this.menuClasses) {
-			this.register(TreeDataProvider.class, clazz.newInstance(), null);
-			logger.info("register menu:[" + clazz.getName() + "]");
-		}
+//		
+//		for (Class clazz : this.menuClasses) {
+//			this.register(TreeDataProvider.class, clazz.newInstance(), null);
+//			logger.info("register menu:[" + clazz.getName() + "]");
+//		}
 	}
 
 	/**
@@ -189,7 +188,7 @@ public abstract class DefaultConsoleActivator implements BundleActivator,
 	 * @throws IllegalAccessException
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	protected void registerService(BundleContext context) throws IOException,
+	protected void registerService() throws IOException,
 			ClassNotFoundException, InstantiationException,
 			IllegalAccessException, Exception {
 		for (Class clazz : this.serviceClasses) {
@@ -276,7 +275,7 @@ public abstract class DefaultConsoleActivator implements BundleActivator,
 	private List<Class<?>> actionClasses = null;
 	private List<Class<?>> domainClasses = null;
 	private List<Class<?>> mapperClasses = null;
-	private List<Class<?>> menuClasses = null;
+//	private List<Class<?>> menuClasses = null;
 	/**
 	 * 初始化bundle下面的所有类
 	 * @throws IOException
