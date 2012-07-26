@@ -5,7 +5,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -78,6 +77,7 @@ public class ActionServlet  extends HttpServlet{
 	 * @param resp
 	 * @throws IOException 
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void genericService(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		try {
 			ActionContext.setBundleContext(this.context);
@@ -108,7 +108,7 @@ public class ActionServlet  extends HttpServlet{
 					Action action = (Action) context.getService(ref[0]);
 					//填充action参数 
 //					fillActionModel(action,request);
-					Method m = null;//action.getClass().getDeclaredMethod(method, new Class<?>[]{});
+					Method m = null;
 					
 					
 					//TODO 需要处理重载
@@ -123,7 +123,6 @@ public class ActionServlet  extends HttpServlet{
 					Object[] parameterValues = this.getActionParameters(action,request,m);
 					
 					
-//					action = (Action) this.injectService(action);
 					//执行action
 					String result = null;
 					result = (String) m.invoke(action, parameterValues);
@@ -182,18 +181,6 @@ public class ActionServlet  extends HttpServlet{
 		ServiceReference[] resultRef = (ServiceReference[]) context.getServiceReferences(com.isoftstone.agiledev.osgi.core.web.result.Result.class.getName(), "(result="+resultType+")");
 		if(resultRef!=null && resultRef.length>0){
 			com.isoftstone.agiledev.osgi.core.web.result.Result resultHandle = (com.isoftstone.agiledev.osgi.core.web.result.Result) context.getService(resultRef[0]);
-//			String statementName = null;
-//			if(r.params()!=null && r.params().length!=0){
-//				for(int i=0;i<r.params().length;i++){
-//					if(r.params()[i].equals("root")){
-//						statementName = r.params()[i+1];
-//						break;
-//					}
-//				}
-//				statementName = statementName.substring(0,1).toUpperCase()+statementName.substring(1);
-//				Object statement = action.getClass().getDeclaredMethod("get"+statementName, null).invoke(action, null);
-//				resultHandle.execute(action,statement);
-//			}
 			Map<String, String> params = new HashMap<String, String>();
 			
 			if(r.params()!=null && r.params().length!=0){
@@ -239,48 +226,13 @@ public class ActionServlet  extends HttpServlet{
 	private Object[] getActionParameters(Action action,HttpServletRequest request,Method method){
 		
 		Annotation[][] as = method.getParameterAnnotations();
-//		Class<?>[] parameterClasses = method.getParameterTypes();
 		List<Object> values = new ArrayList<Object>();
 		for (Annotation[] annotations : as) {
 			String parameterName = ((RequestParameter)annotations[0]).value();
 			String value = request.getParameter(parameterName);
 			values.add(value);
 		}
-//		try {
-//			method.invoke(action, values.toArray(new Object[]{}));
-//		} catch (Exception e) {
-//			e.printStackTrace(); 
-//		}
 		return values.toArray(new Object[]{});
-	}
-	
-	public static void main(String[] args) {
-//		ActionServlet as = new ActionServlet();
-//		try {
-//			as.fillAction(as, null, as.getClass().getDeclaredMethod("test", new Class<?>[]{String.class}));
-//		} catch (SecurityException e) {
-//			e.printStackTrace();
-//		} catch (NoSuchMethodException e) {
-//			e.printStackTrace();
-//		}
-		
-		ActionServlet as = new ActionServlet();
-		try {
-			Method m = as.getClass().getDeclaredMethod("test",null);
-			System.out.println(m);
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-	
-	
-	public void test(String id){
-		
 	}
 	
 }
