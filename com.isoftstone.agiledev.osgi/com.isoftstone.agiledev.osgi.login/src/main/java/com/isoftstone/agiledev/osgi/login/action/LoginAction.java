@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import com.isoftstone.agiledev.osgi.core.web.Action;
 import com.isoftstone.agiledev.osgi.core.web.ActionContext;
+import com.isoftstone.agiledev.osgi.core.web.annotation.RequestParameter;
 import com.isoftstone.agiledev.osgi.core.web.annotation.Result;
 import com.isoftstone.agiledev.osgi.login.domain.Auth;
 import com.isoftstone.agiledev.osgi.login.service.LoginService;
@@ -18,10 +19,9 @@ public class LoginAction implements Action{
 	
 	@Resource
 	private LoginService loginService = null;
-	private String loginName;
-	private String loginPwd;
-	private String validateCode;
-	public String execute(){
+	public String execute(@RequestParameter("loginName")String loginName,
+						@RequestParameter("loginPwd")String loginPwd,
+						@RequestParameter("validateCode")String validateCode){
 		
 		String temp = (String) ActionContext.getSession().getAttribute("random");
 		
@@ -39,44 +39,7 @@ public class LoginAction implements Action{
 	}
 	
 	
-	
 	public com.isoftstone.agiledev.osgi.core.web.Result getResult() {
 		return result;
-	}
-
-
-
-	public String getLoginName() {
-		return loginName;
-	}
-
-
-
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
-	}
-
-
-
-	public String getLoginPwd() {
-		return loginPwd;
-	}
-
-
-
-	public void setLoginPwd(String loginPwd) {
-		this.loginPwd = loginPwd;
-	}
-
-
-
-	public String getValidateCode() {
-		return validateCode;
-	}
-
-
-
-	public void setValidateCode(String validateCode) {
-		this.validateCode = validateCode;
 	}
 }

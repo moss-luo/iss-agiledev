@@ -9,6 +9,7 @@ import org.osgi.framework.ServiceReference;
 
 import com.isoftstone.agiledev.osgi.core.web.ActionContext;
 import com.isoftstone.agiledev.osgi.core.web.annotation.Action;
+import com.isoftstone.agiledev.osgi.core.web.annotation.RequestParameter;
 import com.isoftstone.agiledev.osgi.core.web.annotation.Result;
 import com.isoftstone.agiledev.osgi.core.web.annotation.Results;
 import com.isoftstone.agiledev.osgi.core.web.navigate.TreeDataProvider;
@@ -22,9 +23,9 @@ import com.isoftstone.agiledev.osgi.core.web.navigate.TreeSupport;
 public class IndexMenuAction implements com.isoftstone.agiledev.osgi.core.web.Action {
 	
 	private List<TreeSupport> nodes = null;
-	private String id=null;
+//	private String id=null;
 	
-	public String execute(){
+	public String execute(@RequestParameter("id") String id){
 		BundleContext context = ActionContext.getBundleContext();
 		
 		try {
@@ -50,12 +51,12 @@ public class IndexMenuAction implements com.isoftstone.agiledev.osgi.core.web.Ac
 		return nodes;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
+//	public String getId() {
+//		return id;
+//	}
+//
+//	public void setId(String id) {
+//		this.id = id;
+//	}
 	
 }
