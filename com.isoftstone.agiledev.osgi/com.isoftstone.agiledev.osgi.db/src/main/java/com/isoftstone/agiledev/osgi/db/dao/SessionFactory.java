@@ -4,8 +4,6 @@ package com.isoftstone.agiledev.osgi.db.dao;
  * 使用无配置文件形式。mapper和domain来自其他bundle动态注册
  * @author david
  */
-import java.io.File;
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,36 +20,22 @@ import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 
 import com.isoftstone.agiledev.osgi.commons.util.AppUtils;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
 
 
 
 public class SessionFactory implements SessionCreater {
 
-//	private BundleContext context = null;
 
-//	private Logger logger = LoggerFactory.getLogger(SessionFactory.class);
 	private Properties config = null;
 	public SessionFactory() {
 		super();
 		config = this.loadProperties();
 	}
 
-//	public SessionFactory(BundleContext context) {
-//		super();
-//		this.context = context;
-//	}
 	@Override
 	public SqlSession openSession() {
 		try {
 
-//			ServiceReference[] sf = context.getServiceReferences(
-//					DataSource.class.getName(), "(component.name=dataSource)");
-//			DataSource ds = null;
-//			if (sf != null && sf.length > 0) {
-//				ds = (DataSource) context.getService(sf[0]);
-//			}
 			BasicDataSource ds = new BasicDataSource();
 			ds.setUrl(getProperty("jdbc.url"));
 			ds.setUsername(getProperty("jdbc.username"));
@@ -99,16 +83,7 @@ public class SessionFactory implements SessionCreater {
 		return config.getProperty(key);
 	}
 	private Properties loadProperties(){
-		 String appHome = AppUtils.getAppHome();
-        String dbfile = appHome+"/config/agile-db.properties";
-//        logger.info("Dbconfig file path:"+dbfile);
-        Properties prop = new Properties();
-        try {
-			prop.load(new FileInputStream(new File(dbfile)));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-        return prop;
+		return AppUtils.getRuntime();
 	}
 	
 	@Override
