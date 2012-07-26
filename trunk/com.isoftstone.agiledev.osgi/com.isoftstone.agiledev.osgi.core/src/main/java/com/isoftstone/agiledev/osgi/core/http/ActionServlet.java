@@ -2,7 +2,6 @@ package com.isoftstone.agiledev.osgi.core.http;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
@@ -25,7 +23,6 @@ import org.slf4j.LoggerFactory;
 
 import com.isoftstone.agiledev.osgi.core.web.Action;
 import com.isoftstone.agiledev.osgi.core.web.ActionContext;
-import com.isoftstone.agiledev.osgi.core.web.ModelDriven;
 import com.isoftstone.agiledev.osgi.core.web.annotation.RequestParameter;
 import com.isoftstone.agiledev.osgi.core.web.annotation.Results;
 
@@ -200,28 +197,28 @@ public class ActionServlet  extends HttpServlet{
 	 * @param request
 	 * @return
 	 */
-	@SuppressWarnings("rawtypes")
-	private Action fillActionModel(Action action,HttpServletRequest request)throws Exception{
-		Map params = request.getParameterMap();
-		//填充model
-		if(action instanceof ModelDriven){
-			ModelDriven modelDriven = (ModelDriven) action;
-			Object model = modelDriven.getModel();
-			for (Field f : model.getClass().getDeclaredFields()) {
-				BeanUtils.setProperty(model, f.getName(), params.get(f.getName()));
-			}
-		}else{//填充参数
-			for (Object o : params.keySet()) {
-				for (Field f: action.getClass().getDeclaredFields()) {
-					if(f.getName().equals(o.toString())){
-						BeanUtils.setProperty(action, f.getName(), params.get(o));
-						break;
-					}
-				}
-			}
-		}
-		return action;
-	}
+//	@SuppressWarnings("rawtypes")
+//	private Action fillActionModel(Action action,HttpServletRequest request)throws Exception{
+//		Map params = request.getParameterMap();
+//		//填充model
+//		if(action instanceof ModelDriven){
+//			ModelDriven modelDriven = (ModelDriven) action;
+//			Object model = modelDriven.getModel();
+//			for (Field f : model.getClass().getDeclaredFields()) {
+//				BeanUtils.setProperty(model, f.getName(), params.get(f.getName()));
+//			}
+//		}else{//填充参数
+//			for (Object o : params.keySet()) {
+//				for (Field f: action.getClass().getDeclaredFields()) {
+//					if(f.getName().equals(o.toString())){
+//						BeanUtils.setProperty(action, f.getName(), params.get(o));
+//						break;
+//					}
+//				}
+//			}
+//		}
+//		return action;
+//	}
 	
 	private Object[] getActionParameters(Action action,HttpServletRequest request,Method method){
 		
