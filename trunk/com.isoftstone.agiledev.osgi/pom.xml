@@ -53,6 +53,7 @@
     <module>com.isoftstone.agiledev.osgi.system</module>
     <module>com.isoftstone.agiledev.osgi.basedata</module>
     <module>com.isoftstone.agiledev.osgi.commons</module>
+    <module>com.isoftstone.agiledev.osgi.web</module>
   </modules>
 
   <build>
