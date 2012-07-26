@@ -152,11 +152,9 @@ public abstract class DefaultConsoleActivator implements BundleActivator,
 	 * 
 	 * @param context
 	 */
-	@SuppressWarnings("rawtypes")
-	protected void registerMenu() throws IOException,
-			ClassNotFoundException, InstantiationException,
-			IllegalAccessException {
-
+//	protected void registerMenu() throws IOException,
+//			ClassNotFoundException, InstantiationException,
+//			IllegalAccessException {
 //		String[] classNames = this.getBundleClasses(context);
 //		// 注册Action
 //		ClassLoader loader = this.getClass().getClassLoader();
@@ -176,7 +174,7 @@ public abstract class DefaultConsoleActivator implements BundleActivator,
 //			this.register(TreeDataProvider.class, clazz.newInstance(), null);
 //			logger.info("register menu:[" + clazz.getName() + "]");
 //		}
-	}
+//	}
 
 	/**
 	 * 注册bundle service
@@ -302,7 +300,7 @@ public abstract class DefaultConsoleActivator implements BundleActivator,
 				domainClasses.add(clazz);
 			if (clazz.isAnnotationPresent(EntityMapper.class))
 				mapperClasses.add(clazz);
-			Class<?>[] parents = clazz.getInterfaces();
+//			Class<?>[] parents = clazz.getInterfaces();
 //			for (Class<?> c : parents) {
 //				if (c.getName().equals(TreeDataProvider.class.getName())) {
 //					menuClasses.add(clazz);
