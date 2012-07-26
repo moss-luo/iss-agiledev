@@ -23,7 +23,8 @@ public class JSONResult implements Result {
 
     private static Logger logger = LoggerFactory.getLogger(JSONResult.class);
     
-    protected Object getRoot(Action action,Object o) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException{
+    @SuppressWarnings({"unchecked"})
+	protected Object getRoot(Action action,Object o) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException{
 
 		Object root = null;
 		Map<String, String> params = (Map<String, String>) o;
