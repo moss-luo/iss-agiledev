@@ -20,6 +20,7 @@ public final class Activator implements BundleActivator,ServiceListener{
 	private ActionServlet actionServlet = null;
 	private ServiceReference<HttpService> ref = null;
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void start(BundleContext bc) throws Exception {
 		System.out.println("STARTING com.isoftstone.agiledev.osgi.core");
 
@@ -40,17 +41,16 @@ public final class Activator implements BundleActivator,ServiceListener{
 		
 		this.registerServlet();
 		
-		
-		ServiceReference<HttpService> sf = (ServiceReference<HttpService>) bc.getServiceReference(HttpService.class.getName());
 	}
 
 	/**
 	 * Called whenever the OSGi framework stops our bundle
 	 */
+	@SuppressWarnings("unchecked")
 	public void stop(BundleContext bc) throws Exception {
 		System.out.println("STOPPING com.isoftstone.agiledev.osgi.core");
 
-		ServiceReference sf = bc.getServiceReference(Result.class.getName());
+		ServiceReference<Result> sf = (ServiceReference<Result>) bc.getServiceReference(Result.class.getName());
 		bc.ungetService(sf);
 		this.unregisterServlet();
 	}
@@ -69,6 +69,7 @@ public final class Activator implements BundleActivator,ServiceListener{
 
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void registerServlet(){
 		if (ref == null) {
 			ref = (ServiceReference<HttpService>) context.getServiceReference(HttpService.class.getName());
