@@ -6,9 +6,9 @@
 		<Arg>jdbc/agiledev</Arg>
 		<Arg>
 			<New class="com.mysql.jdbc.jdbc2.optional.MysqlDataSource">
-				<Set name="url">jdbc:mysql://localhost:3306/agiledev</Set>
-				<Set name="user">root</Set>
-				<Set name="password">puxl1982</Set>
+				<Set name="url">jdbc:mysql://10.36.16.52:3306/agile</Set>
+				<Set name="user">agile</Set>
+				<Set name="password">agile</Set>
 			</New>
 		</Arg>
 	</New>
