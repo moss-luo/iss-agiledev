@@ -2,12 +2,14 @@ package com.isoftstone.agiledev.osgi.core.http;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -15,14 +17,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.isoftstone.agiledev.osgi.commons.util.AppUtils;
 import com.isoftstone.agiledev.osgi.core.web.Action;
 import com.isoftstone.agiledev.osgi.core.web.ActionContext;
+import com.isoftstone.agiledev.osgi.core.web.annotation.RequestModel;
 import com.isoftstone.agiledev.osgi.core.web.annotation.RequestParameter;
 import com.isoftstone.agiledev.osgi.core.web.annotation.Results;
 
@@ -32,6 +37,8 @@ public class ActionServlet  extends HttpServlet{
 
 	private BundleContext context;
 	private Logger logger = LoggerFactory.getLogger(ActionServlet.class);
+	private Properties runtime = AppUtils.getRuntime();
+	private String contextPath = null;
 	
 	public ActionServlet(BundleContext context) {
 		super();
@@ -42,12 +49,8 @@ public class ActionServlet  extends HttpServlet{
 	}
 
 	
-	/**
-	 * 
-	 */
 	public void init(ServletConfig config) throws ServletException {
-//		super.init(config);
-//		context.getAllServiceReferences(arg0, arg1)
+		contextPath = runtime.getProperty("webContext");
 	}
 	public void destroy() {
 		super.destroy();
@@ -81,9 +84,9 @@ public class ActionServlet  extends HttpServlet{
 			ActionContext.setRequest(request);
 			ActionContext.setResponse(response);
 			
+			String requestURI = request.getRequestURI();
+			String path = requestURI.substring(requestURI.indexOf(contextPath)+contextPath.length()+"/controller".length()+1);
 			
-			String path = request.getRequestURI().substring(18);
-
 			String[] p = path.split("/");
 			path = p[0]+"/"+p[1];
 			String method = null;
@@ -106,9 +109,8 @@ public class ActionServlet  extends HttpServlet{
 					//填充action参数 
 //					fillActionModel(action,request);
 					Method m = null;
-					
-					
-					//TODO 需要处理重载
+					//TODO 需要处理重载	7.24
+					//TODO 不需要处理重载，action请求路径是唯一的 7.28
 					Method[] ms = action.getClass().getDeclaredMethods();
 					for (Method mm : ms) {
 						if(mm.getName().equals(method)){
@@ -116,8 +118,15 @@ public class ActionServlet  extends HttpServlet{
 							break;
 						}
 					}
-					
-					Object[] parameterValues = this.getActionParameters(action,request,m);
+					Object[] parameterValues = null;
+					if(m!=null){
+						if(m.getParameterTypes().length>0){
+							parameterValues = this.getActionParameters(action,request,m);
+						}
+					}else{
+						logger.error("action:["+path+"] is not defined!");
+						throw new Exception("action:["+path+"] is not defined!");
+					}
 					
 					
 					//执行action
@@ -223,13 +232,48 @@ public class ActionServlet  extends HttpServlet{
 	private Object[] getActionParameters(Action action,HttpServletRequest request,Method method){
 		
 		Annotation[][] as = method.getParameterAnnotations();
+		Class<?>[] parametersType = method.getParameterTypes();
 		List<Object> values = new ArrayList<Object>();
-		for (Annotation[] annotations : as) {
-			String parameterName = ((RequestParameter)annotations[0]).value();
-			String value = request.getParameter(parameterName);
-			values.add(value);
+		for(int i=0;i<as.length;i++){
+			Annotation[] annotation = as[i];
+			if(annotation[0].annotationType().getName().equals(RequestParameter.class.getName())){
+				String value = this.parameterHandler(request, ((RequestParameter)annotation[0]));
+				values.add(value);
+			}else if(annotation[0].annotationType().getName().equals(RequestModel.class.getName())){
+				Object value = this.modelHandler(request, ((RequestModel)annotation[0]),parametersType[i]);
+				values.add(value);
+			}
 		}
 		return values.toArray(new Object[]{});
 	}
+	/**
+	 * 解析requestParameter类型的请求参数
+	 * @param request
+	 * @param annotation
+	 * @return
+	 */
+	private String parameterHandler(HttpServletRequest request,RequestParameter annotation){
+		return request.getParameter(annotation.value());
+	}
 	
+	/**
+	 * 解析requestModel类型的请求参数
+	 * @param request
+	 * @param annotation
+	 * @param parameterType
+	 * @return
+	 */
+	private Object modelHandler(HttpServletRequest request,RequestModel annotation,Class<?> parameterType){
+		try {
+			Map<?,?> params = request.getParameterMap();
+			Object o = parameterType.newInstance();
+			for (Field f : parameterType.getDeclaredFields()) {
+				BeanUtils.setProperty(o, f.getName(), params.get(f.getName()));
+			}
+			return o;
+		} catch (Exception e) {
+			logger.error("error in modelHandle", e);
+		}
+		return null;
+	}
 }
