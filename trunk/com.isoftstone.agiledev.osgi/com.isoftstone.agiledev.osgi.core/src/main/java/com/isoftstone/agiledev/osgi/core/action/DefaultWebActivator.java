@@ -97,10 +97,12 @@ public class DefaultWebActivator extends DefaultConsoleActivator implements Serv
 					Map<String,String> res = this.register.getResources();
 					for (String k : res.keySet()) {
 						http.unregister(k);
+						this.unregisterResources();
 					}
 					Map<String,Map<HttpServlet,Dictionary<?, ?>>> servlets = this.register.getServlets();
 					for (String k : servlets.keySet()) {
 						http.unregister(k);
+						this.unregisterServlet(servlets.get(k).entrySet().iterator().next().getKey());
 					}
 				}
 			}
@@ -112,7 +114,7 @@ public class DefaultWebActivator extends DefaultConsoleActivator implements Serv
 	protected void registerServlet(Register register)throws ServletException{}
 	
 	
-	protected void unregisterServlet(){}
+	protected void unregisterServlet(HttpServlet servlet){}
 	protected void unregisterResources(){}
 	
 }
