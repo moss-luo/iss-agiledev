@@ -23,8 +23,8 @@ import com.isoftstone.agiledev.osgi.core.web.navigate.TreeSupport;
 public class IndexMenuAction implements com.isoftstone.agiledev.osgi.core.web.Action {
 	
 	private List<TreeSupport> nodes = null;
-//	private String id=null;
 	
+	@SuppressWarnings("unchecked")
 	public String execute(@RequestParameter("id") String id){
 		BundleContext context = ActionContext.getBundleContext();
 		
@@ -34,8 +34,8 @@ public class IndexMenuAction implements com.isoftstone.agiledev.osgi.core.web.Ac
 			if(id!=null){
 				filter="(serviceName="+id+")";
 			}
-			ServiceReference[] sfs = context.getServiceReferences(TreeDataProvider.class.getName(), filter);
-			for (ServiceReference sf : sfs) {
+			ServiceReference<TreeDataProvider>[] sfs = (ServiceReference<TreeDataProvider>[]) context.getServiceReferences(TreeDataProvider.class.getName(), filter);
+			for (ServiceReference<TreeDataProvider> sf : sfs) {
 				TreeDataProvider provider = (TreeDataProvider)context.getService(sf);
 				List<TreeSupport> temp = provider.getNodes(id==null?"0":id);
 				nodes.addAll(temp);
