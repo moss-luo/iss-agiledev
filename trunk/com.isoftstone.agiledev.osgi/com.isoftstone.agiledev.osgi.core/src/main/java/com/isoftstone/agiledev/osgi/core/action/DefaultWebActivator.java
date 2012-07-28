@@ -30,8 +30,8 @@ public class DefaultWebActivator extends DefaultConsoleActivator implements Serv
 	public void startBundle(BundleContext context) throws Exception {
 		Properties runtime = AppUtils.getRuntime();
 		
-		register = new ResourcesRegister();
-		register.setContextPath(runtime.getProperty("webContext"));
+		this.register = new ResourcesRegister();
+		this.register.setContextPath(runtime.getProperty("webContext"));
 		this.register();
 		
 		context.addServiceListener(this,
@@ -97,24 +97,39 @@ public class DefaultWebActivator extends DefaultConsoleActivator implements Serv
 					Map<String,String> res = this.register.getResources();
 					for (String k : res.keySet()) {
 						http.unregister(k);
-						this.unregisterResources();
+						this.unregistedResources();
 					}
 					Map<String,Map<HttpServlet,Dictionary<?, ?>>> servlets = this.register.getServlets();
 					for (String k : servlets.keySet()) {
 						http.unregister(k);
-						this.unregisterServlet(servlets.get(k).entrySet().iterator().next().getKey());
+						this.unregistedServlet(servlets.get(k).entrySet().iterator().next().getKey());
 					}
 				}
 			}
 		} catch (Exception e) {
 		}
 	}
-	
+	/**
+	 * web application bundle注册资源文件时需要重写
+	 * @param register
+	 * @throws NamespaceException
+	 */
 	protected void registerResources(Register register)throws NamespaceException{}
+	/**
+	 * web application bundle注册自定义Servlet时需要重写
+	 * @param register
+	 * @throws ServletException
+	 */
 	protected void registerServlet(Register register)throws ServletException{}
 	
-	
-	protected void unregisterServlet(HttpServlet servlet){}
-	protected void unregisterResources(){}
+	/**
+	 * HttpService停止并且卸载当前web application bundle所有servlet后调用
+	 * @param servlet
+	 */
+	protected void unregistedServlet(HttpServlet servlet){}
+	/**
+	 * HttpService停止并且写在当前web application bundle所有资源后调用
+	 */
+	protected void unregistedResources(){}
 	
 }

@@ -6,7 +6,10 @@ import java.util.Properties;
 import org.osgi.framework.*;
 import org.osgi.service.http.HttpService;
 
+import com.isoftstone.agiledev.osgi.commons.util.AppUtils;
 import com.isoftstone.agiledev.osgi.core.http.ActionServlet;
+import com.isoftstone.agiledev.osgi.core.web.Interceptor;
+import com.isoftstone.agiledev.osgi.core.web.interceptor.ParameterInterceptor;
 import com.isoftstone.agiledev.osgi.core.web.result.*;
 
 /**
@@ -19,10 +22,12 @@ public final class Activator implements BundleActivator,ServiceListener{
 	private BundleContext context = null;
 	private ActionServlet actionServlet = null;
 	private ServiceReference<HttpService> ref = null;
-	
+	private String contextPath = null;
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void start(BundleContext bc) throws Exception {
 		System.out.println("STARTING com.isoftstone.agiledev.osgi.core");
+		
+		contextPath = AppUtils.getRuntime().getProperty("webContext");
 
 		this.context = bc;
 		actionServlet = new ActionServlet(bc);
@@ -38,6 +43,11 @@ public final class Activator implements BundleActivator,ServiceListener{
 		props = new Properties();
 		props.put("result", "stream");
 		context.registerService(Result.class.getName(), new StreamResult(), props);
+		
+		
+		props = new Properties();
+		props.put("interceptor", "parameterInterceptor");
+		context.registerService(Interceptor.class.getName(), new ParameterInterceptor(), props);
 		
 		this.registerServlet();
 		
@@ -78,7 +88,7 @@ public final class Activator implements BundleActivator,ServiceListener{
 			try {
 				HttpService http = (HttpService) context.getService(ref);
 				if (null != http) {
-					http.registerServlet("/agile/controller", actionServlet, null, null);
+					http.registerServlet("/"+contextPath+"/controller", actionServlet, null, null);
 				}
 			}catch(Exception e){
 				e.printStackTrace();
@@ -91,7 +101,7 @@ public final class Activator implements BundleActivator,ServiceListener{
             try {
                 HttpService http = (HttpService) context.getService(ref);
                 if(null != http){
-	                http.unregister("/agile/controller");
+	                http.unregister("/"+contextPath+"/controller");
                 }
             }catch(Exception e){
 				e.printStackTrace();

@@ -1,13 +1,10 @@
 package com.isoftstone.agiledev.osgi.core.http;
 
 import java.io.IOException;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -17,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
@@ -27,9 +23,12 @@ import org.slf4j.LoggerFactory;
 import com.isoftstone.agiledev.osgi.commons.util.AppUtils;
 import com.isoftstone.agiledev.osgi.core.web.Action;
 import com.isoftstone.agiledev.osgi.core.web.ActionContext;
-import com.isoftstone.agiledev.osgi.core.web.annotation.RequestModel;
-import com.isoftstone.agiledev.osgi.core.web.annotation.RequestParameter;
+import com.isoftstone.agiledev.osgi.core.web.Interceptor;
+import com.isoftstone.agiledev.osgi.core.web.ValueStack;
 import com.isoftstone.agiledev.osgi.core.web.annotation.Results;
+import com.isoftstone.agiledev.osgi.core.web.interceptor.ParameterInterceptor;
+import com.isoftstone.agiledev.osgi.core.web.request.DefaultActionInvocation;
+import com.isoftstone.agiledev.osgi.core.web.request.DefaultValueStack;
 
 
 @SuppressWarnings("serial")
@@ -118,20 +117,30 @@ public class ActionServlet  extends HttpServlet{
 							break;
 						}
 					}
-					Object[] parameterValues = null;
-					if(m!=null){
-						if(m.getParameterTypes().length>0){
-							parameterValues = this.getActionParameters(action,request,m);
-						}
-					}else{
-						logger.error("action:["+path+"] is not defined!");
-						throw new Exception("action:["+path+"] is not defined!");
-					}
 					
+					
+//					Object[] parameterValues = null;
+//					if(m!=null){
+//						if(m.getParameterTypes().length>0){
+//							parameterValues = this.getActionParameters(action,request,m);
+//						}
+//					}else{
+//						logger.error("action:["+path+"] is not defined!");
+//						throw new Exception("action:["+path+"] is not defined!");
+//					}
+					
+					ValueStack stack = buildStack(request);
+					DefaultActionInvocation actionInvocation  = new DefaultActionInvocation();
+					actionInvocation.setAction(action);
+					actionInvocation.setStack(stack);
+					actionInvocation.setMethod(m);
+					Interceptor interceptor = new ParameterInterceptor();
+					interceptor.doInterceptor(actionInvocation);
 					
 					//执行action
 					String result = null;
-					result = (String) m.invoke(action, parameterValues);
+//					result = (String) m.invoke(action, parameterValues);
+					result = actionInvocation.invock();
 						
 					this.dispatchResult(action,result);
 					
@@ -229,51 +238,18 @@ public class ActionServlet  extends HttpServlet{
 //		return action;
 //	}
 	
-	private Object[] getActionParameters(Action action,HttpServletRequest request,Method method){
-		
-		Annotation[][] as = method.getParameterAnnotations();
-		Class<?>[] parametersType = method.getParameterTypes();
-		List<Object> values = new ArrayList<Object>();
-		for(int i=0;i<as.length;i++){
-			Annotation[] annotation = as[i];
-			if(annotation[0].annotationType().getName().equals(RequestParameter.class.getName())){
-				String value = this.parameterHandler(request, ((RequestParameter)annotation[0]));
-				values.add(value);
-			}else if(annotation[0].annotationType().getName().equals(RequestModel.class.getName())){
-				Object value = this.modelHandler(request, ((RequestModel)annotation[0]),parametersType[i]);
-				values.add(value);
-			}
+	@SuppressWarnings("unchecked")
+	private ValueStack buildStack(HttpServletRequest request){
+		ValueStack stack = new DefaultValueStack();
+		Enumeration<String> paraNames = request.getParameterNames();
+//		for (String k : params.keySet()) {
+//			stack.put(k, params.get(k));
+//		}
+		String k = null;
+		while(paraNames.hasMoreElements()){
+			k = paraNames.nextElement();
+			stack.put(k,request.getParameter(k));
 		}
-		return values.toArray(new Object[]{});
-	}
-	/**
-	 * 解析requestParameter类型的请求参数
-	 * @param request
-	 * @param annotation
-	 * @return
-	 */
-	private String parameterHandler(HttpServletRequest request,RequestParameter annotation){
-		return request.getParameter(annotation.value());
-	}
-	
-	/**
-	 * 解析requestModel类型的请求参数
-	 * @param request
-	 * @param annotation
-	 * @param parameterType
-	 * @return
-	 */
-	private Object modelHandler(HttpServletRequest request,RequestModel annotation,Class<?> parameterType){
-		try {
-			Map<?,?> params = request.getParameterMap();
-			Object o = parameterType.newInstance();
-			for (Field f : parameterType.getDeclaredFields()) {
-				BeanUtils.setProperty(o, f.getName(), params.get(f.getName()));
-			}
-			return o;
-		} catch (Exception e) {
-			logger.error("error in modelHandle", e);
-		}
-		return null;
+		return stack;
 	}
 }
