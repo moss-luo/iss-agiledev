@@ -60,7 +60,7 @@ public abstract class DefaultWebActivator extends DefaultActivator implements Se
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void registerResources()throws Exception{
+	private void registerResources()throws Exception{
 		this.registerResources(register);
 		
 		ServiceReference<HttpService> ref = (ServiceReference<HttpService>) this.context.getServiceReference(HttpService.class.getName());
@@ -72,7 +72,7 @@ public abstract class DefaultWebActivator extends DefaultActivator implements Se
 	}
 	
 
-	public void unregisterResources()throws Exception{
+	private void unregisterResources()throws Exception{
 		this.register.stop();
 		this.unregistedResources(register);
 	}
