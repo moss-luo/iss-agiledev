@@ -15,7 +15,7 @@ import com.isoftstone.agiledev.osgi.commons.util.AppUtils;
 
 public class DefaultWebActivator extends DefaultConsoleActivator implements ServiceListener{
 
-	private Register register = null;
+	private ResourcesRegister register = null;
 
 	
 	@Override
@@ -114,13 +114,13 @@ public class DefaultWebActivator extends DefaultConsoleActivator implements Serv
 	 * @param register
 	 * @throws NamespaceException
 	 */
-	protected void registerResources(Register register)throws NamespaceException{}
+	protected void registerResources(ResourcesRegister register)throws NamespaceException{}
 	/**
 	 * web application bundle注册自定义Servlet时需要重写
 	 * @param register
 	 * @throws ServletException
 	 */
-	protected void registerServlet(Register register)throws ServletException{}
+	protected void registerServlet(ResourcesRegister register)throws ServletException{}
 	
 	/**
 	 * HttpService停止并且卸载当前web application bundle所有servlet后调用

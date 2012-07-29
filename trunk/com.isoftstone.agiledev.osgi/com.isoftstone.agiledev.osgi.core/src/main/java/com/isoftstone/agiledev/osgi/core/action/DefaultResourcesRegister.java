@@ -10,7 +10,7 @@ import org.osgi.service.http.HttpService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DefaultResourcesRegister implements Register {
+public class DefaultResourcesRegister implements ResourcesRegister{
 
 	private Map<String,String> resources = new HashMap<String, String>();
 	private Map<String,Map<HttpServlet,Dictionary<?, ?>>> servlets = new HashMap<String,Map<HttpServlet,Dictionary<?, ?>>>();
