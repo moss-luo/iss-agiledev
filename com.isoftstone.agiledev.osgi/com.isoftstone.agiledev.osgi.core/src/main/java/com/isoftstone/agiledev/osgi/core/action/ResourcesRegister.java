@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServlet;
 
 import org.osgi.service.http.HttpService;
 
-public interface Register {
+public interface ResourcesRegister {
 
 	void registerResources(String alias,String name);
 	void regiserServlet(String alias,HttpServlet servlet,Dictionary<?,?> dic);
