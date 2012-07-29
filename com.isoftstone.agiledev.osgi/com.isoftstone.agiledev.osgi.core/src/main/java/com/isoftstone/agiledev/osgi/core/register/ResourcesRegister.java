@@ -1,4 +1,4 @@
-package com.isoftstone.agiledev.osgi.core.action;
+package com.isoftstone.agiledev.osgi.core.register;
 
 import java.util.Dictionary;
 
@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServlet;
 
 import org.osgi.service.http.HttpService;
 
-public interface ResourcesRegister {
+import com.isoftstone.agiledev.osgi.core.Register;
+
+public interface ResourcesRegister extends Register{
 
 	void registerResources(String alias,String name);
 	void regiserServlet(String alias,HttpServlet servlet,Dictionary<?,?> dic);
@@ -14,8 +16,6 @@ public interface ResourcesRegister {
 	void setHttpService(HttpService httpService);
 	void setContextPath(String contextPath);
 	
-	void start() throws Exception ;
-	void stop() throws Exception ;
 	
 //	Map<String,String> getResources();
 //	Map<String,Map<HttpServlet,Dictionary<?, ?>>> getServlets();

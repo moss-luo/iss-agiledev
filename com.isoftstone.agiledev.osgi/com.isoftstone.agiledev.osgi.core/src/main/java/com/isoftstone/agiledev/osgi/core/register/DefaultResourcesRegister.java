@@ -1,4 +1,4 @@
-package com.isoftstone.agiledev.osgi.core.action;
+package com.isoftstone.agiledev.osgi.core.register;
 
 import java.util.Dictionary;
 import java.util.HashMap;
@@ -10,7 +10,7 @@ import org.osgi.service.http.HttpService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DefaultResourcesRegister implements ResourcesRegister{
+public class DefaultResourcesRegister extends AbstractRegister implements ResourcesRegister{
 
 	private Map<String,String> resources = new HashMap<String, String>();
 	private Map<String,Map<HttpServlet,Dictionary<?, ?>>> servlets = new HashMap<String,Map<HttpServlet,Dictionary<?, ?>>>();

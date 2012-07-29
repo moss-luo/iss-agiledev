@@ -8,12 +8,15 @@ import javax.servlet.http.HttpServlet;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceEvent;
 import org.osgi.framework.ServiceListener;
+import org.osgi.framework.ServiceReference;
 import org.osgi.service.http.HttpService;
 import org.osgi.service.http.NamespaceException;
 
 import com.isoftstone.agiledev.osgi.commons.util.AppUtils;
+import com.isoftstone.agiledev.osgi.core.register.DefaultResourcesRegister;
+import com.isoftstone.agiledev.osgi.core.register.ResourcesRegister;
 
-public class DefaultWebActivator extends DefaultConsoleActivator implements ServiceListener{
+public abstract class DefaultWebActivator extends DefaultActivator implements ServiceListener{
 
 	private ResourcesRegister register = null;
 
@@ -24,7 +27,7 @@ public class DefaultWebActivator extends DefaultConsoleActivator implements Serv
 		
 		this.register = new DefaultResourcesRegister();
 		this.register.setContextPath(runtime.getProperty("webContext"));
-		this.register();
+		this.registerResources();
 		
 		context.addServiceListener(this,
 				"(objectClass=" + HttpService.class.getName() + ")");
@@ -39,75 +42,39 @@ public class DefaultWebActivator extends DefaultConsoleActivator implements Serv
 	public void serviceChanged(ServiceEvent event) {
 		switch (event.getType()) {
 		case ServiceEvent.REGISTERED:
-			this.register();
+			try {
+				this.registerResources();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			break;
 
 		case ServiceEvent.UNREGISTERING:
-			this.unregister();
+			try {
+				this.unregisterResources();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			break;
 		}
 	}
 	
-	
-	protected void register(){
-		try {
+	@SuppressWarnings("unchecked")
+	public void registerResources()throws Exception{
+		this.registerResources(register);
+		
+		ServiceReference<HttpService> ref = (ServiceReference<HttpService>) this.context.getServiceReference(HttpService.class.getName());
+		if(ref!=null){
+			HttpService http = this.context.getService(ref);
+			this.register.setHttpService(http);
 			this.register.start();
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
-//		try {
-//			ref = (ServiceReference<HttpService>) this.context.getServiceReference(HttpService.class.getName());
-//			if(ref!=null){
-//				HttpService http = this.context.getService(ref);
-//				if(http!=null){
-//					this.registerResources(register);
-//					Map<String,String> res = this.register.getResources();
-//					for (String k : res.keySet()) {
-//						http.registerResources(k, res.get(k), null);
-//						logger.info("register resources "+k);
-//					}
-//					this.registerServlet(register);
-//					Map<String,Map<HttpServlet,Dictionary<?, ?>>> servlets = this.register.getServlets();
-//					for (String k : servlets.keySet()) {
-//						Map<HttpServlet,Dictionary<?, ?>> temp = servlets.get(k); 
-//						http.registerServlet(k, temp.entrySet().iterator().next().getKey(), temp.entrySet().iterator().next().getValue(), null);
-//						logger.info("register servlet "+k);
-//					}
-//				}
-//			}
-//		} catch (NamespaceException e) {
-//			e.printStackTrace();
-//		} catch (ServletException e) {
-//			e.printStackTrace();
-//		}
 	}
 	
-	
-	protected void unregister(){
-		try {
-			this.register.stop();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-//		try {
-//			ref = (ServiceReference<HttpService>) this.context.getServiceReference(HttpService.class.getName());
-//			if(ref!=null){
-//				HttpService http = this.context.getService(ref);
-//				if(http!=null){
-//					Map<String,String> res = this.register.getResources();
-//					for (String k : res.keySet()) {
-//						http.unregister(k);
-//						this.unregistedResources();
-//					}
-//					Map<String,Map<HttpServlet,Dictionary<?, ?>>> servlets = this.register.getServlets();
-//					for (String k : servlets.keySet()) {
-//						http.unregister(k);
-//						this.unregistedServlet(servlets.get(k).entrySet().iterator().next().getKey());
-//					}
-//				}
-//			}
-//		} catch (Exception e) {
-//		}
+
+	public void unregisterResources()throws Exception{
+		this.register.stop();
+		this.unregistedResources(register);
 	}
 	/**
 	 * web application bundle注册资源文件时需要重写
@@ -115,6 +82,11 @@ public class DefaultWebActivator extends DefaultConsoleActivator implements Serv
 	 * @throws NamespaceException
 	 */
 	protected void registerResources(ResourcesRegister register)throws NamespaceException{}
+	/**
+	 * HttpService停止并且写在当前web application bundle所有资源后调用
+	 */
+	protected void unregistedResources(ResourcesRegister register){}
+	
 	/**
 	 * web application bundle注册自定义Servlet时需要重写
 	 * @param register
@@ -127,9 +99,5 @@ public class DefaultWebActivator extends DefaultConsoleActivator implements Serv
 	 * @param servlet
 	 */
 	protected void unregistedServlet(HttpServlet servlet){}
-	/**
-	 * HttpService停止并且写在当前web application bundle所有资源后调用
-	 */
-	protected void unregistedResources(){}
 	
 }
