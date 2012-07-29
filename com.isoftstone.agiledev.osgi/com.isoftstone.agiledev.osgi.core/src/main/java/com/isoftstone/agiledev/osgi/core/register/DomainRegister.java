@@ -13,7 +13,7 @@ public class DomainRegister extends DefaultAnnotationServiceRegister implements 
 
 	@Override
 	public void start() throws Exception {
-		for (Class<?> clazz : this.getAnnotationClasses()) {
+		for (Class<?> clazz : this.getClasses()) {
 			EntityAlias annotation = (EntityAlias) clazz.getAnnotation(EntityAlias.class);
 			if (annotation.value() != null)
 				this.context.registerDomain(annotation.value(), clazz);

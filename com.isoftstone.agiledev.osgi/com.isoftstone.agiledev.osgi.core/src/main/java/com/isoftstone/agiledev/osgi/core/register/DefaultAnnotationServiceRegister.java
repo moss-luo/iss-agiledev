@@ -6,7 +6,7 @@ import java.util.List;
 public abstract class DefaultAnnotationServiceRegister extends DefaultServiceRegister implements AnnotationServiceRegister{
 
 	@Override
-	public Class<?>[] getAnnotationClasses() {
+	public Class<?>[] getClasses() {
 		Class<?>[] allBundleClasses = this.context.getContextClasses();
 		List<Class<?>> annotationClasses = new ArrayList<Class<?>>();
 		for (Class<?> c : allBundleClasses) {

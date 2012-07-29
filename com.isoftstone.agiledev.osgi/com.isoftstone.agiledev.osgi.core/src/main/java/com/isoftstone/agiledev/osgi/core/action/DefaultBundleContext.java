@@ -97,17 +97,17 @@ public class DefaultBundleContext implements Context {
 		this.registerService(clazz.getName(), o, props);
 	}
 
-	@SuppressWarnings("rawtypes")
+
 	@Override
-	public void unregisterService(String name, String fileter) {
-		ServiceReference sf = this.bundleContext.getServiceReference(name);
-		this.bundleContext.ungetService(sf);
+	public void registerService(String name, Object o) {
+		this.registerService(name, o, null);
 	}
 
 	@Override
-	public void unregisterService(String name) {
-		this.unregisterService(name,null);
+	public void registerService(Class<?> clazz, Object o) {
+		this.registerService(clazz, o, null);
 	}
+	
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
@@ -123,7 +123,7 @@ public class DefaultBundleContext implements Context {
 			}
 			creater.registerDomain(alias, clazz);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("error in DefaultBundleContext.registerDomain!",e);
 		}
 	}
 
@@ -140,10 +140,47 @@ public class DefaultBundleContext implements Context {
 			}
 			creater.registerMapper(clazz);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("error in DefaultBundleContext.registerMapper!",e);
 		}
 		
 	}
+
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public void unregisterService(String name, String filter) {
+		try {
+			if(filter!=null){
+				ServiceReference sf = this.bundleContext.getServiceReference(name);
+				this.bundleContext.ungetService(sf);
+			}else{
+				ServiceReference[] sfs = this.bundleContext.getServiceReferences(name, filter);
+				if(sfs!=null && sfs.length>0){
+					for (ServiceReference sf : sfs) {
+						this.bundleContext.ungetService(sf);
+					}
+				}
+			}
+		} catch (Exception e) {
+			logger.error("error in DefaultBundleContext.unregisterService!",e);
+		}
+				
+	}
+
+	@Override
+	public void unregisterService(String name) {
+		this.unregisterService(name,null);
+	}
+	@Override
+	public void unregisterService(Class<?> clazz) {
+		this.unregisterService(clazz.getName(),null);
+	}
+
+	@Override
+	public void unregisterService(Class<?> clazz, String filter) {
+		this.unregisterService(clazz.getName(),filter);		
+	}
+
 
 
 }

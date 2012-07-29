@@ -19,7 +19,7 @@ public class MapperRegister extends DefaultAnnotationServiceRegister implements 
 	@SuppressWarnings({ "rawtypes"})
 	@Override
 	public void start() throws Exception {
-		for (Class clazz : this.getAnnotationClasses()) {
+		for (Class clazz : this.getClasses()) {
 			this.context.registerMapper(clazz);
 			logger.info("register mapper:[" + clazz.getName() + "]");
 		}

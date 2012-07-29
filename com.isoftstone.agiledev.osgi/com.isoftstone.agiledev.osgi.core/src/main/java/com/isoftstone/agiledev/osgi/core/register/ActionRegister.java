@@ -20,7 +20,7 @@ public class ActionRegister extends DefaultAnnotationServiceRegister implements 
 	@Override
 	public void start() throws Exception {
 		try {
-			for (Class<?> clazz : this.getAnnotationClasses()) {
+			for (Class<?> clazz : this.getClasses()) {
 				Action annotation = (Action) clazz.getAnnotation(Action.class);
 				Object o = clazz.newInstance();
 				if (o instanceof com.isoftstone.agiledev.osgi.core.web.Action) {
@@ -44,7 +44,7 @@ public class ActionRegister extends DefaultAnnotationServiceRegister implements 
 
 	@Override
 	public void stop() throws Exception {
-		for (Class<?> clazz : this.getAnnotationClasses()) {
+		for (Class<?> clazz : this.getClasses()) {
 			Action annotation = (Action) clazz.getAnnotation(Action.class);
 //			ServiceReference<com.isoftstone.agiledev.osgi.core.web.Action> sf = 
 //						(ServiceReference<com.isoftstone.agiledev.osgi.core.web.Action>) 
