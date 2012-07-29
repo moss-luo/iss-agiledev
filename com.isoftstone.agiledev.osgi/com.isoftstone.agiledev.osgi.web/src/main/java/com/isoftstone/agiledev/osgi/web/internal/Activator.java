@@ -3,7 +3,7 @@ package com.isoftstone.agiledev.osgi.web.internal;
 import org.osgi.service.http.NamespaceException;
 
 import com.isoftstone.agiledev.osgi.core.action.DefaultWebActivator;
-import com.isoftstone.agiledev.osgi.core.action.Register;
+import com.isoftstone.agiledev.osgi.core.register.ResourcesRegister;
 
 /**
  * Extension of the default OSGi bundle activator
@@ -34,7 +34,7 @@ public final class Activator extends DefaultWebActivator {
 			{"/resources/ligerui/skins/Aqua/images/win","resources/ligerui/skins/Aqua/images/win"}
 	}; 
 	
-	protected void registerResources(Register register) throws NamespaceException {
+	protected void registerResources(ResourcesRegister register) throws NamespaceException {
 		for (String[] s : res) {
 			register.registerResources(s[0], s[1]);
 		}
