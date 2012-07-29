@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public abstract class DefaultInterfaceServiceRegister extends DefaultServiceRegister implements InterfaceServiceRegister{
+public abstract class DefaultInterfaceServiceRegister extends DefaultServiceRegister implements BeanRegister{
 
 	private Logger logger = LoggerFactory.getLogger(DefaultInterfaceServiceRegister.class);
 	@Override
@@ -18,7 +18,7 @@ public abstract class DefaultInterfaceServiceRegister extends DefaultServiceRegi
 				
 			for (Class<?> c : allBundleClasses) {
 				for (Class<?> interfaceClasse : c.getInterfaces()) {
-					if(interfaceClasse.getName().equals(this.getParentType().getName())){
+					if(interfaceClasse.getName().equals(this.getRegisterType().getName())){
 						implementClasses.add(c);
 					}
 				}
@@ -31,7 +31,7 @@ public abstract class DefaultInterfaceServiceRegister extends DefaultServiceRegi
 	@Override
 	public void start() throws Exception {
 		for (Class<?> c : this.getClasses()) {
-			this.context.registerService(this.getParentType(), c.newInstance(), null);
+			this.context.registerService(this.getRegisterType(), c.newInstance(), null);
 		}
 	}
 	@Override

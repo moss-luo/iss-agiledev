@@ -1,6 +1,5 @@
 package com.isoftstone.agiledev.osgi.core.register;
 
-import java.lang.annotation.Annotation;
 import java.util.Dictionary;
 import java.util.Properties;
 
@@ -10,12 +9,11 @@ import org.slf4j.LoggerFactory;
 import com.isoftstone.agiledev.osgi.core.service.Service;
 
 
-public class ServiceRegister extends DefaultAnnotationServiceRegister implements
-		AnnotationServiceRegister {
+public class ServiceRegister extends DefaultAnnotationServiceRegister {
 
 	private Logger logger = LoggerFactory.getLogger(ServiceRegister.class);
 	@Override
-	public Class<? extends Annotation> getAnnotationType() {
+	public Class<?> getRegisterType() {
 		return Service.class;
 	}
 

@@ -1,6 +1,5 @@
 package com.isoftstone.agiledev.osgi.core.register;
 
-import java.lang.annotation.Annotation;
 import java.util.Dictionary;
 import java.util.Properties;
 
@@ -9,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import com.isoftstone.agiledev.osgi.core.web.annotation.Action;
 
-public class ActionRegister extends DefaultAnnotationServiceRegister implements AnnotationServiceRegister{
+public class ActionRegister extends DefaultAnnotationServiceRegister{
 
 
 	private Logger logger = LoggerFactory.getLogger(ActionRegister.class);
@@ -59,8 +58,9 @@ public class ActionRegister extends DefaultAnnotationServiceRegister implements 
 
 
 	@Override	
-	public Class<? extends Annotation> getAnnotationType() {
+	public Class<?> getRegisterType() {
 		return Action.class;
 	}
+
 
 }

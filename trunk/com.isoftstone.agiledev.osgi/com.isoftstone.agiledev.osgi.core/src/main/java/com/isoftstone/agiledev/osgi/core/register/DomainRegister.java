@@ -1,13 +1,11 @@
 package com.isoftstone.agiledev.osgi.core.register;
 
-import java.lang.annotation.Annotation;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.isoftstone.agiledev.osgi.core.domain.EntityAlias;
 
-public class DomainRegister extends DefaultAnnotationServiceRegister implements AnnotationServiceRegister {
+public class DomainRegister extends DefaultAnnotationServiceRegister {
 
 	private Logger logger = LoggerFactory.getLogger(DomainRegister.class);
 
@@ -31,7 +29,7 @@ public class DomainRegister extends DefaultAnnotationServiceRegister implements 
 	}
 
 	@Override
-	public Class<? extends Annotation> getAnnotationType() {
+	public Class<?> getRegisterType() {
 		return EntityAlias.class;
 	}
 }
