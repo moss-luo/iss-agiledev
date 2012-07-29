@@ -1,18 +1,24 @@
 package com.isoftstone.agiledev.osgi.core.action;
 
 import java.util.Dictionary;
-import java.util.Map;
 
 import javax.servlet.http.HttpServlet;
+
+import org.osgi.service.http.HttpService;
 
 public interface Register {
 
 	void registerResources(String alias,String name);
 	void regiserServlet(String alias,HttpServlet servlet,Dictionary<?,?> dic);
 	
+	void setHttpService(HttpService httpService);
 	void setContextPath(String contextPath);
 	
-	Map<String,String> getResources();
-	Map<String,Map<HttpServlet,Dictionary<?, ?>>> getServlets();
+	void start() throws Exception ;
+	void stop() throws Exception ;
+	
+//	Map<String,String> getResources();
+//	Map<String,Map<HttpServlet,Dictionary<?, ?>>> getServlets();
 	
 }
+
