@@ -31,7 +31,9 @@ public class DefaultBundleContext implements Context {
 	}
 
 	
-
+	/**
+	 * 获取当前bundle中的所有类
+	 */
 	@Override
 	public Class<?>[] getContextClasses() {
 
@@ -58,7 +60,11 @@ public class DefaultBundleContext implements Context {
 		String[] classNames = OSGIUtil.readJarFileClass(jarPath);
 		return classNames;
 	}
-
+	/**
+	 * 获取bundle-jar的物理位置
+	 * @param context
+	 * @return
+	 */
 	private String getBundlePath(BundleContext context) {
 
 		String bundleName = context.getBundle().getSymbolicName();
