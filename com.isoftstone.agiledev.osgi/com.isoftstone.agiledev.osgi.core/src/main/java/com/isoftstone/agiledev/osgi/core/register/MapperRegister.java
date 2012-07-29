@@ -1,19 +1,17 @@
 package com.isoftstone.agiledev.osgi.core.register;
 
-import java.lang.annotation.Annotation;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.isoftstone.agiledev.osgi.core.domain.EntityMapper;
 
-public class MapperRegister extends DefaultAnnotationServiceRegister implements AnnotationServiceRegister{
+public class MapperRegister extends DefaultAnnotationServiceRegister{
 
 
 
 	private Logger logger = LoggerFactory.getLogger(MapperRegister.class);
 	@Override
-	public Class<? extends Annotation> getAnnotationType() {
+	public Class<?> getRegisterType() {
 		return EntityMapper.class;
 	}
 	@SuppressWarnings({ "rawtypes"})
