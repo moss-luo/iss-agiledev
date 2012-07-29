@@ -63,6 +63,9 @@ public abstract class DefaultActivator implements Activator,
 		mapperRegister.setContext(context);
 		registers.add(mapperRegister);
 		
+		
+		//TODO 需要获取所有注册到OSGI中的Register，并初始化他们
+		
 	}
 	
 	public void start(BundleContext context) throws Exception {

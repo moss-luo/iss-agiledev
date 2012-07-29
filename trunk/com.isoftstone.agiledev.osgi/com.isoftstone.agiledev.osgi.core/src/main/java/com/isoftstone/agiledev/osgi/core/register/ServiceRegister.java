@@ -23,7 +23,7 @@ public class ServiceRegister extends DefaultAnnotationServiceRegister implements
 	@Override
 	public void start() throws Exception {
 
-		for (Class<?> clazz : this.getAnnotationClasses()) {
+		for (Class<?> clazz : this.getClasses()) {
 			Service annotation = (Service) clazz.getAnnotation(Service.class);
 			Class<?> superClazz = annotation.type();
 			if (superClazz != null && superClazz != Object.class) {

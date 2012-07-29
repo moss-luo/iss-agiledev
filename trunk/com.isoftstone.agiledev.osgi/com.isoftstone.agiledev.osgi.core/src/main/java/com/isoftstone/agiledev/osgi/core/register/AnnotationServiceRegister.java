@@ -7,5 +7,4 @@ public interface AnnotationServiceRegister extends BeanRegister{
 
 	Class<? extends Annotation> getAnnotationType();
 	
-	Class<?>[] getAnnotationClasses();
 }
