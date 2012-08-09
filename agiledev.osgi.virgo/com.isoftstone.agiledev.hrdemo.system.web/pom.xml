@@ -19,10 +19,13 @@
 		<artifactId>org.springframework.spring-library</artifactId>
 		<type>libd</type>
 	</dependency>
-
 	<dependency>
 		<groupId>com.isoftstone.agiledev.hrdemo</groupId>
 		<artifactId>com.isoftstone.agiledev.hrdemo.system.app</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>com.isoftstone.agiledev</groupId>
+		<artifactId>com.isoftstone.agiledev.core</artifactId>
 	</dependency>
   </dependencies>
 
