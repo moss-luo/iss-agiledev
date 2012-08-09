@@ -1,0 +1,10 @@
+.agiledev{
+	font-family: Verdana,Arial,sans-serif/*{ffDefault}*/;
+	font-size: 12px/*{fsDefault}*/;
+}
+.agiledev-hide{
+	display:none;
+}
+.agiledev-show{
+	display:block;
+}

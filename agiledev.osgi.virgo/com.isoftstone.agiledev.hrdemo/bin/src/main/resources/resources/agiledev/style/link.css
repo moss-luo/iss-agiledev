@@ -1,0 +1,63 @@
+﻿
+/*---------------------------------link ---------------------------------------------*/
+a {
+	color: #406AA4;
+	text-decoration: none;
+}
+a:hover {
+	color: #f28b12;
+	text-decoration: underline;
+}
+a.black{
+	color: #000000;
+	text-decoration: none;
+}
+a.black:hover {
+	color: #000000;
+	text-decoration: none;
+}
+
+a.boldblack{
+	color: #000000;
+	font-weight: bold;
+	text-decoration: none;
+}
+a.boldblack:hover {
+	color: #f28b12;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+a.blue:link{
+	color: #003399;
+	text-decoration: none;
+}
+a.blue:visited {
+	color: #003399;
+	text-decoration: none;
+}
+a.blue:active {
+	color: #003399;
+	text-decoration: none;
+}
+a.blue:hover {
+	color: #800000;
+	text-decoration: underline;
+}
+
+a.white:link{
+	color: #FFFFFF;
+	text-decoration: none;
+}
+a.white:visited {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+a.white:active {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+a.white:hover {
+	color: #CCCCCC;
+	text-decoration: underline;
+}

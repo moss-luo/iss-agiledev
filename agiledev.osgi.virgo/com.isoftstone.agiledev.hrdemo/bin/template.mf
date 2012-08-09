@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: AgileDev HR Demo
+Bundle-SymbolicName: com.isoftstone.agiledev.hrdemo
+Bundle-Version: 1.0.0.SNAPSHOT
+Web-ContextPath: /hrdemo
+Excluded-Exports: resources.*
