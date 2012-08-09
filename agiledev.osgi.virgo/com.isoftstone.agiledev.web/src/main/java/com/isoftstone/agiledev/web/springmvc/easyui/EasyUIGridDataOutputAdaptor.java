@@ -1,6 +1,7 @@
 package com.isoftstone.agiledev.web.springmvc.easyui;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,9 +39,20 @@ public class EasyUIGridDataOutputAdaptor implements DataOutputAdaptor {
 	public boolean check(Object o) {
 		return o instanceof GridData;
 	}
+	@SuppressWarnings("rawtypes")
 	private Object filterGridData(Object gridData) {
-		if(!check(gridData))throw new RuntimeException("format error:"+gridData);
-		return convertToEasyUIGridData((GridData)gridData);
+		if(gridData instanceof Map){
+			Map m = (Map) gridData;
+			for (Object o : m.values()) {
+				if(check(o)){
+					return convertToEasyUIGridData((GridData)o);
+				}
+			}
+		}else{
+			if(!check(gridData))throw new RuntimeException("format error:"+gridData);
+			return convertToEasyUIGridData((GridData)gridData);
+		}
+		return null;
 	}
 	private EasyUIGridData convertToEasyUIGridData(GridData gridData){
 		EasyUIGridData d = new EasyUIGridData();
