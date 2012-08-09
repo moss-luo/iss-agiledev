@@ -46,9 +46,11 @@ $.widget("ui.agiledevForm", {
 		if($(self.uiForm).form('validate')){
 			$.ajax({
 				url:options.submitUrl,
+				//accepts:{"accept":['application/json, text/javascript, */*',['q=0.01']},
 				type:'post',
 				beforeSend:function(xhr){
-					xhr.setRequestHeader("agiledev-ajax-request-type",'submit-form');
+//					xhr.setRequestHeader("agiledev-ajax-request-type",'submit-form');
+//					xhr.setRequestHeader("Accept","application/json, text/javascript, */*; q=0.01");
 				},
 				data:self.uiForm.serialize(),
 				dataType:'json',
