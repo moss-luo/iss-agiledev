@@ -1,8 +1,6 @@
 /**
  * @author xwpu
  */
-
-
 (function($){
 var options = {
 			formInitUrl:'',//表单初始化地址
@@ -410,7 +408,7 @@ Handle.prototype.save = function(){
 		},
 		success: function(result){
 			var result = eval('('+result+')');
-			if (result.success){
+			if (result.operationPrompt.success){
 				$this.plugin.getRender().closeDialog();
 				$this.plugin.getRender().reloadDatagrid("reload");
 				
@@ -418,7 +416,7 @@ Handle.prototype.save = function(){
 			} else {
 				$.messager.show({
 					title: lang.prompt.title,
-					msg: result.msg
+					msg: result.operationPrompt.msg
 				});
 			}
 		}
