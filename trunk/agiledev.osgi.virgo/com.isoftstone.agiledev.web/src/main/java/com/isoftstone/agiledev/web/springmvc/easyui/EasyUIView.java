@@ -1,5 +1,7 @@
 package com.isoftstone.agiledev.web.springmvc.easyui;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +22,7 @@ public class EasyUIView extends MappingJacksonJsonView {
 	private JsonEncoding encoding = JsonEncoding.UTF8;
 	
 	private List<DataOutputAdaptor> dataOutputAdaptors = null;
-	
+	private Map<String,DataOutputAdaptor> ds = null;
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model,
 			HttpServletRequest request, HttpServletResponse response)
@@ -67,10 +69,18 @@ public class EasyUIView extends MappingJacksonJsonView {
 	
 
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private DataOutputAdaptor buildDataOutputAdaptor(Object singleObj) {
 		if (this.dataOutputAdaptors == null) {
 			return null;
-		} else {
+		} else if(singleObj instanceof Map){
+			Map m = (Map) singleObj;
+			Iterator<Map.Entry> it = m.entrySet().iterator();
+			while(it.hasNext()){
+				DataOutputAdaptor baseAdaptor = this.ds.get(it.next().getValue().getClass().getName());
+				if(baseAdaptor!=null)return baseAdaptor;
+			}
+		}else{
 			for (DataOutputAdaptor f : this.dataOutputAdaptors) {
 				String formatType = f.getType();
 				if (singleObj.getClass().getName().equals(formatType))
@@ -150,5 +160,9 @@ public class EasyUIView extends MappingJacksonJsonView {
 
 	public void setDataOutputAdaptors(List<DataOutputAdaptor> dataOutputAdaptors) {
 		this.dataOutputAdaptors = dataOutputAdaptors;
+		ds = new HashMap<String, DataOutputAdaptor>();
+		for (DataOutputAdaptor d : dataOutputAdaptors) {
+			ds.put(d.getType(), d);
+		}
 	}
 }
