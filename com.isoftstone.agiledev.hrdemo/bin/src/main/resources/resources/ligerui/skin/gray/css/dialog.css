@@ -1,0 +1,107 @@
+﻿ /* --------------
+   *   dialog  *
+* ------------ */    
+ 
+.l-dialog{ padding:0; margin:0;font-size:12px; border-top:1px solid #405999; border-bottom:1px solid #545454; } 
+.l-dialog td,.l-dialog tr,.l-dialog td div{font-size:12px; } 
+.l-dialog-cc{ background:white;}
+.l-dialog-tl,.l-dialog-tr,.l-dialog-bl,.l-dialog-br,.l-dialog-cl,.l-dialog-cr{width:1px;} 
+.l-dialog-tl,.l-dialog-tc,.l-dialog-tr{ height:24px;}
+.l-dialog-bl,.l-dialog-bc,.l-dialog-br{ height:0px; line-height:0px;}
+
+.l-dialog-tl{background:#43569A;border-bottom:1px solid #405999;}
+.l-dialog-tc{background:#6C84B4;border-bottom:1px solid #405999;}
+.l-dialog-tr{background:#43569A;border-bottom:1px solid #405999;}
+.l-dialog-bl{background:#575757;}
+.l-dialog-bc{background:#F2F2F2;}
+.l-dialog-br{background:#575757;}
+.l-dialog-cl{background:#575757;}
+.l-dialog-cr{background:#575757;}
+
+.l-dialog-winbtns{ position:absolute;right:0px; top:4px; height:16px;}
+.l-dialog-winbtn{background:url('../images/win/dialog-winbtns.gif') no-repeat;cursor:pointer;overflow:hidden; width:17px; height:16px; float:right; margin-right:4px;}
+
+.l-dialog-close{background-position:-85px 0px;}
+.l-dialog-close-over{background-position:-85px -16px;}
+.l-dialog-close-disabled{background-position:-85px -32px; cursor:default;}
+.l-dialog-min{ background-position:0px 0px;}
+.l-dialog-min-over{background-position:0px -16px;}
+.l-dialog-min-disabled{background-position:0px -32px;cursor:default;}
+.l-dialog-max{background-position:-17px 0px;}
+.l-dialog-max-over{background-position:-17px -16px;}
+.l-dialog-max-disabled{background-position:-17px -32px;cursor:default;}
+.l-dialog-recover{background-position:-34px 0px;}
+.l-dialog-recover-over{background-position:-34px -16px;}
+.l-dialog-recover-disabled{background-position:-34px -32px;cursor:default;}
+
+.l-dialog-collapse{background-position:-51px 0px;}
+.l-dialog-collapse-over{background-position:-51px -16px;}
+.l-dialog-collapse-disabled{background-position:-51px -32px;cursor:default;}
+.l-dialog-extend{background-position:-68px 0px;}
+.l-dialog-extend-over{background-position:-68px -16px;}
+.l-dialog-extend-disabled{background-position:-68px -32px;cursor:default;}
+
+.l-dialog-tc-inner{ position:relative;height:24px; line-height:24px; width:100%;  }
+.l-dialog-title {  color:#FFF; font-weight:700; text-shadow:none; padding-left:24px; padding-right:20px; text-align:left; padding-top:0px;}
+.l-dialog-tc-inner .l-dialog-icon{ position:absolute; left:4px; top:5px; width:15px; height:14px; overflow:hidden; background:url('../images/win/dialogicon.gif');} 
+
+ 
+.l-dialog-buttons{ height:30px; line-height:30px; background:#F8F8F8;border-top:1px solid #C6C6C6; overflow:hidden; margin-bottom:0px;}
+.l-dialog-buttons-inner{}
+
+.l-dialog-btn,.l-dialog-btn-over,.l-dialog-btn-l,.l-dialog-btn-r{background-image:url('../images/win/dialogbtn.gif');}
+.l-dialog-btn,.l-dialog-btn-over{background-repeat:repeat-x;}
+.l-dialog-btn-l,.l-dialog-btn-r{background-repeat:no-repeat;}
+
+
+.l-dialog-btn{ height:25px; overflow:hidden; width:70px; line-height:25px; cursor:pointer; position:relative; float:right; margin-right:5px;}
+
+.l-dialog-btn-inner{ text-align:center;}
+
+
+
+.l-dialog-inputtext{ width:280px; border:1px solid #0099CC; line-height:23px; height:25px;}
+.l-dialog-textarea{ width:280px; border:1px solid #0099CC;  height:80px;}
+ 
+
+.l-dialog-btn{background-position:0px -25px;}
+.l-dialog-btn-over{ background-position:0px -75px;}
+ 
+.l-dialog-btn-l{ height:25px; position:absolute; left:0px; top:0px; width:3px;background-position:0px 0px;}
+.l-dialog-btn-over .l-dialog-btn-l{background-position:0px -50px;}
+.l-dialog-btn-r{ height:25px; position:absolute; right:0px; top:0px; width:3px;background-position:-4px 0px;}
+.l-dialog-btn-over .l-dialog-btn-r{background-position:-4px -50px;}
+
+
+/* ------------------
+   *   messagebox  *
+* --------------- */
+.l-messagebox{ position:absolute;top:100px; left:100px; width:300px; background:#f9f9f9;border-bottom:1px solid #eaeaea;z-index: 9001;  }
+
+.l-messagebox-title,.l-messagebox-close,.l-messagebox-close-over,.l-messagebox-btn,.l-messagebox-btn-l,.l-messagebox-btn-r,.l-messagebox-lt,.l-messagebox-rt
+{background-image:url('../images/win/box.gif'); background-repeat:no-repeat;} 
+.l-messagebox .l-messagebox-title{ background-repeat:repeat-x;}
+
+.l-messagebox-title{height:21px; line-height:21px; color:black; font-weight:bold; background-position:0px -99px;}
+
+
+
+.l-messagebox-image{ width:35px; height:35px; overflow:hidden; display:none; position:absolute; top:30px; left:15px;background:url('../images/win/box-icons.gif') no-repeat;}
+.l-messagebox-image-donne{background-position:0px 0px; }
+.l-messagebox-image-error{background-position:0px -115px; }
+.l-messagebox-image-question{background-position:0px -70px;height:45px; }
+.l-messagebox-image-warn{background-position:0px -35px; }
+.l-messagebox-title-inner{ padding-left:10px;}
+.l-messagebox-content{ padding-left:20px; padding-top:10px;padding-bottom:20px;}
+.l-messagebox-buttons{ height:30px; position:relative; text-align:center; margin-top:4px;}
+.l-messagebox-buttons-inner{ margin-left:10px;}
+.l-messagebox-close{ width:13px; height:13px; overflow:hidden; position:absolute; right:4px;top:4px;  cursor:pointer; background-position:-8px -24px;}
+.l-messagebox-close-over{background-position:-8px -37px;}
+.l-messagebox-lt{width:3px; height:3px; overflow:hidden;position:absolute; top:0; left:0; z-index:12;background-position:0px -48px;}
+.l-messagebox-rt{width:3px; height:3px; overflow:hidden; position:absolute; top:0; right:0;z-index:12;background-position:-4px -48px;}
+.l-messagebox-l{ background:#f9f9f9; width:1px; height:100%; position:absolute; top:0px; left:0px;overflow:hidden; }
+.l-messagebox-r{ background:#f9f9f9; width:1px; height:100%; position:absolute; top:0px; right:0px; overflow:hidden; } 
+ 
+.l-messagebox-btn{ height:24px; overflow:hidden;background:url('../images/win/box.gif') repeat-x; width:70px; line-height:24px; cursor:pointer; position:relative; float:left; margin-left:5px;} 
+.l-messagebox-btn-inner{ text-align:center;}
+ 

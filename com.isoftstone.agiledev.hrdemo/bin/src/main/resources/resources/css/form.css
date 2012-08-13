@@ -1,0 +1,16 @@
+body:{font-size:12px}
+.container{overflow: hidden;height:100%}
+.title { border-bottom:1px solid #ABABAB;margin: 3px 0 0 5px;width: 99%;color:black;}
+.baseinfo-panel {float:left; margin: 10px 0 0 10px;width:97%;} 
+.content{margin-left:20px}
+.list{overflow: hidden;overflow-y:auto;height:150px}
+.list table{font-size:12px;}
+.content ol{width:100%;list-style: none;}
+.content ol li{float:left;padding: 5px;line-height: 24px;}
+.content .name{display: inline-block;width: 60px;font-size:12px;}
+.content .value{margin-left:-2px;font-size:12px;display: inline-block;}
+.content .red{color:red; margin-left: -3px}
+.button-panel{bottom: 0;position: absolute;/*right: 0;*/left:35%}
+.button-panel a{display:inline-block;}
+.input{width:150px}
+.textarea{width:630px;overflow: hidden;overflow-y:auto}

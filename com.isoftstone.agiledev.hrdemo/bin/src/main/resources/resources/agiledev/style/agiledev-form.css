@@ -1,0 +1,42 @@
+.agiledev-form{
+	/*margin:10px;*/
+}
+.agiledev-dialog{
+	/*margin:10px;*/
+}
+.agiledev-search{
+	margin:15px 0;
+	text-align: left;
+	display:inline;
+}
+.agiledev-form-item{
+	/*margin-bottom:5px;
+	width: 500px;*/
+}
+.agiledev-search .agiledev-form-item{
+	display:inline;
+}
+.agiledev-form-title{
+	display: inline;
+    text-align: left;
+    width: 60px;
+	margin-top:5px;
+}
+.agiledev-dialog .agiledev-form-title{
+	float:left;
+}
+
+/*
+.agiledev-dialog .agiledev-form-element{
+	float:right;
+	margin-right:80px;
+}
+*/
+
+
+.agiledev-form-element{
+	display: inline;
+}
+.search-form #review{
+	display: none;
+}
