@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plan name="com.isoftstone.agiledev.hrdemo_1.0.0.SNAPSHOT.plan" version="1.0.0.SNAPSHOT" scoped="false" atomic="true"
+        xmlns="http://www.eclipse.org/virgo/schema/plan"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+		        http://www.eclipse.org/virgo/schema/plan 
+		        http://www.eclipse.org/virgo/schema/plan/eclipse-virgo-plan.xsd">
+
+	<artifact type="bundle" name="com.isoftstone.agiledev.hrdemo" version="1.0.0.SNAPSHOT"/>
+	<artifact type="bundle" name="com.isoftstone.agiledev.hrdemo.workbench.app" version="1.0.0.SNAPSHOT"/>
+	<artifact type="bundle" name="com.isoftstone.agiledev.hrdemo.workbench.web" version="1.0.0.SNAPSHOT"/>
+	<artifact type="bundle" name="com.isoftstone.agiledev.hrdemo.system.app" version="1.0.0.SNAPSHOT"/>
+	<artifact type="bundle" name="com.isoftstone.agiledev.hrdemo.system.web" version="1.0.0.SNAPSHOT"/>
+	
+</plan>

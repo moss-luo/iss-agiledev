@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: AgileDev WEB
+Bundle-SymbolicName: com.isoftstone.agiledev.web
+Bundle-Version: 1.0.0.SNAPSHOT
+Bundle-ClassPath: .
+Import-Template: org.osgi.framework.*;version="0",
+ com.isoftstone.agiledev.core*;version="1.0.0.SNAPSHOT",
+ com.opensymphony.xwork2.*;version="[2.2.3.1,3)",
+ com.opensymphony.xwork2.*;version="[2.2.3.1,3)",
+ org.apache.struts2.*;version="[2.2.3.1,3)"
+Query-Parameters-Readers: EasyUi-Reader;class=com.isoftstone.agiledev.web.easyui.EasyUiQueryParametersReader
+Eclipse-BuddyPolicy: registered
+Eclipse-RegisterBuddy: org.apache.struts.2-core
