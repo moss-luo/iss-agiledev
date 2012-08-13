@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: AgileDev HR Demo System Application Module
-Bundle-SymbolicName: com.isoftstone.agiledev.hrdemo.system.app
-Bundle-Version: 1.0.0.SNAPSHOT
-Import-Template: org.springframework.*;version="[3.0.5,4)"
-Import-Package: org.springframework.context.config;version="[3.0.5,4)"
-Excluded-Exports: com.isoftstone.agiledev.hrdemo.system.app.internal.*
-Excluded-Imports: com.isoftstone.agiledev.hrdemo.system.app
