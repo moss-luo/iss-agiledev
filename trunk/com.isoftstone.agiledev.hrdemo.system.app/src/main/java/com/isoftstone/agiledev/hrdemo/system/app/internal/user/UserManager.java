@@ -51,6 +51,11 @@ public class UserManager implements IUserManager {
 	public int getTotal() {
 		return (Integer)sqlSession.selectOne("com.isoftstone.agiledev.hrdemo.system.app.user.UserMapper.total");
 	}
+
+	@Override
+	public void remove(int[] ids) {
+		sqlSession.delete("com.isoftstone.agiledev.hrdemo.system.app.user.UserMapper.batchRemove", ids);
+	}
 	
 
 }
