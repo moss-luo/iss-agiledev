@@ -13,7 +13,6 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-import com.isoftstone.agiledev.core.DataOutputAdaptor;
 import com.isoftstone.agiledev.core.tree.Node;
 import com.isoftstone.agiledev.core.tree.TreeData;
 import com.isoftstone.agiledev.web.easyui.EasyUITreeNode;
