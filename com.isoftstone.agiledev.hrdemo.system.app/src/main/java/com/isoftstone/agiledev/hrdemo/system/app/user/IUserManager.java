@@ -8,6 +8,7 @@ public interface IUserManager {
 	void add(User user);
 	void update(User user);
 	void remove(int id);
+	void remove(int[] ids);
 	User findById(int id);
 	int getTotal();
 }

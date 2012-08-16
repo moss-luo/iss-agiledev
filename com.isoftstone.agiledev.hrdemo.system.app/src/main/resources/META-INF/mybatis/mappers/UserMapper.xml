@@ -30,6 +30,13 @@
 		DELETE FROM USER WHERE id=#{id}
 	</delete>
 	
+	<delete id="batchRemove" parameterType="int[]">
+		DELETE FROM USER WHERE id in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
 	<select id="total" resultType="int">
 		SELECT COUNT(*) FROM USER
 	</select>

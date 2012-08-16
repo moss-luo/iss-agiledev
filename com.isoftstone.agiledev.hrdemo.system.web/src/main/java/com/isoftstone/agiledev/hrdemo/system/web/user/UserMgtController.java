@@ -51,9 +51,7 @@ public class UserMgtController {
 	@RequestMapping
 	public OperationPrompt remove(@RequestParam(value="id", required=false) int[] ids){
 		try {
-			for (int id : ids) {
-				this.userManager.remove(id);
-			}
+			this.userManager.remove(ids);
 			
 			return new OperationPrompt("删除成功", true);
 		} catch (Exception e) {
