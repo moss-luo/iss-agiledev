@@ -34,11 +34,13 @@ public class EasyUIView extends MappingJacksonJsonView {
 		}
 		
 		SerializationConfig config = objectMapper.getSerializationConfig();
+		
+		DataOutputAdaptor adaptor = this.buildDataOutputAdaptor(model);
+		
 		Object value = filterModel(model, generator, config, request);
 		
 //		objectMapper.writeValue(generator, value, config);
 
-		DataOutputAdaptor adaptor = this.buildDataOutputAdaptor(value);
 		if (adaptor != null) {
 			adaptor.output(request,response, value);
 		} else {
@@ -70,11 +72,11 @@ public class EasyUIView extends MappingJacksonJsonView {
 
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private DataOutputAdaptor buildDataOutputAdaptor(Object singleObj) {
+	private DataOutputAdaptor buildDataOutputAdaptor(Object model) {
 		if (this.dataOutputAdaptors == null) {
 			return null;
-		} else if(singleObj instanceof Map){
-			Map m = (Map) singleObj;
+		} else if(model instanceof Map){
+			Map m = (Map) model;
 			Iterator<Map.Entry> it = m.entrySet().iterator();
 			while(it.hasNext()){
 				DataOutputAdaptor baseAdaptor = this.ds.get(it.next().getValue().getClass().getName());
@@ -83,7 +85,7 @@ public class EasyUIView extends MappingJacksonJsonView {
 		}else{
 			for (DataOutputAdaptor f : this.dataOutputAdaptors) {
 				String formatType = f.getType();
-				if (singleObj.getClass().getName().equals(formatType))
+				if (model.getClass().getName().equals(formatType))
 					return f;
 			}
 		}
