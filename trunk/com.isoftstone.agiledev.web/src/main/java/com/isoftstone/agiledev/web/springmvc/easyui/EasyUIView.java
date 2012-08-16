@@ -14,7 +14,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
-import com.isoftstone.agiledev.core.DataOutputAdaptor;
+import com.isoftstone.agiledev.web.springmvc.easyui.DataOutputAdaptor;
 
 public class EasyUIView extends MappingJacksonJsonView {
 	private ObjectMapper objectMapper = new ObjectMapper();

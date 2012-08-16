@@ -11,7 +11,6 @@ import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 
-import com.isoftstone.agiledev.core.DataOutputAdaptor;
 import com.isoftstone.agiledev.core.datagrid.GridData;
 import com.isoftstone.agiledev.web.easyui.EasyUIGridData;
 
