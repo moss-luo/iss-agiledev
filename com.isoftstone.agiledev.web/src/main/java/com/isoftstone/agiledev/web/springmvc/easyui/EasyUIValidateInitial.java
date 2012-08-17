@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.eclipse.gemini.blueprint.context.BundleContextAware;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
-import org.springframework.core.annotation.AnnotationUtils;
 
 import com.isoftstone.agiledev.core.init.AbstractInitializeSupport;
 import com.isoftstone.agiledev.core.init.InitChain;
