@@ -9,9 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.isoftstone.agiledev.core.init.AbstractInitializeSupport;
+import com.isoftstone.agiledev.core.init.Init;
 import com.isoftstone.agiledev.core.init.InitChain;
 import com.isoftstone.agiledev.core.init.InitField;
-import com.isoftstone.agiledev.core.init.Initializa;
 import com.isoftstone.agiledev.core.init.Initialization;
 import com.isoftstone.agiledev.core.init.InitializeAdaptor;
 import com.isoftstone.agiledev.core.init.InitializeModel;
@@ -41,8 +41,8 @@ public class EasyUIFormInitial extends AbstractInitializeSupport implements Init
 				for (Class<?> clazz: model.getInitialiedType()) {
 					Field[] fields = clazz.getDeclaredFields();
 					for (Field field : fields) {
-						if(field.isAnnotationPresent(Initializa.class)){
-							Initializa initializa = field.getAnnotation(Initializa.class);
+						if(field.isAnnotationPresent(Init.class)){
+							Init initializa = field.getAnnotation(Init.class);
 							initField = new EasyUIInitField();
 							String name = field.getName();
 							if(initializa.fieldName()!=null || !"".equals(initializa.fieldName())){
@@ -61,7 +61,7 @@ public class EasyUIFormInitial extends AbstractInitializeSupport implements Init
 	}
 	
 	protected void pluralHandle(Field field,Initialization initialization){
-		for (Initializa i : initialization.value()) {
+		for (Init i : initialization.value()) {
 			EasyUIInitField f = new EasyUIInitField();
 			f.setName(i.fieldName());
 			f.setInitValue(i.value());
@@ -75,8 +75,8 @@ public class EasyUIFormInitial extends AbstractInitializeSupport implements Init
 			for (Field initializaField : targetValidateObjectFields) {
 				EasyUIInitField initField = null;
 				//获取注解配置的初始值
-				if(initializaField.isAnnotationPresent(Initializa.class)){
-					Initializa init = initializaField.getAnnotation(Initializa.class);
+				if(initializaField.isAnnotationPresent(Init.class)){
+					Init init = initializaField.getAnnotation(Init.class);
 					initField = new EasyUIInitField();
 //					if(action instanceof ModelDriven){
 //						initField.setName(initializaField.getName());
