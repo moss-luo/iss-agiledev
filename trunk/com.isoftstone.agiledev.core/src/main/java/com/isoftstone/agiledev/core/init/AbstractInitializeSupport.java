@@ -8,7 +8,7 @@ public abstract class AbstractInitializeSupport implements InitializeAdaptor{
 	protected List<InitField> initFields = new ArrayList<InitField>();
 	
 	protected InitField getField(String fieldName){
-		for (InitField field :this.initFields) {
+		for (InitField field :InitData.getInitData()) {
 			if(field.getName().equals(fieldName))
 				return field;
 		}
