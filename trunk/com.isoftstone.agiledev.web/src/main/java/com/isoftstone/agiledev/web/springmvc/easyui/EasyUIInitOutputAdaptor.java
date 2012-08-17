@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import com.isoftstone.agiledev.core.DataOutputAdaptor;
 import com.isoftstone.agiledev.core.init.DefaultInitChain;
 import com.isoftstone.agiledev.core.init.InitData;
 import com.isoftstone.agiledev.core.init.InitField;
