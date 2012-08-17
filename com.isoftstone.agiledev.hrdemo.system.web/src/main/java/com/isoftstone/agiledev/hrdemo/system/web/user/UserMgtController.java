@@ -8,13 +8,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.isoftstone.agiledev.core.OperationPrompt;
 import com.isoftstone.agiledev.core.datagrid.GridData;
+import com.isoftstone.agiledev.core.init.InitializeModel;
+import com.isoftstone.agiledev.core.init.Initializeable;
 import com.isoftstone.agiledev.hrdemo.system.app.user.IUserManager;
 import com.isoftstone.agiledev.hrdemo.system.app.user.User;
 
 @Controller
-public class UserMgtController {
+public class UserMgtController implements Initializeable{
 	@Resource
 	private IUserManager userManager;
+	
+
+	@Override
+	@RequestMapping
+	public InitializeModel init() {
+		return new InitializeModel(new Class[]{User.class});
+	}
 	
 	@RequestMapping
 	public GridData<User> list(@RequestParam(value="name", required=false) String name){
@@ -60,4 +69,5 @@ public class UserMgtController {
 		}
 
 	}
+
 }

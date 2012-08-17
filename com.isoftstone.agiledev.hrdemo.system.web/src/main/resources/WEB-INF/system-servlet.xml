@@ -41,6 +41,7 @@
 					<property name="dataOutputAdaptors">
 						<list>
 							<ref bean="easyUIGridDataOutputAdaptor"/>
+							<ref bean="easyUIInitOutputAdaptor"/>
 						</list>
 					</property>
 				</bean>
@@ -50,9 +51,23 @@
 	
 	
 	<bean id="easyUIGridDataOutputAdaptor" class="com.isoftstone.agiledev.web.springmvc.easyui.EasyUIGridDataOutputAdaptor">
-		<property name="type" value="com.isoftstone.agiledev.core.datagrid.GridData"></property>
+		<property name="type" value="com.isoftstone.agiledev.core.datagrid.GridData"/>
+	</bean>
+	<bean id="easyUIInitOutputAdaptor" class="com.isoftstone.agiledev.web.springmvc.easyui.EasyUIInitOutputAdaptor">
+		<property name="type" value="com.isoftstone.agiledev.core.init.InitializeModel"/>
+		<property name="initSupporters">
+			<list>
+			    <ref bean="easyUIFormInitial"/>
+			    <ref bean="easyUIValidateInitial"/>
+			</list>		    
+		</property>
 	</bean>
 	
+	<bean id="easyUIFormInitial" class="com.isoftstone.agiledev.web.springmvc.easyui.EasyUIFormInitial"/>
+	<bean id="easyUIValidateInitial" class="com.isoftstone.agiledev.web.springmvc.easyui.EasyUIValidateInitial"/>
+	
+	
+		
 	<osgi:reference id="userManager" interface="com.isoftstone.agiledev.hrdemo.system.app.user.IUserManager" bean-name="userManager"/>
 	
 </beans>
