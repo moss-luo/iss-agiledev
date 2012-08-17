@@ -114,6 +114,12 @@
 	</dependency>
 	
 	<dependency>
+		<groupId>com.isoftstone.agiledev</groupId>
+		<artifactId>com.isoftstone.agiledev.web</artifactId>
+		<version>${agiledev.core.version}</version>
+	</dependency>
+	
+	<dependency>
 		<groupId>org.codehaus.jackson</groupId>
 		<artifactId>com.springsource.org.codehaus.jackson.mapper</artifactId>
 		<version>${jackson.mapper.version}</version>
