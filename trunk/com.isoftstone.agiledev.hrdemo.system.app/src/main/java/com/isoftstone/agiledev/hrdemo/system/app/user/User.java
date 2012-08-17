@@ -1,11 +1,13 @@
 package com.isoftstone.agiledev.hrdemo.system.app.user;
 
 import com.isoftstone.agiledev.core.init.Init;
+import com.isoftstone.agiledev.core.validate.annotation.Mobile;
 
 public class User {
 	
 	private Integer id;
 	@Init(fieldName="name",value="zhangsan")
+	@Mobile
 	private String name;
 	@Init(fieldName="password",value="123123")
 	private String password;
