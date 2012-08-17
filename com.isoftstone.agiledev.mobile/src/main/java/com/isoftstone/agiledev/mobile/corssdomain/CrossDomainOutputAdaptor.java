@@ -1,17 +1,13 @@
 package com.isoftstone.agiledev.mobile.corssdomain;
 
-import java.io.PrintWriter;
-
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.codehaus.jackson.JsonEncoding;
-import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import com.isoftstone.agiledev.core.DataOutputAdaptor;
 import com.isoftstone.agiledev.core.mobile.CallbackData;
+import com.isoftstone.agiledev.web.springmvc.easyui.DataOutputAdaptor;
 
 public class CrossDomainOutputAdaptor implements DataOutputAdaptor {
 
