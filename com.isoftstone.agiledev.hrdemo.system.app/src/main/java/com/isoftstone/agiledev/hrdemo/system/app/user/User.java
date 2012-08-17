@@ -1,13 +1,13 @@
 package com.isoftstone.agiledev.hrdemo.system.app.user;
 
-import com.isoftstone.agiledev.core.init.Initializa;
+import com.isoftstone.agiledev.core.init.Init;
 
 public class User {
 	
 	private Integer id;
-	@Initializa(fieldName="name",value="zhangsan")
+	@Init(fieldName="name",value="zhangsan")
 	private String name;
-	@Initializa(fieldName="password",value="123123")
+	@Init(fieldName="password",value="123123")
 	private String password;
 	
 	
