@@ -1,6 +1,6 @@
 package com.isoftstone.agiledev.web.springmvc.easyui;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -12,17 +12,25 @@ import org.codehaus.jackson.JsonEncoding;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
+import org.eclipse.gemini.blueprint.context.BundleContextAware;
+import org.osgi.framework.BundleContext;
 import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
-import com.isoftstone.agiledev.web.springmvc.easyui.DataOutputAdaptor;
-
-public class EasyUIView extends MappingJacksonJsonView {
+public class EasyUIView extends MappingJacksonJsonView implements BundleContextAware {
 	private ObjectMapper objectMapper = new ObjectMapper();
 	private boolean prefixJson = false;
 	private JsonEncoding encoding = JsonEncoding.UTF8;
+	private List<DataOutputAdaptor> dataOutputAdaptors = new ArrayList<DataOutputAdaptor>();
+	private BundleContext bundleContext = null;
 	
-	private List<DataOutputAdaptor> dataOutputAdaptors = null;
-	private Map<String,DataOutputAdaptor> ds = null;
+	
+	private void init(){
+		dataOutputAdaptors.add(new EasyUIGridDataOutputAdaptor());
+		dataOutputAdaptors.add(new EasyUIInitOutputAdaptor(bundleContext));
+		dataOutputAdaptors.add(new EasyUITreeDataOutputAdaptor());
+		DataOutputAdaptorFactory.buildFactory(this.dataOutputAdaptors);
+	}
+	
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model,
 			HttpServletRequest request, HttpServletResponse response)
@@ -79,7 +87,7 @@ public class EasyUIView extends MappingJacksonJsonView {
 			Map m = (Map) model;
 			Iterator<Map.Entry> it = m.entrySet().iterator();
 			while(it.hasNext()){
-				DataOutputAdaptor baseAdaptor = this.ds.get(it.next().getValue().getClass().getName());
+				DataOutputAdaptor baseAdaptor = DataOutputAdaptorFactory.getOutputAdaptor(it.next().getValue().getClass().getName());
 				if(baseAdaptor!=null)return baseAdaptor;
 			}
 		}else{
@@ -91,60 +99,6 @@ public class EasyUIView extends MappingJacksonJsonView {
 		}
 		return null;
 	}
-
-//	
-//
-//	private Object filterTreeData(SerializationConfig config, Object treeData, HttpServletRequest request) {
-//		config.setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);
-//		return convertToEasyUITreeData((TreeData)treeData, request.getContextPath());
-//	}
-//
-//	private boolean isTreeData(Object obj) {
-//		return obj instanceof TreeData;
-//	}
-//	
-//	protected List<EasyUITreeNode> convertToEasyUITreeData(TreeData treeData, String contextPath) {
-//		List<Node> treeNodes = treeData.getNodes();
-//		List<EasyUITreeNode> easyUITreeNodes = new ArrayList<EasyUITreeNode>();
-//		for (Node node : treeNodes) {
-//			easyUITreeNodes.add(convertToEasyUITreeNode(node, contextPath));
-//		}
-//		
-//		return easyUITreeNodes;
-//	}
-//	
-//	protected EasyUITreeNode convertToEasyUITreeNode(Node node, String contextPath) {
-//		EasyUITreeNode euNode = new EasyUITreeNode();
-//		euNode.setId(node.getId());
-//		if (node.getText() != null && node.getUrl() != null) {
-//			euNode.setText(getHref(node, contextPath));
-//		} else {
-//			euNode.setText(node.getText());
-//		}
-//		
-//		euNode.setState(node.hasChild() ? "closed" : "open");
-//		if (node.getChildren() != null && node.getChildren().size() > 0) {
-//			if (euNode.getChildren() == null) {
-//				euNode.setChildren(new ArrayList<EasyUITreeNode>());
-//			}
-//			
-//			for (Node child : node.getChildren()) {
-//				euNode.getChildren().add(convertToEasyUITreeNode(child, contextPath));
-//			}
-//		}
-//		
-//		return euNode;
-//	}
-//
-//	private String getHref(Node node, String contextPath) {
-//		StringBuilder builder = new StringBuilder();
-//		builder.append("<a hh='").append(contextPath).append('/').
-//			append(node.getUrl()).append("'>").append(node.getText()).
-//				append("</a>");
-//		
-//		return builder.toString();
-//	}
-//	
 	@Override
 	public void setPrefixJson(boolean prefixJson) {
 		this.prefixJson = prefixJson;
@@ -161,10 +115,13 @@ public class EasyUIView extends MappingJacksonJsonView {
 	}
 
 	public void setDataOutputAdaptors(List<DataOutputAdaptor> dataOutputAdaptors) {
-		this.dataOutputAdaptors = dataOutputAdaptors;
-		ds = new HashMap<String, DataOutputAdaptor>();
-		for (DataOutputAdaptor d : dataOutputAdaptors) {
-			ds.put(d.getType(), d);
-		}
+		this.dataOutputAdaptors.addAll(dataOutputAdaptors);
+		DataOutputAdaptorFactory.buildFactory(this.dataOutputAdaptors);
+	}
+
+	@Override
+	public void setBundleContext(BundleContext bundleContext) {
+		this.bundleContext = bundleContext;
+		this.init();
 	}
 }
