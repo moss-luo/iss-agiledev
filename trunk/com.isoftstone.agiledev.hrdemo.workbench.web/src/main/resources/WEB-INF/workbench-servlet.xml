@@ -31,18 +31,9 @@
 		<property name="defaultViews">
 			<list>
 				<bean class="com.isoftstone.agiledev.web.springmvc.easyui.EasyUIView">
-					<property name="dataOutputAdaptors">
-						<list>
-							<ref bean="easyUITreeDataOutputAdaptor"/>
-						</list>
-					</property>
 				</bean>
 			</list>
 		</property>
-	</bean>
-	
-	<bean id="easyUITreeDataOutputAdaptor" class="com.isoftstone.agiledev.web.springmvc.easyui.EasyUITreeDataOutputAdaptor">
-		<property name="type" value="com.isoftstone.agiledev.core.tree.TreeData"/>
 	</bean>
 	
 	<osgi:reference id="menuManager" interface="com.isoftstone.agiledev.hrdemo.workbench.app.IMenuManager" bean-name="menuManager"/>
