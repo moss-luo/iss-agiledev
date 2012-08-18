@@ -1,10 +1,16 @@
 (function($){
   	$.extend($.fn.validatebox.defaults.rules, {
-      	mobile: {
+	      mobile: {
+		          validator: function(value, param){   
+		              return /^0{0,1}(13[4-9]|15[7-9]|15[0-2]|18[6-8])[0-9]{8}$/.test(value);   
+		          },
+		          message: '手机号码格式错误!'  
+		  },
+      	  email: {
 	          validator: function(value, param){   
-	              return /^0{0,1}(13[4-9]|15[7-9]|15[0-2]|18[6-8])[0-9]{8}$/.test(value);   
+	              return  /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(value);   
 	          },
-	          message: '手机号码格式错误!'  
+	          message: '电子邮箱格式错误!'  
 	      },
 	      remotely:{
 	    	  validator:function(value,param){
