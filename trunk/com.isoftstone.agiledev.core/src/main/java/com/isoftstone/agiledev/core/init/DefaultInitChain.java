@@ -23,7 +23,8 @@ public class DefaultInitChain implements InitChain {
 	@Override
 	public void doInit(HttpServletRequest request,InitializeModel model) {
 		if(initializeAdaptor!=null){
-			initializeAdaptor.doInit(request, model,this);
+			initializeAdaptor.doInit(request, model);
+			initializeAdaptor = null;
 		}
 	}
 

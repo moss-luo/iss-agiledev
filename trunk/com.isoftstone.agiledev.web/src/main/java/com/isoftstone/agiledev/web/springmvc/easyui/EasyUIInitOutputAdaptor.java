@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.osgi.framework.BundleContext;
 
-import com.isoftstone.agiledev.core.init.DefaultInitChain;
 import com.isoftstone.agiledev.core.init.InitData;
 import com.isoftstone.agiledev.core.init.InitField;
 import com.isoftstone.agiledev.core.init.InitializeAdaptor;
@@ -46,13 +45,7 @@ public class EasyUIInitOutputAdaptor implements DataOutputAdaptor,InitializeMode
 			if(check(obj)){
 				InitializeModel model = (InitializeModel) obj;
 				for(int i=0;i<initSupporters.size();i++){
-					if(i+1>=initSupporters.size()){
-						initSupporters.get(i).doInit(request,model,new DefaultInitChain(null));
-						break;
-					}else{
-						initSupporters.get(i).doInit(request,model,new DefaultInitChain(initSupporters.get(i+1)));
-					}
-					
+					initSupporters.get(i).doInit(request,model);
 				}
 //				JsonGenerator generator =
 //						objectMapper.getJsonFactory().createJsonGenerator(response.getOutputStream(), JsonEncoding.UTF8);

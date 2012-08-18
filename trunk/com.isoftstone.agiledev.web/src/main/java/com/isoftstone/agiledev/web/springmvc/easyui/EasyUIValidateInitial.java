@@ -7,7 +7,6 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 import java.net.URL;
 import java.util.Enumeration;
-import java.util.List;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,6 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 import com.isoftstone.agiledev.core.init.AbstractInitializeSupport;
-import com.isoftstone.agiledev.core.init.InitChain;
 import com.isoftstone.agiledev.core.init.InitField;
 import com.isoftstone.agiledev.core.init.InitializeAdaptor;
 import com.isoftstone.agiledev.core.init.InitializeModel;
@@ -57,7 +55,7 @@ public class EasyUIValidateInitial extends AbstractInitializeSupport implements 
 		}
 	}
 	@Override
-	public List<InitField> doInit(HttpServletRequest request,InitializeModel model,InitChain initChain) {
+	public void doInit(HttpServletRequest request,InitializeModel model) {
 
 		if(validateTypes==null){
 			init();
@@ -77,7 +75,7 @@ public class EasyUIValidateInitial extends AbstractInitializeSupport implements 
 				}
 			}
 		}
-		return this.initFields;
+//		return this.initFields;
 	}
 	
 	private String getValidateType(Field field){
