@@ -30,6 +30,13 @@ public class EasyUIValidateInitial extends AbstractInitializeSupport implements 
 	private static Properties validateTypes = null;
 	private BundleContext bundleContext = null;
 	
+	public EasyUIValidateInitial() {
+	}
+	
+	public EasyUIValidateInitial(BundleContext bundleContext) {
+		this.bundleContext = bundleContext;
+	}
+	
 	private void init(){
 		Bundle bundle = null;
 		for(Bundle b:this.bundleContext.getBundles()){

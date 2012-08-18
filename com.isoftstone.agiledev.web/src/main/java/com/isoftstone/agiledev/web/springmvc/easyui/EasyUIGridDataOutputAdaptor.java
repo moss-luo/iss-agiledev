@@ -16,10 +16,15 @@ import com.isoftstone.agiledev.web.easyui.EasyUIGridData;
 
 public class EasyUIGridDataOutputAdaptor implements DataOutputAdaptor {
 
+		
+	
 	private String type;
 	private ObjectMapper objectMapper = new ObjectMapper();
 
-
+	public EasyUIGridDataOutputAdaptor() {
+		this.type = "com.isoftstone.agiledev.core.datagrid.GridData";
+	}
+	
 	@Override
 	public void output(HttpServletRequest requset,HttpServletResponse response, Object obj) {
 		try {

@@ -21,6 +21,11 @@ public class EasyUITreeDataOutputAdaptor implements DataOutputAdaptor {
 
 	private String type;
 	private ObjectMapper objectMapper = new ObjectMapper();
+	
+	public EasyUITreeDataOutputAdaptor() {
+		this.type = "com.isoftstone.agiledev.core.tree.TreeData";
+	}
+	
 	@Override
 	public void output(HttpServletRequest request,HttpServletResponse response, Object obj) {
 		try {

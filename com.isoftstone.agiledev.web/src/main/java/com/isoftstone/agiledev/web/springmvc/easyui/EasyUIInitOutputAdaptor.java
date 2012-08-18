@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.osgi.framework.BundleContext;
 
 import com.isoftstone.agiledev.core.init.DefaultInitChain;
 import com.isoftstone.agiledev.core.init.InitData;
@@ -20,12 +21,20 @@ public class EasyUIInitOutputAdaptor implements DataOutputAdaptor,InitializeMode
 
 	private List<InitializeAdaptor> initSupporters = new ArrayList<InitializeAdaptor>();
 	private ObjectMapper objectMapper = new ObjectMapper();
-//	private SerializationConfig config = objectMapper.getSerializationConfig();
 	
-	public EasyUIInitOutputAdaptor(){
-		initSupporters.add(new EasyUIFormInitial());
-		initSupporters.add(new EasyUIValidateInitial());
+	public EasyUIInitOutputAdaptor(BundleContext bundleContext){
+		this.init(bundleContext);
 	}
+	public EasyUIInitOutputAdaptor(){
+		this.init(null);
+	}
+	
+	private void init(BundleContext bundleContext){
+		initSupporters.add(new EasyUIFormInitial());
+		initSupporters.add(new EasyUIValidateInitial(bundleContext));
+		this.type = "com.isoftstone.agiledev.core.init.InitializeModel";
+	}
+	
 	@Override
 	public void writeToInitForm(HttpServletResponse response,
 			List<? extends InitField> initFields) {
