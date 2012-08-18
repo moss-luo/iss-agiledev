@@ -19,12 +19,12 @@ public class InitDB {
 
 	private void initData() {
 		for (int i = 0; i < 101; i++) {
-			jdbcTemplate.execute(String.format("INSERT INTO USER(name, password) VALUES('User_%s', 'User_%s')", i, i));
+			jdbcTemplate.execute(String.format("INSERT INTO USER(name, password,mobile,email) VALUES('User_%s', 'User_%s','13888888888','User_%s@163.com')", i, i,i));
 		}
 	}
 
 	private void createTables() {
-		jdbcTemplate.execute("CREATE TABLE USER(id IDENTITY PRIMARY KEY, name CHAR(16), password CHAR(32))");
+		jdbcTemplate.execute("CREATE TABLE USER(id IDENTITY PRIMARY KEY, name CHAR(16), password CHAR(32), mobile CHAR(32), email CHAR(32))");
 	}
 	
 	@Resource
