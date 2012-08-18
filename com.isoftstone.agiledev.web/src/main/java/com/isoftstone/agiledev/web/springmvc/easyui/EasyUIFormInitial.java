@@ -1,7 +1,6 @@
 package com.isoftstone.agiledev.web.springmvc.easyui;
 
 import java.lang.reflect.Field;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import com.isoftstone.agiledev.core.init.AbstractInitializeSupport;
 import com.isoftstone.agiledev.core.init.Init;
-import com.isoftstone.agiledev.core.init.InitChain;
 import com.isoftstone.agiledev.core.init.InitField;
 import com.isoftstone.agiledev.core.init.Initialization;
 import com.isoftstone.agiledev.core.init.InitializeAdaptor;
@@ -20,7 +18,7 @@ public class EasyUIFormInitial extends AbstractInitializeSupport implements Init
 
 	private Logger logger = LoggerFactory.getLogger(EasyUIFormInitial.class);
 	@Override
-	public List<InitField> doInit(HttpServletRequest request,InitializeModel model,InitChain initChain) {
+	public void doInit(HttpServletRequest request,InitializeModel model) {
 		try {
 //				Class<?> clazz = controller.getClass();
 //				while (clazz!=Object.class) {
@@ -57,7 +55,7 @@ public class EasyUIFormInitial extends AbstractInitializeSupport implements Init
 			} catch (Exception e) {
 				logger.error("error in FormInitial!",e);
 			}
-		return this.initFields;
+//		return this.initFields;
 	}
 	
 	protected void pluralHandle(Field field,Initialization initialization){
