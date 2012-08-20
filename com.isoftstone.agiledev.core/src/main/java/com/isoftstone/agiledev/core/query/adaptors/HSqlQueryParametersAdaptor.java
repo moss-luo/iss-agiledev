@@ -9,8 +9,8 @@ public class HSqlQueryParametersAdaptor implements QueryParametersDbAdaptor {
 
 	@Override
 	public void adapt(QueryParameters parameters, Map<String, Object> parametersMap) {
-		parametersMap.put("offset", parameters.getRows());
-		parametersMap.put("limit", (parameters.getPage() - 1) * parameters.getRows());
+		parametersMap.put("limit", parameters.getRows());
+		parametersMap.put("offset", (parameters.getPage() - 1) * parameters.getRows());
 		
 		String orderBy = null;
 		if (parameters.getSort() != null) {

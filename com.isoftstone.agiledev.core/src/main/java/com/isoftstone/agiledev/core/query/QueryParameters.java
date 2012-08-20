@@ -7,6 +7,9 @@ public class QueryParameters implements Pageable, Sortable {
 	private String sort;
 	private int page;
 	private int rows;
+	
+	public static final int UNKOWN_PAGE = -1;
+	public static final int UNKOWN_ROWS = -1;
 
 	@Override
 	public void setOrder(String order) {

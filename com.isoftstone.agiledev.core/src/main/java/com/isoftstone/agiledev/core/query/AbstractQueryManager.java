@@ -1,5 +1,6 @@
 package com.isoftstone.agiledev.core.query;
 
+
 public abstract class AbstractQueryManager implements QueryManager {
 	private int page;
 	private int rows;
@@ -48,9 +49,5 @@ public abstract class AbstractQueryManager implements QueryManager {
 	@Override
 	public String getSort() {
 		return sort;
-	}
-	
-	public <T> T query(QueryExecutor<T> executor) {
-		return QueryUtils.query(this, executor);
 	}
 }
