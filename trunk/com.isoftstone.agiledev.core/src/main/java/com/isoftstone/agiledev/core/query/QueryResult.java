@@ -1,13 +1,13 @@
-package com.isoftstone.agiledev.core.datagrid;
+package com.isoftstone.agiledev.core.query;
 
 import java.util.List;
 
-public class GridData<T> {
+public class QueryResult<T> {
 
 	private int total;
 	private List<T> data;
 	
-	public GridData(int total, List<T> data) {
+	public QueryResult(int total, List<T> data) {
 		this.total = total;
 		this.data = data;
 	}
