@@ -1,6 +1,7 @@
 package com.isoftstone.agiledev.hrdemo.system.app.internal.user;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -19,8 +20,8 @@ public class UserManager implements IUserManager {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<User> list(String name) {
-		return (List<User>)sqlSession.selectList("com.isoftstone.agiledev.hrdemo.system.app.user.UserMapper.list", name);	
+	public List<User> list(Map<String, Object> queryParameters) {
+		return (List<User>)sqlSession.selectList("com.isoftstone.agiledev.hrdemo.system.app.user.UserMapper.list", queryParameters);	
 	}
 
 	@Override

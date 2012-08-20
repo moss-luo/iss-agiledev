@@ -11,18 +11,15 @@ import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 
-import com.isoftstone.agiledev.core.datagrid.GridData;
+import com.isoftstone.agiledev.core.query.QueryResult;
 import com.isoftstone.agiledev.web.easyui.EasyUIGridData;
 
-public class EasyUIGridDataOutputAdaptor implements DataOutputAdaptor {
-
-		
-	
+public class EasyUIGridDataOutputAdaptor implements DataOutputAdaptor {	
 	private String type;
 	private ObjectMapper objectMapper = new ObjectMapper();
 
 	public EasyUIGridDataOutputAdaptor() {
-		this.type = "com.isoftstone.agiledev.core.datagrid.GridData";
+		this.type = QueryResult.class.getName();
 	}
 	
 	@Override
@@ -41,27 +38,27 @@ public class EasyUIGridDataOutputAdaptor implements DataOutputAdaptor {
 	}
 	@Override
 	public boolean check(Object o) {
-		return o instanceof GridData;
+		return o instanceof QueryResult;
 	}
 	@SuppressWarnings("rawtypes")
-	private Object filterGridData(Object gridData) {
-		if(gridData instanceof Map){
-			Map m = (Map) gridData;
+	private Object filterGridData(Object queryResult) {
+		if(queryResult instanceof Map){
+			Map m = (Map) queryResult;
 			for (Object o : m.values()) {
 				if(check(o)){
-					return convertToEasyUIGridData((GridData)o);
+					return convertToEasyUIGridData((QueryResult<?>)o);
 				}
 			}
 		}else{
-			if(!check(gridData))throw new RuntimeException("format error:"+gridData);
-			return convertToEasyUIGridData((GridData)gridData);
+			if(!check(queryResult))throw new RuntimeException("format error:"+queryResult);
+			return convertToEasyUIGridData((QueryResult<?>)queryResult);
 		}
 		return null;
 	}
-	private EasyUIGridData convertToEasyUIGridData(GridData<?> gridData){
+	private EasyUIGridData convertToEasyUIGridData(QueryResult<?> queryResult){
 		EasyUIGridData d = new EasyUIGridData();
-		d.setRows(gridData.getData());
-		d.setTotal(gridData.getTotal());
+		d.setRows(queryResult.getData());
+		d.setTotal(queryResult.getTotal());
 		
 		return d;
 	}

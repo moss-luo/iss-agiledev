@@ -12,7 +12,7 @@
 	<tx:annotation-driven transaction-manager="txManager"/>
 	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="sqlSessionFactory" />
+		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
 	
 	<osgi:reference id="sqlSessionFactory" interface="org.apache.ibatis.session.SqlSessionFactory" bean-name="sqlSessionFactory"/>

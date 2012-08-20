@@ -7,8 +7,9 @@
 		<if test="name != null">
 			WHERE name like concat('%', #{id}, '%')
 		</if>
+		ORDER BY id
 		<if test="orderBy != null">
-			ORDER BY #{orderBy}
+			, name #{orderBy}
 		</if>
 		<if test="limit != null">
 			LIMIT #{limit}
