@@ -1,6 +1,7 @@
 package com.isoftstone.agiledev.hrdemo.workbench.app.internal;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -152,6 +153,7 @@ public class MenuManager implements BundleContextAware, BundleListener, IMenuMan
 		bundleContributions = new HashMap<Long, List<Menu>>();
 		locale = new Locale("");
 		
+		bundleContext.addBundleListener(this);
 		searchExistingMenus();
 	}
 	
@@ -173,11 +175,20 @@ public class MenuManager implements BundleContextAware, BundleListener, IMenuMan
 		
 		URL menuResource = menuResources.nextElement();
 		Properties properties = new Properties();
+		InputStream is = null;
 		try {
-			properties.load(menuResource.openStream());
+			is = menuResource.openStream();
+			properties.load(is);
 		} catch (IOException e) {
 			logger.warn(String.format("Can't read menu properties from bundle %", bundle.getSymbolicName()));
 			return;
+		} finally {
+			if (is != null) {
+				try {
+					is.close();
+				} catch (IOException e) {
+				}
+			}
 		}
 		
 		List<Menu> bundleMenus = new ArrayList<Menu>();

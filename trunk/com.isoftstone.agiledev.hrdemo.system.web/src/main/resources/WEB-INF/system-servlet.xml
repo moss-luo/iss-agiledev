@@ -44,5 +44,4 @@
 	</bean>
 		
 	<osgi:reference id="userManager" interface="com.isoftstone.agiledev.hrdemo.system.app.user.IUserManager" bean-name="userManager"/>
-	<osgi:reference id="queryTemplate" interface="com.isoftstone.agiledev.core.query.QueryTemplate"/>
 </beans>

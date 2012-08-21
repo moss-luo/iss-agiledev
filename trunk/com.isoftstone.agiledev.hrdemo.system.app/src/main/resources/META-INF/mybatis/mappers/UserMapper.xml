@@ -5,7 +5,7 @@
 	<select id="list" parameterType="map" resultType="com.isoftstone.agiledev.hrdemo.system.app.user.User">
 		SELECT * FROM USER
 		<if test="name != null">
-			WHERE name like concat('%', #{id}, '%')
+			WHERE name like '%' || #{name} || '%'
 		</if>
 		ORDER BY id
 		<if test="orderBy != null">
@@ -38,8 +38,11 @@
 		</foreach>
 	</delete>
 	
-	<select id="total" resultType="int">
+	<select id="total" parameterType="string" resultType="int">
 		SELECT COUNT(*) FROM USER
+		<if test="_parameter != null">
+			WHERE name like '%' || #{_parameter} || '%'
+		</if>
 	</select>
 	
 	<select id="selectByName" parameterType="string" resultType="com.isoftstone.agiledev.hrdemo.system.app.user.User">
