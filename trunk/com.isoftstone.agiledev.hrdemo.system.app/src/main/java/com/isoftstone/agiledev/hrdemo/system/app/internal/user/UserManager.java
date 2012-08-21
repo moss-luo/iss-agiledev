@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.isoftstone.agiledev.core.query.Parameter;
-import com.isoftstone.agiledev.core.query.QueryParametersDbAdaptor;
+import com.isoftstone.agiledev.core.query.mybatis.QueryParametersMapCreator;
 import com.isoftstone.agiledev.hrdemo.system.app.user.IUserManager;
 import com.isoftstone.agiledev.hrdemo.system.app.user.User;
 
@@ -20,7 +20,7 @@ public class UserManager implements IUserManager {
 	private SqlSession sqlSession;
 	
 	@Resource
-	private QueryParametersDbAdaptor queryParametersDbAdaptor;
+	private QueryParametersMapCreator queryParametersMapCreator;
 
 	@Override
 	public void add(User user) {
@@ -60,7 +60,7 @@ public class UserManager implements IUserManager {
 	@Override
 	public List<User> list(String name, int start, int end, String orderBy) {
 		return (List<User>)sqlSession.selectList("com.isoftstone.agiledev.hrdemo.system.app.user.UserMapper.list",
-				queryParametersDbAdaptor.adapt(start, end, orderBy, new Parameter[] {new Parameter("name", name)}));
+				queryParametersMapCreator.create(start, end, orderBy, new Parameter("name", name)));
 	}
 	
 

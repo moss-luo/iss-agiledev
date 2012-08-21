@@ -17,7 +17,7 @@
 	
 	<osgi:reference id="sqlSessionFactory" interface="org.apache.ibatis.session.SqlSessionFactory" bean-name="sqlSessionFactory"/>
 	<osgi:reference id="txManager" interface="org.springframework.jdbc.datasource.DataSourceTransactionManager" bean-name="txManager"/>
-	<osgi:reference id="queryParametersAdaptor" interface="com.isoftstone.agiledev.core.query.QueryParametersDbAdaptor" bean-name="queryParametersAdaptor"/>
+	<osgi:reference id="queryParametersMapCreator" interface="com.isoftstone.agiledev.core.query.mybatis.QueryParametersMapCreator" bean-name="queryParametersMapCreator"/>
 	
 	<osgi:service ref="userManager" interface="com.isoftstone.agiledev.hrdemo.system.app.user.IUserManager"/>
 </beans>
