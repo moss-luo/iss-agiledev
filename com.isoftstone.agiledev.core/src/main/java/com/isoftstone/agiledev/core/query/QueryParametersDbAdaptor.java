@@ -3,5 +3,5 @@ package com.isoftstone.agiledev.core.query;
 import java.util.Map;
 
 public interface QueryParametersDbAdaptor {
-	void adapt(QueryParameters parameters, Map<String, Object> parametersMap);
+	Map<String, Object> adapt(int start, int end, String orderBy, Parameter[] parameters);
 }

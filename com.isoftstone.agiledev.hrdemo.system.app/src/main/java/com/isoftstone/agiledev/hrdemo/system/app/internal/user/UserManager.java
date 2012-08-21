@@ -1,7 +1,6 @@
 package com.isoftstone.agiledev.hrdemo.system.app.internal.user;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -9,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.isoftstone.agiledev.core.query.Parameter;
+import com.isoftstone.agiledev.core.query.QueryParametersDbAdaptor;
 import com.isoftstone.agiledev.hrdemo.system.app.user.IUserManager;
 import com.isoftstone.agiledev.hrdemo.system.app.user.User;
 
@@ -17,12 +18,9 @@ import com.isoftstone.agiledev.hrdemo.system.app.user.User;
 public class UserManager implements IUserManager {
 	@Resource
 	private SqlSession sqlSession;
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<User> list(Map<String, Object> queryParameters) {
-		return (List<User>)sqlSession.selectList("com.isoftstone.agiledev.hrdemo.system.app.user.UserMapper.list", queryParameters);	
-	}
+	
+	@Resource
+	private QueryParametersDbAdaptor queryParametersDbAdaptor;
 
 	@Override
 	public void add(User user) {
@@ -49,13 +47,20 @@ public class UserManager implements IUserManager {
 	}
 
 	@Override
-	public int getTotal() {
-		return (Integer)sqlSession.selectOne("com.isoftstone.agiledev.hrdemo.system.app.user.UserMapper.total");
+	public int getTotal(String name) {
+		return (Integer)sqlSession.selectOne("com.isoftstone.agiledev.hrdemo.system.app.user.UserMapper.total", name);
 	}
 
 	@Override
 	public void remove(int[] ids) {
 		sqlSession.delete("com.isoftstone.agiledev.hrdemo.system.app.user.UserMapper.batchRemove", ids);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> list(String name, int start, int end, String orderBy) {
+		return (List<User>)sqlSession.selectList("com.isoftstone.agiledev.hrdemo.system.app.user.UserMapper.list",
+				queryParametersDbAdaptor.adapt(start, end, orderBy, new Parameter[] {new Parameter("name", name)}));
 	}
 	
 

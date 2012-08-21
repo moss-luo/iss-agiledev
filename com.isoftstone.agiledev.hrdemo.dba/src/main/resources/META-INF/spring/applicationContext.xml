@@ -28,14 +28,10 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
-	<bean id="queryTemplate" class="com.isoftstone.agiledev.core.query.QueryTemplate">
-		<constructor-arg>
-			<bean class="com.isoftstone.agiledev.core.query.adaptors.HSqlQueryParametersAdaptor"/>
-		</constructor-arg>
-	</bean>
+	<bean id="queryParametersAdaptor" class="com.isoftstone.agiledev.core.query.adaptors.HSqlQueryParametersAdaptor"/>
 	
 	<osgi:service ref="dataSource" interface="javax.sql.DataSource"/>
 	<osgi:service ref="sqlSessionFactory" interface="org.apache.ibatis.session.SqlSessionFactory"/>
 	<osgi:service ref="txManager" interface="org.springframework.jdbc.datasource.DataSourceTransactionManager"/>
-	<osgi:service ref="queryTemplate" interface="com.isoftstone.agiledev.core.query.QueryTemplate"/>
+	<osgi:service ref="queryParametersAdaptor" interface="com.isoftstone.agiledev.core.query.QueryParametersDbAdaptor"/>
 </beans>

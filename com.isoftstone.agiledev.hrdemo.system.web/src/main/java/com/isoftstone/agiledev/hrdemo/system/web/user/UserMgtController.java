@@ -1,7 +1,6 @@
 package com.isoftstone.agiledev.hrdemo.system.web.user;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -12,21 +11,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.isoftstone.agiledev.core.OperationPrompt;
 import com.isoftstone.agiledev.core.init.InitializeModel;
 import com.isoftstone.agiledev.core.init.Initializeable;
-import com.isoftstone.agiledev.core.query.QueryByMapExecutor;
+import com.isoftstone.agiledev.core.query.QueryExecutor;
 import com.isoftstone.agiledev.core.query.QueryParameters;
 import com.isoftstone.agiledev.core.query.QueryResult;
 import com.isoftstone.agiledev.core.query.QueryTemplate;
-import com.isoftstone.agiledev.core.query.SummaryProvider;
 import com.isoftstone.agiledev.hrdemo.system.app.user.IUserManager;
 import com.isoftstone.agiledev.hrdemo.system.app.user.User;
 
 @Controller
-public class UserMgtController implements Initializeable, SummaryProvider {
+public class UserMgtController implements Initializeable {
 	@Resource
 	private IUserManager userManager;
-	
-	@Resource
-	private QueryTemplate queryTemplate;
 
 	@Override
 	@RequestMapping
@@ -37,15 +32,17 @@ public class UserMgtController implements Initializeable, SummaryProvider {
 	@RequestMapping
 	public QueryResult<User> list(@RequestParam(value="name", required=false) final String name,
 				QueryParameters queryParameters){
-		return queryTemplate.queryByMap(this, queryParameters, new QueryByMapExecutor<User>() {
+		return QueryTemplate.query(queryParameters, new QueryExecutor<User>() {
 			@Override
-			public List<User> execute(Map<String, Object> parameters) {
-				if (name != null) {
-					parameters.put("name", name);
-				}
-				
-				return userManager.list(parameters);
+			public List<User> getResult(int start, int end, String orderBy) {
+				return userManager.list(name, start, end, orderBy);
 			}
+
+			@Override
+			public int getTotal() {
+				return userManager.getTotal(name);
+			}
+			
 		});
 	}
 	
@@ -87,11 +84,6 @@ public class UserMgtController implements Initializeable, SummaryProvider {
 			return new OperationPrompt("删除失败", false);
 		}
 
-	}
-
-	@Override
-	public int getTotal() {
-		return userManager.getTotal();
 	}
 
 }
