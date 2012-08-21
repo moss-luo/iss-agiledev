@@ -1,14 +1,19 @@
-package com.isoftstone.agiledev.core.query.adaptors;
+package com.isoftstone.agiledev.core.query.mybatis;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import com.isoftstone.agiledev.core.query.Parameter;
-import com.isoftstone.agiledev.core.query.QueryParametersDbAdaptor;
 
-public abstract class AbstractQueryParametersDbAdaptor implements QueryParametersDbAdaptor {
+public abstract class AbstractQueryParametersMapCreator implements QueryParametersMapCreator {
 	@Override
-	public Map<String, Object> adapt(int start, int end, String orderBy, Parameter[] parameters) {
+	public Map<String, Object> create(int start, int end, String orderBy,
+			Parameter parameter) {
+		return create(start, end, orderBy, new Parameter[] {parameter});
+	}
+	
+	@Override
+	public Map<String, Object> create(int start, int end, String orderBy, Parameter[] parameters) {
 		Map<String, Object> parametersMap = new HashMap<String, Object>();
 		adaptQueryParameters(start, end, orderBy, parametersMap);
 		
