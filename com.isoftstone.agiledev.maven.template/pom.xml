@@ -28,6 +28,8 @@
 		<hsqldb.version>1.8.0.10</hsqldb.version>
 		<commons-dbcp.version>1.2.2.osgi</commons-dbcp.version>
 		<cglib.version>2.2.0</cglib.version>
+		<javax.validation.version>1.0.0.GA</javax.validation.version>
+		<hibernate.validator.version>4.2.0.Final</hibernate.validator.version>
 	</properties>
 	
 	<distributionManagement>
@@ -45,6 +47,17 @@
 
 	<dependencyManagement>
 		<dependencies>
+		    
+		    <dependency>
+		         <groupId>javax.validation</groupId> 
+		         <artifactId>com.springsource.javax.validation</artifactId> 
+		         <version>${javax.validation.version}</version> 
+		    </dependency>
+		    <dependency> 
+		        <groupId>org.hibernate</groupId> 
+		        <artifactId>com.springsource.org.hibernate.validator</artifactId> 
+		        <version>${hibernate.validator.version}</version> 
+		    </dependency>
 			<dependency>
   				<groupId>org.eclipse.gemini</groupId>
   				<artifactId>org.eclipse.gemini.blueprint.core</artifactId>
