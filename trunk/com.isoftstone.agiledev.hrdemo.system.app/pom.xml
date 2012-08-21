@@ -15,6 +15,14 @@
   <url>http://agiledev-hrdemo.isoftstone.com/system/app</url>
 
   <dependencies>
+    <dependency>
+         <groupId>javax.validation</groupId> 
+         <artifactId>com.springsource.javax.validation</artifactId> 
+    </dependency>
+    <dependency>
+        <groupId>org.hibernate</groupId> 
+        <artifactId>com.springsource.org.hibernate.validator</artifactId> 
+    </dependency>
 	<dependency>
 	    <groupId>org.springframework</groupId>
 		<artifactId>org.springframework.spring-library</artifactId>

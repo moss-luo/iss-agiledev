@@ -10,7 +10,9 @@ Import-Package: org.springframework.context.config;version="[3.0.5,4)",
  org.aopalliance.aop;version="1.0.0",
  net.sf.cglib.proxy;version="[2.2.0,3)",
  net.sf.cglib.core;version="[2.2.0,3)",
- net.sf.cglib.reflect;version="[2.2.0,3)"
+ net.sf.cglib.reflect;version="[2.2.0,3)",
+ org.hibernate.validator.constraints;version="4.2.0.Final",
+ javax.validation.constraints;version="1.0.0.GA"
 Excluded-Exports: com.isoftstone.agiledev.hrdemo.system.app.internal.*
 Excluded-Imports: com.isoftstone.agiledev.hrdemo.system.app
 MyBatis-Mapper-Locations: /META-INF/mybatis/mappers;pattern=**/*Mapper.xml

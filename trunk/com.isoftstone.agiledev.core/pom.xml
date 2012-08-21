@@ -14,6 +14,15 @@
   <url>http://agiledev.isoftstone.com/core</url>
   
   <dependencies>
+    <dependency>
+         <groupId>javax.validation</groupId> 
+         <artifactId>com.springsource.javax.validation</artifactId> 
+    </dependency>
+    <dependency>
+        <groupId>org.hibernate</groupId> 
+        <artifactId>com.springsource.org.hibernate.validator</artifactId> 
+    </dependency>
+    
  	<dependency>
 		<groupId>org.eclipse.osgi</groupId>
         <artifactId>org.eclipse.osgi</artifactId>
