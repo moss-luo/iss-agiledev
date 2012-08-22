@@ -28,10 +28,10 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
-	<bean id="queryParametersMapCreator" class="com.isoftstone.agiledev.core.query.mybatis.HSqlQueryParametersMapCreator"/>
+	<bean id="parametersMapBuilder" class="com.isoftstone.agiledev.core.query.mybatis.HSqlParametersMapBuilder"/>
 	
 	<osgi:service ref="dataSource" interface="javax.sql.DataSource"/>
 	<osgi:service ref="sqlSessionFactory" interface="org.apache.ibatis.session.SqlSessionFactory"/>
 	<osgi:service ref="txManager" interface="org.springframework.jdbc.datasource.DataSourceTransactionManager"/>
-	<osgi:service ref="queryParametersMapCreator" interface="com.isoftstone.agiledev.core.query.mybatis.QueryParametersMapCreator"/>
+	<osgi:service ref="parametersMapBuilder" interface="com.isoftstone.agiledev.core.query.mybatis.ParametersMapBuilder"/>
 </beans>
