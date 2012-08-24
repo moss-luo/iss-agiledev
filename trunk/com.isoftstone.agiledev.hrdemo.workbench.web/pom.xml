@@ -27,6 +27,7 @@
 	<dependency>
 		<groupId>com.isoftstone.agiledev.hrdemo</groupId>
 		<artifactId>com.isoftstone.agiledev.hrdemo.workbench.app</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
 	</dependency>
   </dependencies>
   
