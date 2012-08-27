@@ -120,6 +120,9 @@ public class EasyUIValidateInitial extends AbstractInitializeSupport implements 
 						ValidateParser parser = validateData.getParser();
 						if(parser!=null){
 							return parser.buildValidate(validateField,annotation);
+						}else if(validateData.getExpression().equalsIgnoreCase("required")){
+							validateField.setRequired(true);
+							return validateField;
 						}else{
 							validateField.setValidate(validateData.getExpression());
 							return validateField; 
@@ -179,6 +182,7 @@ public class EasyUIValidateInitial extends AbstractInitializeSupport implements 
 					validateData.setAnnotationClass(entry.getKey().toString());
 					String[] value = entry.getValue().toString().split(",");
 					for(String s:value){
+						if(!s.contains("="))continue;
 						if(s.split("=")[0].equalsIgnoreCase("expression")){
 							validateData.setExpression(s.split("=")[1]);
 						}
