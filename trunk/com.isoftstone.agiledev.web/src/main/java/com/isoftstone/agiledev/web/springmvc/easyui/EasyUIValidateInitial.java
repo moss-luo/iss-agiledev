@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.net.URL;
 import java.util.Enumeration;
@@ -65,33 +66,42 @@ public class EasyUIValidateInitial extends AbstractInitializeSupport implements 
 		for (Class<?> clazz: model.getInitialiedType()) {
 			Field[] fields = clazz.getDeclaredFields();
 			for (Field field : fields) {
-				String validateType = this.getValidateType(field);
-				if(validateType!=null && !"".equals(validateType)){
-					validateField = new EasyUIInitField();
-					String name = field.getName();
-					validateField.setName(name);
-					validateField.appendValidate(validateType);
+				validateField = this.getValidateField(field.getName(),field.getAnnotations());
+				this.pushValidateField(validateField);
+			}
+			
+			Method[] methods = clazz.getDeclaredMethods();
+			for (Method method : methods) {
+				if(method.getName().startsWith("set")){
+					String fieldName = method.getName().substring(3);
+					fieldName = fieldName.substring(0,1).toLowerCase()+fieldName.substring(1);
+					validateField = this.getValidateField(fieldName,method.getAnnotations());
 					this.pushValidateField(validateField);
 				}
 			}
 		}
 	}
 	
-	private String getValidateType(Field field){
-		StringBuilder sb = new StringBuilder();
+	
+	private EasyUIInitField getValidateField(String fieldName,Annotation[] annotations){
 		try {
-			Annotation[] annotations = field.getAnnotations();
-			for (Annotation annotation : annotations) {
-				String validateType = this.getBastValidateExpression(annotation);
-				sb.append(validateType).append(";");
+
+			EasyUIInitField validateField = (EasyUIInitField) this.getField(fieldName);
+			if(validateField == null){
+				validateField = new EasyUIInitField();
+				validateField.setName(fieldName);
 			}
+			for (Annotation annotation : annotations) {
+				validateField = (EasyUIInitField) this.fillValidateField(validateField,annotation);
+			}
+			return validateField;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return sb.toString();
+		return null;
 	}
 	
-	public String getBastValidateExpression(Annotation annotation){
+	public InitField fillValidateField(EasyUIInitField validateField,Annotation annotation){
 		try {
 			
 			Class<?> clazz = null;
@@ -109,9 +119,10 @@ public class EasyUIValidateInitial extends AbstractInitializeSupport implements 
 					if(validateData.getAnnotationClass().equals(clazz.getName())){
 						ValidateParser parser = validateData.getParser();
 						if(parser!=null){
-							return parser.getValidateExpression(annotation);
+							return parser.buildValidate(validateField,annotation);
 						}else{
-							return validateData.getExpression(); 
+							validateField.setValidate(validateData.getExpression());
+							return validateField; 
 						}
 					}
 				}
@@ -119,7 +130,7 @@ public class EasyUIValidateInitial extends AbstractInitializeSupport implements 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "";
+		return validateField;
 	}
 
 	public void pushValidateField(EasyUIInitField f){
@@ -127,6 +138,7 @@ public class EasyUIValidateInitial extends AbstractInitializeSupport implements 
 		if(field!=null){
 			EasyUIInitField validateField = (EasyUIInitField) field;
 			validateField.appendValidate(f.getValidate());
+			validateField.setRequired(f.isRequired());
 		}else{
 			this.addInitField(f);
 		}

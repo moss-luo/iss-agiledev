@@ -4,6 +4,7 @@ import java.lang.annotation.Annotation;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.isoftstone.agiledev.core.init.InitField;
 import com.isoftstone.agiledev.core.validate.ValidateParser;
 
 public class EasyUILengthParser implements ValidateParser {
@@ -17,6 +18,19 @@ public class EasyUILengthParser implements ValidateParser {
 							.append(length.max())
 								.append("]")
 									.toString();
+	}
+
+	@Override
+	public InitField buildValidate(InitField initField,
+			Annotation annotation) {
+		String validateType = this.getValidateExpression(annotation);
+		EasyUIInitField easyUIInitField = (EasyUIInitField) initField;
+		easyUIInitField.setValidate(validateType);
+		Length length = (Length) annotation;
+		if(length.min()>0){
+			easyUIInitField.setRequired(true);
+		}
+		return easyUIInitField;
 	}
 
 }

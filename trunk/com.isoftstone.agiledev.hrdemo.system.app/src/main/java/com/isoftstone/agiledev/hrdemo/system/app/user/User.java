@@ -1,6 +1,7 @@
 package com.isoftstone.agiledev.hrdemo.system.app.user;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.beans.factory.annotation.Required;
 
 import com.isoftstone.agiledev.core.init.Init;
 import com.isoftstone.agiledev.core.validate.annotation.Email;
@@ -50,7 +51,8 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
-	
+
+	@Required
 	public void setPassword(String password) {
 		this.password = password;
 	}
