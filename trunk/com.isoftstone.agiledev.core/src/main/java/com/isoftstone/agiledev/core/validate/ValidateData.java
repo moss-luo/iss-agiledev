@@ -2,15 +2,16 @@ package com.isoftstone.agiledev.core.validate;
 
 public class ValidateData {
 	private String annotationClass;
+	private String expression;
+	private ValidateParser parser;
+	
+	
 	public String getAnnotationClass() {
 		return annotationClass;
 	}
 	public void setAnnotationClass(String annotationClass) {
 		this.annotationClass = annotationClass;
 	}
-	private String expression;
-	private ValidateParser parser;
-	
 	public String getExpression() {
 		return expression;
 	}
