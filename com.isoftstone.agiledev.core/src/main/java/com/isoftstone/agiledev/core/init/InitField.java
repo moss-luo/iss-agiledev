@@ -7,4 +7,10 @@ public interface InitField {
 	 */
 	String getName();
 	void setName(String name);
+	/**
+	 * 是否非空
+	 * @return
+	 */
+	public boolean isRequired();
+	public void setRequired(boolean required);
 }
