@@ -8,10 +8,10 @@ import java.lang.reflect.Proxy;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Map.Entry;
+import java.util.Properties;
+import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,6 +25,8 @@ import com.isoftstone.agiledev.core.init.AbstractInitializeSupport;
 import com.isoftstone.agiledev.core.init.InitField;
 import com.isoftstone.agiledev.core.init.InitializeAdaptor;
 import com.isoftstone.agiledev.core.init.InitializeModel;
+import com.isoftstone.agiledev.core.validate.ValidateData;
+import com.isoftstone.agiledev.core.validate.ValidateParser;
 
 
 
@@ -33,7 +35,7 @@ public class EasyUIValidateInitial extends AbstractInitializeSupport implements 
 	
 	private BundleContext bundleContext = null;
 	
-	private Map<Long,Map<String,String>> validateTypes = null;
+	private Map<Long,Vector<ValidateData>> validateTypes = null;
 	
 	public EasyUIValidateInitial() {
 	}
@@ -73,7 +75,6 @@ public class EasyUIValidateInitial extends AbstractInitializeSupport implements 
 				}
 			}
 		}
-//		return this.initFields;
 	}
 	
 	private String getValidateType(Field field){
@@ -81,35 +82,44 @@ public class EasyUIValidateInitial extends AbstractInitializeSupport implements 
 		try {
 			Annotation[] annotations = field.getAnnotations();
 			for (Annotation annotation : annotations) {
-	
-				Class<?> clazz = null;
-				if(annotation instanceof Proxy){
-					InvocationHandler handle = Proxy.getInvocationHandler(annotation); 
-					Field f = handle.getClass().getDeclaredField("type");
-					f.setAccessible(true);
-					clazz = (Class<?>) f.get(handle);
-					f.setAccessible(false);
-				}else{
-					clazz = annotation.getClass();
-				}
-				String validateType = null;
-				for (Map<String,String> m : validateTypes.values()) {
-					Iterator<String> it = m.keySet().iterator();
-					while(it.hasNext()){
-						String t = it.next();
-						if(t.equals(clazz.getName())){
-							validateType = m.get(t);
-							break;
-						}
-					}
-				}
-				if(validateType!=null)
-					sb.append(validateType).append(";");
+				String validateType = this.getBastValidateExpression(annotation);
+				sb.append(validateType).append(";");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return sb.toString();
+	}
+	
+	public String getBastValidateExpression(Annotation annotation){
+		try {
+			
+			Class<?> clazz = null;
+			if(annotation instanceof Proxy){
+				InvocationHandler handle = Proxy.getInvocationHandler(annotation); 
+				Field f = handle.getClass().getDeclaredField("type");
+				f.setAccessible(true);
+				clazz = (Class<?>) f.get(handle);
+				f.setAccessible(false);
+			}else{
+				clazz = annotation.getClass();
+			}
+			for (Vector<ValidateData> v : validateTypes.values()) {
+				for (ValidateData validateData : v) {
+					if(validateData.getAnnotationClass().equals(clazz.getName())){
+						ValidateParser parser = validateData.getParser();
+						if(parser!=null){
+							return parser.getValidateExpression(annotation);
+						}else{
+							return validateData.getExpression(); 
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 
 	public void pushValidateField(EasyUIInitField f){
@@ -148,15 +158,34 @@ public class EasyUIValidateInitial extends AbstractInitializeSupport implements 
 		Properties properties = new Properties();
 		try {
 			properties.load(resource.openStream());
-			validateTypes = new HashMap<Long,Map<String,String>>();
+			validateTypes = new HashMap<Long,Vector<ValidateData>>();
+			
 			synchronized (this) {
-				Map<String,String> temp = new HashMap<String, String>();
+				Vector<ValidateData> types = new Vector<ValidateData>();
 				for (Entry<Object, Object> entry : properties.entrySet()) {
-					temp.put((String)entry.getKey(), (String)entry.getValue());
+					ValidateData validateData = new ValidateData();
+					validateData.setAnnotationClass(entry.getKey().toString());
+					String[] value = entry.getValue().toString().split(",");
+					for(String s:value){
+						if(s.split("=")[0].equalsIgnoreCase("expression")){
+							validateData.setExpression(s.split("=")[1]);
+						}
+						if(s.split("=")[0].equalsIgnoreCase("parser")){
+							ValidateParser parser = (ValidateParser) this.getClass().getClassLoader().loadClass(s.split("=")[1]).newInstance();
+							validateData.setParser(parser);
+						}
+					}
+					types.add(validateData);
 				}
-				validateTypes.put(bundle.getBundleId(), temp);
+				validateTypes.put(bundle.getBundleId(), types);
 			}
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
