@@ -38,8 +38,9 @@ public class EasyUIInitField implements InitField {
 		return validate;
 	}
 	public void appendValidate(String validate) {
-		if(validate!=null)
-			this.validate = (this.validate==null?validate:this.validate + validate + ";");
+//		if(validate!=null)
+//			this.validate = (this.validate==null?validate:this.validate + validate + ";");
+		this.validate = validate;
 	}
 	public boolean isRequired() {
 		return required;
