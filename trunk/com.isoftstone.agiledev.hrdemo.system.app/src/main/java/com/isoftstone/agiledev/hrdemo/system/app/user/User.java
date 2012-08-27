@@ -18,6 +18,7 @@ public class User {
 	@Mobile
 	private String  mobile;
 	@Email
+//	@org.hibernate.validator.constraints.Email
 	private String  email;
 	
 	
