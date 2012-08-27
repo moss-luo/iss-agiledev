@@ -1,5 +1,7 @@
 package com.isoftstone.agiledev.hrdemo.system.app.user;
 
+import org.hibernate.validator.constraints.Length;
+
 import com.isoftstone.agiledev.core.init.Init;
 import com.isoftstone.agiledev.core.validate.annotation.Email;
 import com.isoftstone.agiledev.core.validate.annotation.Mobile;
@@ -8,6 +10,7 @@ public class User {
 	
 	private Integer id;
 	@Init(fieldName="name",value="zhangsan")
+	@Length(min=1,max=10)
 	private String name;
 	@Init(fieldName="password",value="123123")
 	private String password;
