@@ -411,7 +411,7 @@ Handle.prototype.save = function(){
 					data:form.find("input[class*='agiledev']").serialize(),
 					type:'post',
 					dataType:'json',
-					cache:false
+					cache:false,
 					success:function(r){
 						var result = eval(r);
 						if (result.operationPrompt.success){
