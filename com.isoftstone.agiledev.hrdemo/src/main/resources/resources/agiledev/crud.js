@@ -397,15 +397,43 @@ function Handle(plugin){
 Handle.prototype.save = function(){
 	var $this = this;
 	$('.agiledev-dialog').closest(".agiledev-form").form('submit',{
-		url: $this.plugin.getUrl(),
+		url: $this.plugin.getUrl(),//always pop up a new window,no set url
 		onSubmit: function(){
+			var form = $(this);
 			if($(this).find(":hidden[name='agiledev-ajax-request-type']").length!=0){
 				$(this).find(":hidden[name='agiledev-ajax-request-type']").val('validate');
 			}else{
 				$(this).append("<input name='agiledev-ajax-request-type' type='hidden' value='validate'/>");
 			}
-			return $(this).form('validate');
-		},
+			if($(this).form('validate')){
+				$.ajax({
+					url:$this.plugin.getUrl(),
+					data:form.find("input[class*='agiledev']").serialize(),
+					type:'post',
+					dataType:'json',
+					cache:false
+					success:function(r){
+						var result = eval(r);
+						if (result.operationPrompt.success){
+							$this.plugin.getRender().closeDialog();
+							$this.plugin.getRender().reloadDatagrid("reload");
+							
+							$($this.plugin.selector).datagrid('clearSelections');
+						} else {
+							$.messager.show({
+								title: lang.prompt.title,
+								msg: result.operationPrompt.msg
+							});
+						}
+					},
+					error:function(){
+						var a = 1;
+					}
+				});
+			}
+			return false;
+		}
+		/*,
 		success: function(result){
 			var result = eval('('+result+')');
 			if (result.operationPrompt.success){
@@ -419,7 +447,7 @@ Handle.prototype.save = function(){
 					msg: result.operationPrompt.msg
 				});
 			}
-		}
+		}*/
 	});
 }
  /**
