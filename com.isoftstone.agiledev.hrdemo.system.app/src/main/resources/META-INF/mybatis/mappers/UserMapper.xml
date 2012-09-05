@@ -20,11 +20,11 @@
 	</select>
 	
 	<insert id="save" parameterType="com.isoftstone.agiledev.hrdemo.system.app.user.User">
-		INSERT INTO USER(name, password) VALUES(#{name}, #{password})
+		INSERT INTO USER(name, password,mobile,email) VALUES(#{name}, #{password},#{mobile},#{email})
 	</insert>
 	
 	<update id="update" parameterType="com.isoftstone.agiledev.hrdemo.system.app.user.User">
-		UPDATE USER SET name=#{name}, password=#{password} WHERE id=#{id}
+		UPDATE USER SET name=#{name}, password=#{password},mobile=#{mobile},email=#{email} WHERE id=#{id}
 	</update>
 	
 	<delete id="remove" parameterType="int">
