@@ -1,7 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<base href="/hrdemo/workbench/"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>agiledev HR System</title>
 <link rel="stylesheet" type="text/css" href="../resources/easyui/themes/gray/easyui.css">
@@ -29,7 +28,6 @@ $(function(){
 			if (!has) {
 				$('#tabs').tabs('add', {
 					title: node.text,
-					//href:,
 					content:'<iframe height="483" width="100%" frameborder="0" scrolling="auto" allowtransparency="true" src="'+$(node.text).attr("hh")+'"></iframe>',
 					closable: true,
 					selected: true
