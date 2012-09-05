@@ -405,7 +405,7 @@ Handle.prototype.save = function(){
 			}else{
 				$(this).append("<input name='agiledev-ajax-request-type' type='hidden' value='validate'/>");
 			}
-			if($(this).form('validate')){
+			/*if($(this).form('validate')){
 				$.ajax({
 					url:$this.plugin.getUrl(),
 					data:form.find("input[class*='agiledev']").serialize(),
@@ -430,10 +430,11 @@ Handle.prototype.save = function(){
 						var a = 1;
 					}
 				});
-			}
-			return false;
+			}*/
+//			return false;
+			return $(this).form('validate');
 		}
-		/*,
+		,
 		success: function(result){
 			var result = eval('('+result+')');
 			if (result.operationPrompt.success){
@@ -447,7 +448,7 @@ Handle.prototype.save = function(){
 					msg: result.operationPrompt.msg
 				});
 			}
-		}*/
+		}
 	});
 }
  /**
