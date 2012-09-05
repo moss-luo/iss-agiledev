@@ -24,8 +24,7 @@ public class UserManager implements IUserManager {
 
 	@Override
 	public void add(User user) {
-		// TODO Auto-generated method stub
-		
+		sqlSession.insert("com.isoftstone.agiledev.hrdemo.system.app.user.UserMapper.save",user);
 	}
 
 	@Override
