@@ -29,18 +29,19 @@
 		<hibernate.validator.version>4.2.0.Final</hibernate.validator.version>
 	</properties>
 
-	<distributionManagement>
-		<repository>
-			<id>MIS-release</id>
-			<name>MIS Release Repository</name>
-			<url>http://10.36.65.236:8091/nexus/content/repositories/releases</url>
-		</repository>
-		<snapshotRepository>
-			<id>openlbs-snapshots</id>
-			<name>OpenLBS Snapshots</name>
-			<url>http://10.36.65.236:8091/nexus/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>openlbs-release</id>
+            <name>OpenLBS Release Repository</name>
+            <url>http://10.36.16.8:8091/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>openlbs-snapshots</id>
+            <name>OpenLBS Snapshots</name>
+            <url>http://10.36.16.8:8091/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 	<dependencyManagement>
 		<dependencies>
