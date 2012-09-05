@@ -35,6 +35,9 @@ public class EasyUIView extends MappingJacksonJsonView implements BundleContextA
 	protected void renderMergedOutputModel(Map<String, Object> model,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
+		if(request.getHeader("Accept").indexOf("text/html")!=-1){
+			response.setContentType(request.getHeader("Accept").split(",")[0]);
+		}
 		JsonGenerator generator =
 				objectMapper.getJsonFactory().createJsonGenerator(response.getOutputStream(), encoding);
 		if (prefixJson) {
