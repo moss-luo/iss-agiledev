@@ -7,6 +7,7 @@
 		        http://www.eclipse.org/virgo/schema/plan/eclipse-virgo-plan.xsd">
 
 	<artifact type="bundle" name="com.isoftstone.agiledev.hrdemo" version="1.0.0.SNAPSHOT"/>
+	<artifact type="bundle" name="com.isoftstone.agiledev.hrdemo.dba" version="1.0.0.SNAPSHOT"/>
 	<artifact type="bundle" name="com.isoftstone.agiledev.hrdemo.workbench.app" version="1.0.0.SNAPSHOT"/>
 	<artifact type="bundle" name="com.isoftstone.agiledev.hrdemo.workbench.web" version="1.0.0.SNAPSHOT"/>
 	<artifact type="bundle" name="com.isoftstone.agiledev.hrdemo.system.app" version="1.0.0.SNAPSHOT"/>
