@@ -22,20 +22,6 @@
 <script type="text/javascript" src="../resources/agiledev/form.js"></script>
 <script type="text/javascript" src="../resources/agiledev/crud.js"></script>
 <script type="text/javascript">
-//$(function(){
-//	$("body").agiledevForm({
-//		field:[
-//				{title:'Name',field:'user.name'},
-//				{title:'Password',field:'user.pwd',type:'password'},
-//				{title:'Mobile',field:'user.mobile'},
-//				{title:'Email',field:'user.email'}
-//			],
-//		initUrl:'user-init',
-//		submitUrl:'user-create',
-//		success:function(result){alert(result);},
-//		text:'submit'
-//	});
-//});
 var options = {
 	formInitUrl:'mvc/user/usermgt/init.json',
 	saveUrl:'mvc/user/usermgt/add.json',
@@ -74,11 +60,12 @@ var options = {
 	search:{
 		field:[
 			{title:'用户名',id:'s_userId',field:'name'}
-		],
+		]
+ 		,
 		buttons:{
 			'test':{handler:function(){alert($("#list").crud("getDatagrid").datagrid("getPager").pagination("options").total);}}
 		}
-	}
+ 	}
 };
 $(function(){
 	$("#list").crud(options);
