@@ -18,7 +18,7 @@ public class InitDB {
 	}
 
 	private void initData() {
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 30; i++) {
 			jdbcTemplate.execute(String.format("INSERT INTO USER(name, password,mobile,email) VALUES('User_%s', 'User_%s','13888888888','User_%s@163.com')", i, i,i));
 		}
 	}
