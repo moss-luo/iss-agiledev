@@ -11,12 +11,16 @@
     <module>com.isoftstone.agiledev.parent</module>
     <module>com.isoftstone.agiledev.core</module>
     <module>com.isoftstone.agiledev.web</module>
+    <module>com.isoftstone.agiledev.mobile</module>
+    <module>com.isoftstone.agiledev.orm</module>
 
     <module>com.isoftstone.agiledev.maven.template</module>
     <module>com.isoftstone.agiledev.hrdemo</module>
+    <module>com.isoftstone.agiledev.hrdemo.dba</module>
     <module>com.isoftstone.agiledev.hrdemo.system.app</module>
     <module>com.isoftstone.agiledev.hrdemo.system.web</module>
     <module>com.isoftstone.agiledev.hrdemo.workbench.app</module>
     <module>com.isoftstone.agiledev.hrdemo.workbench.web</module>
+    
   </modules>
 </project>
