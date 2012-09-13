@@ -10,7 +10,7 @@
 
 	<groupId>com.isoftstone.agiledev</groupId>
 	<artifactId>com.isoftstone.agiledev.maven.app.template</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0-RELEASE</version>
 	<packaging>pom</packaging>
 
 	<name>AgileDev Maven APP Template</name>

@@ -22,8 +22,7 @@
 		<slf4j.version>1.6.4</slf4j.version>
 		<mybatis.version>3.0.6</mybatis.version>
 		<eclipse.osgi.version>3.7.0.v20110613</eclipse.osgi.version>
-		<agiledev.version>1.0.0-SNAPSHOT</agiledev.version>
-		<agiledev.hrdemo.version>1.0.0-SNAPSHOT</agiledev.hrdemo.version>
+		<agiledev.version>1.0-RELEASE</agiledev.version>
 		<gemini.blueprint.version>1.0.0.RELEASE</gemini.blueprint.version>
 		<hsqldb.version>1.8.0.10</hsqldb.version>
 		<commons-dbcp.version>1.2.2.osgi</commons-dbcp.version>
