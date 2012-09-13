@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: AgileDev WEB
 Bundle-SymbolicName: com.isoftstone.agiledev.web
-Bundle-Version: 1.0.0.SNAPSHOT
+Bundle-Version: 1.0.RELEASE
 Bundle-ClassPath: .
 Import-Template: org.osgi.framework.*;version="0",
  javax.servlet.*;version="0",
