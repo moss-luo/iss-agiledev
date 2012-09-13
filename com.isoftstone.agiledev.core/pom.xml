@@ -5,14 +5,13 @@
   <parent>
     <groupId>com.isoftstone.agiledev</groupId>
     <artifactId>com.isoftstone.agiledev.parent</artifactId>
-	<version>1.0-RELEASE</version>
+	<version>1.0.0-RELEASE</version>
   </parent> 
   <groupId>com.isoftstone.agiledev</groupId>
   <artifactId>com.isoftstone.agiledev.core</artifactId>
-	<version>1.0-RELEASE</version>
+	<version>1.0.0-RELEASE</version>
   <name>AgileDev Core</name>
   <url>http://agiledev.isoftstone.com/core</url>
-  
   <dependencies>
     <dependency>
          <groupId>javax.validation</groupId> 
