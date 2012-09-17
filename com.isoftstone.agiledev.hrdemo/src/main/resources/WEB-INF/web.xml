@@ -7,7 +7,15 @@
 	version="2.5">
 	
 	<display-name>Agile HR Demo</display-name>
-	
+	<!-- 
+	<context-param>
+	    <param-name>isDevModel</param-name>
+	    <param-value>true</param-value>
+	</context-param>
+	<context-param>
+	    <param-name>devLocation</param-name>
+	    <param-value>/home/david/agiledev/google/trunk/</param-value>
+	</context-param> -->
   <filter>
     <filter-name>host-filter</filter-name>
     <filter-class>org.eclipse.virgo.snaps.core.SnapHostFilter</filter-class>
