@@ -4,7 +4,6 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.isoftstone.agiledev.core.init.Init;
-import com.isoftstone.agiledev.core.validate.annotation.Email;
 import com.isoftstone.agiledev.core.validate.annotation.Mobile;
 
 public class User {
@@ -17,8 +16,7 @@ public class User {
 	private String password;
 	@Mobile
 	private String  mobile;
-	@Email
-//	@org.hibernate.validator.constraints.Email
+	@org.hibernate.validator.constraints.Email
 	private String  email;
 	
 	
