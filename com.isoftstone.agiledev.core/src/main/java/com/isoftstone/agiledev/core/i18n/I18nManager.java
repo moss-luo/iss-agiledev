@@ -78,7 +78,7 @@ public abstract class I18nManager {
 				ResourceBundle rb = rbCache.get(locale);
 				if (rb == null) {
 					rb = ResourceBundle.getBundle(DEFAULT_I18N_DIR + DEFAULT_BASE_NAME,
-						locale, new OsgiControl(bundle));
+						locale, BundleClassLoaderGetter.getClassLoader(bundle), new OsgiControl(bundle));
 					rbCache.put(locale, rb);
 				}
 					
@@ -87,6 +87,22 @@ public abstract class I18nManager {
 			}
 				
 			return mf.format(args);
+		}
+		
+		private static class BundleClassLoaderGetter {
+			private static Map<Bundle, ClassLoader> cache = new HashMap<Bundle, ClassLoader>();
+			
+			public synchronized static ClassLoader getClassLoader(Bundle bundle) {
+				ClassLoader classLoader = null;
+				classLoader = cache.get(bundle);
+				if (classLoader != null)
+					return classLoader;
+				
+				classLoader = new ClassLoader() {};
+				cache.put(bundle, classLoader);
+				
+				return classLoader;
+			}
 		}
 
 		private static class OsgiControl extends ResourceBundle.Control {
