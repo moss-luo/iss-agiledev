@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.isoftstone.agiledev.core.mobile.CallbackData;
-import com.isoftstone.agiledev.web.springmvc.easyui.DataOutputAdaptor;
+import com.isoftstone.agiledev.web.springmvc.DataOutputAdaptor;
 
 public class CrossDomainOutputAdaptor implements DataOutputAdaptor {
 
