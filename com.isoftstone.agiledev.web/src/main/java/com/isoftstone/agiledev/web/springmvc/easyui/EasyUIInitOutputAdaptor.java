@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.eclipse.gemini.blueprint.context.BundleContextAware;
 import org.osgi.framework.BundleContext;
 
 import com.isoftstone.agiledev.core.init.InitData;
@@ -17,10 +18,11 @@ import com.isoftstone.agiledev.core.init.InitializeModel;
 import com.isoftstone.agiledev.core.init.InitializeModelOutputAdaptor;
 import com.isoftstone.agiledev.web.springmvc.DataOutputAdaptor;
 
-public class EasyUIInitOutputAdaptor implements DataOutputAdaptor,InitializeModelOutputAdaptor{
+public class EasyUIInitOutputAdaptor implements DataOutputAdaptor,InitializeModelOutputAdaptor,BundleContextAware{
 
 	private List<InitializeAdaptor> initSupporters = new ArrayList<InitializeAdaptor>();
 	private ObjectMapper objectMapper = new ObjectMapper();
+	private BundleContext bundleContext = null;
 	
 	public EasyUIInitOutputAdaptor(BundleContext bundleContext){
 		this.init(bundleContext);
@@ -29,9 +31,10 @@ public class EasyUIInitOutputAdaptor implements DataOutputAdaptor,InitializeMode
 		this.init(null);
 	}
 	
-	private void init(BundleContext bundleContext){
+	private void init(BundleContext bc){
+		
 		initSupporters.add(new EasyUIFormInitial());
-		initSupporters.add(new EasyUIValidateInitial(bundleContext));
+		initSupporters.add(new EasyUIValidateInitial(bc==null?this.bundleContext:bc));
 		this.type = "com.isoftstone.agiledev.core.init.InitializeModel";
 	}
 	
@@ -85,6 +88,10 @@ public class EasyUIInitOutputAdaptor implements DataOutputAdaptor,InitializeMode
 	}
 	public void setInitSupporters(List<InitializeAdaptor> initSupporters) {
 		this.initSupporters = initSupporters;
+	}
+	@Override
+	public void setBundleContext(BundleContext bundleContext) {
+		this.bundleContext = bundleContext;
 	}
 	
 
