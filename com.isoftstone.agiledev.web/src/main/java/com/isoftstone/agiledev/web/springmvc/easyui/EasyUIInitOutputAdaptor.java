@@ -15,6 +15,7 @@ import com.isoftstone.agiledev.core.init.InitField;
 import com.isoftstone.agiledev.core.init.InitializeAdaptor;
 import com.isoftstone.agiledev.core.init.InitializeModel;
 import com.isoftstone.agiledev.core.init.InitializeModelOutputAdaptor;
+import com.isoftstone.agiledev.web.springmvc.DataOutputAdaptor;
 
 public class EasyUIInitOutputAdaptor implements DataOutputAdaptor,InitializeModelOutputAdaptor{
 
