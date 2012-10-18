@@ -10,7 +10,7 @@ public class JsonUtil {
 	public static String objectToJson(Object object) {
 		StringBuilder json = new StringBuilder();
 		if (object == null) {
-			json.append("\"\"");
+			json.append("\"\""); 
 		} else if (object instanceof String || object instanceof Integer) {
 			json.append("\"").append(object.toString()).append("\"");
 		} else {
