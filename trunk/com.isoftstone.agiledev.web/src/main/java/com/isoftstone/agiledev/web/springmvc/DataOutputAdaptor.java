@@ -1,4 +1,4 @@
-package com.isoftstone.agiledev.web.springmvc.easyui;
+package com.isoftstone.agiledev.web.springmvc;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

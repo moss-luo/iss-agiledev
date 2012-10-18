@@ -16,6 +16,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import com.isoftstone.agiledev.core.tree.Node;
 import com.isoftstone.agiledev.core.tree.TreeData;
 import com.isoftstone.agiledev.web.easyui.EasyUITreeNode;
+import com.isoftstone.agiledev.web.springmvc.DataOutputAdaptor;
 
 public class EasyUITreeDataOutputAdaptor implements DataOutputAdaptor {
 
