@@ -21,6 +21,6 @@
     <module>com.isoftstone.agiledev.hrdemo.system.web</module>
     <module>com.isoftstone.agiledev.hrdemo.workbench.app</module>
     <module>com.isoftstone.agiledev.hrdemo.workbench.web</module>
-    
+    <module>com.isoftstone.agiledev.config</module>
   </modules>
 </project>
