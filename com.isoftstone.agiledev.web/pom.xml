@@ -46,5 +46,11 @@
 		<artifactId>com.isoftstone.agiledev.core</artifactId>
 	</dependency>
         
+	<dependency>
+		<groupId>com.isoftstone.agiledev</groupId>
+		<artifactId>com.isoftstone.agiledev.config</artifactId>
+		<version>1.0.1-RELEASE</version>
+	</dependency>
+        
   </dependencies>
 </project>
