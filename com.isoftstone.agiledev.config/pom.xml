@@ -13,7 +13,7 @@
 	</properties>
 	<groupId>com.isoftstone.agiledev</groupId>
 	<artifactId>com.isoftstone.agiledev.config</artifactId>
-	<version>1.0.2-RELEASE</version>
+	<version>1.0.1-RELEASE</version>
 	<name>AgileDev Config</name>
 	<url>http://agiledev.isoftstone.com/core</url>
 	<dependencies>
