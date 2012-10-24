@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.isoftstone.agiledev.config.manager.ConfigManager;
+import com.isoftstone.agiledev.config.manager.ConfigManagerFactory;
+
 /**
  * 
  * @author hilbert.xu.wang@gmail.com
