@@ -17,7 +17,6 @@ public class ServletRequestDataBinder extends org.springframework.web.bind.Servl
 	public ServletRequestDataBinder(ObjectFactory objFactory, Object target, String objectName) {
 		super(target, objectName);
 		this.objFactory = objFactory;
-		//
 		List<String> callbacks = ConfigReaderFactory.readCallbacks();
 		Class[] parameterTypes = {ObjectFactory.class};
 		Object[] parameters = {objFactory};
