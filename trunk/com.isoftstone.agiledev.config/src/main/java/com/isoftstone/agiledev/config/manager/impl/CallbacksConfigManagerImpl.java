@@ -22,13 +22,13 @@ public class CallbacksConfigManagerImpl extends AbstractConfigManager implements
 		Object obj = ConfigManagerFactory.getConfigContextManager().get("callbacks.path");
         if (obj == null)
         {
-        	//TODO search from default directory
+        	//search from default directory
+        	loadDefaultProps();
         } else {
         	String callbacksConfigPath = (String) obj;
         	File file = new File(callbacksConfigPath);
         	if (file.isDirectory())
         	{
-        		//TODO certain file
         		file = new File(callbacksConfigPath + "/callbacks.properties");
         	}
         	
@@ -41,10 +41,27 @@ public class CallbacksConfigManagerImpl extends AbstractConfigManager implements
 				} catch (IOException e) {
 					throw new ConfigException(e);
 				}
+    			
+    			if(properties.isEmpty())
+    				loadDefaultProps();
     		} else {
-    			//TODO
+    			loadDefaultProps();
     		}
         }
 	}
-
+	
+	private void loadDefaultProps()
+	{
+		String virgohome = System.getProperty("catalina.base");
+		File f = new File(virgohome + "/configuration/agiledev/callbacks.properties");
+		if(f.exists())
+		{
+			try {
+				properties.load(new FileInputStream(f));
+			} catch (IOException e) {
+				throw new ConfigException(e);
+			}
+		}
+	}
+	
 }
