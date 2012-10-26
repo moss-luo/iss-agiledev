@@ -49,7 +49,7 @@
 	<dependency>
 		<groupId>com.isoftstone.agiledev</groupId>
 		<artifactId>com.isoftstone.agiledev.config</artifactId>
-		<version>1.0.1-RELEASE</version>
+		<version>1.0.1-SNAPSHOT</version>
 	</dependency>
         
   </dependencies>
