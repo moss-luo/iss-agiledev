@@ -13,9 +13,9 @@
 	</properties>
 	<groupId>com.isoftstone.agiledev</groupId>
 	<artifactId>com.isoftstone.agiledev.config</artifactId>
-	<version>1.0.1-RELEASE</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>AgileDev Config</name>
-	<url>http://agiledev.isoftstone.com/core</url>
+	<url>http://agiledev.isoftstone.com/config</url>
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipse.osgi</groupId>
