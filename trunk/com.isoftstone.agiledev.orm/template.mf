@@ -4,4 +4,5 @@ Bundle-Name: AgileDev ORM
 Bundle-SymbolicName: com.isoftstone.agiledev.orm
 Bundle-Version: 1.0.1.RELEASE
 Bundle-ClassPath: .
-Import-Template: org.osgi.framework.*
+Import-Template: org.osgi.framework.*,
+ com.isoftstone.agiledev.config.*;version="1.0.1.SNAPSHOT"
