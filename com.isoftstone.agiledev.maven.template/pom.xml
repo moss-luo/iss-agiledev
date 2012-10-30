@@ -4,7 +4,7 @@
 
 	<groupId>com.isoftstone.agiledev</groupId>
 	<artifactId>com.isoftstone.agiledev.maven.template</artifactId>
-	<version>1.0.1-RELEASE</version>
+	<version>1.0.2-RELEASE</version>
 	<packaging>pom</packaging>
 
 	<name>AgileDev Maven Template</name>
@@ -22,7 +22,7 @@
 		<slf4j.version>1.6.4</slf4j.version>
 		<mybatis.version>3.0.6</mybatis.version>
 		<eclipse.osgi.version>3.7.0.v20110613</eclipse.osgi.version>
-		<agiledev.version>1.0.1-RELEASE</agiledev.version>
+		<agiledev.version>1.0.2-RELEASE</agiledev.version>
 		<gemini.blueprint.version>1.0.0.RELEASE</gemini.blueprint.version>
 		<hsqldb.version>1.8.0.10</hsqldb.version>
 		<commons-dbcp.version>1.2.2.osgi</commons-dbcp.version>
@@ -151,6 +151,11 @@
 	<dependency>
 		<groupId>com.isoftstone.agiledev</groupId>
 		<artifactId>com.isoftstone.agiledev.orm</artifactId>
+		<version>${agiledev.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.isoftstone.agiledev</groupId>
+		<artifactId>com.isoftstone.agiledev.config</artifactId>
 		<version>${agiledev.version}</version>
 	</dependency>
 
