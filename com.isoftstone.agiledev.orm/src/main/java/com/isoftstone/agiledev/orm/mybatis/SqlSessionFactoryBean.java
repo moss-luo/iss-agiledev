@@ -190,7 +190,7 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>,
 				recurse = true;
 				entryPattern = pattern.substring(3, pattern.length());
 			}
-			
+
 			if (!entryPattern.startsWith("*")) {
 				throw new IllegalArgumentException(String.format(
 					"Illegal mapper locations definition. Bad match pattern: %s",
