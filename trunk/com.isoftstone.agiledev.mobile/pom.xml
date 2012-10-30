@@ -5,11 +5,11 @@
   <parent>
     <groupId>com.isoftstone.agiledev</groupId>
     <artifactId>com.isoftstone.agiledev.parent</artifactId>
-	<version>1.0.1-RELEASE</version>
+	<version>1.0.2-RELEASE</version>
   </parent> 
   <groupId>com.isoftstone.agiledev</groupId>
   <artifactId>com.isoftstone.agiledev.mobile</artifactId>
-	<version>1.0.1-RELEASE</version>
+	<version>1.0.2-RELEASE</version>
   <name>AgileDev Mobile</name>
   <url>http://agiledev.isoftstone.com/mobile</url>
   
