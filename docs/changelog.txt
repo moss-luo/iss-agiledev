@@ -7,6 +7,7 @@ agiledev版本更新记录
 	修复ResourceBundle缓存资源文件的bug
 	解决静态文件修改后避免重启virgo的问题
 	解决windows下bundlor插件打包失败的问题
+	添加了com.isoftstone.agiledev.config，用来统一处理配置，该版本中仅实现了callback配置的部分
 1.0.2.RELEASE：
 	解决数据库配置文件打包在jar包中的问题
 1.0.3.SNAPSHOT:
