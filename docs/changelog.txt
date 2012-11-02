@@ -9,5 +9,7 @@ agiledev版本更新记录
 	解决windows下bundlor插件打包失败的问题
 1.0.2.RELEASE：
 	解决数据库配置文件打包在jar包中的问题
+1.0.3.SNAPSHOT:
+	新增后台验证功能
 	
 	
