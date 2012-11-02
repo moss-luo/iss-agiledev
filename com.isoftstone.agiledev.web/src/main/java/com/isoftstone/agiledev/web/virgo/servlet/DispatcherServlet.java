@@ -17,6 +17,7 @@ import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.io.Resource;
+import org.springframework.validation.Validator;
 import org.springframework.web.servlet.HandlerAdapter;
 
 import com.isoftstone.agiledev.core.ConfigManager;
@@ -140,6 +141,17 @@ public class DispatcherServlet extends org.springframework.web.servlet.Dispatche
 				
 				if (conversionService != null) {
 					dataBinder.setConversionService(conversionService);
+				}
+				
+				Validator validator = null;
+				try {
+					validator = appContext.getBean(Validator.class);
+				} catch (NoSuchBeanDefinitionException e) {
+					// ignore
+				}
+				
+				if (validator != null) {
+					dataBinder.setValidator(validator);
 				}
 			}
 			
