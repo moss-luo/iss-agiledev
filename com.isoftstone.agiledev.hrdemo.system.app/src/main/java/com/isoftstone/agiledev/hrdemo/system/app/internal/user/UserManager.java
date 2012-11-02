@@ -13,6 +13,8 @@ import com.isoftstone.agiledev.core.query.mybatis.ParametersMapBuilder;
 import com.isoftstone.agiledev.hrdemo.system.app.user.IUserManager;
 import com.isoftstone.agiledev.hrdemo.system.app.user.User;
 
+
+
 @Transactional
 @Service
 public class UserManager implements IUserManager {
@@ -24,7 +26,8 @@ public class UserManager implements IUserManager {
 
 	@Override
 	public void add(User user) {
-		sqlSession.insert("com.isoftstone.agiledev.hrdemo.system.app.user.UserMapper.save",user);
+//		sqlSession.selectOne("com.isoftstone.agiledev.hrdemo.system.app.user.UserMapper.total", name);
+		sqlSession.insert("com.isoftstone.agiledev.hrdemo.system.app.user.UserMapper.save", user);
 	}
 
 	@Override
@@ -64,3 +67,4 @@ public class UserManager implements IUserManager {
 	
 
 }
+

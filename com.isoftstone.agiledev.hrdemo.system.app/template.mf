@@ -18,3 +18,4 @@ Import-Package: org.springframework.context.config;version="[3.0.5,4)",
 Excluded-Exports: com.isoftstone.agiledev.hrdemo.system.app.internal.*
 Excluded-Imports: com.isoftstone.agiledev.hrdemo.system.app
 MyBatis-Mapper-Locations: /META-INF/mybatis/mappers;pattern=**/*Mapper.xml
+

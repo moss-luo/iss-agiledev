@@ -1,22 +1,23 @@
 package com.isoftstone.agiledev.hrdemo.system.app.user;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.isoftstone.agiledev.core.init.Init;
-import com.isoftstone.agiledev.core.validate.annotation.Mobile;
 
 public class User {
 	
 	private Integer id;
 	@Init(fieldName="name",value="zhangsan")
-	@Length(min=1,max=10)
+	@Length(min=1,max=10,message="the length must be in 1-10.")
 	private String name;
 	@Init(fieldName="password",value="123123")
 	private String password;
-	@Mobile
+	@NotEmpty(message="mobile not null")
 	private String  mobile;
-	@org.hibernate.validator.constraints.Email
+	
+	@org.hibernate.validator.constraints.Email(message="the invalid email")
 	private String  email;
 	
 	
@@ -72,3 +73,4 @@ public class User {
 		this.email = email;
 	}
 }
+
