@@ -3,8 +3,10 @@ package com.isoftstone.agiledev.hrdemo.system.web.user;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -47,21 +49,24 @@ public class UserMgtController implements Initializeable {
 	}
 	
 	@RequestMapping
-	public OperationPrompt add(User user){
-		OperationPrompt r = null;
+	public OperationPrompt add(@Valid User user){
+		System.out.print("++++++++=====in add method====++++++++++");
+		OperationPrompt operPrompt = null;
 		try {
 			this.userManager.add(user);
-			r = new OperationPrompt("添加成功", true);
+			operPrompt = new OperationPrompt("添加成功", true);
 		} catch (Exception e) {
-			r = new OperationPrompt("添加失败", false);
+			operPrompt = new OperationPrompt("添加失败", false);
 			e.printStackTrace();
 		}
 		
-		return r;
+		return operPrompt;
 	}
 	
 	@RequestMapping
 	public OperationPrompt update(User user){
+		System.out.print("++++++++=====in update method====++++++++++");
+
 		OperationPrompt r = null;
 		try {
 			this.userManager.update(user);
@@ -75,6 +80,8 @@ public class UserMgtController implements Initializeable {
 	
 	@RequestMapping
 	public OperationPrompt remove(@RequestParam(value="id", required=false) int[] ids){
+		System.out.print("++++++++=====in remove method====++++++++++");
+
 		try {
 			this.userManager.remove(ids);
 			
