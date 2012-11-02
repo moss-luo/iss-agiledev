@@ -85,12 +85,29 @@ $.fn.crud = function(){
 	this.init();
 	return this;
 }
+
+
+
 /**
  * 页面构造器,创建页面上各种组件
  */
 function Render(plugin){
 	this.plugin = plugin;
 }
+
+/**
+ * 关闭所有的后台校验错误信息Tip
+ */
+Render.prototype.closeErrorTip=function(){
+	var tip=$("#_crudDialog").find(".validatebox-tip-content");
+	var box=$("#_crudDialog").find(".agiledev-validatebox-server-side-invalid");
+
+	if(tip&&box){
+	box.removeClass("agiledev-validatebox-server-side-invalid");
+	$("#server-side-error-tip").remove();
+	}
+}
+
 /**
  * 创建查询
  */
@@ -307,6 +324,8 @@ Render.prototype.getRandom = function(){
  * 创建缓存dialog
  */
 Render.prototype.createDialog = function(title,data){
+	var $this=this;
+
 	var dialog = null,$this =this,dialogButtons = $([]);
 	if(document.getElementById("_crudDialog")){
 		dialog = $("#_crudDialog");
@@ -341,6 +360,7 @@ Render.prototype.createDialog = function(title,data){
 						modal:true,
 						buttons:dialogButtons,
 						title:title,
+						closed:false,
 						onOpen:function(){
 							$("#_crudDialog").find(".agiledev-form").find("img").remove();
 							if (data != null) {
@@ -356,6 +376,9 @@ Render.prototype.createDialog = function(title,data){
 									}
 								});
 							}
+						},
+						onClose:function(){
+							$this.closeErrorTip();
 						}
 					}).dialog("close");
 	
@@ -391,6 +414,26 @@ Render.prototype.reloadDatagrid = function(params){
 function Handle(plugin){
 	this.plugin = plugin;
 }
+
+
+Handle.prototype.showServerSideValidationError=function(fieldName,message){
+        var target = $("[name='" + fieldName + "']");
+        var box = $(target);
+        box.addClass("agiledev-validatebox-server-side-invalid");
+        var tip=$("<div id='server-side-error-tip' class=\"validatebox-tip\">"+"<span class=\"validatebox-tip-content\">"+"</span>"+"<span class=\"validatebox-tip-pointer\">"+"</span>"+"</div>").appendTo("body");
+        tip.find(".validatebox-tip-content").html(message);
+        tip.css({display:"block",left:box.offset().left+box.outerWidth(),top:box.offset().top});
+        target.data("oldData", target.val());
+        target.bind("propertychange keydown input paste", function() {
+                if (target.data("oldData") != $(this).val()) {
+                        box.removeClass("agiledev-validatebox-server-side-invalid");
+                        $("#server-side-error-tip").remove();
+                        target.removeData("oldData");
+                        target.unbind("propertychange keydown input paste");
+                }
+        });
+        target.focus();
+}
  /**
  * 保存(新增或者修改)
  */
@@ -405,49 +448,34 @@ Handle.prototype.save = function(){
 			}else{
 				$(this).append("<input name='agiledev-ajax-request-type' type='hidden' value='validate'/>");
 			}
-			/*if($(this).form('validate')){
-				$.ajax({
-					url:$this.plugin.getUrl(),
-					data:form.find("input[class*='agiledev']").serialize(),
-					type:'post',
-					dataType:'json',
-					cache:false,
-					success:function(r){
-						var result = eval(r);
-						if (result.operationPrompt.success){
-							$this.plugin.getRender().closeDialog();
-							$this.plugin.getRender().reloadDatagrid("reload");
-							
-							$($this.plugin.selector).datagrid('clearSelections');
-						} else {
-							$.messager.show({
-								title: lang.prompt.title,
-								msg: result.operationPrompt.msg
-							});
-						}
-					},
-					error:function(){
-						var a = 1;
-					}
-				});
-			}*/
-//			return false;
+		
 			return $(this).form('validate');
 		}
 		,
 		success: function(result){
 			var result = eval('('+result+')');
-			if (result.operationPrompt.success){
+			if(result.valid==false){
+				$.each(result.fields,function(i,f){
+					$this.showServerSideValidationError(f.field,f.defMessage);
+				});
+			}
+			else if (result.operationPrompt.success){
+				$.messager.show({
+					title: lang.prompt.title,
+					msg: result.operationPrompt.msg
+				});
 				$this.plugin.getRender().closeDialog();
 				$this.plugin.getRender().reloadDatagrid("reload");
 				
 				$($this.plugin.selector).datagrid('clearSelections');
+				
 			} else {
 				$.messager.show({
 					title: lang.prompt.title,
 					msg: result.operationPrompt.msg
 				});
 			}
+			return false;
 		}
 	});
 }
@@ -512,4 +540,3 @@ Handle.prototype.search = function(){
 	}
 }
 })(jQuery);
-

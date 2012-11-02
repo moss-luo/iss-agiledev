@@ -305,7 +305,7 @@ $.widget("ui.agiledevForm", {
 						if(tag.length>0){
 							tag.val(f.initValue==null?"":f.initValue);
 							tag.data("initValue",f.initValue);
-							var remoteValid = $.extend({validType:f.validate,required:f.required},tag.data("field")||self.getFieldByName(f.name));
+							var remoteValid = $.extend({validType:f.validate,required:f.required,invalidMessage:f.defMessage},tag.data("field")||self.getFieldByName(f.name));
 							//var remoteValid = {validType:f.validate,required:f.required};
 							tag.validatebox(remoteValid);
 						}
@@ -367,7 +367,7 @@ $.widget("ui.agiledevForm", {
 	},
 	createValidate:function(){
 		$.each(this.options.field,function(i,f){
-			$("[element-id='"+f._id+"']").validatebox({validType:f.validType,required:f.required});
+			$("[element-id='"+f._id+"']").validatebox({validType:f.validType,required:f.required,missingMessage:f.defMessage});
 		});
 	}
 	
