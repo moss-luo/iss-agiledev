@@ -14,6 +14,8 @@ import com.isoftstone.agiledev.core.init.Initialization;
 import com.isoftstone.agiledev.core.init.InitializeAdaptor;
 import com.isoftstone.agiledev.core.init.InitializeModel;
 
+
+
 public class EasyUIFormInitial extends AbstractInitializeSupport implements InitializeAdaptor {
 
 	private Logger logger = LoggerFactory.getLogger(EasyUIFormInitial.class);
