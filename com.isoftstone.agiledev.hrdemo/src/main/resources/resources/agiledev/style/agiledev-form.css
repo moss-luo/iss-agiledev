@@ -13,6 +13,9 @@
 	/*margin-bottom:5px;
 	width: 500px;*/
 }
+.agiledev-validatebox-server-side-invalid{
+        background:#FFFFEE url('../../easyui/themes/default/images/validatebox_warning.png') no-repeat right 1px;
+}
 .agiledev-search .agiledev-form-item{
 	display:inline;
 }
@@ -40,3 +43,4 @@
 .search-form #review{
 	display: none;
 }
+
