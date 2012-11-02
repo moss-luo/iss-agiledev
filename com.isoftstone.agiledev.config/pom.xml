@@ -6,14 +6,14 @@
 	<parent>
 		<groupId>com.isoftstone.agiledev</groupId>
 		<artifactId>com.isoftstone.agiledev.parent</artifactId>
-		<version>1.0.2-RELEASE</version>
+		<version>1.0.3-SNAPSHOT</version>
 	</parent>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<groupId>com.isoftstone.agiledev</groupId>
 	<artifactId>com.isoftstone.agiledev.config</artifactId>
-	<version>1.0.2-RELEASE</version>
+	<version>1.0.3-SNAPSHOT</version>
 	<name>AgileDev Config</name>
 	<url>http://agiledev.isoftstone.com/config</url>
 	<dependencies>
