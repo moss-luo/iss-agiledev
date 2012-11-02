@@ -1,0 +1,13 @@
+agiledev版本更新记录
+
+
+1.0.0.RELEASE：
+	框架移植，从struts移植到基于OSGI的Spring MVC上
+1.0.1.RELEASE：
+	修复ResourceBundle缓存资源文件的bug
+	解决静态文件修改后避免重启virgo的问题
+	解决windows下bundlor插件打包失败的问题
+1.0.2.RELEASE：
+	解决数据库配置文件打包在jar包中的问题
+	
+	
