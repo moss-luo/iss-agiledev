@@ -89,4 +89,9 @@ public class Node {
 	public void setHasChild(boolean hasChild) {
 		this.hasChild = hasChild;
 	}
+
+	public void setChildren(List<Node> children) {
+		this.children = children;
+	}
+	
 }
