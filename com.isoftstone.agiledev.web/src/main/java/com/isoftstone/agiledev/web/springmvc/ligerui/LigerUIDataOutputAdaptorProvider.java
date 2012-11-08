@@ -13,6 +13,8 @@ public class LigerUIDataOutputAdaptorProvider implements DataOutputAdaptorProvid
 	public void init() {
 		DataOutputAdaptor adaptor = new LigerUIGridDataOutputAdaptor();
 		adaptors.put(adaptor.getType(), adaptor);
+		adaptor = new LigerUITreeDataOutputAdaptor();
+		adaptors.put(adaptor.getType(), adaptor);
 	}
 
 	@Override
