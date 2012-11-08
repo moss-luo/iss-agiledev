@@ -9,16 +9,16 @@ import org.springframework.beans.PropertyValue;
 import com.isoftstone.agiledev.web.springmvc.binding.BindingSupport;
 
 public class LigerUIQueryParametersBindingSupport implements BindingSupport {
-	public static final int DEFAULT_DEFAULT_ROWS = 20;
+	public static final int DEFAULT_DEFAULT_ROWS = 10;
 	public static final int DEFAULT_MAX_ROWS = 50;
 	
 	protected int defaultRows = DEFAULT_DEFAULT_ROWS;
 	protected int maxRows = DEFAULT_MAX_ROWS;
 	
 	private static final String PAGE_KEY = "page";
-	private static final String ROWS_KEY = "rows";
-	private static final String ORDER_KEY = "order";
-	private static final String SORT_KEY = "sort";
+	private static final String ROWS_KEY = "pagesize";
+	private static final String ORDER_KEY = "sortorder";
+	private static final String SORT_KEY = "sortname";
 
 	@Override
 	public void adjustProperties(MutablePropertyValues mpvs) {
