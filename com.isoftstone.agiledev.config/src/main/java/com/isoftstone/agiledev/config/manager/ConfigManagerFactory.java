@@ -1,26 +1,16 @@
 package com.isoftstone.agiledev.config.manager;
 
-import com.isoftstone.agiledev.config.manager.impl.CallbacksConfigManagerImpl;
-import com.isoftstone.agiledev.config.manager.impl.ConfigContextManagerImpl;
-import com.isoftstone.agiledev.config.manager.impl.DataSourceConfigManagerImpl;
-
-
 /**
  * 
  * @author hilbert.xu.wang@gmail.com
  *
  */
-public class ConfigManagerFactory {
+public abstract class ConfigManagerFactory {
 	
-	private static final ConfigContextManagerImpl configContextManager = new ConfigContextManagerImpl();
-	private static final CallbacksConfigManagerImpl callbacksConfigManager = new CallbacksConfigManagerImpl();
-	private static final DataSourceConfigManagerImpl dataSourceConfigManager = new DataSourceConfigManagerImpl();
+	private static final ConfigManager callbacksConfigManager = new ConfigManagerImpl("callbacks.path", "callbacks.properties");
+	private static final ConfigManager dataSourceConfigManager = new ConfigManagerImpl("dataSource.path", "jdbc.properties");
+	private static final ConfigManager commonConfigManager = new ConfigManagerImpl("common.path", "common.properties");
 	
-	public static ConfigManager getConfigContextManager()
-	{
-		return configContextManager;
-	}
-
 	public static ConfigManager getCallbacksConfigManager()
 	{
 		return callbacksConfigManager;
@@ -28,6 +18,10 @@ public class ConfigManagerFactory {
 	
 	public static ConfigManager getDataSourceconfigManager(){
 		return dataSourceConfigManager;
+	}
+
+	public static ConfigManager getCommonconfigmanager() {
+		return commonConfigManager;
 	}
 	
 }
