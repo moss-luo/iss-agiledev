@@ -22,21 +22,6 @@ public class EasyUIFormInitial extends AbstractInitializeSupport implements Init
 	@Override
 	public void doInit(HttpServletRequest request,InitializeModel model) {
 		try {
-//				Class<?> clazz = controller.getClass();
-//				while (clazz!=Object.class) {
-//					Field[] fields = clazz.getDeclaredFields();
-//					for (Field field : fields) {
-//						if(field.isAnnotationPresent(Initialization.class)){
-//							Initialization initialization = field.getAnnotation(Initialization.class);
-//							if(initialization.value().length!=0){
-//								pluralHandle(field, initialization);
-//							}else{
-//								singularHandle(field);
-//							}
-//						}
-//					}
-//					clazz = clazz.getSuperclass();
-//				}
 				EasyUIInitField initField = null;
 				for (Class<?> clazz: model.getInitialiedType()) {
 					Field[] fields = clazz.getDeclaredFields();
