@@ -17,12 +17,14 @@ import java.util.Vector;
 import javax.servlet.http.HttpServletRequest;
 
 import org.eclipse.gemini.blueprint.context.BundleContextAware;
+import org.hibernate.validator.constraints.Length;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
 import org.osgi.framework.BundleListener;
 
 import com.isoftstone.agiledev.core.init.AbstractInitializeSupport;
+import com.isoftstone.agiledev.core.init.Init;
 import com.isoftstone.agiledev.core.init.InitField;
 import com.isoftstone.agiledev.core.init.InitializeAdaptor;
 import com.isoftstone.agiledev.core.init.InitializeModel;
@@ -91,8 +93,12 @@ public class EasyUIValidateInitial extends AbstractInitializeSupport implements 
 				validateField = new EasyUIInitField();
 				validateField.setName(fieldName);
 			}
+			
 			for (Annotation annotation : annotations) {
-				validateField = (EasyUIInitField) this.fillValidateField(validateField,annotation);
+					validateField = (EasyUIInitField) this.fillValidateField(validateField,annotation);
+			}
+			if(annotations.length>0){
+				populateValidate(validateField);	
 			}
 			return validateField;
 		} catch (Exception e) {
@@ -100,10 +106,40 @@ public class EasyUIValidateInitial extends AbstractInitializeSupport implements 
 		}
 		return null;
 	}
+
+	private void populateValidate(EasyUIInitField validateField) {
+		String validate=validateField.getValidate();
+		if(validate!=null && validate.indexOf(";")>-1){
+			String[] validates=validate.split(";");
+			String compositValidate="composit[";
+			String fn="";
+			for (int i = 0; i < validates.length; i++) {
+				
+				fn="{'fn':'"+ validates[i].substring(0, validates[i].indexOf(":"))+"',";
+				if(validates[i].substring(validates[i].indexOf(":")+1)!=null){
+					fn+="'msg':'"+validates[i].substring(validates[i].indexOf(":")+1)+"'";
+				}
+				if(i==(validates.length-1)){
+					compositValidate+=(fn+"}");
+				}else{
+					compositValidate+=(fn+"},");
+				}				
+			}
+			compositValidate+="]";
+			validateField.setValidate(compositValidate);
+			validateField.setDefMessage(null);
+		}else if(validate!=null && validate.indexOf(";")==-1 && !validate.contains("{")){
+			int index=validate.indexOf(":");
+			if(index>-1){
+				validateField.setValidate(validate.substring(0, index));
+			}
+		}
+	}
 	
 	public InitField fillValidateField(EasyUIInitField validateField,Annotation annotation){
+		
 		try {
-			
+
 			Class<?> clazz = null;
 			if(annotation instanceof Proxy){
 				InvocationHandler handle = Proxy.getInvocationHandler(annotation); 
@@ -114,25 +150,48 @@ public class EasyUIValidateInitial extends AbstractInitializeSupport implements 
 			}else{
 				clazz = annotation.getClass();
 			}
+			if(Init.class.getName().equals(clazz.getName())){
+				return validateField;
+			}
+			String compositValidate=validateField.getValidate();
+			if(compositValidate!=null){
+				compositValidate+=";";
+			}else{
+				compositValidate="";
+			}
 			for (Vector<ValidateData> v : validateTypes.values()) {
-				for (ValidateData validateData : v) {
-					if(validateData.getAnnotationClass().equals(clazz.getName())){
+				for (ValidateData validateData : v) {				
+					if(validateData.getAnnotationClass().equals(clazz.getName())){						
 						ValidateParser parser = validateData.getParser();
-						if(parser!=null){
-							return parser.buildValidate(validateField,annotation);
+						if(parser!=null){							
+							parser.buildValidate(validateField,annotation);
+							compositValidate+=validateField.getValidate();
+							compositValidate+=":"+validateField.getDefMessage();
+							validateField.setValidate(compositValidate);
+							return validateField;
+							
 						}else if(validateData.getExpression().equalsIgnoreCase("required")){
 							validateField.setRequired(true);
 							return validateField;
 						}else{
-							validateField.setValidate(validateData.getExpression());
+							compositValidate+=validateData.getExpression();
+							
+							compositValidate+=":";
+							validateField.setValidate(compositValidate);
 							return validateField; 
 						}
+						
+
 					}
+					
 				}
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		
 		return validateField;
 	}
 
@@ -212,4 +271,5 @@ public class EasyUIValidateInitial extends AbstractInitializeSupport implements 
 			}
 		}
 	}
+	
 }
