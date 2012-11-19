@@ -5,12 +5,12 @@
   <parent>
     <groupId>com.isoftstone.agiledev</groupId>
     <artifactId>com.isoftstone.agiledev.maven.template</artifactId>
-	<version>1.0.3-SNAPSHOT</version>
+	<version>1.0.3-RELEASE</version>
   </parent>
 
 	<groupId>com.isoftstone.agiledev</groupId>
 	<artifactId>com.isoftstone.agiledev.maven.app.template</artifactId>
-	<version>1.0.3-SNAPSHOT</version>
+	<version>1.0.3-RELEASE</version>
 	<packaging>pom</packaging>
 
 	<name>AgileDev Maven APP Template</name>
