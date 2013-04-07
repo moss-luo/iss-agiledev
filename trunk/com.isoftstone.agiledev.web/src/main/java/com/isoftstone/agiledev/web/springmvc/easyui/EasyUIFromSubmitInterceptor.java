@@ -10,7 +10,6 @@ public class EasyUIFromSubmitInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		String accept = request.getHeader("Accept");
 		return true;
 	}
 	@Override

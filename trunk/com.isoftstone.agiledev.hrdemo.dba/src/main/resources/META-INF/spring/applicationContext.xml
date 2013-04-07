@@ -15,23 +15,15 @@
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
-	<!-- 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" init-method="getConnection" destroy-method="close">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
-		
 	</bean>
 	
-	<context:property-placeholder location="osgibundlejar:/META-INF/jdbc.properties"/>
-	-->
+	<context:property-placeholder location="file:///${catalina.base}/configuration/hrdemo/jdbc.properties"/>
 	
-	
-	<bean id="dataSource" class="com.isoftstone.agiledev.orm.mybatis.ExternalDataSource">
-		<!-- <property name="configurationLocation" value="${user.dir}:configuration/jdbc.properties"/>-->
-	</bean>
-		
 	<bean id="sqlSessionFactory" class="com.isoftstone.agiledev.orm.mybatis.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 	</bean>

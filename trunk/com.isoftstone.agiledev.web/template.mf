@@ -2,14 +2,13 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: AgileDev WEB
 Bundle-SymbolicName: com.isoftstone.agiledev.web
-Bundle-Version: 1.0.3.RELEASE
+Bundle-Version: 1.0.4.SNAPSHOT
 Bundle-ClassPath: .
 Import-Template: org.osgi.framework.*;version="0",
  javax.servlet.*;version="0",
  org.springframework.*;version="[3.0.5,4)",
  org.codehaus.jackson.*;version="[1.4.3,2)",
- com.isoftstone.agiledev.core.*;version="1.0.3.RELEASE",
- com.isoftstone.agiledev.config.*;version="1.0.3.RELEASE"
+ com.isoftstone.agiledev.core.*;version="1.0.4.SNAPSHOT"
 Import-Package: org.eclipse.virgo.web.dm;version="[3.5.0,4)"
 Excluded-Exports: com.isoftstone.agiledev.web,
  agiledev

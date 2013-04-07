@@ -7,27 +7,22 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.codehaus.jackson.JsonEncoding;
-import org.codehaus.jackson.JsonGenerator;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializationConfig;
-
 import com.isoftstone.agiledev.core.query.QueryResult;
 import com.isoftstone.agiledev.web.springmvc.DataOutputAdaptor;
 
 public class LigerUIGridDataOutputAdaptor implements DataOutputAdaptor{
 
 	private String type;
-	private ObjectMapper objectMapper = new ObjectMapper();
+	//private ObjectMapper objectMapper = new ObjectMapper();
 	public LigerUIGridDataOutputAdaptor() {
 		this.type=QueryResult.class.getName();
 	}
 	@Override
 	public void output(HttpServletRequest request, HttpServletResponse response, Object obj) {
 		try {
-			JsonGenerator generator =
+/*			JsonGenerator generator =
 					objectMapper.getJsonFactory().createJsonGenerator(response.getOutputStream(), JsonEncoding.UTF8);
-			SerializationConfig config = objectMapper.getSerializationConfig();
+			SerializationConfig config = objectMapper.getSerializationConfig();*/
 			Object o = this.filterGridData(obj);
 //			generator.writeString(o.toString());
 //			objectMapper.writeValue(generator, o, config);

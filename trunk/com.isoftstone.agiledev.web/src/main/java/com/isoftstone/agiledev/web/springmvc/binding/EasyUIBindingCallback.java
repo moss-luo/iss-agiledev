@@ -3,15 +3,12 @@ package com.isoftstone.agiledev.web.springmvc.binding;
 import org.springframework.beans.MutablePropertyValues;
 
 import com.isoftstone.agiledev.core.ObjectFactory;
+import com.isoftstone.agiledev.core.ObjectFactoryAware;
 import com.isoftstone.agiledev.core.query.QueryParameters;
 import com.isoftstone.agiledev.web.springmvc.easyui.binding.EasyUIQueryParametersBindingSupport;
 
-public class EasyUIBindingCallback implements BindingCallback {
-	private ObjectFactory objFactory;
-	
-	public EasyUIBindingCallback(ObjectFactory objFactory) {
-		this.objFactory = objFactory;
-	}
+public class EasyUIBindingCallback implements BindingCallback, ObjectFactoryAware {
+	private ObjectFactory objectFactory;
 	
 	@Override
 	public void beforeBinding(MutablePropertyValues mpvs, Object target) {
@@ -23,9 +20,14 @@ public class EasyUIBindingCallback implements BindingCallback {
 
 	private BindingSupport getBindingSupport(Object target) {
 		if (target instanceof QueryParameters) {
-			return objFactory.create(EasyUIQueryParametersBindingSupport.class);
+			return objectFactory.create(EasyUIQueryParametersBindingSupport.class);
 		}
 		
 		return null;
+	}
+
+	@Override
+	public void setObjectFactory(ObjectFactory objectFactory) {
+		this.objectFactory = objectFactory;
 	}
 }

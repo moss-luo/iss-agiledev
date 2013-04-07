@@ -17,7 +17,6 @@ import java.util.Vector;
 import javax.servlet.http.HttpServletRequest;
 
 import org.eclipse.gemini.blueprint.context.BundleContextAware;
-import org.hibernate.validator.constraints.Length;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
