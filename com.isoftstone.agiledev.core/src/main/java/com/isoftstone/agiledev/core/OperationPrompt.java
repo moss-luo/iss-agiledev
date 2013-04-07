@@ -5,10 +5,11 @@ public class OperationPrompt {
 	private String msg;
 	
 	public OperationPrompt() {
+		this(null, true);
 	}
 	
 	public OperationPrompt(String msg) {
-		this.msg = msg;
+		this(null, true);
 	}
 	
 	public OperationPrompt(boolean success) {

@@ -5,11 +5,11 @@
   <parent>
     <groupId>com.isoftstone.agiledev</groupId>
     <artifactId>com.isoftstone.agiledev.parent</artifactId>
-	<version>1.0.3-RELEASE</version>
+	<version>1.0.4-SNAPSHOT</version>
   </parent> 
   <groupId>com.isoftstone.agiledev</groupId>
   <artifactId>com.isoftstone.agiledev.core</artifactId>
-	<version>1.0.3-RELEASE</version>
+	<version>1.0.4-SNAPSHOT</version>
   <name>AgileDev Core</name>
   <url>http://agiledev.isoftstone.com/core</url>
   <dependencies>
@@ -36,6 +36,11 @@
 	<dependency>
 		<groupId>net.sourceforge.cglib</groupId>
 		<artifactId>com.springsource.net.sf.cglib</artifactId>
+	</dependency>
+	
+	<dependency>
+  		<groupId>org.eclipse.gemini</groupId>
+  		<artifactId>org.eclipse.gemini.blueprint.core</artifactId>
 	</dependency>
   </dependencies>
   
