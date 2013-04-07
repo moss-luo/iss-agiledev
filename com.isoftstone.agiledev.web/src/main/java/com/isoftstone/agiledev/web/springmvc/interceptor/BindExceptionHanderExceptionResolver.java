@@ -3,15 +3,11 @@ package com.isoftstone.agiledev.web.springmvc.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.core.Conventions;
-import org.springframework.core.GenericTypeResolver;
-import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.support.BindingAwareModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter;

@@ -12,7 +12,7 @@
 		<servlet-name>system</servlet-name>
     	<servlet-class>com.isoftstone.agiledev.web.virgo.servlet.DispatcherServlet</servlet-class>
     	<init-param>
-    		<param-name>contextClass</param-name>
+    		<param-name>context-class</param-name>
     		<param-value>org.eclipse.virgo.web.dm.ServerOsgiBundleXmlWebApplicationContext</param-value>
     	</init-param>
 	</servlet>

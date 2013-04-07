@@ -5,11 +5,11 @@
   <parent>
     <groupId>com.isoftstone.agiledev</groupId>
     <artifactId>com.isoftstone.agiledev.parent</artifactId>
-	<version>1.0.3-RELEASE</version>
+	<version>1.0.4-SNAPSHOT</version>
   </parent> 
   <groupId>com.isoftstone.agiledev</groupId>
   <artifactId>com.isoftstone.agiledev.web</artifactId>
-	<version>1.0.3-RELEASE</version>
+	<version>1.0.4-SNAPSHOT</version>
   <name>AgileDev WEB</name>
   <url>http://agiledev.isoftstone.com/web</url>
   
@@ -44,11 +44,6 @@
 	<dependency>
 		<groupId>com.isoftstone.agiledev</groupId>
 		<artifactId>com.isoftstone.agiledev.core</artifactId>
-	</dependency>
-        
-	<dependency>
-		<groupId>com.isoftstone.agiledev</groupId>
-		<artifactId>com.isoftstone.agiledev.config</artifactId>
 	</dependency>
         
   </dependencies>

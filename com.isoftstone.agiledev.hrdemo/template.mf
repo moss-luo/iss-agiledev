@@ -7,3 +7,4 @@ Web-ContextPath: /hrdemo
 Import-Template: org.eclipse.virgo.*;version="[3.5.0,4)"
 Export-Package: META-INF.agiledev;version="1.0.0.SNAPSHOT"
 Excluded-Exports: resources.*
+Configs-Manager: parameters=$[catalina.base]/configuration/hrdemo/agiledev

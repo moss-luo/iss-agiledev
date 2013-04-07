@@ -4,7 +4,7 @@ Bundle-Name: AgileDev HR Demo Workbench WEB Module
 Bundle-SymbolicName: com.isoftstone.agiledev.hrdemo.workbench.web
 Bundle-Version: 1.0.0.SNAPSHOT
 Import-Template: org.springframework.*;version="[3.0.5,4)",
- com.isoftstone.agiledev.*;version="1.0.3.RELEASE",
+ com.isoftstone.agiledev.*;version="1.0.4.SNAPSHOT",
  com.isoftstone.agiledev.hrdemo.*;version="1.0.0.SNAPSHOT"
 Import-Package: org.springframework.context.config;version="[3.0.5,4)",
  org.springframework.web.servlet.config;version="[3.0.5,4)",
