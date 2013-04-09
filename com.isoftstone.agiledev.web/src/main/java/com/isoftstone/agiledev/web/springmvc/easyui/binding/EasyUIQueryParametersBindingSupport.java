@@ -30,8 +30,12 @@ public class EasyUIQueryParametersBindingSupport implements BindingSupport {
 		if (pageKey == null || rowsKey == null)
 			return;
 		
-		if (!mpvs.contains(pageKey) || !mpvs.contains(rowsKey)) {
-			return;
+		if (!mpvs.contains(pageKey)) {
+			mpvs.addPropertyValue(pageKey, "1");
+		}
+		
+		if (!mpvs.contains(rowsKey)) {
+			mpvs.addPropertyValue(rowsKey, Integer.toString(DEFAULT_DEFAULT_ROWS));
 		}
 		
 		List<PropertyValue> queryParameters = new ArrayList<PropertyValue>();
