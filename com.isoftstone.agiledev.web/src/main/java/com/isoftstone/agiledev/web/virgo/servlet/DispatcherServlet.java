@@ -33,6 +33,7 @@ import com.isoftstone.agiledev.core.ObjectFactory;
 import com.isoftstone.agiledev.core.ObjectFactoryAware;
 import com.isoftstone.agiledev.core.config.ConfigManager;
 import com.isoftstone.agiledev.web.springmvc.binding.BindingCallback;
+import com.isoftstone.agiledev.web.springmvc.binding.EasyUIBindingCallback;
 import com.isoftstone.agiledev.web.springmvc.binding.ServletRequestDataBinder;
 
 @SuppressWarnings("serial")
@@ -86,6 +87,9 @@ public class DispatcherServlet extends org.springframework.web.servlet.Dispatche
 	
 	private void initObjProperties() {
 		ConfigManager configManager = getConfigManager(CONFIG_DOMAIN_OBJECT_PROPERTIES);
+		if (configManager == null)
+			return;
+		
 		for (String key : configManager.keys()) {
 			String sKey = (String)key;
 			int lastDotIndex = sKey.lastIndexOf(".");
@@ -151,6 +155,14 @@ public class DispatcherServlet extends org.springframework.web.servlet.Dispatche
 	private void initBindingCallbacks() {
 		bindingCallbacks = new ArrayList<BindingCallback>();
 		ConfigManager cbConfigManager = getConfigManager(CONFIG_DOMAIN_BINDING_CALLBACK);
+		if (cbConfigManager == null) {
+			EasyUIBindingCallback defaultCallback = new EasyUIBindingCallback();
+			defaultCallback.setObjectFactory(this);
+			bindingCallbacks.add(defaultCallback);
+			
+			return;
+		}
+		
 		Bundle bundle = (Bundle)get("bundle");
 		for (String sCallbackClass : cbConfigManager.keys()) {
 			String bundleSymbolicName = (String)cbConfigManager.get(sCallbackClass);

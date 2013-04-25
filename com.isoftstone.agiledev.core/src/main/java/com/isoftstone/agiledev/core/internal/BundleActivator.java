@@ -154,6 +154,9 @@ public class BundleActivator implements org.osgi.framework.BundleActivator, Bund
 
 	private void unregisterExistingConfigs(long bundleId) {
 		List<ServiceRegistration<?>> srs = bundleIdAndConfigManagerServices.get(bundleId);
+		if (srs == null)
+			return;
+		
 		for (ServiceRegistration<?> sr : srs) {
 			sr.unregister();
 		}

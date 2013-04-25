@@ -3,10 +3,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/utils"
 	xmlns:osgi="http://www.springframework.org/schema/osgi"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
-		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
 		http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi-1.2.xsd">
 	<context:component-scan base-package="com.isoftstone.agiledev.hrdemo.system.web" />
 
@@ -16,18 +16,15 @@
 	<mvc:annotation-driven conversion-service="conversionService" validator="validator"/>
 
 	<bean class="com.isoftstone.agiledev.web.springmvc.interceptor.BindExceptionHanderExceptionResolver"/>
-	<bean
-		class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
+	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
 		<property name="basePackage">
 			<value>com.isoftstone.agiledev.hrdemo.system.web</value>
 		</property>
 	</bean>
 
-	<bean id="conversionService"
-		class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
 
-	<bean
-		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 		<property name="mediaTypes">
 			<map>
 				<entry key="json" value="application/json" />
@@ -42,7 +39,6 @@
 			</list>
 		</property>
 	</bean>
-	<osgi:reference id="userManager"
-		interface="com.isoftstone.agiledev.hrdemo.system.app.user.IUserManager"
-		bean-name="userManager" />
+	
+	<osgi:reference id="userManager" interface="com.isoftstone.agiledev.hrdemo.system.app.user.IUserManager" bean-name="userManager" />
 </beans>

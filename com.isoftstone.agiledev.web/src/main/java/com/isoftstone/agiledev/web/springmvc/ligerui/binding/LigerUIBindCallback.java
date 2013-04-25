@@ -3,18 +3,15 @@ package com.isoftstone.agiledev.web.springmvc.ligerui.binding;
 import org.springframework.beans.MutablePropertyValues;
 
 import com.isoftstone.agiledev.core.ObjectFactory;
+import com.isoftstone.agiledev.core.ObjectFactoryAware;
 import com.isoftstone.agiledev.core.query.QueryParameters;
 import com.isoftstone.agiledev.web.springmvc.binding.BindingCallback;
 import com.isoftstone.agiledev.web.springmvc.binding.BindingSupport;
 
-public class LigerUiBindCallback implements BindingCallback{
+public class LigerUIBindCallback implements BindingCallback, ObjectFactoryAware {
 
 	private ObjectFactory objFactory;
-	
-	public LigerUiBindCallback(ObjectFactory objFactory) {
-		this.objFactory = objFactory;
-	}
-	
+		
 	@Override
 	public void beforeBinding(MutablePropertyValues mpvs, Object target) {
 		BindingSupport s = this.getBindingSupport(target);
@@ -30,6 +27,11 @@ public class LigerUiBindCallback implements BindingCallback{
 		}
 		
 		return null;
+	}
+
+	@Override
+	public void setObjectFactory(ObjectFactory objectFactory) {
+		this.objFactory = objectFactory;
 	}
 
 }

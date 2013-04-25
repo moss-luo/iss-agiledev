@@ -13,7 +13,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit.version>4.8.2</junit.version>
 		<mysql.driver.version>5.1.9</mysql.driver.version>
-		<spring.version>3.0.5.RELEASE</spring.version>
+		<spring.version>3.1.0.RELEASE</spring.version>
 		<servlet.version>2.5</servlet.version>
 		<jstl.version>1.2</jstl.version>
 		<jsp.version>2.1</jsp.version>
@@ -24,12 +24,11 @@
 		<jackson.mapper.version>1.4.3</jackson.mapper.version>
 		<joda.version>1.6.0</joda.version>
 		<cglib.version>2.2.0</cglib.version>
-		<gemini.blueprint.version>1.0.0.RELEASE</gemini.blueprint.version>
+		<gemini.blueprint.version>1.0.2.RELEASE</gemini.blueprint.version>
 		<javax.validation.version>1.0.0.GA</javax.validation.version>
 		<hibernate.validator.version>4.2.0.Final</hibernate.validator.version>
 	</properties>
-	
-	
+
   <repositories>
 	<repository>
      	<id>virgo maven repository</id>
@@ -61,7 +60,6 @@
           <url>http://repository.springsource.com/maven/libraries/external</url>
         </repository>
   </repositories>
-
 
     <distributionManagement>
         <repository>
@@ -98,6 +96,32 @@
   				<groupId>org.eclipse.gemini</groupId>
   				<artifactId>org.eclipse.gemini.blueprint.core</artifactId>
   				<version>${gemini.blueprint.version}</version>
+<exclusions>
+	<exclusion>
+		<groupId>org.springframework</groupId>
+		<artifactId>org.springframework.aop</artifactId>
+	</exclusion>
+	
+	<exclusion>
+		<groupId>org.springframework</groupId>
+		<artifactId>org.springframework.beans</artifactId>
+	</exclusion>
+	
+	<exclusion>
+		<groupId>org.springframework</groupId>
+		<artifactId>org.springframework.context</artifactId>
+	</exclusion>
+	
+	<exclusion>
+		<groupId>org.springframework</groupId>
+		<artifactId>org.springframework.context.support</artifactId>
+	</exclusion>
+	
+	<exclusion>
+		<groupId>org.springframework</groupId>
+		<artifactId>org.springframework.core</artifactId>
+	</exclusion>
+</exclusions>
   			</dependency>
    			
 			<dependency>
