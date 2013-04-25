@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: AgileDev HR Demo
 Bundle-SymbolicName: com.isoftstone.agiledev.hrdemo
-Bundle-Version: 1.0.0.SNAPSHOT
+Bundle-Version: 1.0.4.SNAPSHOT
 Web-ContextPath: /hrdemo
 Import-Template: org.eclipse.virgo.*;version="[3.5.0,4)"
 Export-Package: META-INF.agiledev;version="1.0.0.SNAPSHOT"

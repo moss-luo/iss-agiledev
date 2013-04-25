@@ -2,10 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: AgileDev HR Demo Workbench Application Module
 Bundle-SymbolicName: com.isoftstone.agiledev.hrdemo.workbench.app
-Bundle-Version: 1.0.0.SNAPSHOT
-Import-Template: org.springframework.*;version="[3.0.5,4)",
+Bundle-Version: 1.0.4.SNAPSHOT
+Import-Template: org.springframework.*;version="[3.1.0,4)",
  com.isoftstone.agiledev.*;version="1.0.4.SNAPSHOT",
  com.isoftstone.agiledev.hrdemo.*;version="1.0.0.SNAPSHOT"
-Import-Package: org.springframework.context.config;version="[3.0.5,4)",
+Import-Package: org.springframework.context.config;version="[3.1.0,4)",
  org.eclipse.gemini.blueprint.config;version="[1.0.0,2)"
 Excluded-Exports: com.isoftstone.agiledev.hrdemo.workbench.app.internal.*

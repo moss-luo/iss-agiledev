@@ -18,7 +18,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit.version>4.8.2</junit.version>
 		<mysql.driver.version>5.1.9</mysql.driver.version>
-		<spring.version>3.0.5.RELEASE</spring.version>
+		<spring.version>3.1.0.RELEASE</spring.version>
 		<slf4j.version>1.6.4</slf4j.version>
 		<mybatis.version>3.0.6</mybatis.version>
 		<eclipse.osgi.version>3.7.0.v20110613</eclipse.osgi.version>
@@ -94,6 +94,32 @@
   				<groupId>org.eclipse.gemini</groupId>
   				<artifactId>org.eclipse.gemini.blueprint.core</artifactId>
   				<version>${gemini.blueprint.version}</version>
+<exclusions>
+	<exclusion>
+		<groupId>org.springframework</groupId>
+		<artifactId>org.springframework.aop</artifactId>
+	</exclusion>
+	
+	<exclusion>
+		<groupId>org.springframework</groupId>
+		<artifactId>org.springframework.beans</artifactId>
+	</exclusion>
+	
+	<exclusion>
+		<groupId>org.springframework</groupId>
+		<artifactId>org.springframework.context</artifactId>
+	</exclusion>
+	
+	<exclusion>
+		<groupId>org.springframework</groupId>
+		<artifactId>org.springframework.context.support</artifactId>
+	</exclusion>
+	
+	<exclusion>
+		<groupId>org.springframework</groupId>
+		<artifactId>org.springframework.core</artifactId>
+	</exclusion>
+</exclusions>
   			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>

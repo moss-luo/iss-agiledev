@@ -10,7 +10,7 @@
 
   <groupId>com.isoftstone.agiledev.hrdemo</groupId>
   <artifactId>com.isoftstone.agiledev.hrdemo.dba</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.4-SNAPSHOT</version>
   <name>AgileDev HR Demo Database Access Module</name>
   <url>http://agiledev-hrdemo.isoftstone.com/dba</url>
 

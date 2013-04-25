@@ -25,12 +25,11 @@ public class UserMgtController implements Initializeable {
 	private IUserManager userManager;
 
 	@Override
-	@RequestMapping
 	public InitializeModel init() {
 		return new InitializeModel(new Class[]{User.class});
 	}
 	
-	@RequestMapping
+	@RequestMapping("list")
 	public QueryResult<User> list(@RequestParam(value="name", required=false) final String name,
 				QueryParameters queryParameters){
 		return QueryTemplate.query(queryParameters, new QueryExecutor<User>() {
@@ -47,7 +46,7 @@ public class UserMgtController implements Initializeable {
 		});
 	}
 	
-	@RequestMapping
+	@RequestMapping("add")
 	public OperationPrompt add(@Valid User user){
 		System.out.print("++++++++=====in add method====++++++++++");
 		OperationPrompt operPrompt = null;
@@ -62,7 +61,7 @@ public class UserMgtController implements Initializeable {
 		return operPrompt;
 	}
 	
-	@RequestMapping
+	@RequestMapping("update")
 	public OperationPrompt update(User user){
 		System.out.print("++++++++=====in update method====++++++++++");
 
@@ -77,7 +76,7 @@ public class UserMgtController implements Initializeable {
 		return r;
 	}
 	
-	@RequestMapping
+	@RequestMapping("remove")
 	public OperationPrompt remove(@RequestParam(value="id", required=false) int[] ids){
 		System.out.print("++++++++=====in remove method====++++++++++");
 
