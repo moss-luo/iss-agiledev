@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="org.eclipse.virgo.repository-exclude.bundles.hack" basedir="." default="hack.3.6.1">
+	<property name="src.dir" value="src"/>
+	<property name="bin.dir" value="bin"/>
+	<property name="target.dir" value="target"/>
+	
+    <target name="hack.3.6.1" depends="clean">
+    	<antcall inheritall="true" inheritrefs="true" target="hack">
+    		<param name="hack.version" value="3.6.1"/>
+    	</antcall>
+    </target>
+	
+    <target name="hack.3.5.0" depends="clean">
+    	<antcall inheritall="true" inheritrefs="true" target="hack">
+    		<param name="hack.version" value="3.5.0"/>
+    	</antcall>
+    </target>
+    
+    <target name="clean">
+    	<delete failonerror="false" includeemptydirs="true">
+    		<fileset dir="${bin.dir}" >
+    			<include name="**/*"/>
+    			<include name="**/*.*"/>
+    		</fileset>
+    	</delete>
+    	
+    	<delete failonerror="false" includeemptydirs="true">
+    		<fileset dir="${target.dir}">
+    			<include name="**/*"/>
+    			<include name="**/*.*"/>
+    		</fileset>
+    		<fileset file="${target.dir}"/>
+    	</delete>
+    </target>
+    
+    <target name="hack" depends="clean">
+    	<mkdir dir="${target.dir}"/>
+		<copy file="lib/org.eclipse.virgo.repository-${hack.version}.RELEASE.jar" tofile="${target.dir}/org.eclipse.virgo.repository_${hack.version}.RELEASE.jar"/>
+    	
+    	<javac classpath="lib/org.eclipse.virgo.repository-${hack.version}.RELEASE.jar" destdir="${bin.dir}"
+    		srcdir="${src.dir}" includes="**/*.java" includeantruntime="false"/>
+    	
+    	<jar destfile="${target.dir}/org.eclipse.virgo.repository_${hack.version}.RELEASE.jar" update="true">
+    		<fileset dir="${bin.dir}">
+    			<include name="**/*.class"/>
+    		</fileset>
+    	</jar>
+    </target>
+
+</project>
